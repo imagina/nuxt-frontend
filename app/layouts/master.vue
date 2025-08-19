@@ -6,7 +6,7 @@
 
 <template>
   <div
-    class="tw:min-h-screen tw:flex tw:flex-col"
+    class="min-h-screen flex flex-col"
     data-vaul-drawer-wrapper>
     <IHeader/>
     <main class="flex-1">

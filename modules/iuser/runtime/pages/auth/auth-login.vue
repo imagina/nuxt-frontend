@@ -79,10 +79,6 @@ async function onLogin ()
                 :label="t('iuser.login.submitBtn')"/>
           </div>
         </form>
-
-        <div class="mt-2">
-          UserName {{ authStore.user?.firstName }}
-        </div>
       </div>
     </div>
   </ClientOnly>

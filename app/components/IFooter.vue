@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <footer class="tw:bg-primary tw:text-white tw:p-4">
+  <footer class="bg-primary text-white p-4">
     <p>&copy; 2025 My App</p>
   </footer>
 </template>

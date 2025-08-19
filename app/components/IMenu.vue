@@ -13,18 +13,18 @@
 </script>
 
 <template>
-  <UNavigationMenu :items="props.items" class="tw:hidden tw:md:flex"/>
+  <UNavigationMenu :items="props.items" class="hidden md:flex"/>
   <UDrawer
     v-model:open="dOpen"
-    class="tw:md:hidden" :direction="drawerDirection"
+    class="md:hidden" :direction="drawerDirection"
     should-scale-background :set-background-color-on-scale="false"
-    :ui="{ content: 'tw:w-full', handle: 'tw:bg-gray-400!' }">
+    :ui="{ content: 'w-full', handle: 'bg-gray-400!' }">
 
     <!-- Action Buton -->
     <UButton color="neutral" variant="ghost" trailing-icon="i-lucide-menu"/>
 
     <template #header>
-      <div class="tw:flex tw:justify-between">
+      <div class="flex justify-between">
         <div>
           <DialogTitle>Site Name</DialogTitle>
           <DialogDescription>Menu</DialogDescription>
@@ -38,8 +38,8 @@
         :items="props.items"
         orientation="vertical"
         :ui="{
-          link: 'tw:w-full tw:justify-start tw:px-4 tw:py-2 tw:rounded-md hover:tw:bg-gray-100 dark:hover:tw:bg-gray-800',
-          list: 'tw:flex-col tw:gap-1 tw:w-full'
+          link: 'w-full justify-start px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800',
+          list: 'flex-col gap-1 w-full'
         }"
       />
     </template>

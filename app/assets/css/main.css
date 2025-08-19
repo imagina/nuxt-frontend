@@ -1,7 +1,9 @@
 /* here apply the prefix to all tailwind classes only for project */
-@import "tailwindcss" prefix(tw);
+/*@import "tailwindcss" prefix(tw);*/
+@import "tailwindcss";
+@import "@nuxt/ui";
 @theme {
-  --color-primary: #1586d7;
+  --color-primary: #0e689f;
   --color-secondary: #980027;
   --color-tertiary: #777382;
   --color-quaternary:  #eeeeee;

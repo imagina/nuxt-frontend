@@ -118,7 +118,7 @@
 </script>
 
 <template>
-  <header class="tw:bg-primary tw:text-white tw:p-4">
+  <header class="bg-primary text-white p-4">
     <h1 class="text-xl">My App</h1>
     <div class="absolute top-4 right-4 z-50">
       <IMenu :items="items" />
