@@ -1,4 +1,4 @@
-import {createResolver, defineNuxtModule, extendPages} from '@nuxt/kit'
+import {createResolver, defineNuxtModule, extendPages, addImportsDir} from '@nuxt/kit'
 import pagesConfig from './config/pages'
 
 export default defineNuxtModule({
@@ -13,7 +13,7 @@ export default defineNuxtModule({
     // Alias for the module
     nuxt.options.alias['#ipage'] = runtimeDir
     // Auto-imports
-    //addImportsDir(resolve(runtimeDir, 'composables'))
+    addImportsDir(resolve(runtimeDir, 'composables'))
     //addImportsDir(resolve(runtimeDir, 'stores'))
     //addImportsDir(resolve(runtimeDir, 'utils'))
     // Plugins
