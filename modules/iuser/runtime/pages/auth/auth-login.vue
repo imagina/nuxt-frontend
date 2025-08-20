@@ -11,8 +11,8 @@ const loading = ref(false)
 const route = useRoute()
 
 const auth = reactive({
-  email: 'soporte@imaginacolombia.com',
-  password: 'NStwI2Z9vLbXejl6'
+  email: 'admin@imagina.com',
+  password: '0C68jfLSAJwfWrt0'
 })
 const routeQuery = computed(() => route?.query || null)
 

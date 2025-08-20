@@ -2,7 +2,7 @@ import type {Setting} from "#isetting/types/settings";
 
 const baseUrl = '/isetting/v1'
 
-export const isettingMenusRepository = {
+export const isettingSettingsRepository = {
   async index (params = {}): Promise<{ data: Setting[] }>
   {
     const {$apiFetch} = useNuxtApp()

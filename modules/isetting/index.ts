@@ -1,4 +1,4 @@
-import {createResolver, defineNuxtModule, addPlugin} from '@nuxt/kit'
+import {createResolver, defineNuxtModule, addPlugin, addImportsDir} from '@nuxt/kit'
 //import pagesConfig from './config/pages'
 
 export default defineNuxtModule({
@@ -13,7 +13,8 @@ export default defineNuxtModule({
     // Alias for the module
     nuxt.options.alias['#isetting'] = runtimeDir
     // Auto-imports
-    //addImportsDir(resolve(runtimeDir, 'composables'))
+    //addImportsDir(resolve(runtimeDir, 'stores'))
+    //addImportsDir(resolve(runtimeDir, 'utils'))
     // Plugins
     //addPlugin(resolve(runtimeDir, 'plugins/fetch-settings.server.ts'))
     // Components (optional)

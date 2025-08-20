@@ -14,7 +14,6 @@ export default defineNuxtConfig({
     //Custom
     '@pinia/nuxt',
     '@nuxtjs/i18n',
-    '@pinia/nuxt',
     'pinia-plugin-persistedstate/nuxt',
   ],
   runtimeConfig: {
