@@ -301,7 +301,7 @@ const columnsData = computed<ColumnData[]>(() => {
             :key="img.key"
             :class="['image-componet', img.styleClasses]"
           >
-            <IMedia
+            <IMediaRender
               :baseSrc="img.value.baseSrc"
               :hoverSrc="img.value.hoverSrc"
               v-bind="img.style"
