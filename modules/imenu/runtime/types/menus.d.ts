@@ -53,22 +53,3 @@ export interface MenuItem {
   en?: Translation
   locales?: Record<string, Translation>
 }
-
-// Respuesta del index (/menus)
-export interface MenuIndexResponse {
-  data: Menu[] // sin menuItems
-  meta: {
-    page: {
-      total: number
-      lastPage: number
-      perPage: number
-      currentPage: number
-    }
-  }
-}
-
-// Respuesta del show (/menus/:id?include=menuItems)
-export interface MenuShowResponse {
-  data: Menu // con menuItems
-}
-

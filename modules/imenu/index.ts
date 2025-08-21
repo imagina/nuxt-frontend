@@ -1,4 +1,4 @@
-import {createResolver, defineNuxtModule} from '@nuxt/kit'
+import {createResolver, defineNuxtModule, addComponentsDir} from '@nuxt/kit'
 //import pagesConfig from './config/pages'
 
 export default defineNuxtModule({
@@ -19,7 +19,7 @@ export default defineNuxtModule({
     // Plugins
     //addPlugin(resolve(runtimeDir, 'plugins/fetch-user.client'))
     // Components (optional)
-    // addComponentsDir({path: resolve(runtimeDir, 'components') prefix:'Iuser', pathPrefix: false})
+    addComponentsDir({path: resolve(runtimeDir, 'components'), prefix: 'imenu', pathPrefix: false})
     //Extend pages
     //extendPages((pages) => pagesConfig.forEach(
     //  page => pages.push({...page, file: resolve(page.page)})
