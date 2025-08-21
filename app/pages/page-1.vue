@@ -1,11 +1,116 @@
 <script setup lang="ts">
-  import type { PageData } from '#ipage/types/pages'
-  defineProps<{ page: PageData }>()
+import type { PageData } from "#ipage/types/pages";
+defineProps<{ page: PageData }>();
+
+// Info Alquiler que posiblemente venga de un slider
+const infoRent = ref({
+  img: "https://components.ozonohosting.com/assets/media/pexels-1266623.jpg?u=1700491876",
+  title: "Requisitos de Alquiler",
+  summary: "Excelencia Profesional",
+  customHtml: `
+            <ol>
+            <li>La edad mínima para el alquiler del vehículo debe ser de 25 años</li>
+            <li>Licencia de conducción vigente. Nacional o Internacional</li>
+            <li>Cédula de ciudadanía colombiana, cédula de extranjería o pasaporte</li>
+            <li>
+                Tarjeta de Crédito para avalar el depósito del vehículo, cupo mínimo de
+                $2.000.000 para automóviles y gama premium tipo Nissan Versa $2.700.000
+                entre $4.000.000 y $5.000.000 para camionetas.
+            </li>
+            <li>
+                Nuestro equipo está capacitado y entrenado en servicio al cliente y
+                habilidades blandas, lo cual nos permite ser un apoyo para su
+                organización y sentirse a gusto con las personas que realizarán el trabajo.
+            </li>
+            <li>
+                Recibimos tarjetas bajo Franquicia (Visa, MasterCard, American Express).
+                No se reciben tarjetas de crédito virtuales, prepago, con CCV dinámico o
+                sin información en el plástico. Tampoco Discovery; sólo tarjetas emitidas
+                por bancos.
+            </li>
+            </ol>
+        `,
+  url: "/terminos-y-condiciones",
+  caption: " Términos & Condiciones ",
+});
+// text H1
+const textH1 = ref("Alquiler de Autos en Colombia con Tarifas Increíbles");
 </script>
+
+<style>
+.custom-html ol {
+  list-style: decimal !important;
+  padding-left: 1.25rem;   /* sangría para ver los números */
+}
+.custom-html li { display: list-item; margin-bottom: .5rem; }
+</style>
 
 <template>
   <div>
-    <h1>Page ID {{page.id}} --> {{ page.title }}</h1>
-    <div>{{ page }}</div>
+    <!-- -<h1>Page ID {{ page.id }}  {{ page.title }}</h1>
+    <div>{{ page }}</div>-->
+
+    <!-- H1 -->
+    <section class="bg-quaternary py-5">
+      <div class="container mx-auto">
+        <h1 class="text-center text-18 tracking-[1.8px] uppercase">
+          {{ textH1 }}
+        </h1>
+      </div>
+    </section>
+    <!-- Info -->
+    <section class="relative py-15">
+      <div
+        class="absolute inset-0 lg:inset-y-0 lg:left-0 lg:w-1/3 bg-secondary rounded-e-2xl"
+      ></div>
+      <div
+        class="relative max-w-7xl mx-auto px-4 flex flex-col-reverse lg:flex-row justify-end items-center gap-20 lg:gap-50"
+      >
+        <!-- Image column -->
+        <div class="w-full lg:w-2/5 lg:-mr-[140px]">
+          <img
+            :src="infoRent.img"
+            class="rounded-2xl lg:aspect-4/5 aspect-16/9 shadow-lg object-cover"
+            :alt="infoRent.title"
+          />
+          <!--
+        <ClientOnly>
+        <IMedia
+            :alt="infoRent.title"
+            :base-src="infoRent.img"
+            :ratio="ratioMedia"
+            width="w-full"
+            rounded="rounded-2xl"
+            class="shadow-lg"
+          />
+        </ClientOnly>-->
+        </div>
+        <!-- Text column -->
+        <div class="w-full lg:w-1/2 space-y-6">
+          <p
+            class="text-white lg:text-secondary text-[16px] lg:text-[20px] font-bold uppercase mb-0 text-center lg:text-left"
+          >
+            {{ infoRent.summary }}
+          </p>
+          <h2
+            class="text-white lg:text-primary text-[30px] lg:text-[45px] font-semibold mb-5 text-center lg:text-left"
+          >
+            {{ infoRent.title }}
+          </h2>
+          <div
+            class="space-y-2 text-white lg:text-dark-3 text-[16px] lg:text-[20px] text-justify custom-html"
+            v-html="infoRent.customHtml"
+          ></div>
+          <div class="text-center lg:text-left">
+            <UButton
+              :label="infoRent.caption"
+              :to="infoRent.url"
+              class="bg-white lg:bg-secondary text-secondary lg:text-white hover:bg-primary hover:text-white px-6 py-4 rounded-lg transition text-[18px] font-semibold leading-[20px]"
+            >
+            </UButton>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>

@@ -1,57 +1,74 @@
 export interface Translation {
-  title: string;
-  status: number;
-  uri?: string;
-  url?: string;
-  description?: string;
+  title: string
+  status?: number
+  uri?: string
+  url?: string
+  description?: string
 }
 
 export interface Menu {
-  createdAt: string;
-  createdBy: string | null;
-  deletedAt: string | null;
-  deletedBy: string | null;
-  /** Locale translations for the menu itself */
-  [localeCode: string]: never; // fallback so TS doesn't complain about dynamic locales
-  locales: Record<string, Translation>;
-  id: number;
-  isRoot: number;
-  menuItems: MenuItem[];
-  primary: number;
-  status: number;
-  systemName: string;
-  title: string;
-  updatedAt: string;
-  updatedBy: string | null;
+  id: number
+  systemName: string
+  createdAt: string
+  createdBy: string | null
+  deletedAt: string | null
+  deletedBy: string | null
+  updatedAt: string
+  updatedBy: string | null
+  isRoot: number
+  primary: number
+  menuItems?: MenuItem[]
+  title?: string
+  status?: number
+  locales?: Record<string, Translation>
 }
 
 export interface MenuItem {
-  class: string | null;
-  createdAt: string;
-  createdBy: string | null;
-  deletedAt: string | null;
-  deletedBy: string | null;
-  depth: number | null;
-  description: string;
-  /** Locale translations for this menu item */
-  locales: Record<string, Translation>;
-  icon: string | null;
-  id: number;
-  isRoot: number | null;
-  lft: number | null;
-  linkType: string;
-  menuId: number;
-  moduleName: string | null;
-  pageId: number | null;
-  parentId: number;
-  position: number;
-  rgt: number | null;
-  status: number;
-  systemName: string;
-  target: string;
-  title: string;
-  updatedAt: string;
-  updatedBy: string | null;
-  uri: string;
-  url: string;
+  id: number
+  menuId: number
+  parentId: number
+  position: number
+  systemName: string
+  title: string
+  description: string
+  icon: string | null
+  class: string | null
+  target: '_self' | '_blank' | string
+  linkType: 'internal' | 'external' | string
+  status: number
+  uri: string
+  url: string
+  createdAt: string
+  createdBy: string | null
+  updatedAt: string
+  updatedBy: string | null
+  deletedAt: string | null
+  deletedBy: string | null
+  isRoot: number | null
+  depth: number | null
+  lft: number | null
+  rgt: number | null
+  children?: MenuItem[]
+  es?: Translation
+  en?: Translation
+  locales?: Record<string, Translation>
 }
+
+// Respuesta del index (/menus)
+export interface MenuIndexResponse {
+  data: Menu[] // sin menuItems
+  meta: {
+    page: {
+      total: number
+      lastPage: number
+      perPage: number
+      currentPage: number
+    }
+  }
+}
+
+// Respuesta del show (/menus/:id?include=menuItems)
+export interface MenuShowResponse {
+  data: Menu // con menuItems
+}
+
