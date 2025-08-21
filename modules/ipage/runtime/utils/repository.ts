@@ -5,8 +5,8 @@ const baseUrl = '/ipage/v1'
 export const ipagePagesRepository = {
   async show (slug: string, params = {}): Promise<{ data: PageData }>
   {
-    const {$authApiFetch} = useNuxtApp()
-    return $authApiFetch<{ data: PageData }>(
+    const {$apiFetch} = useNuxtApp()
+    return $apiFetch<{ data: PageData }>(
       `${baseUrl}/pages/${slug}`, {method: 'GET', params})
   },
 }

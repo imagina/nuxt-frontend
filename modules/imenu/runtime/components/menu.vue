@@ -7,14 +7,12 @@ const props = withDefaults(defineProps<{
   systemName: string | number
 }>(), {})
 
-// carga menu
 const {data} = await useAsyncData(
   `menu:${props.systemName}`,
   () => imenuMenusRepository.show(props.systemName, {
     include: 'menuItems.translations',
     filter: {field: 'system_name'}
-  }),
-  {server: true}
+  })
 )
 
 function mapNode (m: MenuItem): NavigationMenuItem
@@ -25,7 +23,7 @@ function mapNode (m: MenuItem): NavigationMenuItem
     target: m.target,
     disabled: m.status !== 1,
     icon: m.icon || undefined,
-    children: (m as any).children?.map(mapNode) // falta probar con hijos
+    children: (m as MenuItem).children?.map(mapNode)
   }
 }
 
