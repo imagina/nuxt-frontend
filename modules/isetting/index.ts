@@ -13,10 +13,10 @@ export default defineNuxtModule({
     // Alias for the module
     nuxt.options.alias['#isetting'] = runtimeDir
     // Auto-imports
-    //addImportsDir(resolve(runtimeDir, 'stores'))
-    //addImportsDir(resolve(runtimeDir, 'utils'))
+    addImportsDir(resolve(runtimeDir, 'stores'))
+    addImportsDir(resolve(runtimeDir, 'utils'))
     // Plugins
-    //addPlugin(resolve(runtimeDir, 'plugins/fetch-settings.server.ts'))
+    addPlugin(resolve(runtimeDir, 'plugins/fetch-settings.server.ts'))
     // Components (optional)
     // addComponentsDir({path: resolve(runtimeDir, 'components') prefix:'Iuser', pathPrefix: false})
     //Extend pages
