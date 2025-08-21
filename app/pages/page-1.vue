@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { PageData } from "#ipage/types/pages";
+const settingStore = useIsettingStore()
 defineProps<{ page: PageData }>();
 
 // Info Alquiler que posiblemente venga de un slider
