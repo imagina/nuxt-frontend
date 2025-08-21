@@ -19,7 +19,7 @@ export default defineNuxtModule({
     // Plugins
     //addPlugin(resolve(runtimeDir, 'plugins/fetch-user.client'))
     // Components (optional)
-    addComponentsDir({path: resolve(runtimeDir, 'components'), prefix: 'imenu', pathPrefix: false})
+    addComponentsDir({path: resolve(runtimeDir, 'components')})
     //Extend pages
     //extendPages((pages) => pagesConfig.forEach(
     //  page => pages.push({...page, file: resolve(page.page)})
