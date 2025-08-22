@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import type {DynamicFieldProps} from './IDynamicField'
-import {DYNAMIC_FIELDS} from './config'
+import type {IFieldProps} from './IField'
+import {FIELDS} from './config'
 
-const props = defineProps<DynamicFieldProps>()
+const props = defineProps<IFieldProps>()
 const emit = defineEmits(['update:modelValue'])
-const fieldComponent = computed(() => DYNAMIC_FIELDS[props.type])
+const fieldComponent = computed(() => FIELDS[props.type])
 
 // Handler for v-model emulation
 function updateValue (value: any)
