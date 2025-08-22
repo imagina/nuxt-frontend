@@ -50,7 +50,11 @@ const active = ref("0");
   <template>
   <div>
     <!-- Oficinas -->
-    <section class="container mx-auto py-10 px-4 ">
+    <IBreadcrumb
+      :title="'Oficinas'"
+      :ui="{ link: 'font-bold text-gray-3' }"
+    />
+    <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-10">
       <div class="grid gap-10 grid-cols-1 md:grid-cols-3">
         <!-- Columna izquierda: Filtros -->
         <aside class="md:col-span-1 filters">

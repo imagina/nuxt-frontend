@@ -42,6 +42,21 @@ const titles = {
   title: "Contáctanos",
   subtitle: "Te responderemos tan pronto como nos sea posible, ¡Gracias!",
 };
+const slides = [
+  {
+    media: { isImage: true, url: 'https://components.ozonohosting.com/assets/media/pexels-1266623.jpg?u=1700491876'} ,
+    title: 'Descubre nuevos destinos al volante, con Rent Cars siempre a tu lado'
+  },
+  {
+    media: { isImage: true, url: 'https://components.ozonohosting.com/assets/media/pexels-1266623.jpg?u=1700491876'} ,
+    title: 'Tu aventura comienza aquí'
+  },
+  {
+    media: { isImage: true, url: 'https://components.ozonohosting.com/assets/media/pexels-1266623.jpg?u=1700491876'} ,
+    title: 'Conduce con tranquilidad'
+  }
+]
+
 
 </script>
 
@@ -59,26 +74,58 @@ const titles = {
       var(--color-dark-1) 50%,
       var(--color-gray-1) 50%);
 }
+.overlay-slide {
+  background: #00000066;
+
+}
 </style>
 
 <template>
   <div>
-    <!-- -<h1>Page ID {{ page.id }}  {{ page.title }}</h1>
-    <div>{{ page }}</div>-->
-
+    <ICarousel
+    :items="slides"
+    dots-position="inside-left-middle"
+    :carousel-props="{
+      dots: true,
+      arrows: false,
+      ui: {
+        item: 'h-[260px] sm:h-[360px] md:h-[400px]',
+        dot: 'w-[16px] h-[16px] rounded-full bg-[#FFFFFF80] data-[state=active]:bg-secondary'
+      }
+    }"
+  >
+    <template #item="{ item }">
+      <div class="relative w-full h-full">
+          <IMediaRender
+              :media="item.media" :alt="item.title"
+              aspect-ratio="auto"
+              :ui="{
+                wrapper: '',
+                container: '',
+                media: 'absolute inset-0 w-full h-full object-cover' }"
+          />
+          <div class="absolute inset-0 overlay-slide"></div>
+          <div class="relative h-full flex items-center justify-center max-w-3/4 mx-auto">
+            <h2 class="text-white text-center font-bold text-2xl sm:text-4xl md:text-5xl">
+              {{ item.title }}
+            </h2>
+          </div>
+        </div>
+    </template>
+    </ICarousel>
     <!-- H1 -->
     <section class="bg-quaternary py-5">
-      <div class="container mx-auto  px-4 sm:px-6 lg:px-8">
+      <div class="container mx-auto  px-4 sm:px-6 lg:px-10">
         <h1 class="text-center text-18 tracking-[1.8px] uppercase mb-10">
           {{ textH1 }}
         </h1>
         <UCard class="shadow-md rounded-3xl mb-5">
-          <FormHome />
+         <FormHome />
         </UCard>
       </div>
     </section>
     <!-- List Categorias -->
-    <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-8">
+    <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-10">
       <div class="text-center">
         <div class="text-secondary text-[16px] lg:text-[20px] font-bold uppercase mb-0 ">{{titlesCart.subtitle}}</div>
         <div class="text-primary text-[30px] lg:text-[45px] font-semibold mb-5 ">{{titlesCart.title}}</div>
@@ -125,8 +172,8 @@ const titles = {
       </div>
     </section>
     <!-- Form Contacto -->
-    <section class="pt-15 form-contact pb-15">
-    <UCard class="shadow-md rounded-3xl max-w-1/2 mx-auto">
+    <section class="pt-20 form-contact pb-20 px-4">
+    <UCard class="shadow-md rounded-3xl lg:max-w-3/4 xl:max-w-1/2 mx-auto">
       <h2 class="text-primary text-center text-[30px] lg:text-[45px] font-semibold mb-2  ">
         {{ titles.title }}
       </h2>

@@ -15,7 +15,7 @@ const email = ['serviciocliente@readyrentacars.com']
 </style>
 <template>
   <footer class="bg-dark-1 text-white">
-    <div class="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 py-12  px-4 sm:px-6 lg:px-8">
+    <div class="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 py-12  px-4 sm:px-6 lg:px-10">
 
       <div class="flex justify-center md:justify-start self-center">
         <IMediaRender
@@ -49,7 +49,7 @@ const email = ['serviciocliente@readyrentacars.com']
 
     </div>
     <div class="bg-dark-2 border-t border-neutral-800">
-  <div class="container mx-auto flex flex-col items-center md:flex-row md:justify-between md:items-center  px-4 sm:px-6 lg:px-8">
+  <div class="container mx-auto flex flex-col items-center md:flex-row md:justify-between md:items-center px-4 sm:px-6 lg:px-10">
     <div class="w-full md:w-auto py-4 text-center md:text-left">
         <ILogoImagina />
     </div>

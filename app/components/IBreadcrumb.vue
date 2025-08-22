@@ -21,7 +21,7 @@ const items = computed<BreadcrumbItem[]>(() => [
 
 <template>
   <section class="bg-gray-2 py-5">
-      <div class="container mx-auto px-4">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-10">
         <UBreadcrumb :items="items" :ui="props.ui"/>
       </div>
     </section>
