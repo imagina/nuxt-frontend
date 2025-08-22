@@ -32,11 +32,11 @@ const props = defineProps<{
 
 <template>
   <div :class="['w-full flex justify-center', ui?.wrapper]">
-    <div :class="['w-full', aspectRatio || 'aspect-video', ui?.container]">
+    <div :class="[ aspectRatio || 'aspect-video', ui?.container]">
       <!-- YOUTUBE -->
       <iframe
         v-if="media?.youtubeId"
-        class="w-full h-full object-contain rounded-2xl shadow"
+        class="w-full h-full"
         :class="ui?.media"
         :src="`https://www.youtube.com/embed/${media?.youtubeId}?rel=0&modestbranding=1`"
         title="YouTube video"
@@ -48,7 +48,7 @@ const props = defineProps<{
       <!-- VIDEO LOCAL -->
       <video
         v-else-if="media?.isVideo"
-        class="w-full h-full object-contain rounded-2xl shadow"
+        class="w-full h-full"
         :class="ui?.media"
         :autoplay="autoplayVideo"
         :loop="loopVideo"
@@ -80,7 +80,7 @@ const props = defineProps<{
           :src="media?.url"
           :alt="alt"
           :title="title"
-          class="w-full h-full object-contain rounded-2xl shadow"
+          class="w-full h-full"
           :class="ui?.media"
           loading="lazy"
           decoding="async"
