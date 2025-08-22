@@ -15,6 +15,7 @@ const fields: Field[] = [
   { required: true, key: 'edad',     label: 'Edad del conductor', placeholder: '35', type: 'email', width: 'col-span-12 md:col-span-3' },
 ]
 
+const size = 'lg'
 
 const state = reactive<Partial<Schema>>({
   devolver: false,
@@ -68,6 +69,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     </template>
     <div :class="classButton">
         <UButton
+        :size="size"
           type="submit"
           class="bg-white w-full justify-center lg:bg-secondary text-secondary lg:text-white hover:bg-primary hover:text-white transition"
         >

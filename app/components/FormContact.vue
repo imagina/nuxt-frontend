@@ -68,6 +68,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   </div>
   <div class="mt-4">
     <UButton type="submit"
+      :size="size"
       class="w-full justify-center bg-secondary h-[45px] text-white hover:bg-primary hover:text-white transition">
       Enviar
     </UButton>
