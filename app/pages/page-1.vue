@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { PageData } from "#ipage/types/pages";
-const settingStore = useIsettingStore()
+const settingStore = useIsettingStore();
 defineProps<{ page: PageData }>();
 
 // Info Alquiler que posiblemente venga de un slider
-const infoRent = ref({
+const infoRent = {
   img: "https://components.ozonohosting.com/assets/media/pexels-1266623.jpg?u=1700491876",
   title: "Requisitos de Alquiler",
   summary: "Excelencia Profesional",
@@ -33,17 +33,32 @@ const infoRent = ref({
         `,
   url: "/terminos-y-condiciones",
   caption: " Términos & Condiciones ",
-});
-// text H1
-const textH1 = ref("Alquiler de Autos en Colombia con Tarifas Increíbles");
+};
+
+
+const textH1 = 'Alquiler de Autos en Colombia con Tarifas Increíbles';
+const titlesCart = { title: 'Gamas de Vehículos', subtitle: 'Reserva el tuyo' };
+const titles = {
+  title: "Contáctanos",
+  subtitle: "Te responderemos tan pronto como nos sea posible, ¡Gracias!",
+};
+
 </script>
 
 <style>
 .custom-html ol {
   list-style: decimal !important;
-  padding-left: 1.25rem;   /* sangría para ver los números */
+  padding-left: 1.25rem;
 }
-.custom-html li { display: list-item; margin-bottom: .5rem; }
+.custom-html li {
+  display: list-item;
+  margin-bottom: .5rem;
+}
+.form-contact {
+  background: linear-gradient(360deg,
+      var(--color-dark-1) 50%,
+      var(--color-gray-1) 50%);
+}
 </style>
 
 <template>
@@ -53,65 +68,75 @@ const textH1 = ref("Alquiler de Autos en Colombia con Tarifas Increíbles");
 
     <!-- H1 -->
     <section class="bg-quaternary py-5">
-      <div class="container mx-auto">
-        <h1 class="text-center text-18 tracking-[1.8px] uppercase">
+      <div class="container mx-auto  px-4 sm:px-6 lg:px-8">
+        <h1 class="text-center text-18 tracking-[1.8px] uppercase mb-10">
           {{ textH1 }}
         </h1>
+        <UCard class="shadow-md rounded-3xl mb-5">
+          <FormHome />
+        </UCard>
       </div>
     </section>
+    <!-- List Categorias -->
+    <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <div class="text-secondary text-[16px] lg:text-[20px] font-bold uppercase mb-0 ">{{titlesCart.subtitle}}</div>
+        <div class="text-primary text-[30px] lg:text-[45px] font-semibold mb-5 ">{{titlesCart.title}}</div>
+      </div>
+      <!-- Vehiculos-->
+    </section>
     <!-- Info -->
-    <section class="relative py-15">
+    <section class="relative py-15 mb-15">
+      <div class="absolute inset-0 lg:inset-y-0 lg:left-0 lg:w-1/3 bg-secondary rounded-e-2xl"></div>
       <div
-        class="absolute inset-0 lg:inset-y-0 lg:left-0 lg:w-1/3 bg-secondary rounded-e-2xl"
-      ></div>
-      <div
-        class="relative max-w-7xl mx-auto px-4 flex flex-col-reverse lg:flex-row justify-end items-center gap-20 lg:gap-50"
-      >
+        class="relative max-w-7xl mx-auto px-4 flex flex-col-reverse lg:flex-row justify-end items-center gap-20 lg:gap-50">
         <!-- Image column -->
         <div class="w-full lg:w-2/5 lg:-mr-[140px]">
-          <img
-            :src="infoRent.img"
-            class="rounded-2xl lg:aspect-4/5 aspect-16/9 shadow-lg object-cover"
-            :alt="infoRent.title"
-          />
           <!--
-        <ClientOnly>
-        <IMedia
-            :alt="infoRent.title"
-            :base-src="infoRent.img"
-            :ratio="ratioMedia"
-            width="w-full"
-            rounded="rounded-2xl"
-            class="shadow-lg"
-          />
-        </ClientOnly>-->
+          <IMediaRender
+            :media="infoRent.img" alt="Logo"
+            aspect-ratio="auto"
+            :ui="{
+              wrapper: '',
+              container: '',
+              media: 'rounded-2xl lg:aspect-4/5 aspect-16/9 shadow-lg object-cover'
+            }"/>
+             -->
+          <img :src="infoRent.img" class="rounded-2xl lg:aspect-4/5 aspect-16/9 shadow-lg object-cover"
+            :alt="infoRent.title" />
         </div>
         <!-- Text column -->
         <div class="w-full lg:w-1/2 space-y-6">
           <p
-            class="text-white lg:text-secondary text-[16px] lg:text-[20px] font-bold uppercase mb-0 text-center lg:text-left"
-          >
+            class="text-white lg:text-secondary text-[16px] lg:text-[20px] font-bold uppercase mb-0 text-center lg:text-left">
             {{ infoRent.summary }}
           </p>
-          <h2
-            class="text-white lg:text-primary text-[30px] lg:text-[45px] font-semibold mb-5 text-center lg:text-left"
-          >
+          <h2 class="text-white lg:text-primary text-[30px] lg:text-[45px] font-semibold mb-5 text-center lg:text-left">
             {{ infoRent.title }}
           </h2>
-          <div
-            class="space-y-2 text-white lg:text-dark-3 text-[16px] lg:text-[20px] text-justify custom-html"
-            v-html="infoRent.customHtml"
-          ></div>
+          <div class="space-y-2 text-white lg:text-dark-3 text-[16px] lg:text-[20px] text-justify custom-html"
+            v-html="infoRent.customHtml"></div>
           <div class="text-center lg:text-left">
-            <UButton
-              :label="infoRent.caption"
-              :to="infoRent.url"
-              class="bg-white lg:bg-secondary text-secondary lg:text-white hover:bg-primary hover:text-white px-6 py-4 rounded-lg transition text-[18px] font-semibold leading-[20px]"
-            >
+            <UButton :label="infoRent.caption" :to="infoRent.url"
+              class="bg-white lg:bg-secondary text-secondary lg:text-white hover:bg-primary hover:text-white px-6 py-4 rounded-lg transition text-[18px] font-semibold leading-[20px]">
             </UButton>
           </div>
         </div>
       </div>
     </section>
+    <!-- Form Contacto -->
+    <section class="pt-15 form-contact pb-15">
+    <UCard class="shadow-md rounded-3xl max-w-1/2 mx-auto">
+      <h2 class="text-primary text-center text-[30px] lg:text-[45px] font-semibold mb-2  ">
+        {{ titles.title }}
+      </h2>
+      <p class="text-center text-[16px] lg:text-[18px]  mb-10 ">
+        {{ titles.subtitle }}
+      </p>
+      <FormContact />
+
+    </UCard>
+
+  </section>
   </div>
 </template>
