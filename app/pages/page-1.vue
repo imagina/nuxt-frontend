@@ -134,9 +134,7 @@ const titles = {
         {{ titles.subtitle }}
       </p>
       <FormContact />
-
     </UCard>
-
   </section>
   </div>
 </template>
