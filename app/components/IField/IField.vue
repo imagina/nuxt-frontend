@@ -1,25 +1,20 @@
-<script lang="ts" setup>
-import type {IFieldProps} from './IField'
-import {FIELDS} from './config'
+<script setup lang="ts">
+  import {FIELDS} from './config'
+  import type {IFieldProps} from './IField'
 
-const props = defineProps<IFieldProps>()
-const emit = defineEmits(['update:modelValue'])
-const fieldComponent = computed(() => FIELDS[props.type])
+  const props = defineProps<IFieldProps>()
+  const model = defineModel<any>()
 
-// Handler for v-model emulation
-function updateValue (value: any)
-{
-  emit('update:modelValue', value)
-}
+  if(model.value === undefined) model.value = props.field.default ?? ''
+  const fieldComponent = computed(() => FIELDS[props.field.type])
 </script>
 
 <template>
-  <UFormField v-bind="formFieldProps">
+  <UFormField v-bind="props.field.formFieldProps">
     <component
       :is="fieldComponent"
-      v-bind="fieldProps"
-      :model-value="props.modelValue"
-      @update:model-value="updateValue"
+      v-bind="props.field.fieldProps"
+      v-model="model"
       v-on="$attrs"
     />
   </UFormField>
