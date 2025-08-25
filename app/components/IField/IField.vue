@@ -10,7 +10,7 @@
 </script>
 
 <template>
-  <UFormField v-bind="props.field.formFieldProps">
+  <UFormField :name="props.field.name" v-bind="props.field.formFieldProps">
     <component
       :is="fieldComponent"
       v-bind="props.field.fieldProps"
