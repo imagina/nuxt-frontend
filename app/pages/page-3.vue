@@ -94,6 +94,7 @@ const impBody = "<h2 style=\"text-align: center;\">&iexcl;Escr&iacute;benos!</h2
       :title="page.title ?? '...'"
       :ui="{ link: 'font-bold text-gray-3' }"
     />
+    <div class="bg-gray-2">
     <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-10">
       <h1 class="page-title hidden">{{ page.title }}</h1>
       <div class="page-body mb-10" v-html="impBody"></div>
@@ -117,11 +118,10 @@ const impBody = "<h2 style=\"text-align: center;\">&iexcl;Escr&iacute;benos!</h2
             referrerpolicy="no-referrer-when-downgrade">
           </iframe>
         </div>
-
 </div>
 
     </section>
-
+</div>
   </div>
 </template>
 

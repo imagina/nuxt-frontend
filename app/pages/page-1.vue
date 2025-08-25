@@ -139,7 +139,7 @@ const cars = [
     <!-- List Categorias -->
     <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-10 mb-10">
       <div class="text-center">
-        <div class="text-secondary text-[16px] lg:text-[20px] font-bold uppercase mb-0 ">{{titlesCart.subtitle}}</div>
+        <div class="text-secondary text-[16px] lg:text-[20px]  font-bold uppercase mb-0 ">{{titlesCart.subtitle}}</div>
         <div class="text-primary text-[30px] lg:text-[45px] font-semibold mb-10 ">{{titlesCart.title}}</div>
         <IList
           :items="cars"
@@ -171,11 +171,10 @@ const cars = [
         </div>
         <!-- Text column -->
         <div class="w-full lg:w-1/2 space-y-6">
-          <p
-            class="text-white lg:text-secondary text-[16px] lg:text-[20px] font-bold uppercase mb-0 text-center lg:text-left">
+          <p class="text-white lg:text-secondary text-[16px] lg:text-[20px] font-bold uppercase mb-0 text-center lg:text-left">
             {{ infoRent.summary }}
           </p>
-          <h2 class="text-white lg:text-primary text-[30px] lg:text-[45px] font-semibold mb-5 text-center lg:text-left">
+          <h2 class="text-white lg:text-primary text-[30px] lg:text-[45px]  font-semibold mb-5 text-center lg:text-left">
             {{ infoRent.title }}
           </h2>
           <div class="space-y-2 text-white lg:text-dark-3 text-[16px] lg:text-[20px] text-justify custom-html"

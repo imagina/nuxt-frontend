@@ -30,6 +30,7 @@ padding: 0;
 border-radius: 0;
 box-shadow: none;
 height: 40px;
+background: transparent;
 }
 input[type="file"]::file-selector-button {
   background: #EFEFEF;
