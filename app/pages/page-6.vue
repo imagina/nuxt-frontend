@@ -57,7 +57,6 @@ const active = ref("0");
       :ui="{ link: 'font-bold text-gray-3' }"
     />
     <div class="bg-gray-2">
-      {{ page.id }}
     <section class=" container mx-auto py-10 px-4 sm:px-6 lg:px-10">
       <div class="grid gap-10 grid-cols-1 md:grid-cols-3">
         <!-- Columna izquierda: Filtros -->
