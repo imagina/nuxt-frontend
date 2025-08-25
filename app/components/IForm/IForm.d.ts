@@ -1,9 +1,14 @@
 import type {IFieldConfig} from '../IField/IField'
 
-export interface IFormProps {
+export interface IFormFieldConfig extends IFieldConfig
+{
+  rules?: string[]
+}
+
+export interface IFormProps
+{
   title: string
   description?: string
-  fields: IFieldConfig[]
-  schema?: any
+  fields: IFormFieldConfig[]
   submitLabel?: string
 }
