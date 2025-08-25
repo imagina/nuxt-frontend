@@ -29,7 +29,7 @@ const impBody = "<h2 style=\"text-align: center;\">&iexcl;Escr&iacute;benos!</h2
 
 </script>
 <style>
-.page-body {
+.nosotros .page-body {
   font-family: DM Sans;
   font-weight: 400;
   font-size: 20px;
@@ -95,7 +95,7 @@ const impBody = "<h2 style=\"text-align: center;\">&iexcl;Escr&iacute;benos!</h2
       :ui="{ link: 'font-bold text-gray-3' }"
     />
     <div class="bg-gray-2">
-    <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-10">
+    <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-10 nosotros">
       <h1 class="page-title hidden">{{ page.title }}</h1>
       <div class="page-body mb-10" v-html="impBody"></div>
       <div class="grid grid-cols-12 gap-10">

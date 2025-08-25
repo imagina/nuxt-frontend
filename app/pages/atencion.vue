@@ -7,7 +7,7 @@ definePageMeta({
 
 
 const breadcrumb =  {
-    media: { isImage: true, url: 'https://components.ozonohosting.com/assets/media/pexels-1266623.jpg?u=1700491876'} ,
+    media: { isImage: true, url: 'images/atencion.jpg'} ,
     title: 'Contigo siempre Atención al Cliente'
 }
 
@@ -44,7 +44,7 @@ const items = [
 
 </script>
 <style>
-.page-body {
+.atencion .page-body {
   font-family: DM Sans;
   font-weight: 400;
   font-size: 20px;
@@ -124,7 +124,7 @@ const items = [
       :title="'Atención al cliente'"
       :ui="{ link: 'font-bold text-gray-3' }"
     />
-    <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-10">
+    <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-10 atencion">
       <h1 class="page-title hidden">{{ page?.title ?? 'Atención al cliente' }}</h1>
       <!--<div class="page-body" v-html="impBody"></div>-->
       <div class="page-body">

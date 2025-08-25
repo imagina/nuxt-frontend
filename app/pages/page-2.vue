@@ -12,7 +12,7 @@ const titles = {
 
 </script>
 <style>
-.page-body {
+.contacto .page-body {
   font-family: DM Sans;
   font-weight: 400;
   font-size: 20px;
@@ -80,12 +80,12 @@ const titles = {
 </style>
 <template>
   <div>
-    <!-- Nosotros -->
+    <!-- Contacto -->
     <IBreadcrumb
       :title="page.title ?? '...'"
       :ui="{ link: 'font-bold text-gray-3' }"
     />
-    <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-10">
+    <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-10 contacto">
       <h1 class="page-title hidden">{{ page.title }}</h1>
       <div class="page-body" v-html="impBody"></div>
     </section>

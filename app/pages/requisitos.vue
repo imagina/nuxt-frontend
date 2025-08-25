@@ -35,7 +35,7 @@ const ui = {
 
 </script>
 <style>
-.page-body {
+.requisitos .page-body {
   font-family: DM Sans;
   font-weight: 400;
   font-size: 20px;
@@ -101,6 +101,8 @@ const ui = {
 
 }
 
+
+
 </style>
 
 <template>
@@ -110,7 +112,7 @@ const ui = {
       :title="'Requisitos'"
       :ui="{ link: 'font-bold text-gray-3' }"
     />
-    <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-10">
+    <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-10 requisitos">
       <h1 class="page-title hidden">Requisitos</h1>
       <div class="page-body" v-html="impBody"></div>
       <div class="grid grid-cols-12 gap-10 items-center">
