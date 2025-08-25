@@ -30,7 +30,8 @@ padding: 0;
 border-radius: 0;
 box-shadow: none;
 height: 40px;
-&::file-selector-button {
+}
+input[type="file"]::file-selector-button {
   background: #EFEFEF;
   color: #444444;
   font-weight: 500;
@@ -39,12 +40,9 @@ height: 40px;
   padding: 6px 20px;
   transition: .2s;
 }
-
-  &::file-selector-button:hover {
+input[type="file"]::file-selector-button:hover {
     background-color: #cccccc;
-  }
 }
-
 </style>
 <template>
   <IFormDynamic :fields="fields"
