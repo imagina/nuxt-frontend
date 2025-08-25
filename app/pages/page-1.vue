@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import type { PageData } from "#ipage/types/pages";
+import CardHome from '~/components/CardHome.vue'
 const settingStore = useIsettingStore();
 defineProps<{ page: PageData }>();
 
 // Info Alquiler que posiblemente venga de un slider
 const infoRent = {
-  img: "https://components.ozonohosting.com/assets/media/pexels-1266623.jpg?u=1700491876",
+  img: "/images/photo.jpg",
   title: "Requisitos de Alquiler",
   summary: "Excelencia Profesional",
   customHtml: `
@@ -44,17 +45,28 @@ const titles = {
 };
 const slides = [
   {
-    media: { isImage: true, url: 'https://components.ozonohosting.com/assets/media/pexels-1266623.jpg?u=1700491876'} ,
+    media: { isImage: true, url: '/images/slider.jpg'} ,
     title: 'Descubre nuevos destinos al volante, con Rent Cars siempre a tu lado'
   },
   {
-    media: { isImage: true, url: 'https://components.ozonohosting.com/assets/media/pexels-1266623.jpg?u=1700491876'} ,
+    media: { isImage: true, url: '/images/slider.jpg'} ,
     title: 'Tu aventura comienza aquí'
   },
   {
-    media: { isImage: true, url: 'https://components.ozonohosting.com/assets/media/pexels-1266623.jpg?u=1700491876'} ,
+    media: { isImage: true, url: '/images/slider.jpg'} ,
     title: 'Conduce con tranquilidad'
   }
+]
+
+const cars = [
+  { id: 1,  category: 'Gama E', title: 'Kia picanto mecánico',  image: '/images/kia-automatico.jpg' },
+  { id: 2,  category: 'Gama E', title: 'Kia picanto automático',  image: '/images/kia-automatico.jpg' },
+  { id: 3,  category: 'Gama E', title: 'Renault logan mecánico',  image: '/images/kia-automatico.jpg' },
+  { id: 4,  category: 'Gama E', title: 'Suzuki Swift',          image: '/images/kia-automatico.jpg' },
+  { id: 5,  category: 'Gama P', title: 'Hyundai Tucson automática', image: '/images/kia-automatico.jpg' },
+  { id: 6,  category: 'Gama FL', title: 'Hyundai Tucson automática',  image: '/images/kia-automatico.jpg' },
+  { id: 7,  category: 'Gama GI', title: 'Nissan X-Trail automática',  image: '/images/kia-automatico.jpg' },
+  { id: 8,  category: 'Gama GL', title: 'Ford Explorer automática', image: '/images/kia-automatico.jpg' }
 ]
 
 
@@ -125,10 +137,15 @@ const slides = [
       </div>
     </section>
     <!-- List Categorias -->
-    <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-10">
+    <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-10 mb-10">
       <div class="text-center">
         <div class="text-secondary text-[16px] lg:text-[20px] font-bold uppercase mb-0 ">{{titlesCart.subtitle}}</div>
-        <div class="text-primary text-[30px] lg:text-[45px] font-semibold mb-5 ">{{titlesCart.title}}</div>
+        <div class="text-primary text-[30px] lg:text-[45px] font-semibold mb-10 ">{{titlesCart.title}}</div>
+        <IList
+          :items="cars"
+          :item-component="CardHome"
+          grid-cols="grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
+        />
       </div>
       <!-- Vehiculos-->
     </section>
@@ -149,7 +166,7 @@ const slides = [
               media: 'rounded-2xl lg:aspect-4/5 aspect-16/9 shadow-lg object-cover'
             }"/>
              -->
-          <img :src="infoRent.img" class="rounded-2xl lg:aspect-4/5 aspect-16/9 shadow-lg object-cover"
+          <img :src="infoRent.img" class="rounded-2xl lg:aspect-4/5 aspect-16/9 shadow-lg object-cover w-full"
             :alt="infoRent.title" />
         </div>
         <!-- Text column -->

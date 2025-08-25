@@ -3,11 +3,16 @@ const settingStore = useIsettingStore()
 
 
 // const
-const logoFooter = settingStore.get('isite::logo2')
-const logoWhite = 'https://components.ozonohosting.com/assets/media/logo-10-horizontal-blanco-ready-rent-cars.png?u=1753915846'
+const logoFooter =  { isImage: true, url: '/images/logo-white.png'}  //settingStore.get('isite::logo2')
 const phone = ['+57 311 8060834','+57 311 8060834']
 const address = ['Calle 74 bis 83-45 · Aeropuerto El Dorado de Bogotá · servicio Meet & Greet']
 const email = ['serviciocliente@readyrentacars.com']
+const items = [
+  { label: 'Preguntas frecuentes', to: '#' },
+  { label: 'Términos y condiciones', to: '#' },
+  { label: 'Política de privacidad', to: '#' },
+  { label: 'Contrato de alquiler de autos', to: '#' }
+]
 
 </script>
 
@@ -22,7 +27,7 @@ const email = ['serviciocliente@readyrentacars.com']
             :media="logoFooter" alt="Logo"
             aspect-ratio="auto"
             :ui="{
-              wrapper: 'h-[150px] w-[181px]',
+              wrapper: 'h-[50px] w-[181px]',
               container: '',
               media: 'object-contain' }"
             />
@@ -32,19 +37,31 @@ const email = ['serviciocliente@readyrentacars.com']
         <h3 class="text-lg font-semibold">Info de Contacto</h3>
 
          <IContactPhone :phones="phone"/>
-         <IContactAddress :address="address" />
          <IContactEmail :email="email" />
+         <IContactAddress :address="address" />
+
       </div>
 
       <div class="flex flex-col space-y-4">
         <h3 class="text-lg font-semibold">Apoyo al Cliente</h3>
-        <!--
-          <MenuDesktop
-            :menuItems="menuFooter"
-            iconFont="fa-solid:caret-right"
-            menuOrientation="vertical"
-            :menuUI="menuUI"
-          />-->
+        <ul class="space-y-2">
+          <li v-for="it in items" :key="it.label">
+            <a
+              :href="it.to" class="group flex items-center gap-3 px-3 py-0 rounded-md "
+            >
+              <!-- Triangulito -->
+              <span
+                class="h-0 w-0 border-y-4 border-y-transparent border-l-6 border-l-white/80
+                      group-hover:border-l-white shrink-0" aria-hidden="true"
+              />
+              <!-- Texto -->
+              <span class="text-sm md:text-base">
+                {{ it.label }}
+              </span>
+            </a>
+          </li>
+        </ul>
+
       </div>
 
     </div>

@@ -1,8 +1,21 @@
 <script setup lang="ts">
 const settingStore = useIsettingStore()
-const logo = settingStore.get('isite::logo1')
+const logo = { isImage: true, url: '/images/logo-color.png'} // settingStore.get('isite::logo1')
 </script>
+<style>
+.menu > nav a {
+  color: var(--color-primary);
+  text-transform: uppercase;
+  font-weight: 600;
+  font-style: SemiBold;
+  font-size: 14px;
+  letter-spacing: .2;
+  &:hover {
+    color: var(--color-secondary);
+  }
 
+}
+</style>
 
 <template>
   <header class="bg-white shadow-md">

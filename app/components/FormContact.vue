@@ -22,9 +22,30 @@ const state = reactive<Record<string, any>>({
   apellidos: '', telefono: '', email: '', ciudad: '', mensaje: '', archivo: null, autorizo: false
 })
 
-
 </script>
+<style>
+input[type="file"] {
+border: 0;
+padding: 0;
+border-radius: 0;
+box-shadow: none;
+height: 40px;
+&::file-selector-button {
+  background: #EFEFEF;
+  color: #444444;
+  font-weight: 500;
+  font-size: 16px;
+  border: 1px solid #5B6077;
+  padding: 6px 20px;
+  transition: .2s;
+}
 
+  &::file-selector-button:hover {
+    background-color: #cccccc;
+  }
+}
+
+</style>
 <template>
   <IFormDynamic :fields="fields"
                 v-model:state="state"
