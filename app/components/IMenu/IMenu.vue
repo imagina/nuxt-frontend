@@ -1,11 +1,8 @@
 <script setup lang="ts">
-  import type {NavigationMenuItem} from '@nuxt/ui'
+  import type {IMenuProps} from './IMenu'
   import {DialogTitle, DialogDescription} from 'reka-ui'
 
-  const props = withDefaults(defineProps<{
-    items: NavigationMenuItem[],
-    drawerDirection?: 'left' | 'right'
-  }>(), {
+  const props = withDefaults(defineProps<IMenuProps>(), {
     drawerDirection: 'right'
   })
 
