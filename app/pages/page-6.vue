@@ -62,7 +62,7 @@ const active = ref("0");
         <!-- Columna izquierda: Filtros -->
         <aside class="md:col-span-1 filters">
           <UCard class="shadow-md">
-            <h1 class="font-[24px] font-semibold text-primary">Oficinas</h1>
+            <h1 class="text-[24px]  text-primary font-semibold">Oficinas</h1>
             <UAccordion v-model="active" :items="items" >
               <template #body="{ item }">
                 <div class="border-t border-gray-200 pt-4">
