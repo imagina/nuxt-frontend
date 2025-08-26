@@ -4,10 +4,6 @@ defineProps<{ page: PageData }>()
 import { ref, computed } from "vue";
 import type { AccordionItem } from "@nuxt/ui";
 
-definePageMeta({
-  layout: 'master'
-})
-
 type Office = { id:number; title:string; summary:string; iframe?:string; address?:string }
 
 const offices: Office[] = [
