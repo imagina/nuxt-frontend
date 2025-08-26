@@ -24,6 +24,15 @@ export default defineNuxtModule({
     extendPages((pages) => pagesConfig.forEach(
       page => pages.push({...page, file: resolve(page.page)})
     ))
+    // Add middleware
+    nuxt.hook('app:resolve', (app) =>
+    {
+      app.middleware.unshift({
+        name: 'ipage-redirect-home',
+        path: resolve(runtimeDir, 'middleware/redirect-home.global'),
+        global: true
+      })
+    })
     //Extend i18n
     nuxt.hook('i18n:registerModule', register => register({
       langDir: resolve('./i18n'),
