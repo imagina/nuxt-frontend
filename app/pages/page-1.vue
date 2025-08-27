@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import type { PageData } from "#ipage/types/pages";
-import CardHome from '~/components/CardHome.vue'
-const settingStore = useIsettingStore();
-defineProps<{ page: PageData }>();
+  import type {PageData} from "#ipage/types/pages";
+  import CardHome from '~/components/CardHome.vue'
 
-// Info Alquiler que posiblemente venga de un slider
-const infoRent = {
-  img: "/images/photo.jpg",
-  title: "Requisitos de Alquiler",
-  summary: "Excelencia Profesional",
-  customHtml: `
+  const settingStore = useIsettingStore();
+  defineProps<{ page: PageData }>();
+
+  // Info Alquiler que posiblemente venga de un slider
+  const infoRent = {
+    img: "/images/photo.jpg",
+    title: "Requisitos de Alquiler",
+    summary: "Excelencia Profesional",
+    customHtml: `
             <ol>
             <li>La edad mínima para el alquiler del vehículo debe ser de 25 años</li>
             <li>Licencia de conducción vigente. Nacional o Internacional</li>
@@ -32,99 +33,48 @@ const infoRent = {
             </li>
             </ol>
         `,
-  url: "/terminos-y-condiciones",
-  caption: " Términos & Condiciones ",
-};
+    url: "/terminos-y-condiciones",
+    caption: " Términos & Condiciones ",
+  };
 
 
-const textH1 = 'Alquiler de Autos en Colombia con Tarifas Increíbles';
-const titlesCart = { title: 'Gamas de Vehículos', subtitle: 'Reserva el tuyo' };
-const titles = {
-  title: "Contáctanos",
-  subtitle: "Te responderemos tan pronto como nos sea posible, ¡Gracias!",
-};
-const slides = [
-  {
-    media: { isImage: true, url: '/images/slider.jpg'} ,
-    title: 'Descubre nuevos destinos al volante, con Rent Cars siempre a tu lado'
-  },
-  {
-    media: { isImage: true, url: '/images/slider.jpg'} ,
-    title: 'Tu aventura comienza aquí'
-  },
-  {
-    media: { isImage: true, url: '/images/slider.jpg'} ,
-    title: 'Conduce con tranquilidad'
-  }
-]
+  const textH1 = 'Alquiler de Autos en Colombia con Tarifas Increíbles';
+  const titlesCart = {title: 'Gamas de Vehículos', subtitle: 'Reserva el tuyo'};
+  const titles = {
+    title: "Contáctanos",
+    subtitle: "Te responderemos tan pronto como nos sea posible, ¡Gracias!",
+  };
 
-const cars = [
-  { id: 1,  category: 'Gama E', title: 'Kia picanto mecánico',  image: '/images/kia-automatico.jpg' },
-  { id: 2,  category: 'Gama E', title: 'Kia picanto automático',  image: '/images/kia-automatico.jpg' },
-  { id: 3,  category: 'Gama E', title: 'Renault logan mecánico',  image: '/images/kia-automatico.jpg' },
-  { id: 4,  category: 'Gama E', title: 'Suzuki Swift',          image: '/images/kia-automatico.jpg' },
-  { id: 5,  category: 'Gama P', title: 'Hyundai Tucson automática', image: '/images/kia-automatico.jpg' },
-  { id: 6,  category: 'Gama FL', title: 'Hyundai Tucson automática',  image: '/images/kia-automatico.jpg' },
-  { id: 7,  category: 'Gama GI', title: 'Nissan X-Trail automática',  image: '/images/kia-automatico.jpg' },
-  { id: 8,  category: 'Gama GL', title: 'Ford Explorer automática', image: '/images/kia-automatico.jpg' }
-]
+  const cars = [
+    {id: 1, category: 'Gama E', title: 'Kia picanto mecánico', image: '/images/kia-automatico.jpg'},
+    {id: 2, category: 'Gama E', title: 'Kia picanto automático', image: '/images/kia-automatico.jpg'},
+    {id: 3, category: 'Gama E', title: 'Renault logan mecánico', image: '/images/kia-automatico.jpg'},
+    {id: 4, category: 'Gama E', title: 'Suzuki Swift', image: '/images/kia-automatico.jpg'},
+    {id: 5, category: 'Gama P', title: 'Hyundai Tucson automática', image: '/images/kia-automatico.jpg'},
+    {id: 6, category: 'Gama FL', title: 'Hyundai Tucson automática', image: '/images/kia-automatico.jpg'},
+    {id: 7, category: 'Gama GI', title: 'Nissan X-Trail automática', image: '/images/kia-automatico.jpg'},
+    {id: 8, category: 'Gama GL', title: 'Ford Explorer automática', image: '/images/kia-automatico.jpg'}
+  ]
 
 
 </script>
 
-<style>
-.custom-html ol {
-  list-style: decimal !important;
-  padding-left: 1.25rem;
-}
-.custom-html li {
-  display: list-item;
-  margin-bottom: .5rem;
-}
-.form-contact {
-  background: linear-gradient(360deg,
-      var(--color-dark-1) 50%,
-      var(--color-gray-1) 50%);
-}
-.overlay-slide {
-  background: #00000066;
-
-}
-</style>
-
 <template>
   <div>
-    <ICarousel
-    :items="slides"
-    dots-position="inside-left-middle"
-    :carousel-props="{
+    <IsliderCarousel
+      system-name="slider_home"
+      dots-position="inside-left-middle"
+      :carousel-props="{
       dots: true,
-      arrows: false,
+      autoplay: true,
+      loop: true,
       ui: {
         item: 'h-[260px] sm:h-[360px] md:h-[400px]',
         dot: 'w-[16px] h-[16px] rounded-full bg-[#FFFFFF80] data-[state=active]:bg-secondary'
       }
     }"
-  >
-    <template #item="{ item }">
-      <div class="relative w-full h-full">
-          <IMediaRender
-              :media="item.media" :alt="item.title"
-              aspect-ratio="auto"
-              :ui="{
-                wrapper: '',
-                container: '',
-                media: 'absolute inset-0 w-full h-full object-cover' }"
-          />
-          <div class="absolute inset-0 overlay-slide"></div>
-          <div class="relative h-full flex items-center justify-center max-w-3/4 mx-auto">
-            <h2 class="text-white text-center font-bold text-2xl sm:text-4xl md:text-5xl">
-              {{ item.title }}
-            </h2>
-          </div>
-        </div>
-    </template>
-    </ICarousel>
+    />
+
     <!-- H1 -->
     <section class="bg-quaternary py-5">
       <div class="container mx-auto  px-4 sm:px-6 lg:px-10">
@@ -132,15 +82,16 @@ const cars = [
           {{ textH1 }}
         </h1>
         <UCard class="shadow-md rounded-3xl mb-5">
-         <FormHome />
+          <FormHome/>
         </UCard>
       </div>
     </section>
     <!-- List Categorias -->
     <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-10 mb-10">
       <div class="text-center">
-        <div class="text-secondary text-[16px] lg:text-[20px]  font-bold uppercase mb-0 ">{{titlesCart.subtitle}}</div>
-        <div class="text-primary text-[30px] lg:text-[45px] font-semibold mb-10 ">{{titlesCart.title}}</div>
+        <div class="text-secondary text-[16px] lg:text-[20px]  font-bold uppercase mb-0 ">{{ titlesCart.subtitle }}
+        </div>
+        <div class="text-primary text-[30px] lg:text-[45px] font-semibold mb-10 ">{{ titlesCart.title }}</div>
         <IList
           :items="cars"
           :item-component="CardHome"
@@ -167,21 +118,23 @@ const cars = [
             }"/>
              -->
           <img :src="infoRent.img" class="rounded-2xl lg:aspect-4/5 aspect-16/9 shadow-lg object-cover w-full"
-            :alt="infoRent.title" />
+               :alt="infoRent.title"/>
         </div>
         <!-- Text column -->
         <div class="w-full lg:w-1/2 space-y-6">
-          <p class="text-white lg:text-secondary text-[16px] lg:text-[20px] font-bold uppercase mb-0 text-center lg:text-left">
+          <p
+            class="text-white lg:text-secondary text-[16px] lg:text-[20px] font-bold uppercase mb-0 text-center lg:text-left">
             {{ infoRent.summary }}
           </p>
-          <h2 class="text-white lg:text-primary text-[30px] lg:text-[45px]  font-semibold mb-5 text-center lg:text-left">
+          <h2
+            class="text-white lg:text-primary text-[30px] lg:text-[45px]  font-semibold mb-5 text-center lg:text-left">
             {{ infoRent.title }}
           </h2>
           <div class="space-y-2 text-white lg:text-dark-3 text-[16px] lg:text-[20px] text-justify custom-html"
-            v-html="infoRent.customHtml"></div>
+               v-html="infoRent.customHtml"></div>
           <div class="text-center lg:text-left">
             <UButton :label="infoRent.caption" :to="infoRent.url"
-              class="bg-white lg:bg-secondary text-secondary lg:text-white hover:bg-primary hover:text-white px-6 py-4 rounded-lg transition text-[18px] font-semibold leading-[20px]">
+                     class="bg-white lg:bg-secondary text-secondary lg:text-white hover:bg-primary hover:text-white px-6 py-4 rounded-lg transition text-[18px] font-semibold leading-[20px]">
             </UButton>
           </div>
         </div>
@@ -189,15 +142,38 @@ const cars = [
     </section>
     <!-- Form Contacto -->
     <section class="pt-20 form-contact pb-20 px-4">
-    <UCard class="shadow-md rounded-3xl lg:max-w-3/4 xl:max-w-1/2 mx-auto">
-      <h2 class="text-primary text-center text-[30px] lg:text-[45px] font-semibold mb-2  ">
-        {{ titles.title }}
-      </h2>
-      <p class="text-center text-[16px] lg:text-[18px]  mb-10 ">
-        {{ titles.subtitle }}
-      </p>
-      <FormContact />
-    </UCard>
-  </section>
+      <UCard class="shadow-md rounded-3xl lg:max-w-3/4 xl:max-w-1/2 mx-auto">
+        <h2 class="text-primary text-center text-[30px] lg:text-[45px] font-semibold mb-2  ">
+          {{ titles.title }}
+        </h2>
+        <p class="text-center text-[16px] lg:text-[18px]  mb-10 ">
+          {{ titles.subtitle }}
+        </p>
+        <FormContact/>
+      </UCard>
+    </section>
   </div>
 </template>
+
+<style>
+  .custom-html ol {
+    list-style: decimal !important;
+    padding-left: 1.25rem;
+  }
+
+  .custom-html li {
+    display: list-item;
+    margin-bottom: .5rem;
+  }
+
+  .form-contact {
+    background: linear-gradient(360deg,
+    var(--color-dark-1) 50%,
+    var(--color-gray-1) 50%);
+  }
+
+  .overlay-slide {
+    background: #00000066;
+
+  }
+</style>
