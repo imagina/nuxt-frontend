@@ -1,7 +1,19 @@
 <script setup lang="ts">
+  const settingStore = useIsettingStore()
   //Always use light for layout master
   const colorMode = useColorMode()
   colorMode.value = 'light'
+
+  // Favicon
+  useHead({
+    link: [
+      {
+        rel: 'icon',
+        type: 'image/png',
+        href: settingStore.get('isite::favicon').url
+      }
+    ]
+  })
 </script>
 
 <template>

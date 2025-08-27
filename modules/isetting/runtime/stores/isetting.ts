@@ -31,7 +31,9 @@ export const useIsettingStore = defineStore(
     actions: {
       async fetchSettings ()
       {
-        const {data} = await isettingSettingsRepository.index();
+        const {data} = await isettingSettingsRepository.index({
+          include: 'translations,files',
+        });
         this.settings = data;
         this.loaded = true;
       },
