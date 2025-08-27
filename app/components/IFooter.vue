@@ -1,9 +1,7 @@
 <script setup lang="ts">
 const settingStore = useIsettingStore()
-
-
 // const
-const logoFooter =  { isImage: true, url: '/images/logo-white.png'}  //settingStore.get('isite::logo2')
+const logoFooter =  settingStore.get('isite::logo2')
 const phone = ['+57 311 8060834','+57 311 8060834']
 const address = ['Calle 74 bis 83-45 · Aeropuerto El Dorado de Bogotá · servicio Meet & Greet']
 const email = ['serviciocliente@readyrentacars.com']

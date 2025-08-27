@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const settingStore = useIsettingStore()
-const logo = { isImage: true, url: '/images/logo-color.png'} // settingStore.get('isite::logo1')
+const logo = settingStore.get('isite::logo1')
 </script>
 <style>
 .menu > nav a {
