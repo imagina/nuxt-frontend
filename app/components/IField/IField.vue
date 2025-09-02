@@ -11,7 +11,7 @@
 
 <template>
   <UFormField :name="props.field.name" v-bind="props.field.formFieldProps">
-    <component
+    <component class="w-full"
       :is="fieldComponent"
       v-bind="props.field.fieldProps"
       v-model="model"

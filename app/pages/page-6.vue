@@ -38,9 +38,7 @@ const iframeSrc = computed(() => {
   return list[i]?.iframe ?? list[0]?.iframe ?? ''
 })
 
-
 const active = ref("0");
-
 
 </script>
 
@@ -48,10 +46,25 @@ const active = ref("0");
   <template>
   <div>
     <!-- Oficinas -->
-    <IBreadcrumb
-      :title="'Oficinas'"
-      :ui="{ link: 'font-bold text-gray-3' }"
-    />
+     <IBreadcrumb
+      :title="page.title ?? '...'"
+      :ui="{ link: 'font-bold text-gray-3' }">
+      <template #extraUp>
+        <IsliderCarousel
+          system-name="slider_home"
+          dots-position="inside-left-middle"
+          :carousel-props="{
+          dots: true,
+          autoplay: true,
+          loop: true,
+          ui: {
+            item: 'h-[260px] sm:h-[360px] md:h-[400px]',
+            dot: 'w-[16px] h-[16px] rounded-full bg-[#FFFFFF80] data-[state=active]:bg-secondary'
+          }
+        }"
+        />
+      </template>
+    </IBreadcrumb>
     <div class="bg-gray-2">
     <section class=" container mx-auto py-10 px-4 sm:px-6 lg:px-10">
       <div class="grid gap-10 grid-cols-1 md:grid-cols-3">

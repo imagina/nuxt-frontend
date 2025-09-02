@@ -1,8 +1,12 @@
 <script setup lang="ts">
+import { onMounted, computed } from 'vue'
   import type {IFormProps} from './IForm'
   import {buildSchema} from './buildSchema'
 
-  const props = defineProps<IFormProps>()
+  const props = withDefaults(defineProps<IFormProps>(), {
+    buttonProps: () => ({}),
+    ui: () => ({})
+  })
   const model = defineModel<Record<string, unknown>>({default: {}})
   const emit = defineEmits<{
     (e: 'submit', payload: Record<string, unknown>): void
@@ -24,21 +28,27 @@
       }
     })
   })
+
+
 </script>
 
 <template>
-  <div class="p-6 bg-white shadow-md rounded-lg space-y-4">
-    <h2 v-if="props.title" class="text-2xl font-bold">{{ props.title }}</h2>
-    <p v-if="props.description" class="text-gray-600">{{ props.description }}</p>
+  <div :class="ui.root">
+    <div v-if="props.title || props.description" :class="ui.header">
+      <h2 v-if="props.title" :class="ui.title">{{ props.title }}</h2>
+      <p v-if="props.description" :class="ui.description">{{ props.description }}</p>
+    </div>
 
-    <UForm :state="model" :schema="formSchema" class="space-y-4" @submit="onSubmit">
+    <UForm :state="model" :schema="formSchema" :class="ui.form" @submit="onSubmit">
       <template v-for="field in props.fields" :key="field.name">
         <IField v-model="model[field.name]" :field="field"/>
       </template>
 
-      <UButton type="submit" color="primary">
-        {{ props.submitLabel || props.title }}
-      </UButton>
+      <div :class="ui.actions">
+        <UButton type="submit" v-bind="props.buttonProps">
+          {{ props.submitLabel || props.title }}
+        </UButton>
+      </div>
     </UForm>
   </div>
 </template>

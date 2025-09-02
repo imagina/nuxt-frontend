@@ -46,14 +46,14 @@
   };
 
   const cars = [
-    {id: 1, category: 'Gama E', title: 'Kia picanto mecánico', image: '/images/kia-automatico.jpg'},
-    {id: 2, category: 'Gama E', title: 'Kia picanto automático', image: '/images/kia-automatico.jpg'},
-    {id: 3, category: 'Gama E', title: 'Renault logan mecánico', image: '/images/kia-automatico.jpg'},
-    {id: 4, category: 'Gama E', title: 'Suzuki Swift', image: '/images/kia-automatico.jpg'},
-    {id: 5, category: 'Gama P', title: 'Hyundai Tucson automática', image: '/images/kia-automatico.jpg'},
-    {id: 6, category: 'Gama FL', title: 'Hyundai Tucson automática', image: '/images/kia-automatico.jpg'},
-    {id: 7, category: 'Gama GI', title: 'Nissan X-Trail automática', image: '/images/kia-automatico.jpg'},
-    {id: 8, category: 'Gama GL', title: 'Ford Explorer automática', image: '/images/kia-automatico.jpg'}
+    {id: 1, category: 'Gama E', title: 'Kia picanto mecánico', media: { isImage: true, url: '/images/kia-automatico.jpg'} },
+    {id: 2, category: 'Gama E', title: 'Kia picanto automático', media: { isImage: true, url: '/images/kia-automatico.jpg'}},
+    {id: 3, category: 'Gama E', title: 'Renault logan mecánico', media: { isImage: true, url: '/images/kia-automatico.jpg'}},
+    {id: 4, category: 'Gama E', title: 'Suzuki Swift', media: { isImage: true, url: '/images/kia-automatico.jpg'}},
+    {id: 5, category: 'Gama P', title: 'Hyundai Tucson automática', media: { isImage: true, url: '/images/kia-automatico.jpg'}},
+    {id: 6, category: 'Gama FL', title: 'Hyundai Tucson automática', media: { isImage: true, url: '/images/kia-automatico.jpg'}},
+    {id: 7, category: 'Gama GI', title: 'Nissan X-Trail automática', media: { isImage: true, url: '/images/kia-automatico.jpg'}},
+    {id: 8, category: 'Gama GL', title: 'Ford Explorer automática', media: { isImage: true, url: '/images/kia-automatico.jpg'}}
   ]
 
 
@@ -141,17 +141,7 @@
       </div>
     </section>
     <!-- Form Contacto -->
-    <section class="pt-20 form-contact pb-20 px-4">
-      <UCard class="shadow-md rounded-3xl lg:max-w-3/4 xl:max-w-1/2 mx-auto">
-        <h2 class="text-primary text-center text-[30px] lg:text-[45px] font-semibold mb-2  ">
-          {{ titles.title }}
-        </h2>
-        <p class="text-center text-[16px] lg:text-[18px]  mb-10 ">
-          {{ titles.subtitle }}
-        </p>
-        <FormContact/>
-      </UCard>
-    </section>
+    <FormContact />
   </div>
 </template>
 
@@ -165,13 +155,6 @@
     display: list-item;
     margin-bottom: .5rem;
   }
-
-  .form-contact {
-    background: linear-gradient(360deg,
-    var(--color-dark-1) 50%,
-    var(--color-gray-1) 50%);
-  }
-
   .overlay-slide {
     background: #00000066;
 

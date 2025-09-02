@@ -1,38 +1,123 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+import type { IFormFieldConfig } from '~/components/IForm/IForm.d'
 
-type Field =
-  | { key: string; label?: string; required?: boolean; width?: string; component?: 'input';  type?: string; placeholder?: string; help?: string }
-  | { key: string; label?: string; required?: boolean; width?: string; component: 'textarea'; rows?: number; placeholder?: string; help?: string }
-  | { key: string; label?: string; required?: boolean; width?: string; component: 'select';  placeholder?: string; options: Array<string | { label: string; value: string }>; help?: string }
-  | { key: string; label?: string; required?: boolean; width?: string; component: 'file';    accept?: string; help?: string }
-  | { key: string; label: string;  required?: boolean; width?: string; component: 'checkbox' }
+const formData = ref<Record<string, any>>({})
 
-const fields: Field[] = [
-  { required: true, key: 'nombre', label: '', placeholder: 'Nombre', width: 'col-span-12' },
-  { required: true, key: 'apellidos', label: '', placeholder: 'Apellidos', width: 'col-span-12' },
-  { required: true, key: 'telefono',  label: '', placeholder: 'Número de contacto', type: 'tel', width: 'col-span-12' },
-  { required: true, key: 'email',     label: '', placeholder: 'Correo electrónico', type: 'email', width: 'col-span-12' },
-  { required: true, key: 'ciudad',    label: '', placeholder: 'Ciudad', component: 'select', options: ['Bogotá', 'Medellín', 'Cali'], width: 'col-span-12' },
-  { required: true, key: 'mensaje',   label: '', component: 'textarea', rows: 4, placeholder: 'Mensaje…', width: 'col-span-12' },
-  { required: false, key: 'archivo',   label: '', component: 'file', accept: '.pdf,.jpg,.jpeg,.png', help: '(Adjunta un .PDF o .JPG si lo requieres)', width: 'col-span-12' },
-  { required: true,key: 'autorizo',  label: 'Autorizo el manejo de datos personales', component: 'checkbox', width: 'col-span-12' }
+const fields: IFormFieldConfig[] = [
+  {
+    name: 'nombre',
+    type: 'input',
+    default: '',
+    rules: ['required'],
+    formFieldProps: { label: '', class: 'col-span-12', ui: { label: 'sr-only' } },
+    fieldProps: { placeholder: 'Nombre', size:'xl' }
+  },
+  {
+    name: 'apellidos',
+    type: 'input',
+    default: '',
+    rules: ['required'],
+    formFieldProps: { label: '', class: 'col-span-12', ui: { label: 'sr-only' } },
+    fieldProps: { placeholder: 'Apellidos', size:'xl' }
+  },
+  {
+    name: 'telefono',
+    type: 'input',
+    default: '',
+    rules: ['required'],
+    formFieldProps: { label: '', class: 'col-span-12', ui: { label: 'sr-only' } },
+    fieldProps: { placeholder: 'Número de contacto', type: 'tel', size:'xl' }
+  },
+  {
+    name: 'email',
+    type: 'input',
+    default: '',
+    rules: ['required', 'email'],
+    formFieldProps: { label: '', class: 'col-span-12', ui: { label: 'sr-only' } },
+    fieldProps: { placeholder: 'Correo electrónico', type: 'email', autocomplete: 'email', size:'xl' }
+  },
+  {
+    name: 'ciudad',
+    type: 'select',
+    default: null,
+    rules: ['required'],
+    formFieldProps: { label: '', class: 'col-span-12', ui: { label: 'sr-only' }  },
+    fieldProps: {
+      placeholder: 'Ciudad',
+      size:'xl',
+      items: ['Bogotá', 'Medellín', 'Cali']
+    }
+  },
+  {
+    name: 'mensaje',
+    type: 'textarea',
+    default: '',
+    rules: ['required'],
+    formFieldProps: { label: '', class: 'col-span-12', ui: { label: 'sr-only' } },
+    fieldProps: { rows: 4, placeholder: 'Mensaje…' }
+  },
+  {
+    name: 'archivo',
+    type: 'input',
+    default: null,
+    rules: [],
+    formFieldProps: { label: '', class: 'col-span-12', help: '(Adjunta un .PDF o .JPG si lo requieres)' },
+    fieldProps: { type: 'file', accept: '.pdf,.jpg,.jpeg,.png' } as any
+  },
+  {
+    name: 'autorizo',
+    type: 'checkbox',
+    default: false,
+    rules: ['required'],
+    formFieldProps: { label: '', class: 'col-span-12' },
+    fieldProps: { label: 'Autorizo el manejo de datos personales' }
+  }
 ]
 
-const state = reactive<Record<string, any>>({
-  apellidos: '', telefono: '', email: '', ciudad: '', mensaje: '', archivo: null, autorizo: false
-})
-
-</script>
-<style>
-input[type="file"] {
-border: 0;
-padding: 0;
-border-radius: 0;
-box-shadow: none;
-height: 40px;
-background: transparent;
+const buttonProps = {
+  size: 'xl',
+  block: true,
+  class: 'justify-center bg-secondary h-[45px] text-white hover:bg-primary hover:text-white transition'
 }
-input[type="file"]::file-selector-button {
+const ui = {
+  root: 'shadow-md rounded-3xl lg:max-w-3/4 xl:max-w-1/2 mx-auto bg-white p-6',
+  title: 'text-primary text-center text-[30px] lg:text-[45px] leading-none font-semibold mb-2',
+  description: 'text-center text-[16px] lg:text-[18px] mb-10',
+  form: 'grid grid-cols-12 gap-4',
+  actions: 'col-span-12 mt-2'
+}
+
+const onSubmit = (values: Record<string, any>) => {
+  console.log('Form submitted:', values)
+}
+</script>
+
+<template>
+  <section class="pt-20 form-contact pb-20 px-4">
+    <IForm
+      v-model="formData"
+      :fields="fields"
+      title="Contáctanos"
+      description="Te responderemos tan pronto como nos sea posible, ¡Gracias!"
+      submit-label="Enviar"
+      @submit="onSubmit"
+      :button-props="buttonProps"
+      :ui="ui"
+    />
+  </section>
+</template>
+
+<style scoped>
+:deep(input[type="file"]) {
+  border: 0;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  height: 40px;
+  background: transparent;
+}
+:deep(input[type="file"]::file-selector-button) {
   background: #EFEFEF;
   color: #444444;
   font-weight: 500;
@@ -41,15 +126,12 @@ input[type="file"]::file-selector-button {
   padding: 6px 20px;
   transition: .2s;
 }
-input[type="file"]::file-selector-button:hover {
-    background-color: #cccccc;
+:deep(input[type="file"]::file-selector-button:hover) {
+  background-color: #cccccc;
+}
+.form-contact {
+  background: linear-gradient(360deg,
+  var(--color-dark-1) 50%,
+  var(--color-gray-1) 50%);
 }
 </style>
-<template>
-  <IFormDynamic :fields="fields"
-                v-model:state="state"
-                text-botom="Enviar"
-                sizeForm="xl"
-                :botom-props="{ size: 'xl', block: true, class: 'justify-center bg-secondary h-[45px] text-white hover:bg-primary hover:text-white transition' }" />
-
-</template>

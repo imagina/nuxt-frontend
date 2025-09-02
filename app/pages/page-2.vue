@@ -11,8 +11,40 @@ const titles = {
 };
 
 </script>
+<template>
+  <div>
+    <!-- Nosotros -->
+    <IBreadcrumb
+      :title="page.title ?? '...'"
+      :ui="{ link: 'font-bold text-gray-3' }">
+        <template #extraUp>
+          <IsliderCarousel
+            system-name="slider_home"
+            dots-position="inside-left-middle"
+            :carousel-props="{
+            dots: true,
+            autoplay: true,
+            loop: true,
+            ui: {
+              item: 'h-[260px] sm:h-[360px] md:h-[400px]',
+              dot: 'w-[16px] h-[16px] rounded-full bg-[#FFFFFF80] data-[state=active]:bg-secondary'
+            }
+          }"
+        />
+        </template>
+
+    </IBreadcrumb>
+    <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-10 nosotros">
+      <h1 class="page-title hidden">{{ page.title }}</h1>
+      <div class="page-body" v-html="impBody"></div>
+    </section>
+    <!-- Form Contacto -->
+    <FormContact />
+  </div>
+</template>
+
 <style>
-.contacto .page-body {
+.nosotros .page-body {
   font-family: DM Sans;
   font-weight: 400;
   font-size: 20px;
@@ -78,28 +110,3 @@ const titles = {
 }
 
 </style>
-<template>
-  <div>
-    <!-- Contacto -->
-    <IBreadcrumb
-      :title="page.title ?? '...'"
-      :ui="{ link: 'font-bold text-gray-3' }"
-    />
-    <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-10 contacto">
-      <h1 class="page-title hidden">{{ page.title }}</h1>
-      <div class="page-body" v-html="impBody"></div>
-    </section>
-    <!-- Form Contacto -->
-    <section class="pt-20 form-contact pb-20 px-4">
-    <UCard class="shadow-md rounded-3xl lg:max-w-3/4 xl:max-w-1/2 mx-auto">
-      <h2 class="text-primary text-center text-[30px] lg:text-[45px] font-semibold mb-2  ">
-        {{ titles.title }}
-      </h2>
-      <p class="text-center text-[16px] lg:text-[18px]  mb-10 ">
-        {{ titles.subtitle }}
-      </p>
-      <FormContact />
-    </UCard>
-  </section>
-  </div>
-</template>

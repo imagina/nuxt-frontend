@@ -1,35 +1,155 @@
 <script setup lang="ts">
   import type { PageData } from '#ipage/types/pages'
   defineProps<{ page: PageData }>()
+  import { ref } from 'vue'
+  import type { IFormFieldConfig } from '~/components/IForm/IForm.d'
 
-  type Field =
-  | { key: string; label?: string; required?: boolean; width?: string; component?: 'input';  type?: string; placeholder?: string; help?: string }
-  | { key: string; label?: string; required?: boolean; width?: string; component: 'textarea'; rows?: number; placeholder?: string; help?: string }
-  | { key: string; label?: string; required?: boolean; width?: string; component: 'select';  placeholder?: string; options: Array<string | { label: string; value: string }>; help?: string }
-  | { key: string; label?: string; required?: boolean; width?: string; component: 'file';    accept?: string; help?: string }
-  | { key: string; label: string;  required?: boolean; width?: string; component: 'checkbox' }
+const formData = ref<Record<string, any>>({})
 
-const fields: Field[] = [
-  { required: true, key: 'nombre', label: '', placeholder: 'Nombre', width: 'col-span-12' },
-  { required: true, key: 'apellidos', label: '', placeholder: 'Apellidos', width: 'col-span-12' },
-  { required: true, key: 'telefono',  label: '', placeholder: 'Número de contacto', type: 'tel', width: 'col-span-12' },
-  { required: true, key: 'email',     label: '', placeholder: 'Correo electrónico', type: 'email', width: 'col-span-12' },
-  { required: true, key: 'ciudad',    label: '', placeholder: 'Ciudad', component: 'select', options: ['Bogotá', 'Medellín', 'Cali'], width: 'col-span-12' },
-  { required: true, key: 'mensaje',   label: '', component: 'textarea', rows: 4, placeholder: 'Mensaje…', width: 'col-span-12' },
-  { required: false, key: 'archivo',   label: '', component: 'file', accept: '.pdf,.jpg,.jpeg,.png', help: '(Adjunta un .PDF o .JPG si lo requieres)', width: 'col-span-12' },
-  { required: true,key: 'autorizo',  label: 'Autorizo el manejo de datos personales', component: 'checkbox', width: 'col-span-12' }
+const fields: IFormFieldConfig[] = [
+  {
+    name: 'nombre',
+    type: 'input',
+    default: '',
+    rules: ['required'],
+    formFieldProps: { label: '', class: 'col-span-12', ui: { label: 'sr-only' } },
+    fieldProps: { placeholder: 'Nombre', size:'xl' }
+  },
+  {
+    name: 'apellidos',
+    type: 'input',
+    default: '',
+    rules: ['required'],
+    formFieldProps: { label: '', class: 'col-span-12', ui: { label: 'sr-only' } },
+    fieldProps: { placeholder: 'Apellidos', size:'xl' }
+  },
+  {
+    name: 'telefono',
+    type: 'input',
+    default: '',
+    rules: ['required'],
+    formFieldProps: { label: '', class: 'col-span-12', ui: { label: 'sr-only' } },
+    fieldProps: { placeholder: 'Número de contacto', type: 'tel', size:'xl' }
+  },
+  {
+    name: 'email',
+    type: 'input',
+    default: '',
+    rules: ['required', 'email'],
+    formFieldProps: { label: '', class: 'col-span-12', ui: { label: 'sr-only' } },
+    fieldProps: { placeholder: 'Correo electrónico', type: 'email', autocomplete: 'email', size:'xl' }
+  },
+  {
+    name: 'ciudad',
+    type: 'select',
+    default: null,
+    rules: ['required'],
+    formFieldProps: { label: '', class: 'col-span-12', ui: { label: 'sr-only' }  },
+    fieldProps: {
+      placeholder: 'Ciudad',
+      size:'xl',
+      items: ['Bogotá', 'Medellín', 'Cali']
+    }
+  },
+  {
+    name: 'mensaje',
+    type: 'textarea',
+    default: '',
+    rules: ['required'],
+    formFieldProps: { label: '', class: 'col-span-12', ui: { label: 'sr-only' } },
+    fieldProps: { rows: 4, placeholder: 'Mensaje…' }
+  },
+  {
+    name: 'archivo',
+    type: 'input',
+    default: null,
+    rules: [],
+    formFieldProps: { label: '', class: 'col-span-12', help: '(Adjunta un .PDF o .JPG si lo requieres)' },
+    fieldProps: { type: 'file', accept: '.pdf,.jpg,.jpeg,.png' } as any
+  },
+  {
+    name: 'autorizo',
+    type: 'checkbox',
+    default: false,
+    rules: ['required'],
+    formFieldProps: { label: '', class: 'col-span-12' },
+    fieldProps: { label: 'Autorizo el manejo de datos personales' }
+  }
 ]
 
-const state = reactive<Record<string, any>>({
-  apellidos: '', telefono: '', email: '', ciudad: '', mensaje: '', archivo: null, autorizo: false
-})
+const buttonProps = {
+  size: 'xl',
+  class: 'justify-center bg-secondary  text-white hover:bg-primary hover:text-white transition'
+}
+const ui = {
+  form: 'grid grid-cols-12 gap-4',
+  actions: 'col-span-12 mt-2'
+}
 
+const onSubmit = (values: Record<string, any>) => {
+  console.log('Form submitted:', values)
+}
 
 const impBody = "<h2 style=\"text-align: center;\">&iexcl;Escr&iacute;benos!</h2>\n\n<p style=\"text-align: center;\">Completa el formulario. Te contactaremos tan pronto como nos sea posible. &iexcl;Gracias!</p>";
 
 </script>
+
+<template>
+  <div>
+    <!-- Contacto -->
+     <IBreadcrumb
+      :title="page.title ?? '...'"
+      :ui="{ link: 'font-bold text-gray-3' }">
+      <template #extraUp>
+        <IsliderCarousel
+          system-name="slider_home"
+          dots-position="inside-left-middle"
+          :carousel-props="{
+          dots: true,
+          autoplay: true,
+          loop: true,
+          ui: {
+            item: 'h-[260px] sm:h-[360px] md:h-[400px]',
+            dot: 'w-[16px] h-[16px] rounded-full bg-[#FFFFFF80] data-[state=active]:bg-secondary'
+          }
+        }"
+        />
+      </template>
+    </IBreadcrumb>
+    <div class="bg-gray-2">
+      <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-10 contacto">
+        <h1 class="page-title hidden">{{ page.title }}</h1>
+        <div class="page-body mb-10" v-html="impBody"></div>
+        <div class="grid grid-cols-12 gap-10">
+          <div class="col-span-12 lg:col-span-6">
+            <IForm
+              v-model="formData"
+              :fields="fields"
+              submit-label="Enviar"
+              @submit="onSubmit"
+              :button-props="buttonProps"
+              :ui="ui"
+            />
+          </div>
+          <div class="col-span-12 lg:col-span-6">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63623.92796860637!2d-74.13125156112116!3d4.683603391468811!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9aeed5ded35d%3A0xf23844a180342b9c!2sAlquiler%20de%20Carros%20Bogot%C3%A1%20-%20ABC%20RENT%20A%20CAR!5e0!3m2!1ses!2sve!4v1755888820280!5m2!1ses!2sve"
+              width="100%"
+              height="550"
+              class="rounded-lg"
+              style="border:0;"
+              allowfullscreen
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</template>
 <style>
-.nosotros .page-body {
+.contacto .page-body {
   font-family: DM Sans;
   font-weight: 400;
   font-size: 20px;
@@ -37,8 +157,8 @@ const impBody = "<h2 style=\"text-align: center;\">&iexcl;Escr&iacute;benos!</h2
   text-align: justify;
 
   & h1, & h2, & h3, & h4 {
-  font-weight: 600;
-  margin-bottom: 15px;
+    font-weight: 600;
+    margin-bottom: 15px;
   }
   & h1, h2 {
     font-size: 40px;
@@ -86,42 +206,26 @@ const impBody = "<h2 style=\"text-align: center;\">&iexcl;Escr&iacute;benos!</h2
   color: var(--primary);
   }
 
-}</style>
-<template>
-  <div>
-    <!-- Nosotros -->
-    <IBreadcrumb
-      :title="page.title ?? '...'"
-      :ui="{ link: 'font-bold text-gray-3' }"
-    />
-    <div class="bg-gray-2">
-    <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-10 nosotros">
-      <h1 class="page-title hidden">{{ page.title }}</h1>
-      <div class="page-body mb-10" v-html="impBody"></div>
-      <div class="grid grid-cols-12 gap-10">
-        <div class="col-span-12 lg:col-span-6">
-           <IFormDynamic :fields="fields"
-                v-model:state="state"
-                text-botom="Enviar" sizeForm="xl"
-                :botom-props="{ size: 'xl', class: 'justify-center bg-secondary h-[45px] text-white hover:bg-primary hover:text-white transition' }" />
-
-        </div>
-        <div class="col-span-12 lg:col-span-6">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63623.92796860637!2d-74.13125156112116!3d4.683603391468811!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9aeed5ded35d%3A0xf23844a180342b9c!2sAlquiler%20de%20Carros%20Bogot%C3%A1%20-%20ABC%20RENT%20A%20CAR!5e0!3m2!1ses!2sve!4v1755888820280!5m2!1ses!2sve"
-            width="100%"
-            height="550"
-            class="rounded-lg"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
-        </div>
-</div>
-
-    </section>
-</div>
-  </div>
-</template>
+}
+.contacto input[type="file"] {
+  border: 0;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  height: 40px;
+  background: transparent;
+}
+.contacto input[type="file"]::file-selector-button {
+  background: #EFEFEF;
+  color: #444444;
+  font-weight: 500;
+  font-size: 16px;
+  border: 1px solid #5B6077;
+  padding: 6px 20px;
+  transition: .2s;
+}
+.contacto input[type="file"]::file-selector-button:hover {
+  background-color: #cccccc;
+}
+</style>
 

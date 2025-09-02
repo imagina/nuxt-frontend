@@ -3,6 +3,8 @@ import { computed } from 'vue'
 import type { BreadcrumbItem } from '@nuxt/ui'
 
 interface Props {
+   wrapper?: string
+  container?: string
   title?: string
   ui?: Record<string, any>
 }
@@ -20,9 +22,14 @@ const items = computed<BreadcrumbItem[]>(() => [
 </script>
 
 <template>
-  <section class="bg-gray-2 py-5">
+  <div>
+    <div v-if="$slots.extraUp">
+      <slot name="extraUp" />
+    </div>
+    <div class="bg-gray-2 py-5">
       <div class="container mx-auto px-4 sm:px-6 lg:px-10">
         <UBreadcrumb :items="items" :ui="props.ui"/>
       </div>
-    </section>
+    </div>
+  </div>
 </template>
