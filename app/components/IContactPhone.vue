@@ -1,7 +1,7 @@
 <script setup>
 
 const props = defineProps({
-  phones: { type: Array, required: true },
+  phone: { type: Array, required: true },
   showPhone: { type: Boolean, default: true },
   phoneWithIcon: { type: Boolean, default: true },
   showIcons: { type: Boolean, default: true },
@@ -16,11 +16,11 @@ const props = defineProps({
 
 <template>
   <!-- Teléfono -->
-  <div v-if="showPhone && phones" class="component-phone">
+  <div v-if="showPhone && phone" class="component-phone">
     <div class="flex">
       <Icon v-if="showIcons" :name="phoneIcon" :class="classIcons" />
       <div class="content-phone">
-        <template v-for="(phone, index) in phones" :key="index">
+        <template v-for="(phone, index) in phone" :key="index">
           <span v-if="withHyphenPhone && index>0">&nbsp;-&nbsp;</span>
           <a :href="`tel:${phone}`" target="_blank" :class="classLinkPhone">
             {{ phone }}

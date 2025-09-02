@@ -34,7 +34,7 @@ const items = [
       <div class="flex flex-col space-y-4">
         <h3 class="text-lg font-semibold">Info de Contacto</h3>
 
-         <IContactPhone :phones="phone"/>
+         <IContactPhone :phone="phone"/>
          <IContactEmail :email="email" />
          <IContactAddress :address="address" />
 
