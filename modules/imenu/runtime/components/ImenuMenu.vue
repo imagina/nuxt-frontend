@@ -17,9 +17,10 @@ const {data} = await useAsyncData(
 
 function mapNode (m: MenuItem): NavigationMenuItem
 {
+  const slug =  m.pageId != null ? m.systemName : undefined;
   return {
     label: m.title,
-    to: m.url,
+    to: slug ?? m.url ?? m.uri,
     target: m.target,
     disabled: m.status !== 1,
     icon: m.icon || undefined,

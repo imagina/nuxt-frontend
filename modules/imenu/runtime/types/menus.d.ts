@@ -36,6 +36,7 @@ export interface MenuItem {
   target: '_self' | '_blank' | string
   linkType: 'internal' | 'external' | string
   status: number
+  pageId: number
   uri: string
   url: string
   createdAt: string
