@@ -5,7 +5,7 @@ const props = defineProps({
   showEmail: { type: Boolean, default: true },
   showIcons: { type: Boolean, default: true },
   emailWithIcon: { type: Boolean, default: true },
-  emailIcon: { type: String, default: 'fa6-regular:envelope' },
+  emailIcon: { type: String, default: 'fa-regular fa-envelope' },
   emailWithTitle: { type: Boolean, default: true },
   classIcons: { type: String, default: 'self-center mr-2 text-white' },
   classTitle: { type: String, default: 'font-bold' },
@@ -18,7 +18,7 @@ const props = defineProps({
     <!-- Email -->
     <div v-if="showEmail && email" class="component-email">
         <div class="flex">
-        <Icon v-if="showIcons" :name="emailIcon" :class="classIcons" />
+        <i v-if="showIcons"  :class="[emailIcon,classIcons]" />
         <div class="content-email">
             <template v-for="(email, index) in email" :key="index">
             <span v-if="withHyphenEmail && index>0">&nbsp;-&nbsp;</span>

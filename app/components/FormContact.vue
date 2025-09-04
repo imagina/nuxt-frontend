@@ -83,7 +83,7 @@ const buttonProps = {
 const ui = {
   root: 'shadow-md rounded-3xl lg:max-w-3/4 xl:max-w-1/2 mx-auto bg-white p-6',
   title: 'text-primary text-center text-[30px] lg:text-[45px] leading-none font-semibold mb-2',
-  description: 'text-center text-[16px] lg:text-[18px] mb-10',
+  description: 'text-center text-[16px] lg:text-[18px] mb-10 block',
   form: 'grid grid-cols-12 gap-4',
   actions: 'col-span-12 mt-2'
 }

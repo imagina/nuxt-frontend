@@ -2,34 +2,6 @@
 import type { PageData } from '#ipage/types/pages'
 defineProps<{ page: PageData }>()
 
-const impBody = "<div class=\"btgrid\">\n<div class=\"grid grid-cols-12 gap-10 items-center\">\n<div class=\"col-span-12 lg:col-span-6\">\n<div class=\"content\">\n<p><img alt=\"\" src=\"/images/img-quienes-somos.jpg\" style=\"width: 100%; height: 450px; border-radius: 30px; object-fit: cover;\" /></p>\n</div>\n</div>\n\n<div class=\"col-span-12 lg:col-span-6\">\n<div class=\"content\">\n<h2>Requisitos</h2>\n\n<p>En caso que la persona que vaya a conducir no sea el due&ntilde;o de la tarjeta de cr&eacute;dito, este ser&aacute; llamado Conductor Adicional y necesitar&aacute; tener una licencia de conducci&oacute;n v&aacute;lida y vigente.</p>\n</div>\n</div>\n</div>\n</div>\n\n<div class=\"btgrid\">\n<div class=\"grid grid-cols-12 gap-10\">\n<div class=\"col-span-12 lg:col-span-6\">\n<div class=\"content\">\n<h2>Persona Natural</h2>\n\n<p>El conductor principal es quien firma el contrato y deber&aacute; presentar los siguientes documentos a su nombre:</p>\n\n<ul>\n\t<li>C&eacute;dula de ciudadania / Pasaporte vigente</li>\n\t<li>Licencia de conducir nacional o extranjera</li>\n\t<li>Tarjeta de cr&eacute;dito con relieve y fondos para deposito de garantia entre $1.600.000 y $2.600.000</li>\n\t<li>Edad del conductor m&iacute;nimo 23 a&ntilde;os</li>\n</ul>\n</div>\n</div>\n\n<div class=\"col-span-12 lg:col-span-6\">\n<div class=\"content\">\n<h2>Persona Jur&iacute;dica</h2>\n\n<p>El representante legal de la compa&ntilde;&iacute;a es quien firma el contrato, deber&aacute; presentar los siguientes documentos a nombre propio o de la compa&ntilde;&iacute;a:</p>\n\n<ul>\n\t<li>C&aacute;mara de comercio no mayor a 15 d&iacute;as</li>\n\t<li>Registro &Uacute;nico Tributario (RUT) actualizado</li>\n\t<li>Carta de intenci&oacute;n firmada por el representante legal solicitando el servicio y aceptando los T&eacute;rminos y Condiciones</li>\n\t<li>C&eacute;dula de ciudadan&iacute;a / Pasaporte vigente</li>\n\t<li>Licencia de conducci&oacute;n nacional o extranjera</li>\n\t<li>Tarjeta de cr&eacute;dito con relieve y fondos para deposito de garant&iacute;a entre $1.600.000 y $2.600.000</li>\n</ul>\n</div>\n</div>\n</div>\n</div>\n\n<p>&nbsp;</p>"
-const titles = { title: 'Nuestros Servicios', subtitle: 'Todo en un sólo lugar' };
-const image =  { isImage: true, url: '/images/requisitos.jpg'}
-
-const items = [
-  {
-    title: 'Servicio 24/7',
-    content:
-      'Nuestro clientes disponen de una asistencia de 24 horas de manera permanente durante los 365 días al año. Así mismo de nuestro contact center mantenemos sistemas de comunicación bidireccional continua.',
-    icon: 'mdi:infinity'
-  },
-  { title: 'Entrega a domicilio', icon: 'material-symbols:location-on-outline', content: 'Lorem Ipsum is simply dummy text' },
-  { title: 'Alquiler de trayecto único', icon: 'tabler:route', content: 'Lorem Ipsum is simply dummy text' },
-  { title: 'Conductor elegido: Bilingüe o Escolta.', icon: 'material-symbols:person-check-outline', content: 'Lorem Ipsum is simply dummy text' },
-  { title: 'Seguros y coberturas', icon: 'mdi:shield-half-full', content: 'Lorem Ipsum is simply dummy text' },
-  { title: 'Servicios adicionales', icon: 'ion:extension-puzzle-outline', content: 'Lorem Ipsum is simply dummy text' },
-]
-
-// Clases para que se vea como el diseño
-const ui = {
-  root: 'space-y-4',
-  item: 'rounded-xl border border-rose-200 bg-white',
-  trigger: 'px-4 py-3 flex items-center gap-3 text-slate-700 rounded-xl data-[state=open]:rounded-b-none ',
-  label: 'font-semibold',
-  icon: 'h-5 w-5 text-slate-400 transition-transform data-[state=open]:rotate-180',
-  content: 'px-4 pb-4 pt-1 text-[15px] leading-relaxed text-slate-600 rounded-b-xl'
-}
-
 </script>
 
 <template>
@@ -58,102 +30,111 @@ const ui = {
     <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-10 requisitos">
       <h1 class="page-title hidden">Requisitos</h1>
       <div class="page-body" v-html="page.body"></div>
-
-      <div class="grid grid-cols-12 gap-10 items-center">
-        <div class="col-span-12 md:col-span-6 mb-8">
-          <div class="text-secondary text-[16px] lg:text-[20px] leading-[23px] font-bold uppercase mb-0 ">{{titles.subtitle}}</div>
-          <div class="text-primary text-[30px] lg:text-[45px]  font-semibold mb-10 ">{{titles.title}}</div>
-
-          <UAccordion :items="items" :ui="ui" :multiple="false">
-            <!-- Cabecera personalizada con el Icon -->
-            <template #leading="{ item }">
-              <span class="flex h-9 w-9 items-center justify-center rounded-full text-secondary" >
-                <Icon :name="item.icon" class="h-7 w-7" />
-              </span>
-              {{ item.title }}
-            </template>
-          </UAccordion>
-
-        </div>
-        <div class="col-span-12 md:col-span-6 mb-8">
-          <IMediaRender
-            :media="image" alt="imagen"
-            aspect-ratio="auto"
-            :ui="{
-              wrapper: 'h-[750px] w-full',
-              container: '',
-              media: 'object-cover rounded-4xl' }"
-            />
-        </div>
-      </div>
     </section>
   </div>
 </template>
-<style>
+<style scoped>
+@reference "~/assets/css/main.css";
+
 .requisitos .page-body {
-  font-family: DM Sans;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 30px;
-  text-align: justify;
+  font-family: 'DM Sans', ui-sans-serif, system-ui;
+  @apply font-normal text-[18px] leading-[20px] md:text-[20px] md:leading-[30px];
 
-  & h1, & h2, & h3, & h4 {
-  font-weight: 600;
-  margin-bottom: 15px;
+  /* imágenes */
+  & :deep(img) { object-fit: cover; border-radius: 30px; }
+
+  /* grid */
+  & :deep(:is(.grid)) { @apply gap-10; }
+
+  /* títulos */
+  & :deep(:is(h1,h2,h3,h4)) { @apply font-semibold mb-[15px]; }
+  & :deep(:is(h1,h2)) { @apply text-[30px] leading-[40px] md:text-[40px] md:leading-[50px]; }
+  & :deep(:is(h3)) { @apply text-[20px] leading-[25px] md:text-[30px] md:leading-[40px]; }
+  & :deep(:is(h4)) { @apply text-[16px] leading-[20px] md:text-[20px] md:leading-[30px]; }
+
+  /* listas */
+  & :deep(:is(ul)) { @apply list-disc pl-5 mt-[15px]; }
+  & :deep(:is(ul li)) { @apply list-item mb-2; }
+  & :deep(:is(ol)) { @apply list-decimal pl-5 mt-[15px]; }
+  & :deep(:is(ol li)) { @apply list-item mb-2; }
+
+  /* énfasis y enlaces */
+  & :deep(:is(strong,a)) { @apply text-primary; }
+
+  /* separador */
+  & :deep(:is(hr)) {
+    @apply border-t;
+    border-color: #00000026;
   }
-  & h1, h2 {
-    font-size: 40px;
-    line-height: 50px;
+
+  /* --- Accordion cards --- */
+
+  & :deep(details.collapsible-item){
+    margin: 12px 0;
+    border: 1.5px solid #fda4af;      /* borde rosa */
+    border-radius: 12px;
+    background: #fff;
+    overflow: hidden;
+    transition: background .2s, border-color .2s, box-shadow .2s;
   }
-  & h3, & h4 {
+
+  & :deep(details.collapsible-item[open]){
+    background: #ffffff;
+    border-color: #fda4af;
+  }
+
+  /* ocultar marcador nativo */
+  & :deep(details.collapsible-item > summary::-webkit-details-marker){ display: none; }
+  & :deep(details.collapsible-item > summary::marker){ content: ""; }
+
+  /* cabecera */
+  & :deep(details.collapsible-item > summary.collapsible-item-title){
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    font-weight: 600;
+    color: #111827;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  /* icono FA izquierdo */
+  & :deep(details.collapsible-item > summary .fa-solid),
+  & :deep(details.collapsible-item > summary .fa-regular){
     font-size: 20px;
-    line-height: 30px;
+    color: #e11d48;                    /* rosa fuerte */
+    margin-right: 6px;
   }
 
-  & ul {
-    list-style: disc !important;
-    padding-left: 1.25rem;
-    margin-top: 15px;
-    & li {
-    display: list-item;
-    margin-bottom: .5rem;
-    }
+  /* chevron derecho */
+  & :deep(details.collapsible-item > summary.collapsible-item-title::after){
+    content: "";
+    margin-left: auto;
+    width: 8px; height: 8px;
+    border: 2px solid currentColor;
+    border-left: 0; border-top: 0;
+    transform: rotate(45deg);
+    opacity: .7;
+    transition: transform .2s ease, opacity .2s ease;
+  }
+  & :deep(details.collapsible-item[open] > summary.collapsible-item-title::after){
+    transform: rotate(-135deg);
+    opacity: 1;
   }
 
-  & ol {
-    list-style: decimal !important;
-    padding-left: 1.25rem;
-    margin-top: 15px;
-    & li {
-    display: list-item;
-    margin-bottom: .5rem;
-    }
+  /* cuerpo */
+  & :deep(details.collapsible-item .collapsible-item-body){
+    padding: 0 20px 16px 48px;          /* sangría bajo el título */
+    color: #374151;
+    line-height: 1.7;
   }
+  & :deep(details.collapsible-item .collapsible-item-body p){ margin: 0; }
 
-  @media (max-width: 767.98px) {
-  font-size: 18px;
-    & h1, h2 {
-    font-size: 30px;
-    line-height: 40px;
-    }
-
-    & h3, & h4 {
-    font-size: 20px;
-    line-height: 25px;
-    }
+  /* hover cuando está cerrado */
+  & :deep(details.collapsible-item:not([open])):hover{
+    background: #fff7f8;
+    border-color: #fda4af;
   }
-
-  & strong, & a {
-  color: var(--primary);
-  }
-
-  & hr {
-    border-top: 1px solid #00000026;
-  }
-  & .col-span-12 {
-    margin-bottom: 30px;
-  }
-
 }
-
 </style>

@@ -4,8 +4,13 @@ import type {Menu, MenuItem} from '#imenu/types/menus'
 import type {NavigationMenuItem} from '@nuxt/ui'
 
 const props = withDefaults(defineProps<{
-  systemName: string | number
-}>(), {})
+  systemName: string | number,
+  desktopNavProps?: Record<string, any>
+  withDrawer?: boolean
+}>(), {
+  desktopNavProps: () => ({ class: 'hidden md:flex' }),
+  withDrawer: true
+})
 
 const {data} = await useAsyncData(
   `menu:${props.systemName}`,
@@ -34,8 +39,10 @@ const items = computed<NavigationMenuItem[]>(() =>
   const list = menu?.menuItems ?? []
   return list.map(mapNode)
 })
+
+
 </script>
 
 <template>
-  <IMenu :items="items"/>
+  <IMenu :items="items" :with-drawer="props.withDrawer" :desktop-nav-props="props.desktopNavProps" />
 </template>
