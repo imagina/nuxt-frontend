@@ -120,7 +120,7 @@ const impBody = "<h2 style=\"text-align: center;\">&iexcl;Escr&iacute;benos!</h2
     <div class="bg-gray-2">
       <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-10 contacto">
         <h1 class="page-title hidden">{{ page.title }}</h1>
-        <div class="page-body" v-html="page.body"></div>
+        <div class="page-body mb-9" v-html="page.body"></div>
         <div class="grid grid-cols-12 gap-10">
           <div class="col-span-12 lg:col-span-6">
             <IForm
