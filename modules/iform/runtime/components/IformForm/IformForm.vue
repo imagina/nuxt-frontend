@@ -1,11 +1,11 @@
 <script setup lang="ts">
-  import {iformFormsRepository} from '#iform/utils/repository'
+  import {iformFormsRepository, iformLeadsRepository} from '#iform/utils/repository'
   import type {IformFormProps} from '../IformForm/IformForm'
   import {mapApiFields} from './BuildFields'
   import type {Form} from "#iform/types/forms";
 
   const props = defineProps<IformFormProps>()
-
+  const formData = ref({})
   const {data} = await useAsyncData(
     `iform:${props.systemName}`,
     () => iformFormsRepository.show(props.systemName, {
@@ -23,15 +23,24 @@
     form: 'grid grid-cols-12 gap-4',
     actions: 'col-span-12 mt-2'
   }
+
+  const formSubmit = () => {
+    iformLeadsRepository.create({
+      form_id: form.value?.id,
+      ...formData.value
+    })
+  }
 </script>
 
 <template>
   <IForm
     v-if="form"
+    v-model="formData"
     :title="form.title"
     :description="form.description"
     :fields="formFields"
     :ui="ui"
     submit-label="Enviar"
+    @submit="formSubmit"
   />
 </template>

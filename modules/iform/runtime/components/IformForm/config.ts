@@ -20,20 +20,21 @@ export const fieldApiTypeToLocal: Record<number, FieldApiMapping> = {
   3: {// NUMBER
     type: 'input',
     fieldProps: {
-      type: 'number'
+      //type: 'number'
     }
   },
   4: {// EMAIL
     type: 'input',
     rules: ['email'],
     fieldProps: {
-      type: 'email',
-      autocomplete: 'email'
+      type: 'email'
     }
   },
   5: {// SELECT
     type: 'select',
-    fieldProps: {}
+    fieldProps: {
+      items: ['test','test2']
+    }
   },
   6: {// SELECT_MULTIPLE
     type: 'select',

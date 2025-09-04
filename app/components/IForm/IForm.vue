@@ -1,35 +1,28 @@
 <script setup lang="ts">
-import { onMounted, computed } from 'vue'
-  import type {IFormProps} from './IForm'
-  import {buildSchema} from './buildSchema'
+import type { IFormProps } from './IForm'
+import { buildSchema } from './buildSchema'
 
-  const props = withDefaults(defineProps<IFormProps>(), {
-    buttonProps: () => ({}),
-    ui: () => ({})
-  })
-  const model = defineModel<Record<string, unknown>>({default: {}})
-  const emit = defineEmits<{
-    (e: 'submit', payload: Record<string, unknown>): void
-  }>()
-  const formSchema = buildSchema(props.fields)
+const props = withDefaults(defineProps<IFormProps>(), {
+  buttonProps: () => ({}),
+  ui: () => ({})
+})
 
-  function onSubmit ()
-  {
-    emit('submit', {...model.value})
+const model = defineModel<Record<string, unknown>>({ default: {} })
+const emit = defineEmits<{
+  (e: 'submit', payload: Record<string, unknown>): void
+}>()
+const formSchema = buildSchema(props.fields)
+
+// inicialización temprana, no en onMounted
+props.fields.forEach(f => {
+  if (!(f.name in model.value) || model.value[f.name] === undefined) {
+    model.value[f.name] = f.default ?? ''
   }
+})
 
-  onMounted(() =>
-  {
-    props.fields.forEach(f =>
-    {
-      if (!(f.name in model.value))
-      {
-        model.value[f.name] = f.default ?? null
-      }
-    })
-  })
-
-
+function onSubmit () {
+  emit('submit', { ...model.value })
+}
 </script>
 
 <template>
