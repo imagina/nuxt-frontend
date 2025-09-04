@@ -149,48 +149,41 @@ const impBody = "<h2 style=\"text-align: center;\">&iexcl;Escr&iacute;benos!</h2
     </div>
   </div>
 </template>
-<style>
+<style scoped>
 @reference "~/assets/css/main.css";
 
 .contacto .page-body {
-  font-family: DM Sans;
+  font-family: 'DM Sans', ui-sans-serif, system-ui;
   @apply font-normal text-[18px] leading-[20px] md:text-[20px] md:leading-[30px];
-}
-.contacto .page-body .grid {
-  @apply gap-10
-}
-.contacto .page-body :is(h1, h2, h3, h4) {
-  @apply font-semibold mb-[15px];
-}
-.contacto .page-body  :is(h1, h2) {
-  @apply text-[30px] leading-[40px] md:text-[40px] md:leading-[50px];
-}
-.contacto .page-body h3  {
-@apply text-[20px] leading-[25px] md:text-[30px]  md:leading-[40px];
-}
-.contacto .page-body h4 {
-@apply text-[16px] leading-[20px] md:text-[20px]  md:leading-[30px];
-}
-.contacto .page-body ul {
-  @apply list-disc pl-5 mt-[15px];
-}
-.contacto .page-body ul li {
-  @apply list-item mb-2;
-}
-.contacto .page-body ol {
-  @apply list-decimal pl-5 mt-[15px];
-}
-.contacto .page-body ol li {
-  @apply list-item mb-2;
-}
-.contacto .page-body :is(strong, a) {
-  @apply text-primary;
-}
-.contacto .page-body hr {
-  @apply border-t border-t-[#00000026];
+
+  & :deep(img) { object-fit: cover; border-radius: 30px; }
+
+  /* grid dentro del HTML inyectado */
+  & :deep(:is(.grid)) { @apply gap-10; }
+
+  /* Títulos */
+  & :deep(:is(h1,h2,h3,h4)) { @apply font-semibold mb-[15px]; }
+  & :deep(:is(h1,h2)) { @apply text-[30px] leading-[40px] md:text-[40px] md:leading-[50px]; }
+  & :deep(:is(h3)) { @apply text-[20px] leading-[25px] md:text-[30px] md:leading-[40px]; }
+  & :deep(:is(h4)) { @apply text-[16px] leading-[20px] md:text-[20px] md:leading-[30px]; }
+
+  /* Listas */
+  & :deep(:is(ul)) { @apply list-disc pl-5 mt-[15px]; }
+  & :deep(:is(ul li)) { @apply list-item mb-2; }
+  & :deep(:is(ol)) { @apply list-decimal pl-5 mt-[15px]; }
+  & :deep(:is(ol li)) { @apply list-item mb-2; }
+
+  /* Énfasis y enlaces */
+  & :deep(:is(strong,a)) { @apply text-primary; }
+
+  /* Separador */
+  & :deep(:is(hr)) {
+    @apply border-t;
+    border-color: #00000026;
+  }
 }
 
-.contacto input[type="file"] {
+.contacto :deep(input[type="file"]) {
   border: 0;
   padding: 0;
   border-radius: 0;
@@ -198,7 +191,7 @@ const impBody = "<h2 style=\"text-align: center;\">&iexcl;Escr&iacute;benos!</h2
   height: 40px;
   background: transparent;
 }
-.contacto input[type="file"]::file-selector-button {
+.contacto :deep(input[type="file"])::file-selector-button {
   background: #EFEFEF;
   color: #444444;
   font-weight: 500;
@@ -207,7 +200,7 @@ const impBody = "<h2 style=\"text-align: center;\">&iexcl;Escr&iacute;benos!</h2
   padding: 6px 20px;
   transition: .2s;
 }
-.contacto input[type="file"]::file-selector-button:hover {
+.contacto :deep(input[type="file"])::file-selector-button:hover {
   background-color: #cccccc;
 }
 </style>
