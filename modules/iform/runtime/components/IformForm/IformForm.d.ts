@@ -1,7 +1,7 @@
 import type {IFieldsKeys} from '~/components/IField/IField'
 import type {IFormProps} from '~/components/IForm/IForm'
 
-export interface IformFormProps extends Omit<IFormProps, 'fields' | 'submitLabel'>
+export interface IformFormProps extends Pick<IFormProps, 'ui'>
 {
   systemName: string
 }
