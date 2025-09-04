@@ -5,12 +5,17 @@ const logoFooter =  settingStore.get('isite::logo2')
 const phone = ['+57 311 8060834','+57 311 8060834']
 const address = ['Calle 74 bis 83-45 · Aeropuerto El Dorado de Bogotá · servicio Meet & Greet']
 const email = ['serviciocliente@readyrentacars.com']
-const items = [
-  { label: 'Preguntas frecuentes', to: '#' },
-  { label: 'Términos y condiciones', to: '#' },
-  { label: 'Política de privacidad', to: '#' },
-  { label: 'Contrato de alquiler de autos', to: '#' }
-]
+
+
+const desktopNavProps = {
+  orientation: 'vertical',
+  variant: 'link',
+  class: '',
+  ui: {
+    list: 'flex-col gap-1 w-full',
+    link: 'text-sm lg:text-base text-white font-normal hover:text-white hover:underline'
+  }
+}
 
 </script>
 
@@ -18,7 +23,7 @@ const items = [
 </style>
 <template>
   <footer class="bg-dark-1 text-white">
-    <div class="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 py-12  px-4 sm:px-6 lg:px-10">
+    <div class="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 py-12 px-4 sm:px-6 lg:px-10">
 
       <div class="flex justify-center md:justify-start self-center">
         <IMediaRender
@@ -42,24 +47,8 @@ const items = [
 
       <div class="flex flex-col space-y-4">
         <h3 class="text-lg font-semibold">Apoyo al Cliente</h3>
-        <ul class="space-y-2">
-          <li v-for="it in items" :key="it.label">
-            <a
-              :href="it.to" class="group flex items-center gap-3 px-3 py-0 rounded-md "
-            >
-              <!-- Triangulito -->
-              <span
-                class="h-0 w-0 border-y-4 border-y-transparent border-l-6 border-l-white/80
-                      group-hover:border-l-white shrink-0" aria-hidden="true"
-              />
-              <!-- Texto -->
-              <span class="text-sm md:text-base">
-                {{ it.label }}
-              </span>
-            </a>
-          </li>
-        </ul>
 
+        <imenu-menu :with-drawer="false" system-name="inferior-menu" :desktop-nav-props="desktopNavProps" />
       </div>
 
     </div>
@@ -69,7 +58,7 @@ const items = [
         <ILogoImagina />
     </div>
     <p class="w-full md:w-auto py-4 text-[16px] font-normal text-center md:text-left">
-        <ICopyright />
+        <ICopyright :with-title-copyright="false" :with-year="false" />
     </p>
   </div>
 </div>

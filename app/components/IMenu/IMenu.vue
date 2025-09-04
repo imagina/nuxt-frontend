@@ -3,22 +3,26 @@
   import {DialogTitle, DialogDescription} from 'reka-ui'
 
   const props = withDefaults(defineProps<IMenuProps>(), {
-    drawerDirection: 'right'
+    drawerDirection: 'right',
+    desktopNavProps: () => ({ class: 'hidden md:flex' }),
+    withDrawer: true
   })
+
 
   const dOpen = ref(false)
 </script>
 
 <template>
-  <UNavigationMenu :items="props.items" class="hidden md:flex"/>
+  <UNavigationMenu :items="props.items" v-bind="props.desktopNavProps"/>
   <UDrawer
     v-model:open="dOpen"
+    v-if="props.withDrawer"
     class="md:hidden" :direction="drawerDirection"
     should-scale-background :set-background-color-on-scale="false"
     :ui="{ content: 'w-full', handle: 'bg-gray-400!' }">
 
     <!-- Action Buton -->
-    <UButton color="neutral" variant="ghost" trailing-icon="i-lucide-menu"/>
+    <UButton color="neutral" variant="ghost" trailing-icon="i-lucide-menu" />
 
     <template #header>
       <div class="flex justify-between">
