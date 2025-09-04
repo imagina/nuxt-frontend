@@ -1,8 +1,8 @@
 <script setup lang="ts">
-  import type { PageData } from '#ipage/types/pages'
-  defineProps<{ page: PageData }>()
-  import { ref } from 'vue'
-  import type { IFormFieldConfig } from '~/components/IForm/IForm.d'
+import { ref } from 'vue';
+import type { IFormFieldConfig } from '~/components/IForm/IForm.d'
+import type { PageData } from '#ipage/types/pages'
+defineProps<{ page: PageData }>()
 
 const formData = ref<Record<string, any>>({})
 
@@ -102,8 +102,9 @@ const impBody = "<h2 style=\"text-align: center;\">&iexcl;Escr&iacute;benos!</h2
       :ui="{ link: 'font-bold text-gray-3' }">
       <template #extraUp>
         <IsliderCarousel
-          system-name="slider_home"
+          system-name="publi_contacto"
           dots-position="inside-left-middle"
+          item-theme="ItemTheme2"
           :carousel-props="{
           dots: true,
           autoplay: true,
@@ -119,7 +120,7 @@ const impBody = "<h2 style=\"text-align: center;\">&iexcl;Escr&iacute;benos!</h2
     <div class="bg-gray-2">
       <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-10 contacto">
         <h1 class="page-title hidden">{{ page.title }}</h1>
-        <div class="page-body mb-10" v-html="impBody"></div>
+        <div class="page-body" v-html="page.body"></div>
         <div class="grid grid-cols-12 gap-10">
           <div class="col-span-12 lg:col-span-6">
             <IForm
@@ -149,64 +150,46 @@ const impBody = "<h2 style=\"text-align: center;\">&iexcl;Escr&iacute;benos!</h2
   </div>
 </template>
 <style>
+@reference "~/assets/css/main.css";
+
 .contacto .page-body {
   font-family: DM Sans;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 30px;
-  text-align: justify;
-
-  & h1, & h2, & h3, & h4 {
-    font-weight: 600;
-    margin-bottom: 15px;
-  }
-  & h1, h2 {
-    font-size: 40px;
-    line-height: 50px;
-  }
-  & h3, & h4 {
-    font-size: 20px;
-    line-height: 30px;
-  }
-
-    & ul {
-    list-style: disc !important;
-    padding-left: 1.25rem;
-    margin-top: 15px;
-    & li {
-    display: list-item;
-    margin-bottom: .5rem;
-    }
-  }
-
-  & ol {
-    list-style: decimal !important;
-    padding-left: 1.25rem;
-    margin-top: 15px;
-    & li {
-    display: list-item;
-    margin-bottom: .5rem;
-    }
-  }
-
-  @media (max-width: 767.98px) {
-  font-size: 18px;
-    & h1, h2 {
-    font-size: 30px;
-    line-height: 40px;
-    }
-
-    & h3, & h4 {
-    font-size: 20px;
-    line-height: 25px;
-    }
-  }
-
-  & strong, & a {
-  color: var(--primary);
-  }
-
+  @apply font-normal text-[18px] leading-[20px] md:text-[20px] md:leading-[30px];
 }
+.contacto .page-body .grid {
+  @apply gap-10
+}
+.contacto .page-body :is(h1, h2, h3, h4) {
+  @apply font-semibold mb-[15px];
+}
+.contacto .page-body  :is(h1, h2) {
+  @apply text-[30px] leading-[40px] md:text-[40px] md:leading-[50px];
+}
+.contacto .page-body h3  {
+@apply text-[20px] leading-[25px] md:text-[30px]  md:leading-[40px];
+}
+.contacto .page-body h4 {
+@apply text-[16px] leading-[20px] md:text-[20px]  md:leading-[30px];
+}
+.contacto .page-body ul {
+  @apply list-disc pl-5 mt-[15px];
+}
+.contacto .page-body ul li {
+  @apply list-item mb-2;
+}
+.contacto .page-body ol {
+  @apply list-decimal pl-5 mt-[15px];
+}
+.contacto .page-body ol li {
+  @apply list-item mb-2;
+}
+.contacto .page-body :is(strong, a) {
+  @apply text-primary;
+}
+.contacto .page-body hr {
+  @apply border-t border-t-[#00000026];
+}
+
 .contacto input[type="file"] {
   border: 0;
   padding: 0;

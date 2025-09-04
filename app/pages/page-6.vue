@@ -51,8 +51,9 @@ const active = ref("0");
       :ui="{ link: 'font-bold text-gray-3' }">
       <template #extraUp>
         <IsliderCarousel
-          system-name="slider_home"
+          system-name="publi_oficinas"
           dots-position="inside-left-middle"
+          item-theme="ItemTheme2"
           :carousel-props="{
           dots: true,
           autoplay: true,

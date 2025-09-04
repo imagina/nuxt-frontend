@@ -17,4 +17,9 @@
   --color-blue-1: #2B7FFF;
   --color-hr: #62748E4D;
   --color-whatsapp: #32D851;
+  --color-overlay-slide: rgba(0, 0, 0, 0.5);
+}
+
+.overlay-slide {
+  background: #00000080;
 }
