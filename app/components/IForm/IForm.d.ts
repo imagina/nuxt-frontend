@@ -20,6 +20,6 @@ export interface IFormProps
   description?: string
   fields: IFormFieldConfig[]
   submitLabel?: string
-  buttonProps?: Record<string, any>
+  buttonProps?: Record<string, unknown>
   ui?: IFormUi
 }

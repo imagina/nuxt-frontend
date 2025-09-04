@@ -35,8 +35,8 @@ import { onMounted, computed } from 'vue'
 <template>
   <div :class="ui.root">
     <div v-if="props.title || props.description" :class="ui.header">
-      <h2 v-if="props.title" :class="ui.title">{{ props.title }}</h2>
-      <p v-if="props.description" :class="ui.description">{{ props.description }}</p>
+      <h2 v-if="props.title" :class="ui.title" v-html="props.title"></h2>
+      <span v-if="props.description" :class="ui.description" v-html="props.description"></span>
     </div>
 
     <UForm :state="model" :schema="formSchema" :class="ui.form" @submit="onSubmit">
