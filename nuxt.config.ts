@@ -20,7 +20,7 @@ export default defineNuxtConfig({
       apiBase: ''// can be overridden by NUXT_PUBLIC_API_BASE environment variable
     }
   },
-  colorMode:{
+  colorMode: {
     preference: 'light',
     fallback: 'light',
     classSuffix: ''
@@ -39,4 +39,15 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()]
   },
+  app: {
+    head: {
+      script: [
+        {
+          src: 'https://kit.fontawesome.com/56d3d5dce0.js',
+          crossorigin: 'anonymous',
+          'data-auto-replace-svg': 'false'
+        }
+      ]
+    }
+  }
 })
