@@ -5,7 +5,7 @@ const props = defineProps({
   showAddress: { type: Boolean, default: true },
   showIcons: { type: Boolean, default: true },
   addressWithIcon: { type: Boolean, default: true },
-  addressIcon: { type: String, default: 'material-symbols:location-on-outline' },
+  addressIcon: { type: String, default: 'fa-regular fa-location-dot' },
   addressWithTitle: { type: Boolean, default: true },
   classIcons: { type: String, default: 'self-center mr-2 text-white' },
   classTitle: { type: String, default: 'font-bold' },
@@ -18,7 +18,7 @@ const props = defineProps({
   <!-- Dirección  -->
   <div v-if="showAddress && address" class="component-address">
     <div class="flex">
-      <Icon v-if="showIcons" :name="addressIcon" :class="classIcons" />
+      <i v-if="showIcons"  :class="[addressIcon,classIcons]" />
       <div class="content-address">
         <template v-for="(address, index) in address" :key="index">
           <span v-if="withHyphenAddress && index>0">&nbsp;-&nbsp;</span>
