@@ -1,26 +1,28 @@
 import {useReCaptcha} from 'vue-recaptcha-v3'
 
-/**
- * The exported executeRecaptcha function allows
- * you to execute reCAPTCHA actions
- * and retrieve the reCAPTCHA token along with the header options
- * to be used in later requests.
- */
 export default () =>
 {
-  const recaptchaInstance = useReCaptcha()
+  const nuxtApp = useNuxtApp()
+  const recaptchaInstance = nuxtApp.$recaptchaEnabled ? useReCaptcha() : null
+
   const executeRecaptcha = async (action: string) =>
   {
-    /**
-     * Wait for the recaptchaInstance to be loaded
-     * by calling the recaptchaLoaded method.
-     * This ensures that the reCAPTCHA library is fully loaded
-     * and ready to execute reCAPTCHA actions.
-     */
-    await recaptchaInstance?.recaptchaLoaded()
-    const token = await recaptchaInstance?.executeRecaptcha(action)
-    const headerOptions = {'google-recaptcha-token': token ?? 'no-token'}
-    return {token, headerOptions}
+    if (!recaptchaInstance)
+    {
+      return {
+        token: null,
+        headerOptions: {'google-recaptcha-disabled': 'true'}
+      }
+    }
+
+    await recaptchaInstance.recaptchaLoaded()
+    const token = await recaptchaInstance.executeRecaptcha(action)
+
+    return {
+      token,
+      headerOptions: {'google-recaptcha-token': token ?? 'no-token'}
+    }
   }
+
   return {executeRecaptcha}
 }
