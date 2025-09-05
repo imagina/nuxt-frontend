@@ -12,8 +12,7 @@
   - `formFieldProps`: additional props for [`UFormField`](https://ui.nuxt.com/components/form#formfield).
   - `fieldProps`: props for the underlying UI component (`UInput`, `UTextarea`, `USelect`, `UCheckbox`, etc.).
 - `submitLabel` **(string, optional)**: Label for the submit button (defaults to `title`).
-- `ui` : ui sections to component `{root?: ClassNameValue, header?: ClassNameValue, title?: ClassNameValue, description?: ClassNameValue
-  form?: ClassNameValue, actions?: ClassNameValue}`
+- `ui` : ui sections to component `{root?: ClassNameValue, header?: ClassNameValue, title?: ClassNameValue, description?: ClassNameValue, form?: ClassNameValue, actions?: ClassNameValue}`
 
 ## v-model
 
@@ -26,7 +25,12 @@
 
 - `@submit`: Emits an object with the current form values when the form is submitted.
 
----
+## Exposed Methods
+
+Using `ref`, the parent component can call:
+
+- `reset()`  
+  Restores all fields to their initial default values and clears validation errors from the underlying [`UForm`](https://ui.nuxt.com/components/form).
 
 ## Example — Create User Form
 
