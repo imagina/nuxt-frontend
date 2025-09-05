@@ -31,6 +31,10 @@ Using `ref`, the parent component can call:
 
 - `reset()`  
   Restores all fields to their initial default values and clears validation errors from the underlying [`UForm`](https://ui.nuxt.com/components/form).
+- `success(message?: string)`  
+    Show an success alert and hide the form
+- `error(message?: string)`
+    Show an error alert and hide the form
 
 ## Example — Create User Form
 

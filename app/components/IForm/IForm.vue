@@ -2,6 +2,7 @@
 import type {IFormProps} from './IForm'
 import {buildSchema} from './buildSchema'
 import {ref} from 'vue'
+import type {AlertProps} from '#ui/types'
 
 const props = withDefaults(defineProps<IFormProps>(), {
   buttonProps: () => ({}),
@@ -12,10 +13,11 @@ const model = defineModel<Record<string, unknown>>({default: {}})
 const emit = defineEmits<{
   (e: 'submit', payload: Record<string, unknown>): void
 }>()
+const message = ref('')
 const formSchema = buildSchema(props.fields)
-
-// ref al UForm para usar su API
 const uFormRef = ref()
+
+const status = ref<'idle' | 'success' | 'error'>('idle')
 
 // guardamos los valores iniciales
 const initialValues: Record<string, unknown> = {}
@@ -33,16 +35,43 @@ function onSubmit ()
   emit('submit', {...model.value})
 }
 
+const bannerConfig = computed<Partial<AlertProps>>(() =>
+{
+  return {
+    title: message.value,
+    color: status.value === 'success' ? 'success' : 'error',
+    icon: status.value === 'success' ? 'fa-light fa-circle-check' : 'fa-light fa-circle-exclamation',
+    ui: {root: 'items-center', title: 'text-gray-900'},
+    actions: [
+      {
+        label: status.value == 'success' ? 'Enviar de nuevo' : 'Reintentar',
+        onClick: reset,
+        variant: 'soft'
+      }
+    ]
+  }
+})
+
 function reset ()
 {
-  // reset valores
   Object.keys(initialValues).forEach(key => model.value[key] = initialValues[key])
-  // reset validaciones
   uFormRef.value?.clear()
+  status.value = 'idle'
 }
 
-// expone el método
-defineExpose({reset})
+function success (msg = 'Formulario enviado correctamente.')
+{
+  message.value = msg
+  status.value = 'success'
+}
+
+function error (msg = 'Ocurrió un error al enviar el formulario.')
+{
+  message.value = msg
+  status.value = 'error'
+}
+
+defineExpose({reset, success, error})
 </script>
 
 <template>
@@ -52,7 +81,21 @@ defineExpose({reset})
       <span v-if="props.description" :class="ui.description" v-html="props.description"></span>
     </div>
 
-    <UForm ref="uFormRef" :state="model" :schema="formSchema" :class="ui.form" @submit="onSubmit">
+    <!-- Message -->
+    <UAlert v-if="status != 'idle'" class="mt-6" v-bind="bannerConfig">
+      <template #leading>
+        <i :class="[bannerConfig.icon, 'text-4xl']"/>
+      </template>
+    </UAlert>
+    <!--Form-->
+    <UForm
+      v-else
+      ref="uFormRef"
+      :state="model"
+      :schema="formSchema"
+      :class="ui.form"
+      @submit="onSubmit"
+    >
       <template v-for="field in props.fields" :key="field.name">
         <IField v-model="model[field.name]" :field="field"/>
       </template>
