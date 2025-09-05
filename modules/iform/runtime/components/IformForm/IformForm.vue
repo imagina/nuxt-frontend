@@ -7,6 +7,8 @@ import {defu} from 'defu'
 
 const props = defineProps<IformFormProps>()
 const formData = ref({})
+const {executeRecaptcha} = useIcoreRecaptcha()
+
 const {data} = await useAsyncData(
   `iform:${props.systemName}`,
   () => iformFormsRepository.show(props.systemName, {
@@ -25,12 +27,14 @@ const ui = defu(props.ui, {
   actions: 'col-span-12 mt-2'
 })
 
-const formSubmit = () =>
+const formSubmit = async () =>
 {
-  iformLeadsRepository.create({
-    form_id: form.value?.id,
-    values: formData.value
-  })
+  const {headerOptions} = await executeRecaptcha('submit')
+
+  await iformLeadsRepository.create(
+    {attributes: {form_id: form.value?.id, values: formData.value}},
+    headerOptions
+  )
 }
 </script>
 

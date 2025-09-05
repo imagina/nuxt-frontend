@@ -14,12 +14,13 @@ export const iformFormsRepository = {
 }
 
 export const iformLeadsRepository = {
-  async create (data: Record<string, unknown>): Promise<boolean>
+  async create (body: Record<string, unknown>, headers: HeadersInit = {}): Promise<boolean>
   {
     const {$apiFetch} = useNuxtApp()
     return $apiFetch(`${baseUrl}/leads`, {
       method: 'POST',
-      body: {attributes: data}
+      body,
+      headers,
     })
   }
 }

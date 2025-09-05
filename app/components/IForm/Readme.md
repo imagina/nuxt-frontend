@@ -12,6 +12,8 @@
   - `formFieldProps`: additional props for [`UFormField`](https://ui.nuxt.com/components/form#formfield).
   - `fieldProps`: props for the underlying UI component (`UInput`, `UTextarea`, `USelect`, `UCheckbox`, etc.).
 - `submitLabel` **(string, optional)**: Label for the submit button (defaults to `title`).
+- `ui` : ui sections to component `{root?: ClassNameValue, header?: ClassNameValue, title?: ClassNameValue, description?: ClassNameValue
+  form?: ClassNameValue, actions?: ClassNameValue}`
 
 ## v-model
 
