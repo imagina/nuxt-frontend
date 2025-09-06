@@ -10,6 +10,7 @@ export function mapApiFields (fields: Field[]): IFormFieldConfig[]
     const ifield: IFormFieldConfig = {
       name: f.systemName || f.label.toLowerCase().replace(/\s+/g, '_'),
       type: fieldPresets?.type ?? 'input',
+      default: fieldPresets?.default ?? '',
       rules: [
         ...(f.required ? ['required'] : []),
         ...(fieldPresets?.rules ?? [])

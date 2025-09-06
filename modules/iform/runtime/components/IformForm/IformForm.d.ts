@@ -10,6 +10,7 @@ export interface IformFormProps extends Pick<IFormProps, 'ui'>
 interface FieldApiMapping
 {
   type: IFieldsKeys
+  default: unknown
   rules?: string[]
   fieldProps?: Record<string, unknown>
 }

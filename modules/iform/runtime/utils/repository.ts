@@ -1,4 +1,5 @@
 import type {Form} from "#iform/types/forms";
+import {toFormData} from '#iform/utils/toFormData'
 
 const baseUrl = '/iform/v1'
 
@@ -14,12 +15,16 @@ export const iformFormsRepository = {
 }
 
 export const iformLeadsRepository = {
-  async create (body: Record<string, unknown>, headers: HeadersInit = {}): Promise<boolean>
+  async create (
+    body: Record<string, unknown> | FormData,
+    headers: HeadersInit = {}
+  ): Promise<boolean>
   {
     const {$apiFetch} = useNuxtApp()
+    const payload = body instanceof FormData ? body : toFormData(body)
     return $apiFetch(`${baseUrl}/leads`, {
       method: 'POST',
-      body,
+      body: payload,
       headers,
     })
   }
