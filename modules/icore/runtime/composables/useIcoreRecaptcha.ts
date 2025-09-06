@@ -11,7 +11,7 @@ export default () =>
     {
       return {
         token: null,
-        headerOptions: {'google-recaptcha-disabled': 'true'}
+        headerOptions: {'google-recaptcha-token': 'no-token'}
       }
     }
 
