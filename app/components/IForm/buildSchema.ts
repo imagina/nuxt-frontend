@@ -9,7 +9,10 @@ const fileSchema = z.custom<File>(isFileInstance, {
   message: "Selecciona un archivo válido"
 })
 
-type RuleKind = 'string' | 'boolean' | 'file' // extiéndelo si agregas más
+const isPresent = (v: unknown) =>
+  v !== undefined && v !== null && !(typeof v === "string" && v.trim() === "")
+
+type RuleKind = 'string' | 'boolean' | 'file' | 'any' // extiéndelo si agregas más
 
 const rules: Record<
   RuleKind,
@@ -38,6 +41,12 @@ const rules: Record<
       return fileSchema
     }
     return schema
+  },
+  any: (schema, field, rule) => {
+    if (rule === "required") {
+      return (schema as z.ZodTypeAny).refine(isPresent, { message: `${field.name} is required` })
+    }
+    return schema
   }
 }
 
@@ -48,7 +57,7 @@ function defineFieldSchema(field: IFormFieldConfig): { rule: RuleKind; type: z.Z
     case "file":
       return { rule: "file", type: fileSchema.optional().nullable() }
     default:
-      return { rule: "string", type: z.string() }
+      return { rule: "any", type: z.any() }
   }
 }
 
