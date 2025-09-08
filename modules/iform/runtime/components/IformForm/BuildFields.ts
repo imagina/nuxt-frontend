@@ -15,9 +15,9 @@ export function mapApiFields (fields: Field[]): IFormFieldConfig[]
         ...(f.required ? ['required'] : []),
         ...(fieldPresets?.rules ?? [])
       ],
+      width: `col-span-${f.width}`,
       formFieldProps: {
         label: f.label,
-        class: `col-span-${f.width}`,
         ui: {},
       },
       fieldProps: {
