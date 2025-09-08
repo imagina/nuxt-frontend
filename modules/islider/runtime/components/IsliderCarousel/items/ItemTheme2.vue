@@ -14,10 +14,10 @@
     />
     <div class="absolute inset-0 overlay-slide"></div>
     <div class="relative  h-full flex items-center flex-col justify-center max-w-3/4 mx-auto text-white text-center">
-      <h2 class="text-[30px] lg:text-[45px]">
+      <h2 class="leading-[30px] text-[30px] lg:text-[45px] lg:leading-[45px]">
         {{ item.title }}
       </h2>
-      <p class="font-bold text-[30px] lg:text-[45px] ">{{ item.summary }}</p>
+      <p class="font-bold leading-[30px] text-[30px] lg:text-[45px] lg:leading-[45px]">{{ item.summary }}</p>
     </div>
   </div>
 </template>

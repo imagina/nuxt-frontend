@@ -8,7 +8,7 @@ const props = withDefaults(defineProps<{
   desktopNavProps?: Record<string, any>
   withDrawer?: boolean
 }>(), {
-  desktopNavProps: () => ({ class: 'hidden md:flex' }),
+  desktopNavProps: () => ({ class: 'hidden lg:flex' }),
   withDrawer: true
 })
 
