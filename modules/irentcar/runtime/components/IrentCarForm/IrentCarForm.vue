@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import {irentcarOfficeRepository, irentcarReservationRepository} from '#irentcar/utils/repository'
-import type {DateValidationForm, OfficeOption} from './IrentCarForm'
+import type {DateValidationForm, IrentCarFormProps, OfficeOption} from './IrentCarForm'
 import type {IFormFieldConfig} from "~/components/IForm/IForm";
 import type {DateValidation} from "#irentcar/types/reservation";
 import {useInavigation} from "#icore/composables/useInavigation";
+import {defu} from "defu";
 
 const {goTo} = useInavigation()
-
+const props = defineProps<IrentCarFormProps>()
 const form = ref<DateValidationForm>({
   pickupOfficeId: null,
   pickupDate: null,
@@ -151,6 +152,10 @@ const dateValidation = async () =>
   validationDate.value = dateValidation
   loading.value = false
 }
+
+const ui = defu(props.ui, {
+  root: 'shadow-md rounded-3xl bg-white p-6'
+})
 </script>
 
 <template>
@@ -163,9 +168,7 @@ const dateValidation = async () =>
       block: true,
       class: 'bg-secondary text-secondary text-white hover:bg-primary hover:text-white transition'
     }"
-    :ui="{
-      actions: 'items-end'
-    }"
+    :ui="ui"
     @submit="goTo({name: 'irentcar.page.stepper', query: form})"
   />
 </template>
