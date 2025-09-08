@@ -10,10 +10,11 @@ const whatsapp = [ { callingCode: '+57', number: '3118060834', message: ''} ]
         <div class="flex items-center gap-4">
           <div class="logo ">
             <IMediaRender
+              @click="$router.push('/')"
               :media="logo" alt="Logo"
               aspect-ratio="auto"
               :ui="{
-                wrapper: '',
+                wrapper: 'cursor-pointer',
                 container: 'h-[34px] w-[144px]',
                 media: 'object-contain' }"
               />
