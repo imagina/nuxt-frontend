@@ -13,6 +13,9 @@
 - `drawerDirection` **("left" | "right", default: `"right"`)**:  
   Direction where the mobile drawer will appear.
 
+- `desktopNavProps` **(Record<string, unknown>**, default: `{ class: 'hidden lg:flex' }`)**  Props/attributes passed **directly** to desktop `<UNavigationMenu>` via `v-bind`.
+
+
 ## Behavior
 
 - On desktop (`md+` breakpoints):  

@@ -4,7 +4,7 @@
 
   const props = withDefaults(defineProps<IMenuProps>(), {
     drawerDirection: 'right',
-    desktopNavProps: () => ({ class: 'hidden md:flex' }),
+    desktopNavProps: () => ({ class: 'hidden lg:flex' }),
     withDrawer: true
   })
 
@@ -17,7 +17,7 @@
   <UDrawer
     v-model:open="dOpen"
     v-if="props.withDrawer"
-    class="md:hidden" :direction="drawerDirection"
+    class="lg:hidden" :direction="drawerDirection"
     should-scale-background :set-background-color-on-scale="false"
     :ui="{ content: 'w-full', handle: 'bg-gray-400!' }">
 
