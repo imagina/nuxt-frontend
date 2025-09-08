@@ -23,7 +23,7 @@ const status = ref<'idle' | 'success' | 'error'>('idle')
 const initialValues: Record<string, unknown> = {}
 props.fields.forEach(f =>
 {
-  initialValues[f.name] = f.default ?? ''
+  initialValues[f.name] = f.default !== undefined ? f.default : ''
   if (!(f.name in model.value) || model.value[f.name] === undefined)
   {
     model.value[f.name] = initialValues[f.name]
@@ -88,27 +88,28 @@ defineExpose({reset, success, error})
       </template>
     </UAlert>
     <!--Form-->
-    <UForm
-      v-else
-      ref="uFormRef"
-      :state="model"
-      :schema="formSchema"
-      :class="ui.form"
-      @submit="onSubmit"
-    >
-      <div class="grid grid-cols-12 gap-3">
-        <template v-for="field in props.fields" :key="field.name">
-          <div v-if="field.showIf !== false" :class="field.width || 'col-span-12'">
-            <IField v-model="model[field.name]" :field="field"/>
-          </div>
-        </template>
+    <ClientOnly v-else>
+      <UForm
+        ref="uFormRef"
+        :state="model"
+        :schema="formSchema"
+        :class="ui.form"
+        @submit="onSubmit"
+      >
+        <div class="grid grid-cols-12 gap-3">
+          <template v-for="field in props.fields" :key="field.name">
+            <div v-if="field.showIf !== false" :class="field.width || 'col-span-12'">
+              <IField v-model="model[field.name]" :field="field"/>
+            </div>
+          </template>
 
-        <div :class="[ui.actions, props.submitWidth || 'col-span-12']">
-          <UButton type="submit" v-bind="props.buttonProps">
-            {{ props.submitLabel || props.title }}
-          </UButton>
+          <div :class="[ui.actions, props.submitWidth || 'col-span-12']">
+            <UButton type="submit" v-bind="props.buttonProps">
+              {{ props.submitLabel || props.title }}
+            </UButton>
+          </div>
         </div>
-      </div>
-    </UForm>
+      </UForm>
+    </ClientOnly>
   </div>
 </template>

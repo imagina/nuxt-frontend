@@ -6,23 +6,27 @@ export function mapApiFields (fields: Field[]): IFormFieldConfig[]
 {
   return fields.map((f) =>
   {
-    const fieldPresets = fieldApiTypeToLocal[Number(f.typeId)];
+    const typeId = Number(f.typeId);
+    const fieldPresets = fieldApiTypeToLocal[typeId];
+    if(!fieldPresets) return f;
     const ifield: IFormFieldConfig = {
       name: f.systemName || f.label.toLowerCase().replace(/\s+/g, '_'),
       type: fieldPresets?.type ?? 'input',
-      default: fieldPresets?.default ?? '',
+      default: fieldPresets.default,
       rules: [
         ...(f.required ? ['required'] : []),
         ...(fieldPresets?.rules ?? [])
       ],
       width: `col-span-${f.width}`,
       formFieldProps: {
-        label: f.label,
+        label: [7].includes(typeId) ? '' : f.label,
         ui: {},
+        required: !!f.required
       },
       fieldProps: {
         ...(fieldPresets?.fieldProps ?? {}),
-        placeholder: f.placeholder ?? undefined
+        placeholder: f.placeholder ?? undefined,
+        label: [7].includes(typeId) ? f.label : '',
       }
     }
 
