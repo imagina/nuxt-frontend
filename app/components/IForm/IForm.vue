@@ -98,7 +98,7 @@ defineExpose({reset, success, error})
     >
       <div class="grid grid-cols-12 gap-4">
         <template v-for="field in props.fields" :key="field.name">
-          <div v-if="field.vIf !== false" :class="field.width || 'col-span-12'">
+          <div v-if="field.showIf !== false" :class="field.width || 'col-span-12'">
             <IField v-model="model[field.name]" :field="field"/>
           </div>
         </template>

@@ -4,7 +4,7 @@ export interface IFormFieldConfig extends IFieldConfig
 {
   rules?: string[],
   width?: string,
-  vIf?: boolean,
+  showIf?: boolean,
 }
 
 export interface IFormUi

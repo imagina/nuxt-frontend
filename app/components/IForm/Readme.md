@@ -11,7 +11,10 @@
   - `rules`: array of validation rules (e.g. `["required", "email"]`).
   - `formFieldProps`: additional props for [`UFormField`](https://ui.nuxt.com/components/form#formfield).
   - `fieldProps`: props for the underlying UI component (`UInput`, `UTextarea`, `USelect`, `UCheckbox`, etc.).
+  - `width`: class for grid position within Form
+  - `showIf`: Prop v-if to field
 - `submitLabel` **(string, optional)**: Label for the submit button (defaults to `title`).
+- `submitWidth`: class for grid within form
 - `buttonProps` **(Record<string, unknown>, optional)**: Props that are passed directly to the <UButton type="submit"> (e.g. { color: 'primary', variant: 'solid', size: 'md', trailingIcon: 'i-lucide-send' }).
 - `ui` : ui sections to component `{root?: ClassNameValue, header?: ClassNameValue, title?: ClassNameValue, description?: ClassNameValue, form?: ClassNameValue, actions?: ClassNameValue}`
 
