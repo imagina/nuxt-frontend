@@ -17,14 +17,15 @@ const desktopNavProps = {
   }
 }
 
+
 </script>
 
 <style scoped>
 </style>
 <template>
+  <IContactWhatsappFixed />
   <footer class="bg-dark-1 text-white">
     <div class="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 py-12 px-4 sm:px-6 lg:px-10">
-
       <div class="flex justify-center md:justify-start self-center">
         <IMediaRender
             :media="logoFooter" alt="Logo"
