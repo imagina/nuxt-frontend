@@ -5,7 +5,7 @@ const whatsapp = [ { callingCode: '+57', number: '3118060834', message: ''} ]
 </script>
 <template>
   <header class="bg-white shadow-md">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-10">
+    <UContainer>
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center gap-4">
           <div class="logo ">
@@ -18,7 +18,7 @@ const whatsapp = [ { callingCode: '+57', number: '3118060834', message: ''} ]
                 media: 'object-contain' }"
               />
           </div>
-          <div class="pl-4 border-l border-gray-300">
+          <div class="pl-4 border-l border-gray-300 hidden sm:block">
             <IContactWhatsapp :whatsapp="whatsapp"
                               classIcons="flex items-center justify-center text-white"
                               classLinkPhone="inline-block text-[18px] text-w"/>
@@ -28,7 +28,7 @@ const whatsapp = [ { callingCode: '+57', number: '3118060834', message: ''} ]
           <imenu-menu system-name="main-menu"/>
         </div>
       </div>
-    </div>
+    </UContainer>
   </header>
 </template>
 <style scoped>
