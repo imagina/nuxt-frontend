@@ -96,7 +96,7 @@ defineExpose({reset, success, error})
       :class="ui.form"
       @submit="onSubmit"
     >
-      <div class="grid grid-cols-12 gap-4">
+      <div class="grid grid-cols-12 gap-3">
         <template v-for="field in props.fields" :key="field.name">
           <div v-if="field.showIf !== false" :class="field.width || 'col-span-12'">
             <IField v-model="model[field.name]" :field="field"/>
