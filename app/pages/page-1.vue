@@ -18,6 +18,19 @@
     {id: 8, category: 'Gama GL', title: 'Ford Explorer automática', media: { isImage: true, url: '/images/kia-automatico.jpg'}}
   ]
 
+const buttonProps = {
+  size: 'xl',
+  block: true,
+  class: 'justify-center bg-secondary h-[45px] text-white hover:bg-primary hover:text-white transition'
+}
+
+const uiImage = {
+  wrapper: '',
+  container: '',
+  media: 'rounded-2xl lg:aspect-4/5 aspect-16/9 shadow-lg object-cover'
+}
+
+
 </script>
 <template>
   <div>
@@ -68,64 +81,57 @@
       loop: false,
       active: false,
     }">
-    <template #item="{ item }">
-      <section class="relative py-15 mb-15">
-        <div class="absolute inset-0 lg:inset-y-0 lg:left-0 lg:w-1/3 bg-secondary rounded-e-2xl"></div>
-        <div
-          class="relative max-w-7xl mx-auto px-4 flex flex-col-reverse lg:flex-row justify-end items-center gap-20 lg:gap-50">
-          <!-- Image column -->
-          <div class="w-full lg:w-2/5 lg:-mr-[140px]">
-            <IMediaRender
-              :media="item.files.slideimage"
-              :alt="item.title"
-              aspect-ratio="auto"
-              :ui="{
-                wrapper: '',
-                container: '',
-                media: 'rounded-2xl lg:aspect-4/5 aspect-16/9 shadow-lg object-cover'
-              }" />
-          </div>
-          <!-- Text column -->
-          <div class="w-full lg:w-1/2 space-y-6">
-            <p
-              class="text-white lg:text-secondary text-[16px] lg:text-[20px] font-bold uppercase mb-0 text-center lg:text-left">
-              {{ item.summary }}
-            </p>
-            <h2
-              class="text-white lg:text-primary text-[30px] lg:text-[45px]  font-semibold mb-5 text-center lg:text-left">
-              {{ item.title }}
-            </h2>
-            <div class="space-y-2 text-white lg:text-dark-3 text-[16px] lg:text-[20px] text-justify custom-html"
-                v-html="item.customHtml"></div>
-            <div class="text-center lg:text-left">
-              <UButton :label="item.caption" :to="item.uri ?? item.url"
-                      class="bg-white lg:bg-secondary text-secondary lg:text-white hover:bg-primary hover:text-white px-6 py-4 rounded-lg transition text-[18px] font-semibold leading-[20px]">
-              </UButton>
+      <template #item="{ item }">
+        <section class="relative py-15 mb-15">
+          <div class="absolute inset-0 lg:inset-y-0 lg:left-0 lg:w-1/3 bg-secondary rounded-e-2xl"></div>
+          <div
+            class="relative max-w-7xl mx-auto px-4 flex flex-col-reverse lg:flex-row justify-end items-center gap-20 lg:gap-50">
+            <!-- Image column -->
+            <div class="w-full lg:w-2/5 lg:-mr-[140px]">
+              <IMediaRender
+                :media="item.files.slideimage"
+                :alt="item.title"
+                aspect-ratio="auto"
+                :ui="uiImage"
+                />
+            </div>
+            <!-- Text column -->
+            <div class="w-full lg:w-1/2 space-y-6">
+              <p
+                class="text-white lg:text-secondary text-[16px] lg:text-[20px] font-bold uppercase mb-0 text-center lg:text-left">
+                {{ item.summary }}
+              </p>
+              <h2
+                class="text-white lg:text-primary text-[30px] lg:text-[45px]  font-semibold mb-5 text-center lg:text-left">
+                {{ item.title }}
+              </h2>
+              <div class="space-y-2 text-white lg:text-dark-3 text-[16px] lg:text-[20px] text-justify custom-html" v-html="item.customHtml"></div>
+              <div class="text-center lg:text-left">
+                <UButton :label="item.caption" :to="item.uri ?? item.url"
+                        class="bg-white lg:bg-secondary text-secondary lg:text-white hover:bg-primary hover:text-white px-6 py-4 rounded-lg transition text-[18px] font-semibold leading-[20px]">
+                </UButton>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-
-
-    </template>
+        </section>
+      </template>
     </IsliderCarousel>
     <!-- Form Contacto -->
     <FormContact />
   </div>
 </template>
 
-<style>
+<style scoped>
 @reference "~/assets/css/main.css";
-  .page-body-h1 h1{
+  :deep(.page-body-h1 h1 ){
     @apply text-center text-[18px] tracking-[1.8px] uppercase mb-10;
   }
-  .custom-html ol {
+  :deep(.custom-html ol) {
     list-style: decimal !important;
     padding-left: 1.25rem;
   }
-  .custom-html li {
+  :deep(.custom-html li) {
     display: list-item;
     margin-bottom: .5rem;
   }
-
 </style>

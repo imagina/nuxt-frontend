@@ -1,97 +1,19 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import type { IFormFieldConfig } from '~/components/IForm/IForm.d'
 import type { PageData } from '#ipage/types/pages'
 defineProps<{ page: PageData }>()
 
-const formData = ref<Record<string, any>>({})
-
-const fields: IFormFieldConfig[] = [
-  {
-    name: 'nombre',
-    type: 'input',
-    default: '',
-    rules: ['required'],
-    formFieldProps: { label: '', class: 'col-span-12', ui: { label: 'sr-only' } },
-    fieldProps: { placeholder: 'Nombre', size:'xl' }
-  },
-  {
-    name: 'apellidos',
-    type: 'input',
-    default: '',
-    rules: ['required'],
-    formFieldProps: { label: '', class: 'col-span-12', ui: { label: 'sr-only' } },
-    fieldProps: { placeholder: 'Apellidos', size:'xl' }
-  },
-  {
-    name: 'telefono',
-    type: 'input',
-    default: '',
-    rules: ['required'],
-    formFieldProps: { label: '', class: 'col-span-12', ui: { label: 'sr-only' } },
-    fieldProps: { placeholder: 'Número de contacto', type: 'tel', size:'xl' }
-  },
-  {
-    name: 'email',
-    type: 'input',
-    default: '',
-    rules: ['required', 'email'],
-    formFieldProps: { label: '', class: 'col-span-12', ui: { label: 'sr-only' } },
-    fieldProps: { placeholder: 'Correo electrónico', type: 'email', autocomplete: 'email', size:'xl' }
-  },
-  {
-    name: 'ciudad',
-    type: 'select',
-    default: null,
-    rules: ['required'],
-    formFieldProps: { label: '', class: 'col-span-12', ui: { label: 'sr-only' }  },
-    fieldProps: {
-      placeholder: 'Ciudad',
-      size:'xl',
-      items: ['Bogotá', 'Medellín', 'Cali']
-    }
-  },
-  {
-    name: 'mensaje',
-    type: 'textarea',
-    default: '',
-    rules: ['required'],
-    formFieldProps: { label: '', class: 'col-span-12', ui: { label: 'sr-only' } },
-    fieldProps: { rows: 4, placeholder: 'Mensaje…' }
-  },
-  {
-    name: 'archivo',
-    type: 'input',
-    default: null,
-    rules: [],
-    formFieldProps: { label: '', class: 'col-span-12', help: '(Adjunta un .PDF o .JPG si lo requieres)' },
-    fieldProps: { type: 'file', accept: '.pdf,.jpg,.jpeg,.png' } as any
-  },
-  {
-    name: 'autorizo',
-    type: 'checkbox',
-    default: false,
-    rules: ['required'],
-    formFieldProps: { label: '', class: 'col-span-12' },
-    fieldProps: { label: 'Autorizo el manejo de datos personales' }
-  }
-]
 
 const buttonProps = {
   size: 'xl',
   class: 'justify-center bg-secondary  text-white hover:bg-primary hover:text-white transition'
 }
 const ui = {
+  root: '',
   form: 'grid grid-cols-12 gap-4',
-  actions: 'col-span-12 mt-2'
+  actions: 'col-span-12 mt-2',
+  title: 'hidden',
+  description: 'hidden',
 }
-
-const onSubmit = (values: Record<string, any>) => {
-  console.log('Form submitted:', values)
-}
-
-const impBody = "<h2 style=\"text-align: center;\">&iexcl;Escr&iacute;benos!</h2>\n\n<p style=\"text-align: center;\">Completa el formulario. Te contactaremos tan pronto como nos sea posible. &iexcl;Gracias!</p>";
-
 </script>
 
 <template>
@@ -123,14 +45,9 @@ const impBody = "<h2 style=\"text-align: center;\">&iexcl;Escr&iacute;benos!</h2
         <div class="page-body mb-9" v-html="page.body"></div>
         <div class="grid grid-cols-12 gap-10">
           <div class="col-span-12 lg:col-span-6">
-            <IForm
-              v-model="formData"
-              :fields="fields"
-              submit-label="Enviar"
-              @submit="onSubmit"
+            <IformForm
               :button-props="buttonProps"
-              :ui="ui"
-            />
+              :ui="ui" system-name="contact_form" />
           </div>
           <div class="col-span-12 lg:col-span-6">
             <iframe
@@ -181,27 +98,15 @@ const impBody = "<h2 style=\"text-align: center;\">&iexcl;Escr&iacute;benos!</h2
     @apply border-t;
     border-color: #00000026;
   }
-}
 
-.contacto :deep(input[type="file"]) {
-  border: 0;
-  padding: 0;
-  border-radius: 0;
-  box-shadow: none;
-  height: 40px;
-  background: transparent;
 }
-.contacto :deep(input[type="file"])::file-selector-button {
-  background: #EFEFEF;
-  color: #444444;
-  font-weight: 500;
+:deep(label) {
+  display: none;
+}
+:deep(input), :deep(textarea) {
+  min-height: 40px;
   font-size: 16px;
-  border: 1px solid #5B6077;
-  padding: 6px 20px;
-  transition: .2s;
-}
-.contacto :deep(input[type="file"])::file-selector-button:hover {
-  background-color: #cccccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
 }
 </style>
 
