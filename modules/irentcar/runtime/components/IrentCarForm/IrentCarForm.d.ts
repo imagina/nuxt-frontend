@@ -1,10 +1,12 @@
+export interface OfficeOption {
+  label: string;
+  value: number;
+  cityId: number;
+}
+
 export interface DateValidationForm
 {
-  pickupOffice: {
-    label: string,
-    value: number,
-    cityId: number,
-  } | null
+  pickupOfficeId: number | null
   pickupDate: string | null
   pickupTime: string | null
   dropOfficeId: number | null

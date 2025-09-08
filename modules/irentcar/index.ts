@@ -1,5 +1,5 @@
-import {createResolver, defineNuxtModule, addComponentsDir} from '@nuxt/kit'
-//import pagesConfig from './config/pages'
+import {createResolver, defineNuxtModule, addComponentsDir, extendPages} from '@nuxt/kit'
+import pagesConfig from './config/pages'
 
 export default defineNuxtModule({
   meta: {
@@ -21,9 +21,9 @@ export default defineNuxtModule({
     // Components (optional)
     addComponentsDir({path: resolve(runtimeDir, 'components')})
     //Extend pages
-    //extendPages((pages) => pagesConfig.forEach(
-    //  page => pages.push({...page, file: resolve(page.page)})
-    //))
+    extendPages((pages) => pagesConfig.forEach(
+     page => pages.push({...page, file: resolve(page.page)})
+    ))
     //Extend i18n
     nuxt.hook('i18n:registerModule', register => register({
       langDir: resolve('./i18n'),

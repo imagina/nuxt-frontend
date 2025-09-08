@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import {irentcarOfficeRepository, irentcarReservationRepository} from '#irentcar/utils/repository'
-import type {DateValidationForm} from './IrentCarForm'
+import type {DateValidationForm, OfficeOption} from './IrentCarForm'
 import type {IFormFieldConfig} from "~/components/IForm/IForm";
 import type {DateValidation} from "#irentcar/types/reservation";
+import {useInavigation} from "#icore/composables/useInavigation";
+
+const {goTo} = useInavigation()
 
 const form = ref<DateValidationForm>({
-  pickupOffice: null,
+  pickupOfficeId: null,
   pickupDate: null,
   pickupTime: null,
   dropOfficeId: null,
@@ -16,7 +19,7 @@ const loading = ref<boolean>(false)
 const validationDate = ref<DateValidation | null>(null)
 
 watch(
-  () => [form.value.pickupOffice, form.value.pickupDate] as const,
+  () => [form.value.pickupOfficeId, form.value.pickupDate] as const,
   async ([pickupOfficeId, pickupDate], [prevId, prevDate]) =>
   {
     if (!pickupOfficeId || !pickupDate) return
@@ -30,13 +33,18 @@ const {data: offices} = await useAsyncData(`irentCar:offices`, () =>
   irentcarOfficeRepository.index({include: 'locatable'})
 )
 
-const officeOptions = (offices.value?.data ?? []).map(office => ({
-  label: office.title, value: office.id, cityId: office.locatable?.id
+const officeOptions: OfficeOption[] = (offices.value?.data ?? []).map(office => ({
+  label: office.title, value: office.id, cityId: office.locatable?.cityId
 }))
 
+const selectedPickupOffice = computed<OfficeOption | null>(() =>
+{
+  if (!form.value.pickupOfficeId) return null
+  return officeOptions.find(office => office.value === form.value.pickupOfficeId) ?? null
+})
 const formFields = computed<IFormFieldConfig[]>(() => ([
   {
-    name: 'pickupOffice',
+    name: 'pickupOfficeId',
     type: 'selectMenu',
     width: 'col-span-6',
     rules: ['required'],
@@ -45,7 +53,8 @@ const formFields = computed<IFormFieldConfig[]>(() => ([
       required: true
     },
     fieldProps: {
-      items: officeOptions
+      items: officeOptions,
+      valueKey: 'value'
     }
   },
   {
@@ -83,14 +92,14 @@ const formFields = computed<IFormFieldConfig[]>(() => ([
     name: 'dropOfficeId',
     type: 'selectMenu',
     width: 'col-span-6',
-    vIf: !!form.value.pickupTime,
+    showIf: !!form.value.pickupTime,
     rules: ['required'],
     formFieldProps: {
       label: 'Oficina de Devolución',
       required: true
     },
     fieldProps: {
-      items: officeOptions.filter(item => item.cityId == form.value.pickupOffice?.cityId),
+      items: officeOptions.filter(item => item.cityId == selectedPickupOffice.value?.cityId),
       valueKey: 'value'
     }
   },
@@ -98,7 +107,7 @@ const formFields = computed<IFormFieldConfig[]>(() => ([
     name: 'dropDate',
     type: 'input',
     width: 'col-span-3',
-    vIf: !!form.value.pickupTime,
+    showIf: !!form.value.pickupTime,
     rules: ['required'],
     formFieldProps: {
       label: 'Fecha de devolución',
@@ -114,7 +123,7 @@ const formFields = computed<IFormFieldConfig[]>(() => ([
     name: 'dropTime',
     type: 'select',
     width: 'col-span-3',
-    vIf: !!form.value.pickupTime,
+    showIf: !!form.value.pickupTime,
     rules: ['required'],
     formFieldProps: {
       label: 'Hora de devolución',
@@ -128,14 +137,14 @@ const formFields = computed<IFormFieldConfig[]>(() => ([
 
 const dateValidation = async () =>
 {
+  loading.value = true
   form.value.pickupTime = null
   form.value.dropOfficeId = null
   form.value.dropDate = null
   form.value.dropTime = null
-  loading.value = true
   const {data: dateValidation} = await irentcarReservationRepository.dateValidation({
     filter: {
-      pickup_office_id: form.value.pickupOffice?.value,
+      pickup_office_id: selectedPickupOffice?.value?.value,
       pickup_date: form.value.pickupDate
     }
   })
@@ -157,5 +166,6 @@ const dateValidation = async () =>
     :ui="{
       actions: 'items-end'
     }"
+    @submit="goTo({name: 'irentcar.page.stepper', query: form})"
   />
 </template>
