@@ -4,6 +4,11 @@ export default defineAppConfig({
       defaultVariants : {
         variant: 'soft'
       }
+    },
+    formField: {
+      slots:{
+        error: 'mt-1 text-xs'
+      }
     }
   }
 })

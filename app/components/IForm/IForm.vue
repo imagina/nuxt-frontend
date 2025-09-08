@@ -96,14 +96,18 @@ defineExpose({reset, success, error})
       :class="ui.form"
       @submit="onSubmit"
     >
-      <template v-for="field in props.fields" :key="field.name">
-        <IField v-model="model[field.name]" :field="field"/>
-      </template>
+      <div class="grid grid-cols-12 gap-4">
+        <template v-for="field in props.fields" :key="field.name">
+          <div v-if="field.vIf !== false" :class="field.width || 'col-span-12'">
+            <IField v-model="model[field.name]" :field="field"/>
+          </div>
+        </template>
 
-      <div :class="ui.actions">
-        <UButton type="submit" v-bind="props.buttonProps">
-          {{ props.submitLabel || props.title }}
-        </UButton>
+        <div :class="[ui.actions, props.submitWidth || 'col-span-12']">
+          <UButton type="submit" v-bind="props.buttonProps">
+            {{ props.submitLabel || props.title }}
+          </UButton>
+        </div>
       </div>
     </UForm>
   </div>

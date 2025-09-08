@@ -2,10 +2,13 @@ import type {IFieldConfig} from '../IField/IField'
 
 export interface IFormFieldConfig extends IFieldConfig
 {
-  rules?: string[]
+  rules?: string[],
+  width?: string,
+  vIf?: boolean,
 }
 
-export interface IFormUi {
+export interface IFormUi
+{
   root?: string
   header?: string
   title?: string
@@ -20,6 +23,7 @@ export interface IFormProps
   description?: string
   fields: IFormFieldConfig[]
   submitLabel?: string
+  submitWidth?: string
   buttonProps?: Record<string, unknown>
   ui?: IFormUi
 }
