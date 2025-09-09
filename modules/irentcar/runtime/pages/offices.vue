@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import type { PageData } from '#ipage/types/pages'
-defineProps<{ page: PageData }>()
-import { ref, computed } from "vue";
-import type { AccordionItem } from "@nuxt/ui";
+import {irentcarOfficeRepository} from '#irentcar/utils/repository'
+import type {AccordionItem} from "@nuxt/ui";
+
+const {data: officesResponse} = await useAsyncData(`irentCar:offices`, () =>
+  irentcarOfficeRepository.index({include: 'locatable'})
+)
+const officesData = officesResponse.value?.data ?? []
 
 type Office = { id:number; title:string; summary:string; iframe?:string; address?:string }
 
@@ -31,7 +34,8 @@ const items = computed<AccordionItem[]>(() =>
   }))
 )
 
-const iframeSrc = computed(() => {
+const iframeSrc = computed(() =>
+{
   const list = items.value
   if (!list.length) return ''
   const i = Number(active.value) || 0
@@ -39,15 +43,13 @@ const iframeSrc = computed(() => {
 })
 
 const active = ref("0");
-
 </script>
 
-
-  <template>
+<template>
   <div>
     <!-- Oficinas -->
-     <IBreadcrumb
-      :title="page.title ?? '...'"
+    <IBreadcrumb
+      title="Oficinas"
       :ui="{ link: 'font-bold text-gray-3' }">
       <template #extraUp>
         <IsliderCarousel
@@ -67,25 +69,25 @@ const active = ref("0");
       </template>
     </IBreadcrumb>
     <div class="bg-gray-2">
-    <section class=" container mx-auto py-10 px-4 sm:px-6 lg:px-10">
-      <div class="grid gap-10 grid-cols-1 md:grid-cols-3">
-        <!-- Columna izquierda: Filtros -->
-        <aside class="md:col-span-1 filters">
-          <UCard class="shadow-md">
-            <h1 class="text-[24px]  text-primary font-semibold">Oficinas</h1>
-            <UAccordion v-model="active" :items="items" >
-              <template #body="{ item }">
-                <div class="border-t border-gray-200 pt-4">
-                  {{ item.summary }}
-                </div>
+      <section class=" container mx-auto py-10 px-4 sm:px-6 lg:px-10">
+        <div class="grid gap-10 grid-cols-1 md:grid-cols-3">
+          <!-- Columna izquierda: Filtros -->
+          <aside class="md:col-span-1 filters">
+            <UCard class="shadow-md">
+              <h1 class="text-[24px]  text-primary font-semibold">Oficinas</h1>
+              <UAccordion v-model="active" :items="items">
+                <template #body="{ item }">
+                  <div class="border-t border-gray-200 pt-4">
+                    {{ item.summary }}
+                  </div>
 
-              </template>
-            </UAccordion>
-          </UCard>
-        </aside>
+                </template>
+              </UAccordion>
+            </UCard>
+          </aside>
 
-        <!-- Columna derecha: Maps -->
-        <div class="md:col-span-2 maps">
+          <!-- Columna derecha: Maps -->
+          <div class="md:col-span-2 maps">
             <iframe
               :src="iframeSrc"
               class="h-[600px] w-full rounded-lg"
@@ -94,9 +96,9 @@ const active = ref("0");
               allowfullscreen
               referrerpolicy="no-referrer-when-downgrade"
             />
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
     </div>
   </div>
 </template>
