@@ -24,3 +24,27 @@
 .overlay-slide {
   background: #00000080;
 }
+
+.page-title {
+  @apply mb-10 text-[30px] leading-[40px] md:text-[40px] md:leading-[50px];
+}
+
+.page-body {
+  font-family: 'DM Sans', ui-sans-serif, system-ui;
+  @apply font-normal text-[18px] leading-[20px] md:text-[20px] md:leading-[30px];
+
+  & :is(.grid) { @apply gap-10; }
+
+  /* Títulos */
+  & :is(h1,h2,h3,h4) { @apply font-semibold mb-[15px]; }
+  & :is(h1,h2) { @apply text-[30px] leading-[40px] md:text-[40px] md:leading-[50px]; }
+  & :is(h3) { @apply text-[20px] leading-[25px] md:text-[30px] md:leading-[40px]; }
+  & :is(h4) { @apply text-[16px] leading-[20px] md:text-[20px] md:leading-[30px]; }
+
+  /* Listas */
+  & :is(ul) { @apply list-disc pl-5 mt-[15px]; }
+  & :is(ul li) { @apply list-item mb-2; }
+  & :is(ol) { @apply list-decimal pl-5 mt-[15px]; }
+  & :is(ol li) { @apply list-item mb-2; }
+
+}

@@ -5,8 +5,8 @@ defineProps<{ page: PageData }>()
 </script>
 
 <template>
-  <div>
-    <h1>Default Page ID {{ page.id }} --> {{ page.title }}</h1>
-    <div>{{ page }}</div>
-  </div>
+  <UContainer class="py-10">
+      <h1 class="page-title">{{ page.title }}</h1>
+      <div class="page-body" v-html="page.body"></div>
+  </UContainer>
 </template>
