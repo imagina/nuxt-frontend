@@ -50,11 +50,9 @@ const uiImage = {
 
     <!-- H1 -->
     <section class="bg-quaternary py-5">
-      <div class="container mx-auto  px-4 sm:px-6 lg:px-10">
+      <div class="container mx-auto  px-4 sm:px-6 lg:px-10 mb-5">
         <div class="page-body-h1" v-html="page.body"></div>
-        <UCard class="shadow-md rounded-3xl mb-5">
-          <FormHome/>
-        </UCard>
+        <irent-car-form />
       </div>
     </section>
     <!-- List Categorias -->
