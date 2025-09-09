@@ -8,7 +8,7 @@ const props = withDefaults(defineProps<{
   desktopNavProps?: Record<string, any>
   withDrawer?: boolean
 }>(), {
-  desktopNavProps: () => ({ class: 'hidden lg:flex' }),
+  desktopNavProps: () => ({class: 'hidden lg:flex'}),
   withDrawer: true
 })
 
@@ -22,10 +22,10 @@ const {data} = await useAsyncData(
 
 function mapNode (m: MenuItem): NavigationMenuItem
 {
-  const slug =  m.pageId != null ? m.systemName : undefined;
+  const toUrl = {'page': m.systemName, 'internal': m.uri, 'external': m.url}
   return {
     label: m.title,
-    to: slug ?? m.url ?? m.uri,
+    to: toUrl[m.linkType],
     target: m.target,
     disabled: m.status !== 1,
     icon: m.icon || undefined,
@@ -44,5 +44,5 @@ const items = computed<NavigationMenuItem[]>(() =>
 </script>
 
 <template>
-  <IMenu :items="items" :with-drawer="props.withDrawer" :desktop-nav-props="props.desktopNavProps" />
+  <IMenu :items="items" :with-drawer="props.withDrawer" :desktop-nav-props="props.desktopNavProps"/>
 </template>

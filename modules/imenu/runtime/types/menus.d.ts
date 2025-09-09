@@ -34,7 +34,7 @@ export interface MenuItem {
   icon: string | null
   class: string | null
   target: '_self' | '_blank' | string
-  linkType: 'internal' | 'external' | string
+  linkType: 'internal' | 'external' | 'page'
   status: number
   pageId: number
   uri: string
