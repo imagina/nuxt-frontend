@@ -9,20 +9,19 @@ export async function usePageLoader (slug: string)
 
   const {data, error} = await useAsyncData(`page-${slug}`, () =>
     ipagePagesRepository.show(slug, {
-      filter: {field: 'slug'},
-      include: 'translations'
-    })
+        filter: { field: 'slug' },
+        include: 'translations'
+      })
   )
 
   if (error.value)
   {
     if (error.value?.statusCode === 404)
     {
-      throw createError({statusCode: 404, statusMessage: 'Page Not Found'})
+      showError({statusCode: 404, statusMessage: 'Page Not Found'})
     }
-    throw createError({statusCode: 500, statusMessage: 'Unexpected Error'})
+    showError({statusCode: 500, statusMessage: 'Unexpected Error'})
   }
-
   page.value = data.value?.data
 
   // Get all available component files in this folder
