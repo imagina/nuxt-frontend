@@ -154,7 +154,7 @@ const dateValidation = async () =>
 }
 
 const ui = defu(props.ui, {
-  root: 'shadow-md rounded-3xl bg-white p-6'
+  root: 'form-rent-car shadow-md rounded-3xl bg-white p-6'
 })
 </script>
 

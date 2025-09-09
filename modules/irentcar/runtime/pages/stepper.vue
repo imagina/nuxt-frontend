@@ -96,6 +96,10 @@ const prev = () => stepperRef.value?.prev()
 
 <template>
   <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-10">
+
+    <irent-car-form class="mb-10" />
+
+
     <UStepper color="secondary" v-model="step" :items="steps" ref="stepperRef" class="w-full">
       <!-- Paso 1: Tarifas -->
       <template #rates>
@@ -976,5 +980,7 @@ const prev = () => stepperRef.value?.prev()
     padding-left: 1.25rem;
   }
 }
-
+.form-rent-car {
+  @apply bg-gray-100;
+}
 </style>
