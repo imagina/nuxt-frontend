@@ -1,6 +1,6 @@
 import type {DateValidation} from "#irentcar/types/reservation";
 import type {Office} from "#irentcar/types/office";
-import type {Gamma} from "#irentcar/types/gamma";
+import type {GammaOffice} from "#irentcar/types/gammaOffice";
 
 const baseUrl = '/irentcar/v1'
 
@@ -13,10 +13,10 @@ export const irentcarReservationRepository = {
       params
     })
   },
-  async availableGammas (params: Record<string, unknown>): Promise<{ data: Gamma[] }>
+  async availableGammas (params: Record<string, unknown>): Promise<{ data: GammaOffice[] }>
   {
     const {$apiFetch} = useNuxtApp()
-    return $apiFetch<{ data: Gamma[] }>(`${baseUrl}/reservations/available/gammas`, {
+    return $apiFetch<{ data: GammaOffice[] }>(`${baseUrl}/reservations/available/gammas`, {
       method: 'GET',
       params
     })

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type {StepperItem} from '@nuxt/ui'
 import {irentcarReservationRepository} from "#irentcar/utils/repository";
-import type {Gamma} from "#irentcar/types/gamma";
+import type {GammaOffice} from "#irentcar/types/gammaOffice";
 
 const step = ref(0)
 const router = useRouter()
@@ -18,7 +18,7 @@ const {data} = useAsyncData('irentCar::rent-gammas', () =>
     }
   })
 )
-const availableGammas = computed<Gamma[]>(() => data.value?.data ?? [])
+const availableGammas = computed<GammaOffice[]>(() => data.value?.data ?? [])
 
 const steps: StepperItem[] = [
   {title: 'Tarifas', icon: 'mdi:car', slot: 'rates'},
@@ -42,11 +42,11 @@ function resetFilters ()
 }
 
 // Carro seleccionado
-const selectedCar = ref<Gamma | null>(null)
-const isSelected = (c: Gamma) => selectedCar.value?.id === c.id
+const selectedCar = ref<GammaOffice | null>(null)
+const isSelected = (c: GammaOffice) => selectedCar.value?.id === c.id
 
 
-function selectCar (car: Gamma)
+function selectCar (car: GammaOffice)
 {
   selectedCar.value = car
   // stepper?.next()
