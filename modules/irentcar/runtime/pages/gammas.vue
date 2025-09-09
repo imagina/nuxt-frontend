@@ -1,19 +1,21 @@
 <script lang="ts" setup>
 import type {IFormFieldConfig} from "~/components/IForm/IForm";
 import {irentcarGammaRepository, irentcarStaticRepository} from "#irentcar/utils/repository";
+import GammaCard from '#irentcar/components/IrentCarGammaCard/IrentCarGammaCard.vue'
 import type {Type} from "#irentcar/types/static";
 
 const router = useRouter()
 const urlFilters = router.currentRoute.value.query.filters ?? '{}'
 const filters = ref(JSON.parse(urlFilters as string))
 
-const getGammas = () =>
-{
-  const notNullFilters = Object.fromEntries(Object.entries(filters.value).filter(([_, v]) => v !== null))
-  router.push({query: {filters: JSON.stringify(notNullFilters)}})
-  return irentcarGammaRepository.index({filter: notNullFilters})
-}
-const {data: gammas} = useAsyncData('irent::pageGammas', getGammas)
+const notNullFilters = computed(() => Object.fromEntries(Object.entries(filters.value).filter(([_, v]) => v !== null)))
+const {data: gammas, refresh: refreshGammas} = await useAsyncData(
+  'irent::pageGammas', () => irentcarGammaRepository.index({
+    filter: notNullFilters.value,
+    include: 'files',
+  })
+)
+const gammasData = computed(() => gammas.value?.data ?? [])
 type StaticResponse = { data: Type[] }
 const {data: statics} = await useAsyncData<[StaticResponse, StaticResponse, StaticResponse]>(
   'irent::statics',
@@ -72,6 +74,11 @@ const filterFields = computed<IFormFieldConfig[]>(() => ([
     }
   },
 ]))
+const filterGammas = () =>
+{
+  router.push({query: {filters: JSON.stringify(notNullFilters.value)}})
+  refreshGammas()
+}
 </script>
 <template>
   <div class="grid grid-cols-12">
@@ -81,11 +88,15 @@ const filterFields = computed<IFormFieldConfig[]>(() => ([
         title="Filters"
         submit-label="Buscar"
         :fields="filterFields"
-        @submit="getGammas()"
+        @submit="filterGammas()"
       />
     </div>
     <div class="col-span-8">
-      itemList...
+      <IList
+        :items="gammasData"
+        :item-component="GammaCard"
+        grid-cols="grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
+      />
     </div>
   </div>
 </template>

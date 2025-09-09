@@ -1,3 +1,5 @@
+import type {Thumbnails} from "#islider/types/slider";
+
 export interface FuelType
 {
   id: number;
@@ -16,6 +18,25 @@ export interface VehicleType
   title: string;
 }
 
+interface GammaFile
+{
+  disk: string | null;
+  extension: string | null;
+  filename: string | null;
+  filesize: number | null;
+  folderId: number | null;
+  hasThumbnails: boolean | null;
+  hasWatermark: boolean | null;
+  isFolder: number; // 0 = false, 1 = true
+  isImage: boolean;
+  isVideo: boolean;
+  mimetype: string | null;
+  path: string;
+  thumbnails: Thumbnails;
+  url: string;
+  visibility: string | null;
+}
+
 export interface Gamma
 {
   id: number;
@@ -27,6 +48,7 @@ export interface Gamma
   passengersNumber: number;
   nextGammaId: number;
   options: string | null; // adjust if it's an array or object in real API
+  files: { mainimage: GammaFile };
 
   fuelTypeId: number;
   fuelType: FuelType;
