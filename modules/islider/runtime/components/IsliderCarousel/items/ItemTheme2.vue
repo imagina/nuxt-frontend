@@ -13,11 +13,11 @@
       :ui="{media: 'absolute inset-0 w-full h-full object-cover'}"
     />
     <div class="absolute inset-0 overlay-slide"></div>
-    <div class="relative  h-full flex items-center flex-col justify-center max-w-3/4 mx-auto text-white text-center">
-      <h2 class="leading-[30px] text-[30px] lg:text-[45px] lg:leading-[45px]">
+    <div class="relative h-full flex items-center flex-col justify-center max-w-3/4 mx-auto text-white text-center ">
+      <h2 class="leading-[30px] text-[30px] lg:text-[48px] lg:leading-[48px]">
         {{ item.title }}
       </h2>
-      <p class="font-bold leading-[30px] text-[30px] lg:text-[45px] lg:leading-[45px]">{{ item.summary }}</p>
+      <p class="font-bold leading-[30px] text-[30px] lg:text-[48px] lg:leading-[48px]">{{ item.summary }}</p>
     </div>
   </div>
 </template>
