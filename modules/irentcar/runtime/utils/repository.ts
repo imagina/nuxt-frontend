@@ -1,6 +1,8 @@
 import type {DateValidation} from "#irentcar/types/reservation";
 import type {Office} from "#irentcar/types/office";
 import type {GammaOffice} from "#irentcar/types/gammaOffice";
+import type {Type} from "#irentcar/types/static";
+import type {Gamma} from "#irentcar/types/gamma";
 
 const baseUrl = '/irentcar/v1'
 
@@ -28,6 +30,44 @@ export const irentcarOfficeRepository = {
   {
     const {$apiFetch} = useNuxtApp()
     return $apiFetch<{ data: Office[] }>(`${baseUrl}/offices`, {
+      method: 'GET',
+      params
+    })
+  }
+}
+
+export const irentcarGammaRepository = {
+  async index (params: Record<string, unknown> = {}): Promise<{ data: Gamma[] }>
+  {
+    const {$apiFetch} = useNuxtApp()
+    return $apiFetch<{ data: Gamma[] }>(`${baseUrl}/gammas`, {
+      method: 'GET',
+      params
+    })
+  }
+}
+
+export const irentcarStaticRepository = {
+  async indexVehiculeType (params: Record<string, unknown> = {}): Promise<{ data: Type[] }>
+  {
+    const {$apiFetch} = useNuxtApp()
+    return $apiFetch<{ data: Type[] }>(`${baseUrl}/vehicle-types`, {
+      method: 'GET',
+      params
+    })
+  },
+  async indexTransmissionType (params: Record<string, unknown> = {}): Promise<{ data: Type[] }>
+  {
+    const {$apiFetch} = useNuxtApp()
+    return $apiFetch<{ data: Type[] }>(`${baseUrl}/transmission-types`, {
+      method: 'GET',
+      params
+    })
+  },
+  async indexFuelType (params: Record<string, unknown> = {}): Promise<{ data: Type[] }>
+  {
+    const {$apiFetch} = useNuxtApp()
+    return $apiFetch<{ data: Type[] }>(`${baseUrl}/fuel-types`, {
       method: 'GET',
       params
     })

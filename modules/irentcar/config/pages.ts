@@ -18,6 +18,12 @@ const pages = [
     path: '/rent-car/offices',
     page: 'runtime/pages/offices.vue',
     meta: {layout},
+  },
+  {
+    name: 'irentcar.page.gammas',
+    path: '/rent-car/gammas',
+    page: 'runtime/pages/gammas.vue',
+    meta: {layout},
   }
 ]
 
