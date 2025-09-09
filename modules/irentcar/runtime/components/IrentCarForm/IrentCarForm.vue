@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {irentcarOfficeRepository, irentcarReservationRepository} from '#irentcar/utils/repository'
-import type {DateValidationForm, IrentCarFormProps, OfficeOption} from './IrentCarForm'
+import type {DataValidationForm, IrentCarFormProps, OfficeOption} from './IrentCarForm'
 import type {IFormFieldConfig} from "~/components/IForm/IForm";
 import type {DateValidation} from "#irentcar/types/reservation";
 import {useInavigation} from "#icore/composables/useInavigation";
@@ -8,7 +8,7 @@ import {defu} from "defu";
 
 const {goTo} = useInavigation()
 const props = defineProps<IrentCarFormProps>()
-const form = ref<DateValidationForm>({
+const form = ref<DataValidationForm>({
   pickupOfficeId: null,
   pickupDate: null,
   pickupTime: null,

@@ -7,7 +7,7 @@ export interface OfficeOption
   cityId: number;
 }
 
-export interface DateValidationForm
+export interface DataValidationForm
 {
   pickupOfficeId: number | null
   pickupDate: string | null
