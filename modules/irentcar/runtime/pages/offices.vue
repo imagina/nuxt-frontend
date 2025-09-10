@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {irentcarOfficeRepository} from '#irentcar/utils/repository'
 import type {AccordionItem} from "@nuxt/ui";
+const settingStore = useIsettingStore()
 
 const {data: officesResponse} = await useAsyncData(`irentCar:offices`, () =>
   irentcarOfficeRepository.index({include: 'locatable'})
@@ -38,6 +39,14 @@ const active = ref("0")
 const uiAccordion = {
   trigger: 'text-primary data-[state=open]:text-secondary capitalize'
 }
+
+
+useSeoMeta({
+  title: () => `Oficinas | ${settingStore.get('isite::siteName')}`,
+  ogTitle: () => `Oficinas | ${settingStore.get('isite::siteName')}`,
+  description: () => `Oficinas | ${settingStore.get('isite::siteName')}`,
+  ogDescription: () => `Oficinas | ${settingStore.get('isite::siteName')}`,
+})
 
 </script>
 

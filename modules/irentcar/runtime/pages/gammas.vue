@@ -3,6 +3,7 @@ import type {IFormFieldConfig} from "~/components/IForm/IForm";
 import {irentcarGammaRepository, irentcarStaticRepository} from "#irentcar/utils/repository";
 import GammaCard from '#irentcar/components/IrentCarGammaCard/IrentCarGammaCard.vue'
 import type {Type} from "#irentcar/types/static";
+const settingStore = useIsettingStore()
 
 const router = useRouter()
 const urlFilters = router.currentRoute.value.query.filters ?? '{}'
@@ -84,6 +85,13 @@ const buttonProps = {
   block: true,
   class: 'justify-center bg-secondary text-white hover:bg-primary hover:text-white transition'
 }
+
+useSeoMeta({
+  title: () => `Vehículos | ${settingStore.get('isite::siteName')}`,
+  ogTitle: () => `Vehículos | ${settingStore.get('isite::siteName')}`,
+  description: () => `Vehículos | ${settingStore.get('isite::siteName')}`,
+  ogDescription: () => `Vehículos | ${settingStore.get('isite::siteName')}`,
+})
 
 </script>
 <template>
