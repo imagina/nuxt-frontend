@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {irentcarOfficeRepository, irentcarReservationRepository} from '#irentcar/utils/repository'
-import type {DataValidationForm, IrentCarFormProps, OfficeOption} from './IrentCarForm'
+import type {RentAvailability, IrentCarFormProps, OfficeOption, IrentCarFormEmits} from './IrentCarForm'
 import type {IFormFieldConfig} from "~/components/IForm/IForm";
 import type {DateValidation} from "#irentcar/types/reservation";
 import {useInavigation} from "#icore/composables/useInavigation";
@@ -8,13 +8,20 @@ import {defu} from "defu";
 
 const {goTo} = useInavigation()
 const props = defineProps<IrentCarFormProps>()
-const form = ref<DataValidationForm>({
+const emit = defineEmits<IrentCarFormEmits>()
+
+const router = useRouter()
+const urlFilters = router.currentRoute.value.query.rentAvailability ?? '{}'
+const preFilters = JSON.parse(urlFilters as string)
+
+const form = ref<RentAvailability>({
   pickupOfficeId: null,
   pickupDate: null,
   pickupTime: null,
   dropOfficeId: null,
   dropDate: null,
   dropTime: null,
+  ...preFilters
 })
 const loading = ref<boolean>(false)
 const validationDate = ref<DateValidation | null>(null)
@@ -25,6 +32,10 @@ watch(
   {
     if (!pickupOfficeId || !pickupDate) return
     if (pickupOfficeId === prevId && pickupDate === prevDate) return
+    form.value.pickupTime = null
+    form.value.dropOfficeId = form.value.pickupOfficeId
+    form.value.dropDate = null
+    form.value.dropTime = null
     await dateValidation()
   },
   {immediate: false}
@@ -68,7 +79,8 @@ const formFields = computed<IFormFieldConfig[]>(() => ([
       required: true
     },
     fieldProps: {
-      type: 'date'
+      type: 'date',
+      min: new Date().toISOString().split("T")[0]
     }
   },
   {
@@ -139,10 +151,6 @@ const formFields = computed<IFormFieldConfig[]>(() => ([
 const dateValidation = async () =>
 {
   loading.value = true
-  form.value.pickupTime = null
-  form.value.dropOfficeId = null
-  form.value.dropDate = null
-  form.value.dropTime = null
   const {data: dateValidation} = await irentcarReservationRepository.dateValidation({
     filter: {
       pickup_office_id: selectedPickupOffice?.value?.value,
@@ -152,6 +160,25 @@ const dateValidation = async () =>
   validationDate.value = dateValidation
   loading.value = false
 }
+
+const onSubmit = () =>
+{
+  emit("submit", {
+    ...form.value,
+    pickupOffice: offices.value?.data.find(i => i.id == form.value.pickupOfficeId) ?? null,
+    dropoffOffice: offices.value?.data.find(i => i.id == form.value.dropOfficeId) ?? null,
+  })
+  goTo({name: "irentcar.page.stepper", query: {rentAvailability: JSON.stringify(form.value)}})
+}
+
+onMounted(async () =>
+{
+  const {pickupOfficeId, pickupDate, pickupTime, dropOfficeId, dropDate, dropTime} = form.value
+  if (pickupOfficeId && pickupDate && pickupTime && dropOfficeId && dropDate && dropTime) {
+    await dateValidation()
+    onSubmit()
+  }
+})
 
 const ui = defu(props.ui, {
   root: 'form-rent-car shadow-md rounded-3xl bg-white p-6'
@@ -169,6 +196,6 @@ const ui = defu(props.ui, {
       class: 'bg-secondary text-secondary text-white hover:bg-primary hover:text-white transition'
     }"
     :ui="ui"
-    @submit="goTo({name: 'irentcar.page.stepper', query: form})"
+    @submit="onSubmit"
   />
 </template>
