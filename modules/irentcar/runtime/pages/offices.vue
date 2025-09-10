@@ -14,18 +14,24 @@ const armIframeSrc = (lat?: string, lng?: string) =>
 const items = computed<AccordionItem[]>(() =>
   officesData.map(o => ({
     label: o.title,
+    summary: o.locatable.address,
     iframe: armIframeSrc(o.locatable.lat,o.locatable.lng),
     ...o,
   }))
 )
 
-const iframeSrc = computed(() =>
-{
+type MapActive = AccordionItem & { summary: string; iframe: string }
+
+// Item actual
+const activeItem = computed<MapActive | null>(() => {
   const list = items.value
-  if (!list.length) return ''
+  if (!list.length) return null
   const i = Number(active.value) || 0
-  return list[i]?.iframe ?? list[0]?.iframe ?? ''
+  return list[i] ?? list[0]
 })
+
+const iframeSrc = computed(() => activeItem.value?.iframe ?? '')
+const summary   = computed(() => activeItem.value?.summary ?? '')
 
 const active = ref("0")
 
@@ -67,7 +73,7 @@ const uiAccordion = {
               <h1 class="text-[24px]  text-primary font-semibold mb-3">Oficinas</h1>
               <UAccordion v-model="active" :items="items" :ui="uiAccordion">
                 <template #body="{ item }">
-                  <div class="border-t border-gray-200 pt-4" v-html="item.description" />
+                  <div class="border-t border-gray-200 pt-4"> {{ item.summary }} </div>
                 </template>
               </UAccordion>
             </UCard>
@@ -76,14 +82,20 @@ const uiAccordion = {
           <!-- Columna derecha: Maps -->
           <div class="md:col-span-2 maps">
             <div class="sticky top-0 z-50 bg-white/80 backdrop-blur">
-              <iframe
-                :src="iframeSrc"
-                class="h-[600px] w-full rounded-lg"
-                style="border:0"
-                loading="lazy"
-                allowfullscreen
-                referrerpolicy="no-referrer-when-downgrade"
-              />
+              <div class="relative">
+                <iframe
+                  :src="iframeSrc"
+                  class="h-[600px] w-full rounded-lg"
+                  style="border:0"
+                  loading="lazy"
+                  allowfullscreen
+                  referrerpolicy="no-referrer-when-downgrade"
+                />
+                <!-- Texto  -->
+                <div class="absolute z-50 bg-white px-3 py-1 text-map-name">
+                  {{summary}}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -91,4 +103,17 @@ const uiAccordion = {
     </div>
   </div>
 </template>
-
+<style>
+.text-map-name {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: 500;
+    font-size: 15px;
+    color: black;
+    width: 200px;
+    top: 10px;
+    left: 10px;
+    border-radius: 2px;
+}
+</style>
