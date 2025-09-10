@@ -3,8 +3,8 @@ import type {PageData} from "#ipage/types/pages";
 import CardGamma from '~/components/CardGamma.vue'
 import {irentcarGammaRepository} from "#irentcar/utils/repository";
 
-const {data: gammas, refresh: refreshGammas} = await useAsyncData(
-  'irent::pageGammas', () => irentcarGammaRepository.index({
+const {data: gammas} = await useAsyncData(
+  'irent::homePage', () => irentcarGammaRepository.index({
     include: 'files',
   })
 )
