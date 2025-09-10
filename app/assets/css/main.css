@@ -2,8 +2,8 @@
 /*@import "tailwindcss" prefix(tw);*/
 @import "tailwindcss";
 @import "@nuxt/ui";
-@source inline("col-span-{1..12} lg:col-span-{1..12} capitalize text-primary data-[state=open]:text-secondary md:grid-cols-{1..12}");
-@source inline("leading-[30px] text-[30px] lg:text-[48px] lg:leading-[48px] max-w-3/4 ");
+@source inline("col-span-{1..12} lg:col-span-{1..12} md:col-span-{1..12} capitalize text-primary data-[state=open]:text-secondary md:grid-cols-{1..12}");
+@source inline("leading-[30px] text-[30px] lg:text-[48px] lg:leading-[48px] max-w-3/4 lg:grid-cols-{1..12}");
 @theme {
   --color-primary: #172E3F;
   --color-secondary: #980027;
