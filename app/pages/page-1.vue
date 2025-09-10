@@ -1,22 +1,18 @@
 <script setup lang="ts">
-  import type {PageData} from "#ipage/types/pages";
-  import CardHome from '~/components/CardHome.vue'
+import type {PageData} from "#ipage/types/pages";
+import CardGamma from '~/components/CardGamma.vue'
+import {irentcarGammaRepository} from "#irentcar/utils/repository";
 
+const {data: gammas, refresh: refreshGammas} = await useAsyncData(
+  'irent::pageGammas', () => irentcarGammaRepository.index({
+    include: 'files',
+  })
+)
+const gammasData = computed(() => gammas.value?.data ?? [])
+const titlesCart = {title: 'Gamas de Vehículos', subtitle: 'Reserva el tuyo'};
   const settingStore = useIsettingStore();
   defineProps<{ page: PageData }>();
 
-  const titlesCart = {title: 'Gamas de Vehículos', subtitle: 'Reserva el tuyo'};
-
-  const cars = [
-    {id: 1, category: 'Gama E', title: 'Kia picanto mecánico', media: { isImage: true, url: '/images/kia-automatico.jpg'} },
-    {id: 2, category: 'Gama E', title: 'Kia picanto automático', media: { isImage: true, url: '/images/kia-automatico.jpg'}},
-    {id: 3, category: 'Gama E', title: 'Renault logan mecánico', media: { isImage: true, url: '/images/kia-automatico.jpg'}},
-    {id: 4, category: 'Gama E', title: 'Suzuki Swift', media: { isImage: true, url: '/images/kia-automatico.jpg'}},
-    {id: 5, category: 'Gama P', title: 'Hyundai Tucson automática', media: { isImage: true, url: '/images/kia-automatico.jpg'}},
-    {id: 6, category: 'Gama FL', title: 'Hyundai Tucson automática', media: { isImage: true, url: '/images/kia-automatico.jpg'}},
-    {id: 7, category: 'Gama GI', title: 'Nissan X-Trail automática', media: { isImage: true, url: '/images/kia-automatico.jpg'}},
-    {id: 8, category: 'Gama GL', title: 'Ford Explorer automática', media: { isImage: true, url: '/images/kia-automatico.jpg'}}
-  ]
 
 const buttonProps = {
   size: 'xl',
@@ -55,19 +51,18 @@ const uiImage = {
         <irent-car-form />
       </div>
     </section>
-    <!-- List Categorias -->
+    <!-- List Gamas -->
     <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-10 mb-10">
       <div class="text-center">
         <div class="text-secondary text-[16px] lg:text-[20px]  font-bold uppercase mb-0 ">{{ titlesCart.subtitle }}
         </div>
         <div class="text-primary text-[30px] lg:text-[45px] font-semibold mb-10 ">{{ titlesCart.title }}</div>
         <IList
-          :items="cars"
-          :item-component="CardHome"
+          :items="gammasData"
+          :item-component="CardGamma"
           grid-cols="grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
         />
       </div>
-      <!-- Vehiculos-->
     </section>
     <!-- Info -->
     <IsliderCarousel

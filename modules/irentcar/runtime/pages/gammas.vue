@@ -79,24 +79,67 @@ const filterGammas = () =>
   router.push({query: {filters: JSON.stringify(notNullFilters.value)}})
   refreshGammas()
 }
+
+const buttonProps = {
+  block: true,
+  class: 'justify-center bg-secondary text-white hover:bg-primary hover:text-white transition'
+}
+
 </script>
 <template>
-  <div class="grid grid-cols-12">
-    <div class="col-span-4">
-      <IForm
-        v-model="filters"
-        title="Filters"
-        submit-label="Buscar"
-        :fields="filterFields"
-        @submit="filterGammas()"
-      />
+  <IBreadcrumb
+      title="Vehículos"
+      :ui="{ link: 'font-bold text-gray-3' }">
+      <template #extraUp>
+        <IsliderCarousel
+          system-name="publi_vehiculos"
+          item-theme="ItemTheme2"
+          dots-position="inside-left-middle"
+          :carousel-props="{
+          dots: true,
+          autoplay: true,
+          loop: true,
+          ui: {
+            item: 'h-[260px] sm:h-[360px] md:h-[400px]',
+            dot: 'w-[16px] h-[16px] rounded-full bg-[#FFFFFF80] data-[state=active]:bg-secondary'
+          }
+        }"/>
+      </template>
+    </IBreadcrumb>
+    <div class="bg-gray-2">
+      <section class=" container mx-auto py-10 px-4 sm:px-6 lg:px-10">
+        <div class="grid gap-10 grid-cols-12">
+          <!-- Columna izquierda: Filtros -->
+          <aside class="col-span-12 md:col-span-4 lg:col-span-3 filters">
+            <div class="sticky top-0 z-50 bg-white/80 backdrop-blur">
+              <div class="relative">
+
+                <UCard class="shadow-md">
+                  <h1 class="text-[24px]  text-primary font-semibold mb-3">Filtros</h1>
+                  <IForm
+                    v-model="filters"
+                    submit-label="Buscar"
+                    :fields="filterFields"
+                    :button-props="buttonProps"
+                    :ui="{   actions: 'col-span-12 mt-2' }"
+                    @submit="filterGammas()"
+                  />
+                </UCard>
+
+               </div>
+            </div>
+          </aside>
+
+          <!-- Columna derecha: Vehículos -->
+          <div class="col-span-12 md:col-span-8 lg:col-span-9 maps">
+              <IList
+                  :items="gammasData"
+                  :item-component="GammaCard"
+                  grid-cols="grid-cols-2 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+                />
+          </div>
+        </div>
+      </section>
     </div>
-    <div class="col-span-8">
-      <IList
-        :items="gammasData"
-        :item-component="GammaCard"
-        grid-cols="grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
-      />
-    </div>
-  </div>
+
 </template>

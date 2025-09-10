@@ -68,7 +68,7 @@ const uiAccordion = {
       <section class=" container mx-auto py-10 px-4 sm:px-6 lg:px-10">
         <div class="grid gap-10 grid-cols-1 md:grid-cols-3">
           <!-- Columna izquierda: Filtros -->
-          <aside class="md:col-span-1 filters">
+          <aside class="col-span-1 md:col-span-1 filters">
             <UCard class="shadow-md">
               <h1 class="text-[24px]  text-primary font-semibold mb-3">Oficinas</h1>
               <UAccordion v-model="active" :items="items" :ui="uiAccordion">
@@ -80,7 +80,7 @@ const uiAccordion = {
           </aside>
 
           <!-- Columna derecha: Maps -->
-          <div class="md:col-span-2 maps">
+          <div class="col-span-1 md:col-span-2 maps">
             <div class="sticky top-0 z-50 bg-white/80 backdrop-blur">
               <div class="relative">
                 <iframe
