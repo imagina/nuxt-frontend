@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const settingStore = useIsettingStore()
 const logo = settingStore.get('isite::logo1')
+const siteName = settingStore.get('isite::siteName')
 const whatsapp = [ { callingCode: '+57', number: '3118060834', message: ''} ]
 </script>
 <template>
@@ -26,7 +27,7 @@ const whatsapp = [ { callingCode: '+57', number: '3118060834', message: ''} ]
           </div>
         </div>
         <div class="menu">
-          <imenu-menu system-name="main-menu"/>
+          <imenu-menu system-name="main-menu" :title="siteName"/>
         </div>
       </div>
     </UContainer>

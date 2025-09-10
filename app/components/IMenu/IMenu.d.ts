@@ -5,5 +5,7 @@ export interface IMenuProps {
   drawerDirection?: 'left' | 'right',
   desktopNavProps?: Record<string, unknown>
   withDrawer?: boolean
+  title?: string
+  description?: string
 }
 

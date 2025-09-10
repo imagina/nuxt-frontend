@@ -2,12 +2,14 @@
 import {imenuMenusRepository} from '#imenu/utils/repository'
 import type {Menu, MenuItem} from '#imenu/types/menus'
 import type {NavigationMenuItem} from '@nuxt/ui'
+import type {IMenuProps} from "~/components/IMenu/IMenu";
 
-const props = withDefaults(defineProps<{
-  systemName: string | number,
-  desktopNavProps?: Record<string, any>
-  withDrawer?: boolean
-}>(), {
+interface ImenuMenuProps extends Omit<IMenuProps, 'items'>
+{
+  systemName: string,
+}
+
+const props = withDefaults(defineProps<ImenuMenuProps>(), {
   desktopNavProps: () => ({class: 'hidden lg:flex'}),
   withDrawer: true
 })
@@ -45,5 +47,11 @@ const items = computed<NavigationMenuItem[]>(() =>
 </script>
 
 <template>
-  <IMenu :items="items" :with-drawer="props.withDrawer" :desktop-nav-props="props.desktopNavProps"/>
+  <IMenu
+    :items="items"
+    :with-drawer="props.withDrawer"
+    :desktop-nav-props="props.desktopNavProps"
+    :title="props.title"
+    :description="props.description"
+  />
 </template>

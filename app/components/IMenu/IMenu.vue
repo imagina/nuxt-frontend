@@ -6,7 +6,9 @@ import type {NavigationMenuItem} from "@nuxt/ui";
 const props = withDefaults(defineProps<IMenuProps>(), {
   drawerDirection: 'right',
   desktopNavProps: () => ({class: 'hidden lg:flex'}),
-  withDrawer: true
+  withDrawer: true,
+  title: '',
+  description: 'Menu',
 })
 
 
@@ -19,7 +21,7 @@ function normalizePath (toPath?: string)
   return '/' + toPath
 }
 
-const mappedItems = computed<NavigationMenuItem[]>((i) => props.items.map((item) =>
+const mappedItems = computed<NavigationMenuItem[]>(() => props.items.map((item) =>
 {
   if (item.to) item.to = normalizePath(item.to as string)
   return item
@@ -41,8 +43,8 @@ const mappedItems = computed<NavigationMenuItem[]>((i) => props.items.map((item)
     <template #header>
       <div class="flex justify-between">
         <div>
-          <DialogTitle>Site Name</DialogTitle>
-          <DialogDescription>Menu</DialogDescription>
+          <DialogTitle>{{ title }}</DialogTitle>
+          <DialogDescription>{{ description}}</DialogDescription>
         </div>
         <UButton color="neutral" variant="ghost" icon="i-lucide-x" @click="dOpen = false"/>
       </div>
@@ -52,6 +54,7 @@ const mappedItems = computed<NavigationMenuItem[]>((i) => props.items.map((item)
       <UNavigationMenu
         :items="mappedItems"
         orientation="vertical"
+        @click="dOpen = false"
         :ui="{
           link: 'w-full justify-start px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800',
           list: 'flex-col gap-1 w-full'
