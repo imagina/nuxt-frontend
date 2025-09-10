@@ -388,5 +388,8 @@ const ahora = [
     padding-left: 1.25rem;
   }
 }
-
+.border-hr {
+  border-color: #62748E4D;
+  margin: 1rem 0;
+}
 </style>

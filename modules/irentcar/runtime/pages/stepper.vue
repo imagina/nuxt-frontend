@@ -983,4 +983,8 @@ const prev = () => stepperRef.value?.prev()
 .form-rent-car {
   @apply bg-gray-100;
 }
+.border-hr {
+  border-color: #62748E4D;
+  margin: 1rem 0;
+}
 </style>
