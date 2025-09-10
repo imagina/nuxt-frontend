@@ -1,19 +1,33 @@
-<script setup lang="ts">
-  import type {IMenuProps} from './IMenu'
-  import {DialogTitle, DialogDescription} from 'reka-ui'
+<script lang="ts" setup>
+import type {IMenuProps} from './IMenu'
+import {DialogTitle, DialogDescription} from 'reka-ui'
+import type {NavigationMenuItem} from "@nuxt/ui";
 
-  const props = withDefaults(defineProps<IMenuProps>(), {
-    drawerDirection: 'right',
-    desktopNavProps: () => ({ class: 'hidden lg:flex' }),
-    withDrawer: true
-  })
+const props = withDefaults(defineProps<IMenuProps>(), {
+  drawerDirection: 'right',
+  desktopNavProps: () => ({class: 'hidden lg:flex'}),
+  withDrawer: true
+})
 
 
-  const dOpen = ref(false)
+const dOpen = ref(false)
+
+function normalizePath (toPath?: string)
+{
+  if (!toPath) return undefined
+  if (toPath.startsWith('/') || toPath.startsWith('http')) return toPath
+  return '/' + toPath
+}
+
+const mappedItems = computed<NavigationMenuItem[]>((i) => props.items.map((item) =>
+{
+  if (item.to) item.to = normalizePath(item.to as string)
+  return item
+}))
 </script>
 
 <template>
-  <UNavigationMenu :items="props.items" v-bind="props.desktopNavProps"/>
+  <UNavigationMenu :items="mappedItems" v-bind="props.desktopNavProps"/>
   <UDrawer
     v-model:open="dOpen"
     v-if="props.withDrawer"
@@ -22,7 +36,7 @@
     :ui="{ content: 'w-full', handle: 'bg-gray-400!' }">
 
     <!-- Action Buton -->
-    <UButton color="neutral" variant="ghost" trailing-icon="i-lucide-menu" />
+    <UButton color="neutral" variant="ghost" trailing-icon="i-lucide-menu"/>
 
     <template #header>
       <div class="flex justify-between">
@@ -36,7 +50,7 @@
 
     <template #body>
       <UNavigationMenu
-        :items="props.items"
+        :items="mappedItems"
         orientation="vertical"
         :ui="{
           link: 'w-full justify-start px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800',

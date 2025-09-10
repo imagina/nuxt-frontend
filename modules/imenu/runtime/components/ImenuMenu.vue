@@ -15,17 +15,18 @@ const props = withDefaults(defineProps<{
 const {data} = await useAsyncData(
   `menu:${props.systemName}`,
   () => imenuMenusRepository.show(props.systemName, {
-    include: 'menuItems.translations',
+    include: 'menuItems.translations,menuItems.page.translations',
     filter: {field: 'system_name'}
   })
 )
 
 function mapNode (m: MenuItem): NavigationMenuItem
 {
-  const toUrl = {'page': m.systemName, 'internal': m.uri, 'external': m.url}
+  const toUrlTypes = {'page': (m.page?.slug ?? m.systemName), 'internal': m.uri, 'external': m.url}
+
   return {
     label: m.title,
-    to: toUrl[m.linkType],
+    to: toUrlTypes[m.linkType],
     target: m.target,
     disabled: m.status !== 1,
     icon: m.icon || undefined,

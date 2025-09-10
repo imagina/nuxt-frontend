@@ -1,4 +1,5 @@
-export interface Translation {
+export interface Translation
+{
   title: string
   status?: number
   uri?: string
@@ -6,7 +7,8 @@ export interface Translation {
   description?: string
 }
 
-export interface Menu {
+export interface Menu
+{
   id: number
   systemName: string
   createdAt: string
@@ -23,7 +25,8 @@ export interface Menu {
   locales?: Record<string, Translation>
 }
 
-export interface MenuItem {
+export interface MenuItem
+{
   id: number
   menuId: number
   parentId: number
@@ -35,6 +38,7 @@ export interface MenuItem {
   class: string | null
   target: '_self' | '_blank' | string
   linkType: 'internal' | 'external' | 'page'
+  page: { slug: string }
   status: number
   pageId: number
   uri: string

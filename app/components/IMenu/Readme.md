@@ -7,7 +7,7 @@
   Each item can include:
   - `label`: text of the menu item.
   - `icon`: optional icon.
-  - `to`: link destination (Nuxt route or external URL).
+  - `to`: link destination (Nuxt route or external URL). (note: if it is relative should start with / )
   - `children`: optional submenu items.
 
 - `drawerDirection` **("left" | "right", default: `"right"`)**:  
