@@ -4,7 +4,7 @@ const pages = [
   {
     name: 'irentcar.page.stepper',
     path: '/rent-car/stepper',
-    page: 'runtime/pages/stepper.vue',
+    page: 'runtime/pages/stepper',
     meta: {layout},
   },
   {
