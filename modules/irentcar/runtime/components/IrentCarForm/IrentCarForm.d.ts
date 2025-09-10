@@ -1,4 +1,10 @@
 import type {IFormProps} from "~/components/IForm/IForm";
+import type {Office} from "#irentcar/types/office";
+
+export interface IrentCarFormEmits
+{
+  (e: "submit", payload: RentAvailability): void
+}
 
 export interface OfficeOption
 {
@@ -7,7 +13,7 @@ export interface OfficeOption
   cityId: number;
 }
 
-export interface DataValidationForm
+export interface RentAvailability
 {
   pickupOfficeId: number | null
   pickupDate: string | null
@@ -15,6 +21,8 @@ export interface DataValidationForm
   dropOfficeId: number | null
   dropDate: string | null
   dropTime: string | null
+  pickupOffice?: Office | null,
+  dropoffOffice?: Office | null
 }
 
 export interface IrentCarFormProps extends Pick<IFormProps, 'ui'>
