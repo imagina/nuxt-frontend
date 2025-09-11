@@ -15,11 +15,13 @@ const open = defineModel<boolean>("open", { default: false });
         wrapper: '',
         container: 'rounded-xl px-1 bg-quaternary border-1 border-gray-300',
         media: 'w-full object-contain rounded-xl' }"/>
-    <div class="text-center text-primary leading-[16px] text-[16px] lg:leading-[18px] lg:text-[18px] font-semibold mt-4" v-html="props.item.description" />
+    <div class="text-center text-primary leading-[16px] text-[16px] lg:leading-[18px] lg:text-[18px] font-semibold mt-4">
+      {{ props.item.summary }}
+    </div>
     <div class="text-center text-secondary text-[14px] lg:text-[16px] uppercase mb-1 font-semibold">
       {{ props.item.title }}
     </div>
-    <div class="flex justify-center items-center gap-3 text-[13px] text-gray-3 mb-2">
+    <div class="flex flex-col md:flex-row justify-center items-center gap-1 md:gap-3 text-sm md:text-md text-gray-3 mb-2">
       <div class="flex items-center gap-1">
         <Icon size="lg" name="mdi:car-shift-pattern"/>
         {{ props.item.transmissionType.title }}
@@ -52,16 +54,16 @@ const open = defineModel<boolean>("open", { default: false });
               media: 'w-full object-contain rounded-t-xl' }"/>
         </div>
         <div class="car-modal-body p-4">
-          <div class="text-primary text-lg font-semibold" v-html="props.item.description" />
-          <div class="text-secondary text-md uppercase font-semibold mb-2">
+          <div class="text-primary text-lg font-bold"> {{ props.item.summary }} </div>
+          <div class="text-secondary text-md uppercase font-semibold mt-1 mb-2">
             {{ props.item.title }}
           </div>
-          <div class="text-primary text-sm font-semibold">Especificaciones</div>
-          <div class="text-[13px] text-gray-3 mt-2">
+          <div class="text-primary text-sm font-bold">Especificaciones</div>
+          <div class="text-sm text-gray-3 mt-2">
               <Icon size="lg" name="mdi:car-shift-pattern"/>
               {{ props.item.transmissionType.title }}
           </div>
-          <div class="flex justify-between text-[13px] text-gray-3 mb-3">
+          <div class="flex flex-col sm:flex-row justify-between text-sm text-gray-3 mb-3">
             <div class="flex items-center gap-1">
               <Icon size="lg" name="material-symbols:person"/>
               {{ props.item.passengersNumber }} pasajeros
@@ -75,12 +77,9 @@ const open = defineModel<boolean>("open", { default: false });
               {{ props.item.doors }} puertas
             </div>
           </div>
-          <!--  Falta colocar los extras -->
-          <!--<div class="text-primary text-sm font-semibold">También incluye</div>
-          <div class="mb-3">
-
-          </div>-->
-          <UButton  size="md" color="secondary" class="px-3" loading-auto label="Realizar reservación" />
+          <div class="text-primary text-sm font-bold">También incluye</div>
+          <div class="text-primary text-sm mb-3 gamma-description" v-html="props.item.description" />
+          <UButton to="/rent-car/stepper" size="md" color="secondary" class="px-3 cursor-pointer" loading-auto label="Realizar reservación" />
 
         </div>
       </div>
