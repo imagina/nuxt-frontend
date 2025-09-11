@@ -77,7 +77,6 @@ const open = defineModel<boolean>("open", { default: false });
               {{ props.item.doors }} puertas
             </div>
           </div>
-          <div class="text-primary text-sm font-bold">También incluye</div>
           <div class="text-primary text-sm mb-3 gamma-description" v-html="props.item.description" />
           <UButton to="/rent-car/stepper" size="md" color="secondary" class="px-3 cursor-pointer" loading-auto label="Realizar reservación" />
 
