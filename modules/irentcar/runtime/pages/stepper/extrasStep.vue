@@ -39,11 +39,9 @@ const setExtras = () =>
       <NavigationArrows/>
 
       <div class="main-resume info-card">
-        <GammaOfficeCard :gamma-office="gammaOfficeSelected"/>
+        <GammaOfficeCard :gamma-office="gammaOfficeSelected" :collapsable="false"/>
 
-        <hr class="border-hr my-4"/>
-
-        <!-- Description TODO: Pendiente definir de donde sale esto -->
+        <!-- Description TODO: Pendiente definir de donde sale esto
         <div class="description">
           <h4 class="stepper-title mb-2">Descripción</h4>
           <div class="stepper-description text-primary mb-2">
@@ -68,7 +66,7 @@ const setExtras = () =>
               Asistencia las 24/7
             </div>
           </div>
-        </div>
+        </div>-->
 
       </div>
 
@@ -77,7 +75,7 @@ const setExtras = () =>
       <!-- Items -->
       <div v-if="extrasGroup.length" class="main-resume ">
         <h4 class="stepper-title mb-2">Elegir elementos opcionales</h4>
-        <UCheckboxGroup v-model="gammaOfficeExtraIds" :items="extrasGroup" @change="setExtras">
+        <UCheckboxGroup v-model="gammaOfficeExtraIds" color="info" :items="extrasGroup" @change="setExtras">
           <template #label="{item}">
             <div class="grid grid-cols-2">
               <div>{{ item.label }}</div>

@@ -6,7 +6,11 @@ import type {RentCtx} from './'
 const rent = inject<RentCtx>(RENT_CTX)
 if (!rent) throw new Error('RENT_CTX no disponible')
 
-const props = defineProps<{ gammaOffice: GammaOffice }>()
+// const props = defineProps<{ gammaOffice: GammaOffice }>()
+const props = withDefaults(
+  defineProps<{ gammaOffice: GammaOffice; collapsable?: boolean }>(),
+  { collapsable: true }
+)
 const selectGammaOffice = () =>
 {
 
@@ -22,6 +26,8 @@ const upgradeGammaOffice = () =>
 {
   rent.reservationData.value.gammaOffice = nextGammaOffice.value
 }
+
+
 </script>
 <template>
   <div class="grid grid-cols-12 justify-between gap-4">
@@ -51,9 +57,9 @@ const upgradeGammaOffice = () =>
         :media="gammaOffice.gamma.files.mainimage" :alt="gammaOffice.gamma.title"
         aspect-ratio="aspect-[1/1]"
         :ui="{
-                        wrapper: '',
-                        container: '',
-                        media: 'object-cover rounded-lg' }"/>
+          wrapper: '',
+          container: 'rounded-xl px-1 bg-quaternary ',
+          media: 'object-contain  rounded-lg' }"/>
     </div>
 
     <!-- Precio / CTA -->
@@ -68,15 +74,23 @@ const upgradeGammaOffice = () =>
     </div>
 
 
-    <div class="col-span-12">
-      <details class="group inline px-0">
+    <div class="col-span-12" v-if="collapsable">
+      <details class="group inline px-0" >
         <summary
           class="list-none inline-flex text-[14px] items-center gap-1 text-blue-600 cursor-pointer hover:underline mb-3">
           <Icon name="tabler:caret-down-filled" class="h-4 w-4 transition-transform group-open:rotate-270"/>
           Detalles
         </summary>
-        <div class="text-md text-gray-600 flex items-center" v-html="gammaOffice.gamma.description"></div>
+        <div class="text-md text-gray-600" v-html="gammaOffice.gamma.description"></div>
       </details>
     </div>
+
+    <div class="col-span-12" v-else>
+      <hr class="border-hr my-4"/>
+      <h4 class="stepper-title mb-2">Descripción</h4>
+      <div class="stepper-description text-primary mb-2" v-html="gammaOffice.gamma.description"></div>
+    </div>
+
+
   </div>
 </template>

@@ -3,7 +3,7 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 @source inline("col-span-{1..12} lg:col-span-{1..12} md:col-span-{1..12} sm:col-span-{1..12} capitalize text-primary data-[state=open]:text-secondary md:grid-cols-{1..12}");
-@source inline("leading-[28px] text-[28px] lg:text-[48px] lg:leading-[48px] max-w-3/4 grid-cols-{1..12} lg:grid-cols-{1..12} border-gray-300");
+@source inline("md:col-start-11 text-blue-1 aspect-[1/1] leading-[28px] text-[28px] lg:text-[48px] lg:leading-[48px] max-w-3/4 grid-cols-{1..12} lg:grid-cols-{1..12} border-gray-300");
 @theme {
   --color-primary: #172E3F;
   --color-secondary: #980027;

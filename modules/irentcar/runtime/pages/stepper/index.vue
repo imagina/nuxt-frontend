@@ -69,15 +69,19 @@ provide(RENT_CTX, ctx)
     </UStepper>
   </section>
 </template>
-<style scoped>
+<style>
 @reference "~/assets/css/main.css";
 /***** MAIN ******/
 .main-stepper .stepper-title {
-  @apply font-semibold text-[20px] text-primary;
+  @apply font-bold text-[20px] text-primary;
+}
+
+.main-stepper .stepper-title-2 {
+  @apply font-bold text-[18px] text-primary;
 }
 
 .main-stepper .stepper-subtitle {
-  @apply font-bold text-[18px] text-primary;
+  @apply font-semibold text-[18px] text-primary;
 }
 
 .main-stepper .stepper-summary {
@@ -95,7 +99,11 @@ provide(RENT_CTX, ctx)
 
 /***** SIDE ******/
 .side-stepper .stepper-title {
-  @apply font-semibold text-[18px] text-primary;
+  @apply font-bold text-[18px] text-primary;
+}
+
+.side-stepper .stepper-title-2 {
+  @apply font-bold text-[16px] text-primary;
 }
 
 .side-stepper .stepper-subtitle {

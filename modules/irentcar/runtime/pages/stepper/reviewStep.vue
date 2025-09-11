@@ -54,14 +54,6 @@ if (!rent) throw new Error('RENT_CTX no disponible')
           </div>
         </div>
 
-        <hr class=" border-hr my-4"/>
-
-        <div class="flex justify-end">
-          <UButton size="md" variant="soft" class="text-primary">Términos y condiciones del contrato de alquiler
-          </UButton>
-        </div>
-
-
       </div>
     </div>
 
