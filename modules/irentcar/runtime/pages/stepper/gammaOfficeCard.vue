@@ -77,7 +77,7 @@ const upgradeGammaOffice = () =>
     <div class="col-span-12" v-if="collapsable">
       <details class="group inline px-0" >
         <summary
-          class="list-none inline-flex text-[14px] items-center gap-1 text-blue-600 cursor-pointer hover:underline mb-3">
+          class="list-none inline-flex text-[14px] items-center gap-1 text-blue-1 cursor-pointer hover:underline mb-3">
           <Icon name="tabler:caret-down-filled" class="h-4 w-4 transition-transform group-open:rotate-270"/>
           Detalles
         </summary>
