@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import {DialogTitle, DialogDescription} from 'reka-ui'
 import type {IrentCarGammaCardProps} from "#irentcar/components/IrentCarGammaCard/IrentCarGammaCard";
 
 const props = defineProps<IrentCarGammaCardProps>()
@@ -41,6 +42,14 @@ const open = defineModel<boolean>("open", { default: false });
   </div>
 
   <UModal class="car-modal" v-model:open="open" :ui="{ header: 'hidden', overlay: 'overlay-slide', body: 'p-0 sm:p-0',  content: 'w-fit max-w-[calc(100vw-2rem)]' }" >
+    <template #header>
+      <div class="flex justify-between">
+        <div>
+          <DialogTitle>{{ props.item.summary }}</DialogTitle>
+          <DialogDescription>{{ props.item.title }}</DialogDescription>
+        </div>
+      </div>
+    </template>
     <template #body>
       <div class="card-modal">
         <div class="relative">
