@@ -8,7 +8,7 @@ export function mapApiFields (fields: Field[]): IFormFieldConfig[]
   {
     const typeId = Number(f.typeId);
     const fieldPresets = fieldApiTypeToLocal[typeId];
-    if(!fieldPresets) return f;
+    if (!fieldPresets) return f;
     const ifield: IFormFieldConfig = {
       name: f.systemName || f.label.toLowerCase().replace(/\s+/g, '_'),
       type: fieldPresets?.type ?? 'input',
@@ -27,6 +27,7 @@ export function mapApiFields (fields: Field[]): IFormFieldConfig[]
         ...(fieldPresets?.fieldProps ?? {}),
         placeholder: f.placeholder ?? undefined,
         label: [7].includes(typeId) ? f.label : '',
+        ...([5].includes(typeId) ? {items: f.options.fieldOptions ?? []} : {})
       }
     }
 

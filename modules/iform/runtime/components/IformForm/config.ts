@@ -38,7 +38,7 @@ export const fieldApiTypeToLocal: Record<number, FieldApiMapping> = {
     type: 'select',
     default: null,
     fieldProps: {
-      items: ['test', 'test2']
+      items: []
     }
   },
   6: {// SELECT_MULTIPLE
@@ -67,7 +67,7 @@ export const fieldApiTypeToLocal: Record<number, FieldApiMapping> = {
     type: 'input',
     default: '',
     fieldProps: {
-      type: 'datetime-local'
+      type: 'date'
     }
   },
   12: {// FILE
