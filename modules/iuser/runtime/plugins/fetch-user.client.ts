@@ -4,7 +4,6 @@ export default defineNuxtPlugin({
   dependsOn: ["auth-api-fetch"],
   async setup ()
   {
-    console.log('[fetch-user plugin] active.')
     const authStore = useIuserAuthStore()
     if (authStore.isAuthenticated) await authStore.fetchUser()
   }

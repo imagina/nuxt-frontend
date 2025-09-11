@@ -7,6 +7,7 @@ export interface AuthUser {
   lastLogin: string | null
   firstName: string
   lastName: string
+  fullName: string
   isGuest: boolean | 0 | 1
   createdAt: string
   updatedAt: string
