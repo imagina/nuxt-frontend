@@ -1,4 +1,5 @@
 import type {IFieldConfig} from '../IField/IField'
+import type {ButtonProps} from "#ui/components/Button.vue";
 
 export interface IFormFieldConfig extends IFieldConfig
 {
@@ -25,5 +26,6 @@ export interface IFormProps
   submitLabel?: string
   submitWidth?: string
   buttonProps?: Record<string, unknown>
+  actions?: ButtonProps[]
   ui?: IFormUi
 }

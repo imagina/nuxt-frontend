@@ -104,9 +104,14 @@ defineExpose({reset, success, error})
           </template>
 
           <div :class="[ui.actions, props.submitWidth || 'col-span-12']">
-            <UButton type="submit" v-bind="props.buttonProps">
-              {{ props.submitLabel || props.title }}
-            </UButton>
+            <template v-if="props.actions" v-for="act in actions" :key="act.label">
+              <UButton v-bind="act"/>
+            </template>
+            <template v-else>
+              <UButton type="submit" v-bind="props.buttonProps">
+                {{ props.submitLabel || props.title }}
+              </UButton>
+            </template>
           </div>
         </div>
       </UForm>

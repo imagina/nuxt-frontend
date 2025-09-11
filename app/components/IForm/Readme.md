@@ -16,6 +16,7 @@
 - `submitLabel` **(string, optional)**: Label for the submit button (defaults to `title`).
 - `submitWidth`: class for grid within form
 - `buttonProps` **(Record<string, unknown>, optional)**: Props that are passed directly to the <UButton type="submit"> (e.g. { color: 'primary', variant: 'solid', size: 'md', trailingIcon: 'i-lucide-send' }).
+- `actions?`: ButtonProps[] this will replace the default action, don't forget to let one type="submit" 
 - `ui` : ui sections to component `{root?: ClassNameValue, header?: ClassNameValue, title?: ClassNameValue, description?: ClassNameValue, form?: ClassNameValue, actions?: ClassNameValue}`
 
 ## v-model
