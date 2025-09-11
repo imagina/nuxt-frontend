@@ -58,7 +58,7 @@ const formFields = computed<IFormFieldConfig[]>(() => ([
   {
     name: 'pickupOfficeId',
     type: 'selectMenu',
-    width: 'col-span-6',
+    width: 'col-span-12 md:col-span-6',
     rules: ['required'],
     formFieldProps: {
       label: 'Oficina de Recogida',
@@ -72,7 +72,7 @@ const formFields = computed<IFormFieldConfig[]>(() => ([
   {
     name: 'pickupDate',
     type: 'input',
-    width: 'col-span-3',
+    width: 'col-span-12 sm:col-span-6 md:col-span-3',
     rules: ['required'],
     formFieldProps: {
       label: 'Fecha de Recogida',
@@ -86,7 +86,7 @@ const formFields = computed<IFormFieldConfig[]>(() => ([
   {
     name: 'pickupTime',
     type: 'select',
-    width: 'col-span-3',
+    width: 'col-span-12 sm:col-span-6 md:col-span-3',
     rules: ['required'],
     formFieldProps: {
       label: 'Hora de Recogida',
@@ -104,7 +104,7 @@ const formFields = computed<IFormFieldConfig[]>(() => ([
   {
     name: 'dropOfficeId',
     type: 'selectMenu',
-    width: 'col-span-6',
+    width: 'col-span-12 md:col-span-6',
     showIf: !!form.value.pickupTime,
     rules: ['required'],
     formFieldProps: {
@@ -119,7 +119,7 @@ const formFields = computed<IFormFieldConfig[]>(() => ([
   {
     name: 'dropDate',
     type: 'input',
-    width: 'col-span-3',
+    width: 'col-span-12 sm:col-span-6 md:col-span-3',
     showIf: !!form.value.pickupTime,
     rules: ['required'],
     formFieldProps: {
@@ -135,7 +135,7 @@ const formFields = computed<IFormFieldConfig[]>(() => ([
   {
     name: 'dropTime',
     type: 'select',
-    width: 'col-span-3',
+    width: 'col-span-12 sm:col-span-6 md:col-span-3',
     showIf: !!form.value.pickupTime,
     rules: ['required'],
     formFieldProps: {
