@@ -5,7 +5,7 @@ import {irentcarGammaRepository} from "#irentcar/utils/repository";
 
 const {data: gammas} = await useAsyncData(
   'irent::homePage', () => irentcarGammaRepository.index({
-    include: 'files',
+    include: 'files', take: 12, page: 1
   })
 )
 const gammasData = computed(() => gammas.value?.data ?? [])
@@ -45,7 +45,7 @@ const uiImage = {
     />
 
     <!-- H1 -->
-    <section class="bg-quaternary py-5">
+    <section class="home bg-quaternary py-5">
       <div class="container mx-auto  px-4 sm:px-6 lg:px-10 mb-5">
         <div class="page-body-h1" v-html="page.body"></div>
         <irent-car-form />
@@ -57,11 +57,44 @@ const uiImage = {
         <div class="text-secondary text-[16px] lg:text-[20px]  font-bold uppercase mb-0 ">{{ titlesCart.subtitle }}
         </div>
         <div class="text-primary text-[30px] lg:text-[45px] font-semibold mb-10 ">{{ titlesCart.title }}</div>
-        <IList
+
+        <ICarousel
           :items="gammasData"
-          :item-component="CardGamma"
-          grid-cols="grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
-        />
+          :carousel-props="{
+            dots: true,
+            loop: true,
+            autoplay: true,
+            ui: {
+              item: 'basis-1/2 md:basis-1/3',
+              dot: 'w-[13px] h-[13px] rounded-full data-[state=active]:bg-primary'
+            }
+          }"
+          dots-position="outside-bottom-middle"
+          arrows-position="inside-between-middle"
+        >
+          <template #item="{ item, index }">
+            <div class="car-card h-full rounded-xl mb-4">
+              <IMediaRender
+                :media="item.files.mainimage" :alt="item.title"
+                aspect-ratio="aspect-4/3"
+                :ui="{
+                  wrapper: '',
+                  container: 'rounded-xl px-1 bg-quaternary border-1 border-gray-300',
+                  media: 'w-full object-contain rounded-xl' }"/>
+              <div class="text-center text-primary leading-[16px] text-[16px] lg:leading-[18px] lg:text-[18px] font-bold mt-4">
+                {{ item.summary }}
+              </div>
+              <div class="text-center text-secondary text-[14px] lg:text-[16px] uppercase my-2 font-bold">
+                {{ item.title }}
+              </div>
+              <div class="text-center">
+                <UButton to="/rent-car/stepper" size="xs" color="secondary" class="px-3" loading-auto label="Reserva ahora" />
+              </div>
+            </div>
+          </template>
+        </ICarousel>
+
+
       </div>
     </section>
     <!-- Info -->
@@ -118,6 +151,9 @@ const uiImage = {
 @reference "~/assets/css/main.css";
   :deep(.page-body-h1 h1 ){
     @apply text-center text-[18px] tracking-[1.8px] uppercase mb-10;
+  }
+  :deep(.home .form-rent-car) {
+    @apply bg-white;
   }
   :deep(.custom-html ol) {
     list-style: decimal !important;
