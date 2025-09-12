@@ -9,6 +9,7 @@ export const useIuserAuthStore = defineStore(
     const user = ref<AuthUser | null>(null)
     const token = ref<AuthToken | null>(null)
     const refreshingPromise = ref<Promise<{ data: AuthToken }> | null>(null)
+    const fetchedOnce = ref(false)
     // Computed property to check if the user is authenticated
     const isAuthenticated = computed(() => !!token.value)
 
@@ -30,10 +31,9 @@ export const useIuserAuthStore = defineStore(
       token.value = null
     }
 
-    async function fetchUser ()
+    function fetchUser (): void
     {
-      const {data} = await iuserAuthRepository.me()
-      setUserdata(data)
+      iuserAuthRepository.me().then(response => setUserdata(response.data))
     }
 
     async function login (email: string, password: string)
@@ -45,9 +45,11 @@ export const useIuserAuthStore = defineStore(
 
     async function logout ()
     {
-      try {
+      try
+      {
         if (isAuthenticated.value) await iuserAuthRepository.logout()
-      } finally {
+      } finally
+      {
         clearAuth()
         await navigateTo('/')
       }
@@ -79,6 +81,7 @@ export const useIuserAuthStore = defineStore(
       user,
       token,
       isAuthenticated,
+      fetchedOnce,
       login,
       logout,
       hasPermission,
@@ -88,6 +91,17 @@ export const useIuserAuthStore = defineStore(
   },
   {
     persist: [
-      {pick: ['token']}
+      {
+        pick: ['token'],
+        afterHydrate: (ctx) =>
+        {
+          const store = ctx.store as ReturnType<typeof useIuserAuthStore>
+          if (import.meta.client && store.token && !store.fetchedOnce)
+          {
+            store.fetchedOnce = true
+            store.fetchUser()
+          }
+        }
+      }
     ]
   })

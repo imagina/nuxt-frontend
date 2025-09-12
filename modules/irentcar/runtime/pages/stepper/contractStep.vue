@@ -8,43 +8,9 @@ import type {RentCtx} from './'
 const rent = inject<RentCtx>(RENT_CTX)
 if (!rent) throw new Error('RENT_CTX no disponible')
 
-const formUI = {
-  label: 'text-md font-medium text-[#314158]'
-}
-const trip = reactive({
-  details: {
-    title: 'Detalles del viaje',
-    offices: [
-      {label: 'Oficina de recogida/devolución', text: 'Bogotá El Dorado International Airport (Bogotá Colombia)'},
-    ],
-    dates: [
-      {
-        label: 'Fecha y hora de la recogida',
-        text: `${rent.reservationData.value?.pickupDate} ${rent.reservationData.value?.pickupTime}:00`
-      },
-      {
-        label: 'Fecha y hora de devolución',
-        text: `${rent.reservationData.value?.dropDate} ${rent.reservationData.value?.dropTime}:00`
-      }
-    ]
-  },
-  contact: [
-    {label: 'Nombre', value: '', placeholder: "Andres", help: ''},
-    {label: 'Apellidos', value: '', placeholder: "Rojas", help: ''},
-    {
-      label: 'Número de contacto',
-      value: '',
-      placeholder: "300 XXX XXXX",
-      help: 'Para alquileres fuera del país, incluya el prefijo del país (Ej. +1 para USA)'
-    },
-    {
-      label: 'Correo electrónico',
-      value: '',
-      placeholder: 'correo@mail.com',
-      help: 'La confirmación se enviará por correo electrónico'
-    }
-  ]
-})
+const authUser = computed(() => useIuserAuthStore().user)
+
+const formUI = {label: 'text-md font-medium text-[#314158]'}
 </script>
 <template>
   <div class="grid gap-10 grid-cols-1 lg:grid-cols-3 mt-6">
@@ -55,17 +21,14 @@ const trip = reactive({
       <NavigationArrows/>
 
       <div class="main-resume">
-
         <h4 class="stepper-title mb-3"> Nombre del titular del contrato </h4>
-
-        <div class="grid grid-cols-12 gap-4">
-          <div class="col-span-12 md:col-span-6" v-for="(c, i ) in trip.contact" :key="i">
-            <UFormField :label="c.label" :ui="formUI" :help="c.help">
-              <UInput size="md" v-model="c.value" :placeholder="c.placeholder" class="w-full"/>
-            </UFormField>
-          </div>
+        <!-- Auth component -->
+        <IuserAuth v-if="!authUser"/>
+        <!-- User Data -->
+        <div v-else>
+          datos del usuario: {{authUser.fullName}} - {{authUser.email}}
+          <pre>{{authUser.fields}}</pre>
         </div>
-
       </div>
 
       <hr class="border-hr my-4"/>

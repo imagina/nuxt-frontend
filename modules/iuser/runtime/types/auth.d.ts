@@ -11,6 +11,7 @@ export interface AuthUser {
   isGuest: boolean | 0 | 1
   createdAt: string
   updatedAt: string
+  fields: Record<string, unknown>
 }
 
 export interface AuthToken {

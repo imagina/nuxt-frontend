@@ -19,7 +19,6 @@ export default defineNuxtModule({
     addImportsDir(resolve(runtimeDir, 'utils'))
     // Plugins
     addPlugin({src: resolve(runtimeDir, 'plugins/auth-api-fetch'), mode: 'all'})
-    //addPlugin({src : resolve(runtimeDir, 'plugins/fetch-user.client'), mode: "client"})
     // Components (optional)
     addComponentsDir({path: resolve(runtimeDir, 'components')})
     //Extend pages

@@ -11,8 +11,8 @@ const authStore = useIuserAuthStore()
 const props = defineProps<IuserAuthProps>()
 const emit = defineEmits<IuserAuthEmits>()
 const authType = ref<AUTH_TYPE>(structuredClone(props.defaultType ?? 'login'))
-const loginForm = ref<AuthLoginForm>({email: 'admin@imagina.co', password: '0C68jfLSAJwfWrt0'})
-const registerForm = ref<AuthRegisterForm>({email: 'admin@imagina.com', password: '0C68jfLSAJwfWrt0'})
+const loginForm = ref<AuthLoginForm>({email: '', password: ''})
+const registerForm = ref<AuthRegisterForm>({email: '', password: ''})
 const loading = ref<boolean>(false)
 
 const loginFormRef = ref<InstanceType<typeof IForm> | null>(null)
@@ -67,7 +67,7 @@ function onRegister ()
 {
   loading.value = true
   const registerData = {...registerForm.value, roles: [userRole.data.id]}
-  iuserUserRepository.register(registerData).then(async (response) =>
+  iuserUserRepository.register(registerData).then(async () =>
   {
     emit('registered')
     await authStore.login(registerForm.value.email, registerForm.value.password)
