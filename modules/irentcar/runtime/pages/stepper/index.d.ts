@@ -6,6 +6,7 @@ export interface ReservationData extends RentAvailability
 {
   gammaOffice: GammaOffice | null
   gammaOfficeExtras: Extra[]
+  flyNumber: string
 }
 
 export interface RentCtx

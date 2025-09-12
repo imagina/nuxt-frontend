@@ -6,9 +6,11 @@ import type {GammaOffice} from "#irentcar/types/gammaOffice";
 
 const rent = inject<RentCtx>(RENT_CTX)
 if (!rent) throw new Error('RENT_CTX no disponible')
+const {formatCurrency} = useNumberFormat()
 const availableGammas = computed(() => rent?.gammaOffices.value ?? [])
 const selectGammaOffice = (gammaOffice: GammaOffice) =>
 {
+  rent.reservationData.value.gammaOfficeExtras = []
   rent.reservationData.value.gammaOffice = gammaOffice
   rent.next()
 }
@@ -22,7 +24,7 @@ const selectGammaOffice = (gammaOffice: GammaOffice) =>
             <IrentCarGammaCard :item="gammaOffice.gamma" orientation="horizontal"/>
           </div>
           <div class="col-span-12 md:col-span-4">
-            <div class="font-semibold text-gray-800">$ {{ gammaOffice.price }}</div>
+            <div class="font-semibold text-gray-800"> {{ formatCurrency(gammaOffice.price) }}</div>
             <UButton color="secondary" size="md" class="block my-1 text-white hover:bg-primary"
                      label="Seleccionar" @click="selectGammaOffice(gammaOffice)"/>
           </div>

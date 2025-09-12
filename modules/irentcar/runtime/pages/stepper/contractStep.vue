@@ -9,8 +9,23 @@ const rent = inject<RentCtx>(RENT_CTX)
 if (!rent) throw new Error('RENT_CTX no disponible')
 
 const authUser = computed(() => useIuserAuthStore().user)
+const flyNumberModel = computed({
+  get: () => rent.reservationData.value.flyNumber ?? '',
+  set: (val: string) => {
+    rent.reservationData.value.flyNumber = val.trim().toUpperCase()
+  }
+})
 
 const formUI = {label: 'text-md font-medium text-[#314158]'}
+const userData = computed(() =>
+{
+  if (!authUser) return null
+  return [
+    {label: 'Nombre', value: authUser.value?.fullName},
+    {label: 'Email', value: authUser.value?.email},
+    {label: 'Teléfono', value: authUser.value?.fields.phone ?? '-'},
+  ]
+})
 </script>
 <template>
   <div class="grid gap-10 grid-cols-1 lg:grid-cols-3 mt-6">
@@ -21,13 +36,15 @@ const formUI = {label: 'text-md font-medium text-[#314158]'}
       <NavigationArrows/>
 
       <div class="main-resume">
-        <h4 class="stepper-title mb-3"> Nombre del titular del contrato </h4>
+        <h4 class="stepper-title mb-3"> Nombre del conductor </h4>
         <!-- Auth component -->
         <IuserAuth v-if="!authUser"/>
         <!-- User Data -->
         <div v-else>
-          datos del usuario: {{authUser.fullName}} - {{authUser.email}}
-          <pre>{{authUser.fields}}</pre>
+          <template v-for="(ud, index) in userData" :key="index">
+            <div class="text-sm font-bold">{{ ud.label }}</div>
+            <div class="text-gray-600">{{ ud.value }}</div>
+          </template>
         </div>
       </div>
 
@@ -46,7 +63,12 @@ const formUI = {label: 'text-md font-medium text-[#314158]'}
       <div class="main-resume">
         <UFormField label="Número de vuelo" :ui="formUI"
                     description="En caso de que su vuelo se retrase, el personal de la oficina de recogida puede gestionar mejor el servicio si dispone de los datos del vuelo (por ejemplo, BA732)">
-          <UInput size="md" placeholder="XX000" class="w-full"/>
+          <UInput
+            v-model="flyNumberModel"
+            size="md"
+            placeholder="XX000"
+            class="w-full"
+          />
         </UFormField>
       </div>
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {irentcarReservationRepository} from "#irentcar/utils/repository";
 import type {GammaOffice} from "#irentcar/types/gammaOffice";
-import {steps, RENT_CTX} from './config'
+import {STEPS, RENT_CTX, INITIAL_RESERVATION_DATA} from './config'
 import type {ReservationData, RentCtx} from './'
 // --- Steps
 import RatesStep from './ratesStep.vue'
@@ -15,18 +15,7 @@ const settingStore = useIsettingStore()
 const step = ref(0)
 const loading = ref(false)
 const gammaOffices = ref<GammaOffice[]>([])
-const reservationData = ref<ReservationData>({
-  pickupOfficeId: null,
-  pickupDate: null,
-  pickupTime: null,
-  dropOfficeId: null,
-  dropDate: null,
-  dropTime: null,
-  pickupOffice: null,
-  dropoffOffice: null,
-  gammaOffice: null,
-  gammaOfficeExtras: []
-})
+const reservationData = ref<ReservationData>(INITIAL_RESERVATION_DATA)
 
 const getGammaOffices = async (filter: RentAvailability) =>
 {
@@ -42,7 +31,8 @@ const getGammaOffices = async (filter: RentAvailability) =>
   })
   loading.value = false
   gammaOffices.value = data
-  reservationData.value = {...reservationData.value, ...filter} as ReservationData
+  step.value = 0
+  reservationData.value = {...INITIAL_RESERVATION_DATA, ...filter} as ReservationData
 }
 
 const stepperRef = ref<any>(null)
@@ -76,7 +66,7 @@ useSeoMeta({
       v-model="step"
       disabled
       color="secondary"
-      :items="steps"
+      :items="STEPS"
       ref="stepperRef"
       class="w-full">
       <template #rates>
