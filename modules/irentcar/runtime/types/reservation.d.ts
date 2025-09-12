@@ -50,12 +50,12 @@ export interface Reservation {
   pickupDate: string
   dropoffDate: string
   statusId: number
-  gammaOfficePrice: string
-  gammaOfficeTax: string
+  gammaOfficePrice: number
+  gammaOfficeTax: number
   gammaOfficeTaxAmount: number
   gammaOfficeExtraIds: string
-  gammaOfficeExtraTotalPrice: string
-  totalPrice: string
+  gammaOfficeExtraTotalPrice: number
+  totalPrice: number
   totalPriceUsd: number
   options: Record<string, unknown>
   createdAt: string
@@ -63,4 +63,5 @@ export interface Reservation {
   status: Status
   gammaData: Gamma
   extrasData: Extra[]
+  rentalDays: number
 }

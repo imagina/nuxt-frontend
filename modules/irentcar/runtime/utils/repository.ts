@@ -23,10 +23,18 @@ export const irentcarReservationRepository = {
       params
     })
   },
-  async create (body: CreateReservationData): Promise<{ data: Record<string, unknown> }>
+  async preview (body: CreateReservationData): Promise<{ data: Reservation }>
   {
     const {$authApiFetch} = useNuxtApp()
-    return $authApiFetch<{ data: Record<string, unknown> }>(`${baseUrl}/reservations`, {
+    return $authApiFetch<{ data: Reservation }>(`${baseUrl}/reservations/preview`, {
+      method: 'POST',
+      body: {attributes: body}
+    })
+  },
+  async create (body: CreateReservationData): Promise<{ data: Reservation }>
+  {
+    const {$authApiFetch} = useNuxtApp()
+    return $authApiFetch<{ data: Reservation }>(`${baseUrl}/reservations`, {
       method: 'POST',
       body: {attributes: body}
     })
