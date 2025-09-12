@@ -1,4 +1,4 @@
-import type {CreateReservationData, DateValidation} from "#irentcar/types/reservation";
+import type {DateValidation} from "#irentcar/types/reservation";
 import type {Office} from "#irentcar/types/office";
 import type {GammaOffice} from "#irentcar/types/gammaOffice";
 import type {Type} from "#irentcar/types/static";
@@ -23,12 +23,20 @@ export const irentcarReservationRepository = {
       params
     })
   },
-  async create (body: CreateReservationData): Promise<{ data: Record<string, unknown> }>
+
+  async irentcarReservations (params: Record<string, unknown> = {}): Promise<{ data: Reservation[] }>
   {
     const {$authApiFetch} = useNuxtApp()
-    return $authApiFetch<{ data: Record<string, unknown> }>(`${baseUrl}/reservations`, {
-      method: 'POST',
-      body: {attributes: body}
+    return $authApiFetch<{ data: Reservation[] }>(`${baseUrl}/reservations`, {
+      method: 'GET',
+      params
+    })
+  },
+  async irentcarDeleteReservation (id: number): Promise<void>
+  {
+    const {$authApiFetch} = useNuxtApp()
+    return $authApiFetch<void>(`${baseUrl}/reservations/${id}`, {
+      method: 'DELETE'
     })
   }
 }
