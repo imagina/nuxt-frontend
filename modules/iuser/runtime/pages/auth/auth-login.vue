@@ -24,7 +24,7 @@ function onLogin ()
                 container: 'h-[34px] w-[144px]',
                 media: 'object-contain' }"
         />
-        <IuserAuth @logged="onLogin"/>
+        <IuserAuth @logged="onLogin"/>d
       </div>
     </div>
   </ClientOnly>

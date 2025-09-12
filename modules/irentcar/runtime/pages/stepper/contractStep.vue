@@ -36,11 +36,18 @@ const userData = computed(() =>
       <NavigationArrows/>
 
       <div class="main-resume">
-        <h4 class="stepper-title mb-3"> Nombre del conductor </h4>
+        <h4 class="stepper-title mb-3"> Detalles del contrato </h4>
         <!-- Auth component -->
-        <IuserAuth v-if="!authUser"/>
+        <div v-if="!authUser" class="w-full max-w-80 mx-auto mb-6">
+
+          <p class="text-center text-sm mb-2">Ingresa o regístrate para completar la reserva</p>
+
+          <IuserAuth />
+        </div>
         <!-- User Data -->
         <div v-else>
+          <h4 class="stepper-subtitle mb-3"> Datos del conductor </h4>
+
           <template v-for="(ud, index) in userData" :key="index">
             <div class="text-sm font-bold">{{ ud.label }}</div>
             <div class="text-gray-600">{{ ud.value }}</div>
@@ -84,3 +91,8 @@ const userData = computed(() =>
     </div>
   </div>
 </template>
+<style scoped>
+:deep(.auth-title) {
+  display: none;
+}
+</style>

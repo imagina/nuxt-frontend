@@ -87,12 +87,12 @@ function onRegister ()
     v-if="authType === 'login'"
     v-model="loginForm"
     ref="loginFormRef"
-    title="Login"
+    title="Iniciar Sesión"
     description=""
     :fields="LOGIN_FORM_FIELDS"
-    submit-label="Login"
+    submit-label="Iniciar Sesión"
     :actions="formActions"
-    :ui="{actions: 'flex justify-between'}"
+    :ui="{actions: 'flex justify-between', title: 'auth-title text-primary text-center font-bold mb-2 text-lg uppercase my-2'}"
     @submit="onLogin"
   />
   <IForm
@@ -101,7 +101,7 @@ function onRegister ()
     ref="registerFormRef"
     :fields="registerFormFields"
     :actions="formActions"
-    :ui="{actions: 'flex justify-between'}"
+    :ui="{actions: 'flex justify-between',title: 'auth-title text-primary text-center font-bold mb-2 text-lg uppercase my-2'}"
     title="Register"
     @submit="onRegister"
   />

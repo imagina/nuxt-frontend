@@ -47,10 +47,10 @@ const extrasGroup = computed<CheckboxGroupItem[]>(() =>
     <!-- Col: 1 Main stepper -->
     <div v-if="gammaOffice" class="col-span-12 lg:col-span-2 main-stepper stepper_list_container">
       <div class="stepper_list_item grid grid-cols-12 gap-4 items-center">
-        <div class="col-span-12 md:col-span-8 ">
+        <div class="col-span-12 md:col-span-9">
           <IrentCarGammaCard :item="gammaOffice.gamma" orientation="horizontal"/>
         </div>
-        <div class="col-span-12 md:col-span-4">
+        <div class="col-span-12 md:col-span-3">
           <div class="font-semibold text-gray-800">{{ formatCurrency(gammaOffice.price) }}</div>
           <UButton v-if="nextGammaOffice" color="secondary" size="md"
                    class="block my-1 text-white hover:bg-primary"

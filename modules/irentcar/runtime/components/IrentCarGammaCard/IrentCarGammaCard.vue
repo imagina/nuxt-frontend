@@ -20,8 +20,8 @@ const gridOrientationUi = computed(() =>
   const ui = {
     'horizontal': {
       container: 'flex flex-col gap-4 md:flex-row md:items-center',
-      image: 'order-1 md:order-2 md:flex-4',
-      content: 'order-2 md:order-1 md:flex-8',
+      image: 'order-1 md:order-2 md:flex-3',
+      content: 'order-2 md:order-1 md:flex-9',
       ctaWrap: 'mt-3',
       text: 'text-center md:text-left',
       items: 'flex justify-center md:justify-start'
@@ -50,8 +50,7 @@ const gridOrientationUi = computed(() =>
           :ui="{
             wrapper: '',
             container: 'rounded-xl px-1 bg-quaternary border-1 border-gray-300',
-            media: 'w-full object-contain rounded-xl'
-          }"/>
+            media: 'w-full object-contain rounded-xl'}"/>
       </div>
       <!-- Content -->
       <div :class="gridOrientationUi.content">

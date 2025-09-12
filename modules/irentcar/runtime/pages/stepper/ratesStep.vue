@@ -20,10 +20,10 @@ const selectGammaOffice = (gammaOffice: GammaOffice) =>
     <div class="col-span-12 lg:col-span-2 main-stepper stepper_list_container">
       <template v-for="gammaOffice in availableGammas" :key="gammaOffice.id">
         <div class="stepper_list_item grid grid-cols-12 gap-4 items-center">
-          <div class="col-span-12 md:col-span-8 ">
+          <div class="col-span-12 md:col-span-9">
             <IrentCarGammaCard :item="gammaOffice.gamma" orientation="horizontal"/>
           </div>
-          <div class="col-span-12 md:col-span-4">
+          <div class="col-span-12 md:col-span-3">
             <div class="font-semibold text-gray-800"> {{ formatCurrency(gammaOffice.price) }}</div>
             <UButton color="secondary" size="md" class="block my-1 text-white hover:bg-primary"
                      label="Seleccionar" @click="selectGammaOffice(gammaOffice)"/>

@@ -109,7 +109,7 @@ useSeoMeta({
   }
 
   .main-stepper .stepper-subtitle {
-    @apply font-semibold text-[18px] text-primary;
+    @apply font-semibold text-[16px] text-primary;
   }
 
   .main-stepper .stepper-summary {

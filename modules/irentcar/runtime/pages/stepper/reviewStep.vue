@@ -41,7 +41,7 @@ function createReservation ()
         <UButton
           label="RESERVAR"
           color="secondary"
-          class="w-full"
+          class="w-full justify-center"
           @click="createReservation"
         />
       </div>
