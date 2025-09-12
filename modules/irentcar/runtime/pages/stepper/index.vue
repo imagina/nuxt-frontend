@@ -8,13 +8,25 @@ import RatesStep from './ratesStep.vue'
 import ExtrasStep from './extrasStep.vue'
 import ContractStep from './contractStep.vue'
 import ReviewStep from './reviewStep.vue'
+import type {RentAvailability} from "#irentcar/components/IrentCarForm/IrentCarForm";
 
 const settingStore = useIsettingStore()
 
 const step = ref(0)
 const loading = ref(false)
 const gammaOffices = ref<GammaOffice[]>([])
-const reservationData = ref<ReservationData>({})
+const reservationData = ref<ReservationData>({
+  pickupOfficeId: null,
+  pickupDate: null,
+  pickupTime: null,
+  dropOfficeId: null,
+  dropDate: null,
+  dropTime: null,
+  pickupOffice: null,
+  dropoffOffice: null,
+  gammaOffice: null,
+  gammaOfficeExtras: []
+})
 
 const getGammaOffices = async (filter: RentAvailability) =>
 {
@@ -30,7 +42,7 @@ const getGammaOffices = async (filter: RentAvailability) =>
   })
   loading.value = false
   gammaOffices.value = data
-  reservationData.value = {...reservationData.value, ...filter}
+  reservationData.value = {...reservationData.value, ...filter} as ReservationData
 }
 
 const stepperRef = ref<any>(null)
@@ -54,12 +66,19 @@ useSeoMeta({
 </script>
 
 <template>
-  <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-10">
+  <section id="irentStepperPage" class="container mx-auto py-10 px-4 sm:px-6 lg:px-10">
     <!-- Form -->
     <irent-car-form class="mb-10" @submit="getGammaOffices"/>
     <!-- Stepper -->
     <div v-if="!gammaOffices.length">No Available gammas...</div>
-    <UStepper v-else disabled color="secondary" v-model="step" :items="steps" ref="stepperRef" class="w-full">
+    <UStepper
+      v-else
+      v-model="step"
+      disabled
+      color="secondary"
+      :items="steps"
+      ref="stepperRef"
+      class="w-full">
       <template #rates>
         <RatesStep/>
       </template>
@@ -80,94 +99,112 @@ useSeoMeta({
 </template>
 <style>
 @reference "~/assets/css/main.css";
-/***** MAIN ******/
-.main-stepper .stepper-title {
-  @apply font-bold text-[20px] text-primary;
-}
-
-.main-stepper .stepper-title-2 {
-  @apply font-bold text-[18px] text-primary;
-}
-
-.main-stepper .stepper-subtitle {
-  @apply font-semibold text-[18px] text-primary;
-}
-
-.main-stepper .stepper-summary {
-  @apply text-[14px];
-}
-
-.main-stepper .stepper-description {
-  @apply text-[15px];
-
-  & a {
-    @apply underline;
+#irentStepperPage {
+  .stepper_list_container {
+    @apply divide-y divide-gray-200 dark:divide-gray-700;
   }
 
-  & :is(h1,h2,h3,h4) { @apply font-bold text-[16px] mb-[10px]; }
-
-  & ol {
-    list-style: decimal !important;
-    padding-left: 1.25rem;
+  .stepper_list_item {
+    @apply py-3;
   }
 
-  & ul {
-    list-style: disc !important;
-    padding-left: 1.25rem;
+  /***** MAIN ******/
+
+  .main-stepper .stepper-title {
+    @apply font-bold text-[20px] text-primary;
   }
-  & hr {
+
+  .main-stepper .stepper-title-2 {
+    @apply font-bold text-[18px] text-primary;
+  }
+
+  .main-stepper .stepper-subtitle {
+    @apply font-semibold text-[18px] text-primary;
+  }
+
+  .main-stepper .stepper-summary {
+    @apply text-[14px];
+  }
+
+  .main-stepper .stepper-description {
+    @apply text-[15px];
+
+    & a {
+      @apply underline;
+    }
+
+    & :is(h1,h2,h3,h4) {
+      @apply font-bold text-[16px] mb-[10px];
+    }
+
+    & ol {
+      list-style: decimal !important;
+      padding-left: 1.25rem;
+    }
+
+    & ul {
+      list-style: disc !important;
+      padding-left: 1.25rem;
+    }
+
+    & hr {
+      border-color: #62748E4D;
+      margin: 1rem 0;
+    }
+  }
+
+  /***** SIDE ******/
+
+  .side-stepper .stepper-title {
+    @apply font-bold text-[18px] text-primary;
+  }
+
+  .side-stepper .stepper-title-2 {
+    @apply font-bold text-[16px] text-primary;
+  }
+
+  .side-stepper .stepper-subtitle {
+    @apply font-semibold text-[16px] text-primary;
+  }
+
+  .side-stepper .stepper-summary {
+    @apply text-[13px] text-primary;
+  }
+
+  .side-stepper .stepper-description {
+    @apply text-[14px] text-primary;
+
+    & a {
+      @apply underline;
+    }
+
+    & :is(h1,h2,h3,h4) {
+      @apply font-bold text-[16px] mb-[10px];
+    }
+
+    & ol {
+      list-style: decimal !important;
+      padding-left: 1.25rem;
+    }
+
+    & ul {
+      list-style: disc !important;
+      padding-left: 1.25rem;
+    }
+
+    & hr {
+      border-color: #62748E4D;
+      margin: 1rem 0;
+    }
+  }
+
+  .form-rent-car {
+    @apply bg-gray-100;
+  }
+
+  .border-hr {
     border-color: #62748E4D;
     margin: 1rem 0;
   }
-}
-
-/***** SIDE ******/
-.side-stepper .stepper-title {
-  @apply font-bold text-[18px] text-primary;
-}
-
-.side-stepper .stepper-title-2 {
-  @apply font-bold text-[16px] text-primary;
-}
-
-.side-stepper .stepper-subtitle {
-  @apply font-semibold text-[16px] text-primary;
-}
-
-.side-stepper .stepper-summary {
-  @apply text-[13px] text-primary;
-}
-
-.side-stepper .stepper-description {
-  @apply text-[14px] text-primary;
-
-  & a {
-    @apply underline;
-  }
-
-  & :is(h1,h2,h3,h4) { @apply font-bold text-[16px] mb-[10px]; }
-
-  & ol {
-    list-style: decimal !important;
-    padding-left: 1.25rem;
-  }
-
-  & ul {
-    list-style: disc !important;
-    padding-left: 1.25rem;
-  }
-  & hr {
-    border-color: #62748E4D;
-    margin: 1rem 0;
-  }
-}
-
-.form-rent-car {
-  @apply bg-gray-100;
-}
-
-.border-hr {
-  border-color: #62748E4D;
-  margin: 1rem 0;
 }
 </style>

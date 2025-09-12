@@ -96,8 +96,8 @@ const formFields = computed<IFormFieldConfig[]>(() => ([
       disabled: !validationDate.value,
       valueKey: 'value',
       loading: loading.value,
-      items: validationDate.value?.pickupHourSlots.slots.map(item => ({
-        value: item.hour, label: item.hour, disabled: !item.available
+      items: validationDate.value?.pickupHourSlots.slots.filter(i => i.available).map(item => ({
+        value: item.hour, label: item.hour
       }))
     }
   },
@@ -174,7 +174,8 @@ const onSubmit = () =>
 onMounted(async () =>
 {
   const {pickupOfficeId, pickupDate, pickupTime, dropOfficeId, dropDate, dropTime} = form.value
-  if (pickupOfficeId && pickupDate && pickupTime && dropOfficeId && dropDate && dropTime) {
+  if (pickupOfficeId && pickupDate && pickupTime && dropOfficeId && dropDate && dropTime)
+  {
     await dateValidation()
     onSubmit()
   }

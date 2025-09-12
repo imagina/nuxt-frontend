@@ -1,10 +1,11 @@
 import type {GammaOffice, Extra} from "#irentcar/types/gammaOffice";
 import type {RentAvailability} from "#irentcar/components/IrentCarForm/IrentCarForm";
+import type {CheckboxGroupProps} from "#ui/components/CheckboxGroup.vue";
 
 export interface ReservationData extends RentAvailability
 {
   gammaOffice: GammaOffice | null
-  gammaOfficeExtras: Extra[] | null
+  gammaOfficeExtras: Extra[]
 }
 
 export interface RentCtx
@@ -14,10 +15,4 @@ export interface RentCtx
   reservationData: Ref<ReservationData>
   next: () => void
   prev: () => void
-  // rentParams: Ref<RentAvailability | undefined>
-  // loading: Ref<boolean>
-  // getAvailableGammas: (filter: RentAvailability) => Promise<void>
-  // selectedCar: Ref<GammaOffice | null>
-  // selectCar: (car: GammaOffice) => void
-  // isSelected: (c: GammaOffice) => boolean
 }
