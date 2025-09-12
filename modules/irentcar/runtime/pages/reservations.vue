@@ -1,81 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { irentcarReservationRepository } from '../utils/repository'
-
-interface Extra {
-  id: number
-  title: string
-  description: string
-}
-
-interface ExtraData {
-  id: number
-  gamma_office_id: number
-  extra_id: number
-  price: string
-  extra: Extra
-}
-
-interface TransmissionType {
-  id: number
-  title: string
-}
-
-interface FuelType {
-  id: number
-  title: string
-}
-
-interface VehicleType {
-  id: number
-  title: string
-}
-
-interface GammaData {
-  id: number
-  title: string
-  summary: string
-  description: string
-  transmission_type_id: number
-  passengers_number: number
-  luggage: number
-  doors: number
-  fuel_type_id: number
-  vehicle_type_id: number
-  transmission_type: TransmissionType
-  fuel_type: FuelType
-  vehicle_type: VehicleType
-}
-
-interface Status {
-  id: number
-  title: string
-}
-
-interface Reservation {
-  id: number
-  userId: number
-  gammaId: number
-  gammaOfficeId: number
-  pickupOfficeId: number
-  dropoffOfficeId: number
-  pickupDate: string
-  dropoffDate: string
-  statusId: number
-  gammaOfficePrice: string
-  gammaOfficeTax: string
-  gammaOfficeTaxAmount: number
-  gammaOfficeExtraIds: string
-  gammaOfficeExtraTotalPrice: string
-  totalPrice: string
-  totalPriceUsd: number
-  options: Record<string, unknown>
-  createdAt: string
-  updatedAt: string
-  status: Status
-  gammaData: GammaData
-  extrasData: ExtraData[]
-}
+import type {Reservation} from "#irentcar/types/reservation";
+import type {Type} from "#irentcar/types/static";
 
 // Estado de carga y datos
 const loading = ref(false)
@@ -106,7 +33,7 @@ const showCancelModal = ref(false)
 const reservationToCancel = ref<number | null>(null)
 
 // Métodos para el estado y colores
-const getStatusColor = (status: Status): 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral' => {
+const getStatusColor = (status: Type): 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral' => {
   const colors = {
     'Pendiente': 'warning' as const,
     'Aprobado': 'primary' as const,
@@ -117,7 +44,7 @@ const getStatusColor = (status: Status): 'primary' | 'secondary' | 'success' | '
   return colors[status.title as keyof typeof colors] || 'neutral'
 }
 
-const getStatusLabel = (status: Status) => {
+const getStatusLabel = (status: Type) => {
   return status.title
 }
 
@@ -129,7 +56,7 @@ const formatDate = (dateString: string) => {
   })
 }
 
-const canCancel = (status: Status) => {
+const canCancel = (status: Type) => {
   return ['Pendiente', 'Aprobado'].includes(status.title)
 }
 
@@ -232,7 +159,7 @@ onMounted(() => {
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
           <div class="flex items-center space-x-3">
             <div class="flex-shrink-0">
-              <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="h-5 w-5 text-gray-400" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
               </svg>
@@ -245,7 +172,7 @@ onMounted(() => {
 
           <div class="flex items-center space-x-3">
             <div class="flex-shrink-0">
-              <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="h-5 w-5 text-gray-400" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
@@ -258,7 +185,7 @@ onMounted(() => {
 
           <div class="flex items-center space-x-3">
             <div class="flex-shrink-0">
-              <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="h-5 w-5 text-gray-400" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
               </svg>

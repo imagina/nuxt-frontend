@@ -1,3 +1,6 @@
+import type {Gamma} from "#irentcar/types/gamma";
+import type {Extra} from "#irentcar/types/gammaOffice";
+
 export interface Slot
 {
   hour: string;            // e.g., "08:00"
@@ -35,4 +38,29 @@ export interface CreateReservationData
   dropoff_date: string;
   gamma_office_id: number;
   gamma_office_extra_ids: string;
+}
+
+export interface Reservation {
+  id: number
+  userId: number
+  gammaId: number
+  gammaOfficeId: number
+  pickupOfficeId: number
+  dropoffOfficeId: number
+  pickupDate: string
+  dropoffDate: string
+  statusId: number
+  gammaOfficePrice: string
+  gammaOfficeTax: string
+  gammaOfficeTaxAmount: number
+  gammaOfficeExtraIds: string
+  gammaOfficeExtraTotalPrice: string
+  totalPrice: string
+  totalPriceUsd: number
+  options: Record<string, unknown>
+  createdAt: string
+  updatedAt: string
+  status: Status
+  gammaData: Gamma
+  extrasData: Extra[]
 }

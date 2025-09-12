@@ -29,7 +29,7 @@ const pages = [
     name: 'irentcar.page.reservations',
     path: '/rent-car/reservations',
     page: 'runtime/pages/reservations.vue',
-    meta: {layout},
+    meta: {layout, auth: true},
   }
 ]
 
