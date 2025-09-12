@@ -9,10 +9,11 @@ if (!rent) throw new Error('RENT_CTX no disponible')
 const resume = computed<ReservationData>(() => rent.reservationData.value)
 const selectedGammaOffice = computed<GammaOffice | null>(() => resume.value.gammaOffice)
 const selectedExtras = computed<Extra[]>(() => resume.value?.gammaOfficeExtras ?? [])
+const reservationPreview = computed(() => rent.reservationData.value.reservation)
 
 function editStep (step: 'extras' | 'gamma')
 {
-  if(!rent) return;
+  if (!rent) return;
   switch (step)
   {
     case 'extras':
@@ -80,23 +81,45 @@ function editStep (step: 'extras' | 'gamma')
     </div>
 
     <!-- Total -->
-    <div v-if="selectedGammaOffice" class="main-resume stepper_list_item">
+    <div v-if="reservationPreview" class="main-resume stepper_list_item">
       <div class="flex justify-between items-center">
         <h3 class="stepper-title">A pagar a la llegada</h3>
       </div>
-
       <div class="space-y-1 text-sm">
-        <div class="flex justify-between">
-          Tarifa básica
-          <span class="font-semibold">$000.0000 COP</span>
+        <!-- Gamma Office Price -->
+        <div>
+          <div class="flex justify-between">
+            Tarifa básica
+            <span class="font-semibold">{{ formatCurrency(reservationPreview.gammaOfficePrice) }}</span>
+          </div>
+          <div>
+            {{ reservationPreview.rentalDays }} Dias x {{ formatCurrency(reservationPreview.gammaOfficePrice) }}
+          </div>
         </div>
-        <div class="flex justify-between">
-          Impuesto sobre las ventas (19%)
-          <span class="font-semibold">(Incluído)</span>
+        <!-- Extras -->
+        <div v-if="reservationPreview.extrasData.length">
+          <div class="flex justify-between">
+            Elementos Extra
+            <span class="font-semibold">{{ reservationPreview.gammaOfficeExtraTotalPrice }}</span>
+          </div>
+          <div>
+            {{ reservationPreview.extrasData.map(i => i.title).join(', ') }}
+          </div>
         </div>
+        <!-- Taxes -->
+        <div>
+          <div class="flex justify-between">
+            Impuesto sobre las ventas ({{ reservationPreview.gammaOfficeTax }}%)
+            <span class="font-semibold">{{ reservationPreview.gammaOfficeTaxAmount }}</span>
+          </div>
+        </div>
+        <!-- Total -->
         <div class="flex justify-between">
-          Tarifa Aeropuerto: 10% (10%)
-          <span class="font-semibold">(Incluído)</span>
+          Precio Total
+          <span class="font-semibold">
+            {{ reservationPreview.totalPrice }} <br>
+            USD {{ reservationPreview.totalPriceUsd }}
+          </span>
         </div>
       </div>
     </div>

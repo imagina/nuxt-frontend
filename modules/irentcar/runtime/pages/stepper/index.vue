@@ -14,6 +14,7 @@ const settingStore = useIsettingStore()
 
 const step = ref(0)
 const loading = ref(false)
+const completed = ref(false)
 const gammaOffices = ref<GammaOffice[]>([])
 const reservationData = ref<ReservationData>(INITIAL_RESERVATION_DATA)
 
@@ -39,11 +40,16 @@ const stepperRef = ref<any>(null)
 const next = () => stepperRef.value?.next()
 const prev = () => stepperRef.value?.prev()
 
+function completeReservation ()
+{
+  completed.value = true
+}
+
 const ctx: RentCtx = {
   step,
   gammaOffices,
   reservationData,
-  next, prev
+  next, prev, completeReservation
 }
 provide(RENT_CTX, ctx)
 
@@ -57,34 +63,44 @@ useSeoMeta({
 
 <template>
   <section id="irentStepperPage" class="container mx-auto py-10 px-4 sm:px-6 lg:px-10">
-    <!-- Form -->
-    <irent-car-form class="mb-10" @submit="getGammaOffices"/>
-    <!-- Stepper -->
-    <div v-if="!gammaOffices.length">No Available gammas...</div>
-    <UStepper
-      v-else
-      v-model="step"
-      disabled
-      color="secondary"
-      :items="STEPS"
-      ref="stepperRef"
-      class="w-full">
-      <template #rates>
-        <RatesStep/>
-      </template>
+    <div v-if="completed" class="flex flex-col items-center justify-center h-screen">
+      <UAlert
+        title="Reserva Creada"
+        description="Tu reserva a sido creada, te enviaremos por correo los detalles de tu reserva."
+        color="success"
+        :actions="[{ label: 'Volver al inicio', variant: 'soft', color: 'success', to: '/' }]"
+      />
+    </div>
+    <div v-else>
+      <!-- Form -->
+      <irent-car-form class="mb-10" @submit="getGammaOffices"/>
+      <!-- Stepper -->
+      <div v-if="!gammaOffices.length">No Available gammas...</div>
+      <UStepper
+        v-else
+        v-model="step"
+        disabled
+        color="secondary"
+        :items="STEPS"
+        ref="stepperRef"
+        class="w-full">
+        <template #rates>
+          <RatesStep/>
+        </template>
 
-      <template #extras>
-        <ExtrasStep/>
-      </template>
+        <template #extras>
+          <ExtrasStep/>
+        </template>
 
-      <template #contract>
-        <ContractStep/>
-      </template>
+        <template #contract>
+          <ContractStep/>
+        </template>
 
-      <template #review>
-        <ReviewStep/>
-      </template>
-    </UStepper>
+        <template #review>
+          <ReviewStep/>
+        </template>
+      </UStepper>
+    </div>
   </section>
 </template>
 <style>
