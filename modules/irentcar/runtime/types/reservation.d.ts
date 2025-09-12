@@ -26,3 +26,13 @@ export interface DateValidation
     };
   };
 }
+
+export interface CreateReservationData
+{
+  pickup_office_id: number;
+  pickup_date: string;
+  dropoff_office_id: number;
+  dropoff_date: string;
+  gamma_office_id: number;
+  gamma_office_extra_ids: string;
+}
