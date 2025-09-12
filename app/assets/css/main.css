@@ -47,5 +47,74 @@
   & :is(ol) { @apply list-decimal pl-5 mt-[15px]; }
   & :is(ol li) { @apply list-item mb-2; }
 
+   /* --- Accordion cards --- */
+  & details.collapsible-item {
+    margin: 12px 0;
+    border: 1.5px solid #cdd6e4;
+    border-radius: 12px;
+    background: #fff;
+    overflow: hidden;
+    transition: background .2s, border-color .2s, box-shadow .2s;
+  }
+
+  & details.collapsible-item[open] {
+    background: #ffffff;
+    border-color: var(--color-primary);
+  }
+
+  /* ocultar marcador nativo */
+  & details.collapsible-item > summary::-webkit-details-marker { display: none; }
+  & details.collapsible-item > summary::marker { content: ""; }
+
+  /* cabecera */
+  & details.collapsible-item > summary.collapsible-item-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    font-weight: 600;
+    color: #111827;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  /* icono FA izquierdo */
+  & details.collapsible-item > summary .fa-solid,
+  & details.collapsible-item > summary .fa-regular {
+    font-size: 20px;
+    color: var(--color-primary);
+    margin-right: 6px;
+  }
+
+  /* chevron derecho */
+  & details.collapsible-item > summary.collapsible-item-title::after {
+    content: "";
+    margin-left: auto;
+    width: 8px; height: 8px;
+    border: 2px solid currentColor;
+    border-left: 0; border-top: 0;
+    transform: rotate(45deg);
+    opacity: .7;
+    transition: transform .2s ease, opacity .2s ease;
+  }
+  & details.collapsible-item[open] > summary.collapsible-item-title::after {
+    transform: rotate(-135deg);
+    opacity: 1;
+  }
+
+  /* cuerpo */
+  & details.collapsible-item .collapsible-item-body {
+    padding: 0 20px 16px 48px;
+    color: #374151;
+    line-height: 1.7;
+  }
+  & details.collapsible-item .collapsible-item-body p { margin: 0; }
+
+  /* hover cuando está cerrado */
+  & details.collapsible-item:not([open]):hover{
+    background: #eeeeee;
+    border-color: var(--color-primary);
+  }
+
 }
 
