@@ -44,8 +44,8 @@ const bannerConfig = computed<Partial<AlertProps>>(() =>
     ui: {root: 'items-center', title: 'text-gray-900'},
     actions: [
       {
-        label: status.value == 'success' ? 'Enviar de nuevo' : 'Reintentar',
-        onClick: reset,
+        label: 'Entendido',
+        onClick: () => status.value = 'idle',
         variant: 'soft'
       }
     ]
@@ -56,13 +56,13 @@ function reset ()
 {
   Object.keys(initialValues).forEach(key => model.value[key] = initialValues[key])
   uFormRef.value?.clear()
-  status.value = 'idle'
 }
 
 function success (msg = 'Formulario enviado correctamente.')
 {
   message.value = msg
   status.value = 'success'
+  reset()
 }
 
 function error (msg = 'Ocurrió un error al enviar el formulario.')
@@ -81,14 +81,8 @@ defineExpose({reset, success, error})
       <span v-if="props.description" :class="ui.description" v-html="props.description"></span>
     </div>
 
-    <!-- Message -->
-    <UAlert v-if="status != 'idle'" class="mt-6" v-bind="bannerConfig">
-      <template #leading>
-        <i :class="[bannerConfig.icon, 'text-4xl']"/>
-      </template>
-    </UAlert>
     <!--Form-->
-    <ClientOnly v-else>
+    <ClientOnly>
       <UForm
         ref="uFormRef"
         :state="model"
@@ -115,6 +109,13 @@ defineExpose({reset, success, error})
           </div>
         </div>
       </UForm>
+
+      <!-- Message -->
+      <UAlert v-if="status != 'idle'" class="mt-6" v-bind="bannerConfig">
+        <template #leading>
+          <i :class="[bannerConfig.icon, 'text-4xl']"/>
+        </template>
+      </UAlert>
     </ClientOnly>
   </div>
 </template>

@@ -7,6 +7,12 @@ const pages = [
     meta: {layout},
   },
   {
+    name: 'iuser.auth-logout',
+    path: '/auth/logout',
+    page: 'runtime/pages/auth/auth-logout.vue',
+    meta: {layout},
+  },
+  {
     name: 'iuser.no-access',
     path: '/auth/no-access',
     page: 'runtime/pages/auth/no-access.vue',

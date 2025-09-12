@@ -1,38 +1,13 @@
 <script setup lang="ts">
-import {reactive, ref, computed, onMounted} from 'vue'
-
-defineI18nRoute(false)
-const authStore = useIuserAuthStore()
-
-const {t} = useI18n()
-
-const isPwd = ref(true)
-const loading = ref(false)
 const route = useRoute()
+const settingStore = useIsettingStore()
+const logo = settingStore.get('isite::logo1')
 
-const auth = reactive({
-  email: 'admin@imagina.com',
-  password: '0C68jfLSAJwfWrt0'
-})
-const routeQuery = computed(() => route?.query || null)
-
-onMounted(() =>
+function onLogin ()
 {
-
-})
-
-async function onLogin ()
-{
-  try
-  {
-    await authStore.login(auth.email, auth.password)
-    const redirectTo = route.query.redirectTo as string || '/'
-    if (redirectTo && redirectTo.startsWith('/')) navigateTo(redirectTo)
-    else navigateTo('/')
-  } catch (error)
-  {
-    console.error('[LOGIN ERROR]', error)
-  }
+  const redirectTo = route.query.redirectTo as string || '/'
+  if (redirectTo && redirectTo.startsWith('/')) navigateTo(redirectTo)
+  else navigateTo('/')
 }
 </script>
 
@@ -40,45 +15,16 @@ async function onLogin ()
   <ClientOnly>
     <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 to-white px-4">
       <div class="w-full max-w-md backdrop-blur-sm bg-white/70 shadow-xl rounded-2xl px-8 py-10 animate-fade-in">
-
-        <div class="flex flex-col items-center mb-6">
-          <span class="text-2xl font-semibold text-blue-500 uppercase">
-            {{ t('iuser.login.title') }}
-          </span>
-        </div>
-
-        <form @submit.prevent="onLogin" class="space-y-4">
-          <UFormField :label="t('iuser.login.inputs.email')" name="username">
-            <UInput v-model="auth.email" type="email" required/>
-          </UFormField>
-
-          <UFormField :label="t('iuser.login.inputs.password')" name="password">
-            <UInput v-model="auth.password" :type="isPwd ? 'password' : 'text'" required
-                    :trailing-icon="isPwd ? 'i-heroicons-eye-slash' : 'i-heroicons-eye'"
-                    @click:trailing-icon="isPwd = !isPwd"/>
-          </UFormField>
-
-          <div class="flex justify-between items-center">
-            <NuxtLinkLocale :to="{ name: 'iuser.resetPassword', query: routeQuery }"
-                            class="text-sm text-blue-500 hover:underline">
-              {{ t('iuser.login.forgotPassword') }}
-            </NuxtLinkLocale>
-          </div>
-
-          <div class="flex flex-col sm:flex-row justify-between gap-2">
-            <NuxtLinkLocale :to="{ name: 'iuser.register', query: routeQuery }" class="w-full sm:w-auto">
-              <UButton block color="neutral" variant="soft" :label="t('iuser.login.withoutAccount.link')"/>
-            </NuxtLinkLocale>
-
-            <UButton
-                v-if="authStore.isAuthenticated"
-                block color="neutral" variant="soft" label="logout" @click="authStore.logout"/>
-
-            <UButton
-                block type="submit" color="primary" variant="solid" :loading="loading"
-                :label="t('iuser.login.submitBtn')"/>
-          </div>
-        </form>
+        <IMediaRender
+          @click="$router.push('/')"
+          :media="logo" alt="Logo"
+          aspect-ratio="auto"
+          :ui="{
+                wrapper: 'cursor-pointer',
+                container: 'h-[34px] w-[144px]',
+                media: 'object-contain' }"
+        />
+        <IuserAuth @logged="onLogin"/>
       </div>
     </div>
   </ClientOnly>

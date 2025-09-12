@@ -1,4 +1,4 @@
-import {addImportsDir, createResolver, defineNuxtModule, extendPages, addPlugin} from '@nuxt/kit'
+import {addImportsDir, createResolver, defineNuxtModule, extendPages, addPlugin, addComponentsDir} from '@nuxt/kit'
 
 import pagesConfig from './config/pages'
 
@@ -19,9 +19,9 @@ export default defineNuxtModule({
     addImportsDir(resolve(runtimeDir, 'utils'))
     // Plugins
     addPlugin({src: resolve(runtimeDir, 'plugins/auth-api-fetch'), mode: 'all'})
-    addPlugin({src : resolve(runtimeDir, 'plugins/fetch-user.client'), mode: "client"})
+    //addPlugin({src : resolve(runtimeDir, 'plugins/fetch-user.client'), mode: "client"})
     // Components (optional)
-    // addComponentsDir({path: resolve(runtimeDir, 'components') prefix:'Iuser', pathPrefix: false})
+    addComponentsDir({path: resolve(runtimeDir, 'components')})
     //Extend pages
     extendPages((pages) => pagesConfig.forEach(
       page => pages.push({...page, file: resolve(page.page)})

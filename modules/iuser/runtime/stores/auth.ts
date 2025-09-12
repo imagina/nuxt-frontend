@@ -26,7 +26,6 @@ export const useIuserAuthStore = defineStore(
 
     function clearAuth ()
     {
-      alert('You have been logged out.')
       user.value = null
       token.value = null
     }
@@ -46,9 +45,12 @@ export const useIuserAuthStore = defineStore(
 
     async function logout ()
     {
-      if (isAuthenticated.value) await iuserAuthRepository.logout()
-      clearAuth()
-      navigateTo({name: 'iuser.auth-login'})
+      try {
+        if (isAuthenticated.value) await iuserAuthRepository.logout()
+      } finally {
+        clearAuth()
+        await navigateTo('/')
+      }
     }
 
     function hasPermission (key: string): boolean

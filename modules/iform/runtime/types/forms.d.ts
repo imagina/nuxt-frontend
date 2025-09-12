@@ -67,7 +67,8 @@ export interface FieldType
 
 export interface FieldOptions
 {
-  icon: string | null;
+  icon?: string | null;
+  fieldOptions?: string[];
 }
 
 export interface FieldAffix

@@ -1,4 +1,5 @@
 import type {AuthUser, LoginResponse, AuthToken} from "#iuser/types/auth";
+import type {Role} from "#iuser/types/roles";
 
 const baseUrl = '/iuser/v1'
 
@@ -30,5 +31,27 @@ export const iuserAuthRepository = {
         method: 'POST',
         body: {attributes: {token}}
       })
+  }
+}
+
+export const iuserUserRepository = {
+  async register (params: Record<string, unknown>): Promise<{ data: string }>
+  {
+    const {$apiFetch} = useNuxtApp()
+    return $apiFetch<{ data: string }>(`${baseUrl}/users/register`, {
+      method: 'POST',
+      body: {attributes: params}
+    })
+  }
+}
+
+export const iuserRoleRepository = {
+  async show (criteria: unknown, params: Record<string, unknown>): Promise<{ data: Role }>
+  {
+    const {$apiFetch} = useNuxtApp()
+    return $apiFetch<{ data: Role }>(`${baseUrl}/roles/${criteria}`, {
+      method: 'GET',
+      params
+    })
   }
 }
