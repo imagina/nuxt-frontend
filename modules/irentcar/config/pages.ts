@@ -24,6 +24,12 @@ const pages = [
     path: '/rent-car/gammas',
     page: 'runtime/pages/gammas.vue',
     meta: {layout},
+  },
+  {
+    name: 'irentcar.page.reservations',
+    path: '/rent-car/reservations',
+    page: 'runtime/pages/reservations.vue',
+    meta: {layout},
   }
 ]
 
