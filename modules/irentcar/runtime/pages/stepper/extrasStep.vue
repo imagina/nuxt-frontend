@@ -51,10 +51,12 @@ const extrasGroup = computed<CheckboxGroupItem[]>(() =>
           <IrentCarGammaCard :item="gammaOffice.gamma" orientation="horizontal"/>
         </div>
         <div class="col-span-12 md:col-span-3">
-          <div class="font-semibold text-gray-800">{{ formatCurrency(gammaOffice.price) }}</div>
-          <UButton v-if="nextGammaOffice" color="secondary" size="md"
-                   class="block my-1 text-white hover:bg-primary"
-                   label="Mejorar" @click="upgradeGammaOffice"/>
+          <div class="font-semibold text-gray-800 text-center md:text-right">{{ formatCurrency(gammaOffice.price) }}</div>
+          <div class="flex justify-center md:justify-end">
+            <UButton v-if="nextGammaOffice" color="secondary" size="md"
+                    class="block my-1 text-white hover:bg-primary"
+                    label="Mejorar" @click="upgradeGammaOffice"/>
+          </div>
         </div>
       </div>
 
