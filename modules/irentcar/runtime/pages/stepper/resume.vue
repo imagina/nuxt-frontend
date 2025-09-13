@@ -4,12 +4,19 @@ import type {RentCtx, ReservationData} from './'
 import type {Extra, GammaOffice} from "#irentcar/types/gammaOffice";
 
 const {formatCurrency} = useNumberFormat()
-const rent = inject<RentCtx>(RENT_CTX)
-if (!rent) throw new Error('RENT_CTX no disponible')
-const resume = computed<ReservationData>(() => rent.reservationData.value)
+const props = defineProps<{ reservation?: ReservationData | null }>()
+const rent = props.reservation ? null : inject<RentCtx>(RENT_CTX)
+
+const resume = computed<ReservationData>(() =>
+{
+  if (props.reservation) return props.reservation
+  if (rent) return rent.reservationData.value
+  throw new Error('No hay reservation por prop ni RENT_CTX disponible')
+})
+
 const selectedGammaOffice = computed<GammaOffice | null>(() => resume.value.gammaOffice)
 const selectedExtras = computed<Extra[]>(() => resume.value?.gammaOfficeExtras ?? [])
-const reservationPreview = computed(() => rent.reservationData.value.reservation)
+const reservationPreview = computed(() => resume.value.reservation)
 
 function editStep (step: 'extras' | 'gamma')
 {
@@ -103,7 +110,7 @@ function editStep (step: 'extras' | 'gamma')
             <span class="font-semibold">{{ reservationPreview.gammaOfficeExtraTotalPrice }}</span>
           </div>
           <div>
-            {{ reservationPreview.extrasData.map(i => i.title).join(', ') }}
+            {{ reservationPreview.extrasData.map(i => i.extra.title).join(', ') }}
           </div>
         </div>
         <!-- Taxes -->

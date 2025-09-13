@@ -39,7 +39,7 @@ export const irentcarReservationRepository = {
       body: {attributes: body}
     })
   },
-  async irentcarReservations (params: Record<string, unknown> = {}): Promise<{ data: Reservation[] }>
+  async index (params: Record<string, unknown> = {}): Promise<{ data: Reservation[] }>
   {
     const {$authApiFetch} = useNuxtApp()
     return $authApiFetch<{ data: Reservation[] }>(`${baseUrl}/reservations`, {
@@ -47,11 +47,11 @@ export const irentcarReservationRepository = {
       params
     })
   },
-  async irentcarDeleteReservation (criteria: number): Promise<void>
+  async update (criteria: number, body: Record<string, unknown>, params: Record<string, unknown> = {}): Promise<void>
   {
     const {$authApiFetch} = useNuxtApp()
     return $authApiFetch<void>(`${baseUrl}/reservations/${criteria}`, {
-      method: 'DELETE'
+      method: 'PUT', body, params
     })
   }
 }

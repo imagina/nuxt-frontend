@@ -1,5 +1,6 @@
 import type {Gamma} from "#irentcar/types/gamma";
 import type {Extra} from "#irentcar/types/gammaOffice";
+import type {Office} from "#irentcar/types/office";
 
 export interface Slot
 {
@@ -46,7 +47,9 @@ export interface Reservation {
   gammaId: number
   gammaOfficeId: number
   pickupOfficeId: number
+  pickupOffice: Office
   dropoffOfficeId: number
+  dropoffOffice: Office
   pickupDate: string
   dropoffDate: string
   statusId: number
@@ -62,6 +65,10 @@ export interface Reservation {
   updatedAt: string
   status: Status
   gammaData: Gamma
-  extrasData: Extra[]
+  gamma: Gamma
+  extrasData: {
+    extra: Extra,
+    price: number
+  }[]
   rentalDays: number
 }
