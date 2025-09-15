@@ -1,81 +1,116 @@
 <script lang="ts" setup>
-import NavigationButtons from './navigationButtons.vue'
-import Resume from './resume.vue'
-import {RENT_CTX} from './config'
-import type {RentCtx} from './'
-import type {CheckboxGroupItem} from "#ui/components/CheckboxGroup.vue";
-import type {GammaOffice} from "#irentcar/types/gammaOffice";
+  import NavigationButtons from './navigationButtons.vue'
+  import {RENT_CTX} from './config'
+  import type {RentCtx} from './stepperPage'
+  import type {CheckboxGroupItem} from "#ui/components/CheckboxGroup.vue";
+  import type {GammaOffice} from "#irentcar/types/gammaOffice";
+  import {irentcarGammaOfficeExtraRepository} from "#irentcar/utils/repository";
+  import type {GammaOfficeExtra} from "#irentcar/types/extra";
 
-const rent = inject<RentCtx>(RENT_CTX)
-if (!rent) throw new Error('RENT_CTX no disponible')
-const {formatCurrency} = useNumberFormat()
-const gammaOffice = computed(() => rent.reservationData.value?.gammaOffice)
-const gammaOfficeExtras = computed(() => gammaOffice.value?.extras || [])
-const extrasSelected = computed(() => rent.reservationData.value?.gammaOfficeExtras || [])
-const gammaOfficeExtraIds = computed({
-  get: () => extrasSelected.value.map(i => i.id),
-  set: (ids: Number[]) => {
-    const selected = new Set(ids)
-    rent.reservationData.value.gammaOfficeExtras = gammaOfficeExtras.value.filter(e => selected.has(e.id))
+  const rent = inject<RentCtx>(RENT_CTX)
+  if (!rent) throw new Error('RENT_CTX no disponible')
+
+  const {formatCurrency} = useNumberFormat()
+  const loading = ref<boolean>(false)
+  const gammaOffice = computed<GammaOffice | null>(() => rent.reservationPreview.value?.gammaOffice)
+  const gammaOfficeExtras = ref<GammaOfficeExtra[]>([])
+
+  async function getExtras ()
+  {
+    loading.value = true
+    gammaOfficeExtras.value = []
+    const {data} = await irentcarGammaOfficeExtraRepository.index({
+      filter: {gammaOfficeId: gammaOffice.value?.id ?? 0},
+      include: 'extra',
+    })
+    gammaOfficeExtras.value = data ?? []
+    loading.value = false
   }
-})
 
-const nextGammaOffice = computed(() =>
-{
-  const nextGammaId = gammaOffice.value?.gamma.nextGammaId;
-  if (!nextGammaId) return null;
-  return rent?.gammaOffices.value.find(i => i.gammaId === nextGammaId);
-})
+  const gammaOfficeExtraIds = computed({
+    get: () => rent.reservationPreview.value.extrasData.map(i => i.id),
+    set: (ids: number[]) =>
+    {
+      const selected = new Set(ids)
+      rent.reservationPreview.value.extrasData = gammaOfficeExtras.value.filter(e => selected.has(e.id))
+    }
+  })
+  const nextGammaOffice = computed<GammaOffice | null>(() =>
+  {
+    const nextGammaId = gammaOffice.value?.gamma.nextGammaId;
+    if (!nextGammaId) return null;
+    return rent?.gammaOffices.value.find(i => i.gammaId === nextGammaId) ?? null;
+  })
 
-const upgradeGammaOffice = () =>
-{
-  rent.reservationData.value.gammaOffice = nextGammaOffice.value as GammaOffice
-}
+  const upgradeGammaOffice = () =>
+  {
+    const next = unref(nextGammaOffice)
+    if (!next || !next.gamma) return
+    rent.reservationPreview.value.extrasData = []
+    rent.reservationPreview.value.gammaOffice = next
+    rent.reservationPreview.value.gamma = next.gamma
+    getExtras()
+  }
 
-const extrasGroup = computed<CheckboxGroupItem[]>(() =>
-  gammaOfficeExtras.value.map(extra => ({
-    label: `${extra.title} (${formatCurrency(extra.pivot.price)})`,
-    id: extra.id,
-    description: extra.description,
-    price: extra.pivot.price
-  }))
-)
+  const extrasGroup = computed<CheckboxGroupItem[]>(() =>
+    gammaOfficeExtras.value.map(i => ({
+      label: i.extra.title,
+      id: i.id,
+      description: i.extra.description,
+      price: i.price,
+      priceConversions: Object.entries(i.priceConversions ?? {})
+        .map(([currency, value]) => `${currency} ${value}`)
+        .join(', '),
+    }))
+  )
+
+  onMounted(() => getExtras())
 </script>
 <template>
-  <div class="grid gap-10 grid-cols-1 lg:grid-cols-3 mt-6">
-
-    <!-- Col: 1 Main stepper -->
-    <div v-if="gammaOffice" class="col-span-12 lg:col-span-2 main-stepper stepper_list_container">
-      <div class="stepper_list_item grid grid-cols-12 gap-4 items-center">
-        <div class="col-span-12 md:col-span-9">
-          <IrentCarGammaCard :item="gammaOffice.gamma" orientation="horizontal"/>
-        </div>
-        <div class="col-span-12 md:col-span-3">
-          <div class="font-semibold text-gray-800 text-center md:text-right">{{ formatCurrency(gammaOffice.price) }}</div>
-          <div class="flex justify-center md:justify-end">
-            <UButton v-if="nextGammaOffice" color="secondary" size="md"
-                    class="block my-1 text-white hover:bg-primary"
-                    label="Mejorar" @click="upgradeGammaOffice"/>
-          </div>
-        </div>
+  <div v-if="gammaOffice" class="stepper_list_item grid grid-cols-12 gap-4 items-center">
+    <div class="col-span-12 md:col-span-9">
+      <IrentCarGammaCard :item="gammaOffice.gamma" orientation="horizontal"/>
+    </div>
+    <div class="col-span-12 md:col-span-3">
+      <div class="font-semibold text-gray-800 text-center md:text-right">{{
+          formatCurrency(gammaOffice.price)
+        }}
       </div>
-
-      <!-- Items -->
-      <div v-if="extrasGroup.length" class="main-resume stepper_list_item">
-        <h4 class="stepper-title mb-2">Elegir elementos opcionales</h4>
-        <UCheckboxGroup
-          v-model="gammaOfficeExtraIds"
-          color="info"
-          value-key="id"
-          :items="extrasGroup"
+      <div class="flex justify-center md:justify-end">
+        <UButton
+          v-if="nextGammaOffice"
+          color="secondary"
+          size="md"
+          class="block my-1 text-white hover:bg-primary"
+          label="Mejorar"
+          @click="upgradeGammaOffice"
         />
       </div>
-      <NavigationButtons/>
-    </div>
-
-    <!-- Col: 2 Side stepper -->
-    <div class="col-span-12 lg:col-span-1 side-stepper">
-      <Resume/>
     </div>
   </div>
+
+  <!-- Items -->
+  <div v-if="extrasGroup.length" class="main-resume stepper_list_item">
+    <h4 class="stepper-title mb-2">Elegir elementos opcionales</h4>
+    <UCheckboxGroup
+      v-model="gammaOfficeExtraIds"
+      color="info"
+      value-key="id"
+      :items="extrasGroup"
+    >
+      <template #label="{item}">
+        <div class="flex items-center justify-between">
+          <div class="font-semibold text-gray-800">{{ item.label }}</div>
+          <div class="stepper-description pl-3 pb-3">{{ formatCurrency(item.price) }}</div>
+        </div>
+      </template>
+      <template #description="{item}">
+        <div class="flex items-center justify-between stepper-description">
+          <div>{{ item.description }}</div>
+          <div>{{ item.priceConversions }}</div>
+        </div>
+      </template>
+    </UCheckboxGroup>
+  </div>
+  <NavigationButtons :loading="loading"/>
 </template>
