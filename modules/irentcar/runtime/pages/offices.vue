@@ -15,8 +15,8 @@ const armIframeSrc = (lat?: string, lng?: string) =>
 const items = computed<AccordionItem[]>(() =>
   officesData.map(o => ({
     label: o.title,
-    summary: o.locatable.address,
-    iframe: armIframeSrc(o.locatable.lat,o.locatable.lng),
+    summary: o.locatable?.address,
+    iframe: armIframeSrc(o.locatable?.lat,o.locatable?.lng),
     ...o,
   }))
 )
@@ -94,7 +94,7 @@ useSeoMeta({
               <div class="relative">
                 <iframe
                   :src="iframeSrc"
-                  class="h-[600px] w-full rounded-lg"
+                  class="h-[450px] md:h-[600px] w-full rounded-lg"
                   style="border:0"
                   loading="lazy"
                   allowfullscreen
