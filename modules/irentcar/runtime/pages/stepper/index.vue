@@ -214,5 +214,8 @@ useSeoMeta({
     border-color: #62748E4D;
     margin: 1rem 0;
   }
+  .max-w-stepper {
+    max-width: 150px;
+  }
 }
 </style>

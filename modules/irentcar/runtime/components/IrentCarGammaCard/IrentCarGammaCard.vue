@@ -49,7 +49,7 @@ const gridOrientationUi = computed(() =>
           aspect-ratio="aspect-square"
           :ui="{
             wrapper: '',
-            container: 'max-w-32 rounded-xl px-1 bg-quaternary border-1 border-gray-300',
+            container: 'max-w-stepper rounded-xl px-1 bg-quaternary border-1 border-gray-300',
             media: 'w-full object-contain rounded-xl'}"/>
       </div>
       <!-- Content -->
