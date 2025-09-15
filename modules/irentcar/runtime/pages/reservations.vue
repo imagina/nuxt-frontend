@@ -47,14 +47,21 @@ function cancelReservation(reservationId: number){
 </script>
 
 <template>
+
+  <div class="container mx-auto px-4">
+
   <client-only>
-    Mis Reservaciones
+    <h1 class="text-2xl font-bold mt-4 mb-4 text-center">Mis Reservaciones</h1>
 
     <div v-if="!reservations.length">
       Reservations [{{ reservations.length }}]
     </div>
     <div v-else>
-      <UAccordion :items="items">
+      <UAccordion :items="items" class="mb-3 p-4 " :ui="{
+        item: 'border rounded-lg border-primary px-3 last:pb-3 mb-4 last:border-b-1' ,
+
+        body: 'border rounded-t-lg',
+      }">
         <!--Label-->
         <template #default="{ item }">
           {{ item.gammaOffice?.gamma.summary }} <br>
@@ -62,12 +69,14 @@ function cancelReservation(reservationId: number){
         </template>
         <!-- Content -->
         <template #content="{ item }">
-          <Resumen :reservation="item"/>
-          <div>
-            <UButton label="Cancelar" color="error" size="sm" class="mt-2" @click="cancelReservation(item.id)" />
+          <Resumen :reservation="item" class="mb-9" />
+          <div class="text-center border-t pt-4 mb-4">
+            <UButton label="Cancelar" color="error" size="sm" @click="cancelReservation(item.id)" />
           </div>
         </template>
       </UAccordion>
     </div>
   </client-only>
+
+</div>
 </template>
