@@ -3,10 +3,7 @@ const settingStore = useIsettingStore()
 const logo = settingStore.get('isite::logo1')
 const siteName = settingStore.get('isite::siteName')
 const whatsapp = [ { callingCode: '+57', number: '3118060834', message: ''} ]
-
-
 const authUser  = computed(() => useIuserAuthStore().user)
-
 const isLoggedIn = computed(() => !!authUser.value?.id)
 const items = computed<DropdownItem[]>(() =>
   isLoggedIn.value
@@ -49,7 +46,7 @@ const items = computed<DropdownItem[]>(() =>
               <imenu-menu system-name="main-menu" :title="siteName"/>
             </div>
             <UDropdownMenu :items="items" :popper="{ placement: 'bottom-start', strategy: 'fixed' }">
-              <UButton icon="i-material-symbols:person"  color="neutral"  variant="ghost" />
+              <UButton icon="i-material-symbols:person"  color="neutral" variant="ghost" />
             </UDropdownMenu>
           </div>
         </div>
