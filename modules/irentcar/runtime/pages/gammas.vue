@@ -116,9 +116,9 @@ useSeoMeta({
     </IBreadcrumb>
     <div class="bg-gray-2">
       <section class=" container mx-auto py-10 px-4 sm:px-6 lg:px-10">
-        <div class="grid gap-10 grid-cols-12">
+        <div class="flex flex-col gap-10 lg:flex-row">
           <!-- Columna izquierda: Filtros -->
-          <aside class="col-span-12 md:col-span-4 lg:col-span-3 filters">
+          <aside class="shrink-0 lg:basis-[20%] lg:max-w-[420px] filters">
             <div class="sticky top-0 z-50 bg-white/80 backdrop-blur">
               <div class="relative">
 
@@ -139,11 +139,11 @@ useSeoMeta({
           </aside>
 
           <!-- Columna derecha: Vehículos -->
-          <div class="col-span-12 md:col-span-8 lg:col-span-9 maps">
+          <div class="min-w-0 lg:flex-1 gammas">
               <IList
                   :items="gammasData"
                   :item-component="GammaCard"
-                  grid-cols="grid-cols-2 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+                  grid-cols="grid-cols-1 gap-6 sm:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4"
                 />
           </div>
         </div>

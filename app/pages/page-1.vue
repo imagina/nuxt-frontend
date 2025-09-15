@@ -136,7 +136,7 @@ const uiImage = {
               <div class="space-y-2 text-white lg:text-dark-3 text-[16px] lg:text-[20px] text-justify custom-html" v-html="item.customHtml"></div>
               <div class="text-center lg:text-left">
                 <UButton :label="item.caption" :to="item.uri ?? item.url"
-                        class="bg-white lg:bg-secondary text-secondary lg:text-white hover:bg-primary hover:text-white px-6 py-4 rounded-lg transition text-[18px] font-semibold leading-[20px]">
+                        class="bg-white lg:bg-secondary text-secondary lg:text-white hover:bg-primary hover:text-white px-6 py-4 rounded-lg transition text-[15px] font-semibold leading-[20px]">
                 </UButton>
               </div>
             </div>

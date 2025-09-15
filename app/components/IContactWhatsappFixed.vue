@@ -35,7 +35,7 @@ const items = [
       <div @click="open = true" class="icon" >
         <i class="fa fa-whatsapp"></i>
       </div>
-      <div class="text">¿Hablamos?</div>
+      <div class="text hidden lg:inline-flex">¿Hablamos?</div>
     </div>
 
     <Transition
