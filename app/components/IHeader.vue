@@ -8,6 +8,7 @@ const isLoggedIn = computed(() => !!authUser.value?.id)
 const items = computed<DropdownItem[]>(() =>
   isLoggedIn.value
     ? [
+        { label: 'Mis Reservas', icon: 'i-lucide:calendar-check', to: '/rent-car/reservations' },
         { label: 'Cerrar sesión', icon: 'i-lucide:log-out', to: '/auth/logout' }
       ]
     : [
