@@ -74,13 +74,15 @@ const uiImage = {
         >
           <template #item="{ item, index }">
             <div class="car-card h-full rounded-xl mb-4">
-              <IMediaRender
-                :media="item.files.mainimage" :alt="item.title"
-                aspect-ratio="aspect-4/3"
-                :ui="{
-                  wrapper: '',
-                  container: 'rounded-xl px-1 bg-quaternary border-1 border-gray-300',
-                  media: 'w-full object-contain rounded-xl' }"/>
+              <NuxtLink to="/rent-car/stepper">
+                <IMediaRender
+                  :media="item.files.mainimage" :alt="item.title"
+                  aspect-ratio="aspect-4/3"
+                  :ui="{
+                    wrapper: '',
+                    container: 'rounded-xl px-1 bg-quaternary border-1 border-gray-300',
+                    media: 'w-full object-contain rounded-xl' }"/>
+              </NuxtLink>
               <div class="text-center text-primary leading-[16px] text-[16px] lg:leading-[18px] lg:text-[18px] font-bold mt-4">
                 {{ item.summary }}
               </div>

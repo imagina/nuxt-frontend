@@ -27,14 +27,16 @@ const desktopNavProps = {
   <footer class="bg-dark-1 text-white">
     <div class="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 py-12 px-4 sm:px-6 lg:px-10">
       <div class="flex justify-center md:justify-start self-center">
-        <IMediaRender
-            :media="logoFooter" alt="Logo"
-            aspect-ratio="auto"
-            :ui="{
-              wrapper: 'h-[50px] w-[181px]',
-              container: '',
-              media: 'object-contain' }"
-            />
+        <NuxtLink to="/">
+          <IMediaRender
+              :media="logoFooter" alt="Logo"
+              aspect-ratio="auto"
+              :ui="{
+                wrapper: 'h-[50px] w-[181px]',
+                container: '',
+                media: 'object-contain' }"
+              />
+        </NuxtLink>
       </div>
 
       <div class="flex flex-col space-y-4">

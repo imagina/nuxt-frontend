@@ -2,9 +2,14 @@
 /*@import "tailwindcss" prefix(tw);*/
 @import "tailwindcss";
 @import "@nuxt/ui";
-@source inline("col-span-{1..12} lg:col-span-{1..12} md:col-span-{1..12} sm:col-span-{1..12} capitalize text-primary data-[state=open]:text-secondary md:grid-cols-{1..12}");
-@source inline("md:col-start-{1..12} text-blue-1 aspect-[1/1] leading-[28px] text-[28px] lg:text-[48px] lg:leading-[48px] max-w-3/4 grid-cols-{1..12} lg:grid-cols-{1..12} border-gray-300");
-@source inline("max-w-80 mb-6 text-center md:text-right flex justify-center md:justify-end order-{1..12} md:order-{1..12} flex-{1..12} md:flex-{1..12}");
+
+@source inline('{,sm:,md:,lg:}grid-cols-{1..12}');
+@source inline('{,sm:,md:,lg:}col-start-{1..12}');
+@source inline('{,sm:,md:,lg:}col-span-{1..12}');
+@source inline('{,md:,lg:}order-{1..12} {,md:,lg:}flex-{1..12}');
+@source inline('capitalize text-primary data-[state=open]:text-secondary data-[state=open]:font--bold max-w-80');
+@source inline('aspect-[1/1] leading-[28px] text-[28px] lg:text-[48px] lg:leading-[48px] max-w-[75%] border-gray-300');
+@source inline('h-[450px] md:h-[600px] max-w-[20rem] mb-6 text-center md:text-right flex justify-center md:justify-end');
 @theme {
   --color-primary: #172E3F;
   --color-secondary: #980027;
