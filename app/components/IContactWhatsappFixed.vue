@@ -133,7 +133,6 @@ const items = [
   border-radius: 10px;
   color: var(--color-primary);
   font-weight: 600;
-  display: inline-flex;
   border: 2px solid #e9e9e9;
   position: relative;
 }
