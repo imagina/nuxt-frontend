@@ -23,19 +23,10 @@ const cardUI = {
 
 const items = [
   {
-    label: "Atención 24/7",
-    callingCode: "+58",
-    number: "4121234567",
-    message: "Hola, necesito ayuda",
-    icon: "fa fa-headset",
-  },
-  {
-    label: "Ventas",
-    callingCode: "+34",
-    number: "600112233",
-    message: "Quiero info de precios",
-  },
-
+    label: "",
+    callingCode: "+57",
+    number: "3118060834",
+  }
 ]
 </script>
 <template>

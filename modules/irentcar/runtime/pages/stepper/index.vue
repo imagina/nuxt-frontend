@@ -75,7 +75,9 @@ useSeoMeta({
       <!-- Form -->
       <irent-car-form class="mb-10" @submit="getGammaOffices"/>
       <!-- Stepper -->
-      <div v-if="!gammaOffices.length">No Available gammas...</div>
+      <div v-if="!gammaOffices.length" class="text-md text-center font-semibold text-gray-700 mb-2">
+        Aquí verás los vehículos disponibles según tu búsqueda
+      </div>
       <UStepper
         v-else
         v-model="step"

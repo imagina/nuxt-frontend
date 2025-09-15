@@ -9,7 +9,8 @@ const whatsapp = [ { callingCode: '+57', number: '3118060834', message: ''} ]
     <UContainer>
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center gap-4">
-          <div class="logo ">
+          <div class="logo">
+            <NuxtLink to="/">
             <IMediaRender
               @click="$router.push('/')"
               :media="logo" alt="Logo"
@@ -19,6 +20,7 @@ const whatsapp = [ { callingCode: '+57', number: '3118060834', message: ''} ]
                 container: 'h-[34px] w-[144px]',
                 media: 'object-contain' }"
               />
+            </NuxtLink>
           </div>
           <div class="pl-4 border-l border-gray-300 hidden sm:block">
             <IContactWhatsapp :whatsapp="whatsapp"

@@ -37,7 +37,7 @@ const summary   = computed(() => activeItem.value?.summary ?? '')
 const active = ref("0")
 
 const uiAccordion = {
-  trigger: 'text-primary data-[state=open]:text-secondary capitalize'
+  trigger: 'text-primary data-[state=open]:font-bold data-[state=open]:text-secondary capitalize'
 }
 
 
