@@ -15,7 +15,6 @@ export default defineNuxtPlugin({
         {
           const response = await authStore.refreshAccessTokenIfNeeded()
           if (response) accessToken = response.data.accessToken
-          else throw new Error('AUTH_ABORT: unable to refresh token')
         }
         // Add authorization header if token is available
         if (accessToken) options.headers.set('Authorization', `Bearer ${accessToken}`);
