@@ -3,6 +3,19 @@ const settingStore = useIsettingStore()
 const logo = settingStore.get('isite::logo1')
 const siteName = settingStore.get('isite::siteName')
 const whatsapp = [ { callingCode: '+57', number: '3118060834', message: ''} ]
+const authUser  = computed(() => useIuserAuthStore().user)
+const isLoggedIn = computed(() => !!authUser.value?.id)
+const items = computed<DropdownItem[]>(() =>
+  isLoggedIn.value
+    ? [
+        { label: 'Mis Reservas', icon: 'i-lucide:calendar-check', to: '/rent-car/reservations' },
+        { label: 'Cerrar sesión', icon: 'i-lucide:log-out', to: '/auth/logout' }
+      ]
+    : [
+        { label: 'Ingresar',    icon: 'i-lucide:log-in', to: '/auth/login'},
+      ]
+)
+
 </script>
 <template>
   <header class="bg-white shadow-md">
@@ -28,8 +41,15 @@ const whatsapp = [ { callingCode: '+57', number: '3118060834', message: ''} ]
                               classLinkPhone="inline-block text-[18px] text-w"/>
           </div>
         </div>
-        <div class="menu">
-          <imenu-menu system-name="main-menu" :title="siteName"/>
+        <div class="menus">
+          <div class="flex items-center">
+            <div class="menu">
+              <imenu-menu system-name="main-menu" :title="siteName"/>
+            </div>
+            <UDropdownMenu :items="items" :popper="{ placement: 'bottom-start', strategy: 'fixed' }">
+              <UButton icon="i-material-symbols:person"  color="neutral" variant="ghost" />
+            </UDropdownMenu>
+          </div>
         </div>
       </div>
     </UContainer>

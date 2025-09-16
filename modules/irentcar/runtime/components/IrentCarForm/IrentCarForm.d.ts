@@ -27,5 +27,5 @@ export interface RentAvailability
 
 export interface IrentCarFormProps extends Pick<IFormProps, 'ui'>
 {
-
+  id?: string
 }

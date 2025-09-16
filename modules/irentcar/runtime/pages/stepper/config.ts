@@ -1,5 +1,5 @@
 import type {StepperItem} from "@nuxt/ui";
-import type {ReservationData} from "#irentcar/pages/stepper/index";
+import type {ReservationData} from "#irentcar/pages/stepper/stepperPage";
 
 export const RENT_CTX = Symbol('RENT_CTX')
 export const STEPS: StepperItem[] = [
@@ -11,14 +11,14 @@ export const STEPS: StepperItem[] = [
 
 export const INITIAL_RESERVATION_DATA: ReservationData = {
   pickupOfficeId: null,
-  pickupDate: null,
-  pickupTime: null,
-  dropOfficeId: null,
-  dropDate: null,
-  dropTime: null,
   pickupOffice: null,
+  dropoffOfficeId: null,
   dropoffOffice: null,
+  pickupDate: null,
+  dropoffDate: null,
+
   gammaOffice: null,
-  gammaOfficeExtras: [],
-  flyNumber: ''
+  gamma: null,
+  extrasData: [],
+  options: { flyNumber: '' }
 }

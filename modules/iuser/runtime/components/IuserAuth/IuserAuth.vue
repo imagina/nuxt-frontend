@@ -85,8 +85,8 @@ function onRegister ()
 <template>
   <IForm
     v-if="authType === 'login'"
-    v-model="loginForm"
     ref="loginFormRef"
+    v-model="loginForm"
     title="Iniciar Sesión"
     description=""
     :fields="LOGIN_FORM_FIELDS"
@@ -97,8 +97,8 @@ function onRegister ()
   />
   <IForm
     v-if="authType === 'register'"
-    v-model="registerForm"
     ref="registerFormRef"
+    v-model="registerForm"
     :fields="registerFormFields"
     :actions="formActions"
     :ui="{actions: 'flex justify-between',title: 'auth-title text-primary text-center font-bold mb-2 text-lg uppercase my-2'}"
