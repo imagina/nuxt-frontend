@@ -1,7 +1,7 @@
 <script lang="ts" setup>
   import NavigationButtons from './navigationButtons.vue'
   import {RENT_CTX} from './config'
-  import type {RentCtx} from './stepperPage'
+  import type {ExtrasCheckBoxItem, RentCtx} from './stepperPage'
   import type {CheckboxGroupItem} from "#ui/components/CheckboxGroup.vue";
   import type {GammaOffice} from "#irentcar/types/gammaOffice";
   import {irentcarGammaOfficeExtraRepository} from "#irentcar/utils/repository";
@@ -52,16 +52,19 @@
     getExtras()
   }
 
-  const extrasGroup = computed<CheckboxGroupItem[]>(() =>
-    gammaOfficeExtras.value.map(i => ({
-      label: i.extra.title,
-      id: i.id,
-      description: i.extra.description,
-      price: i.price,
-      priceConversions: Object.entries(i.priceConversions ?? {})
-        .map(([currency, value]) => `${currency} ${value}`)
-        .join(', '),
-    }))
+
+  const extrasGroup = computed<ExtrasCheckBoxItem[]>(() =>
+    gammaOfficeExtras.value.map(i => {
+      return {
+        label: i.extra.title,
+        id: i.id,
+        description: i.extra.description,
+        price: i.price,
+        priceConversions: Object.entries(i.priceConversions ?? {})
+          .map(([currency, value]) => `${currency} ${value}`)
+          .join(', '),
+      }
+    })
   )
 
   onMounted(() => getExtras())

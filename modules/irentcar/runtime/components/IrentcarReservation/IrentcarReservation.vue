@@ -3,19 +3,18 @@ import type {Reservation} from "#irentcar/types/reservation";
 import type {Gamma} from "#irentcar/types/gamma";
 import type {GammaOfficeExtra} from "#irentcar/types/extra";
 import {useIPriceConversion} from "#imports";
-import type {StepKey} from "#irentcar/pages/stepper/stepperPage";
+import type {ReservationData, StepKey} from "#irentcar/pages/stepper/stepperPage";
 
-const props = defineProps<{ reservation: Reservation | null, canEdit?: boolean }>()
+const props = defineProps<{ reservation: Reservation | ReservationData | null, canEdit?: boolean }>()
 const {formatCurrency} = useNumberFormat()
 const {getAsLabel} = useIPriceConversion()
 const emit = defineEmits<{ (e: 'edit', val: StepKey): void }>()
 
 const reservation = computed<Reservation>(() => props.reservation as Reservation)
 const selectedGamma = computed<Gamma | null>(() => reservation.value.gamma)
-const selectedExtras = computed<GammaOfficeExtra[]>(() => reservation.value?.extrasData ?? [])
+const selectedExtras = computed<GammaOfficeExtra[]>(() => reservation.value.extrasData)
 const prices = computed(() =>
 {
-
   const gammaConversions = Object.fromEntries(Object.entries(reservation.value.gammaOfficePriceConversions ?? {})
     .map(([key, value]) => [key, (value * (reservation.value.rentalDays ?? 1)).toFixed(2)])
   )
@@ -141,7 +140,7 @@ const prices = computed(() =>
       <div class="flex justify-between items-center">
         <h3 class="stepper-title">A pagar a la llegada</h3>
       </div>
-      <template v-for="(p, indexP) in prices" :key="indexP">
+      <template v-for="p in prices" :key="p.label">
         <div class="item mb-3">
           <div class="flex justify-between">
             <span class="font-semibold text-gray-800">{{ p.label }}</span>

@@ -2,6 +2,7 @@ import type {Gamma} from "#irentcar/types/gamma";
 import type {Extra} from "#irentcar/types/gammaOffice";
 import type {Office} from "#irentcar/types/office";
 import type {PriceConversion} from "#irentcar/types/priceConversion";
+import type {GammaOfficeExtra} from "#irentcar/types/extra";
 
 export interface Slot
 {
@@ -39,7 +40,7 @@ export interface CreateReservationData
   dropoff_office_id: number;
   dropoff_date: string;
   gamma_office_id: number;
-  gamma_office_extra_ids: string;
+  gamma_office_extra_ids: number[];
 }
 
 export interface Reservation {
@@ -63,10 +64,7 @@ export interface Reservation {
   status: Status
   gammaData: Gamma
   gamma: Gamma
-  extrasData: {
-    extra: Extra,
-    price: number
-  }[]
+  extrasData: GammaOfficeExtra[] | []
   rentalDays: number,
 
   gammaOfficePrice: number | null

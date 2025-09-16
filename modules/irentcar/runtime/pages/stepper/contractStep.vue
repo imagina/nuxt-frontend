@@ -8,7 +8,7 @@
 
   const authUser = computed(() => useIuserAuthStore().user)
   const flyNumberModel = computed({
-    get: () => rent.reservationPreview.value.options?.flyNumber ?? '',
+    get: () => rent.reservationPreview.value.options.flyNumber as string,
     set: (val: string) => {
       rent.reservationPreview.value.options.flyNumber = val.trim().toUpperCase()
     }

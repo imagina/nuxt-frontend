@@ -43,3 +43,12 @@ export interface RentCtx
   editStep: (stepName: StepKey) => void
   completeReservation: () => void
 }
+
+export interface ExtrasCheckBoxItem
+{
+  label: string,
+  id: number,
+  description: string,
+  price: string,
+  priceConversions: string
+}

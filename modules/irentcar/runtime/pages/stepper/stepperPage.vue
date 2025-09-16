@@ -108,8 +108,8 @@ provide(RENT_CTX, ctx)
 
       <div v-if="!gammaOffices.length">
         <div class="text-center mb-6 text-gray-700">
-          En esta seccion podras realizar la reserva de tu vehiculo de manera facil y rapida.
-          Escoge en este momento la oficina de recogida y devolucion, las fechas y horas, y el vehiculo que mas se
+          En esta sección podrás realizar la reserva de tu vehiculo de manera fácil y rápida.
+          Escoge en este momento la oficina de recogida y devolución, las fechas y horas, y el vehiculo que mas se
           adapte a tus necesidades. <br>
           Te guiaremos paso a paso para completar tu reserva.
         </div>
