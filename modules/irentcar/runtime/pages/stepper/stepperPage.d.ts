@@ -2,6 +2,7 @@ import type {GammaOffice} from "#irentcar/types/gammaOffice";
 import type {Office} from "#irentcar/types/office";
 import type {Gamma} from "#irentcar/types/gamma";
 import type {GammaOfficeExtra} from "#irentcar/types/extra";
+import type {PriceConversion} from "#irentcar/types/priceConversion";
 
 export interface ReservationData
 {
@@ -18,14 +19,19 @@ export interface ReservationData
   options: { flyNumber: string } | Record<string, unknown>
 
   gammaOfficePrice: number | null
-  gammaOfficeTax: number | null
-  gammaOfficeTaxAmount: number | null
-  totalPrice: number | null
-  gammaOfficeExtraTotalPrice: number | null
-  rentalDays: number | null
+  gammaOfficePriceConversions: PriceConversion | null
 
-  //totalPriceUsd: number | null
+  gammaOfficeExtraTotalPrice: number | null
+  gammaOfficeExtraTotalPriceConversions: PriceConversion | null
+
+  totalPrice: number | null
+  totalPriceConversions: PriceConversion | null
+
+  gammaOfficeTax: number | null
+  rentalDays: number | null
 }
+
+export type StepKey = 'gamma' | 'extras' | 'contract' | 'review'
 
 export interface RentCtx
 {
@@ -34,5 +40,6 @@ export interface RentCtx
   reservationPreview: Ref<ReservationData>
   next: () => void
   prev: () => void
+  editStep: (stepName: StepKey) => void
   completeReservation: () => void
 }

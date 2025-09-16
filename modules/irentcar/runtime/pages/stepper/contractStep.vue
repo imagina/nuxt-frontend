@@ -21,7 +21,7 @@
     return [
       {label: 'Nombre', value: authUser.value?.fullName},
       {label: 'Email', value: authUser.value?.email},
-      {label: 'Teléfono', value: authUser.value?.fields.phone ?? '-'},
+      {label: 'Teléfono', value: authUser.value?.fields.telephone ?? '-'},
     ]
   })
 </script>

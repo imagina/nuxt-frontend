@@ -31,6 +31,7 @@
       rent.reservationPreview.value.gammaOfficeTax = res.data.gammaOfficeTax
       rent.reservationPreview.value.gammaOfficeTaxAmount = res.data.gammaOfficeTaxAmount
       rent.reservationPreview.value.totalPrice = res.data.totalPrice
+      rent.reservationPreview.value.totalPriceUsd = res.data.totalPriceUsd
       rent.reservationPreview.value.gammaOfficeExtraTotalPrice = res.data.gammaOfficeExtraTotalPrice
       rent.reservationPreview.value.rentalDays = res.data.rentalDays
 
@@ -63,12 +64,11 @@
 <template>
   <div>
     <div class="sticky top-4">
-      <Resume :reservation="reservation"/>
+      <Resume :reservation="reservation" can-edit @edit="rent.editStep"/>
     </div>
   </div>
-  <div class="mt-4">
+  <div v-if="errorMessages" class="mt-4" >
     <UAlert
-      v-if="errorMessages"
       :title="errorMessages"
       color="error"
       :actions="[{label: 'Cerrar', color: 'error', onClick: closeError}]"

@@ -52,7 +52,7 @@ export const irentcarReservationRepository = {
   {
     const {$authApiFetch} = useNuxtApp()
     return $authApiFetch(`${baseUrl}/reservations/${criteria}`, {
-      method: 'PUT', body, params
+      method: 'PUT', body: {attributes: body}, params
     })
   }
 }
