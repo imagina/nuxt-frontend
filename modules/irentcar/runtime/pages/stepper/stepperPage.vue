@@ -99,6 +99,8 @@ provide(RENT_CTX, ctx)
         title="Reserva Creada"
         description="Tu reserva a sido creada, te enviaremos por correo los detalles de tu reserva."
         color="success"
+        :ui="{ title: 'text-xl font-bold ',
+               description: 'text-md  ' }"
         :actions="[{ label: 'Volver al inicio', variant: 'soft', color: 'success', to: '/' }]"
       />
     </div>

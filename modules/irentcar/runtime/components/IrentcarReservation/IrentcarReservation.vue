@@ -51,7 +51,7 @@ const prices = computed(() =>
 })
 </script>
 <template>
-  <div class="sticky top-4 stepper_list_container">
+  <div class="stepper_list_container">
     <!-- Detalles -->
     <div class="side-reservation relative stepper_list_item">
       <h3 class="stepper-title mb-3 pr-12">Detalles del viaje</h3>
@@ -78,7 +78,7 @@ const prices = computed(() =>
     <!-- Fly number -->
     <div v-if="reservation.options.flyNumber" class="side-reservation stepper_list_item">
       <div class="flex justify-between items-center">
-        <h3 class="stepper-title"> Numero de vuelo </h3>
+        <h3 class="stepper-title"> Número de vuelo </h3>
         <UButton
           v-if="canEdit"
           size="xs"
@@ -138,7 +138,7 @@ const prices = computed(() =>
     <!-- Total -->
     <div v-if="reservation.totalPrice" class="main-resume stepper_list_item">
       <div class="flex justify-between items-center">
-        <h3 class="stepper-title">A pagar a la llegada</h3>
+        <h3 class="stepper-title font-bold text-[20px] text-primary mb-3">A pagar a la llegada</h3>
       </div>
       <template v-for="p in prices" :key="p.label">
         <div class="item mb-3">
