@@ -1,18 +1,36 @@
 // Auxiliares
-interface LocalizedInfo {
+export interface LocalizedInfo
+{
   title: string
   value: string
   message: string
 }
 
-interface Type {
+export type ItemTypes =
+  'PHONE'
+  | 'WHATSAPP'
+  | 'EMAIL'
+  | 'FACEBOOK'
+  | 'TWITTER'
+  | 'INSTAGRAM'
+  | 'TIKTOK'
+  | 'YOUTUBE'
+  | 'LINKEDIN'
+  | 'GOOGLE'
+  | 'PINTEREST'
+  | 'FLICKR'
+
+
+export interface Type
+{
   id: number
   title: string
   icon: string
 }
 
 // Principal
-export interface Item {
+export interface Item
+{
   countryCode: string
   createdAt: string
   createdBy: number | null
