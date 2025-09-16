@@ -101,7 +101,7 @@ provide(RENT_CTX, ctx)
         color="success"
         :ui="{ title: 'text-xl font-bold ',
                description: 'text-md  ' }"
-        :actions="[{ label: 'Volver al inicio', variant: 'soft', color: 'success', to: '/' }]"
+        :actions="[{ label: 'Ver mis reservas', variant: 'soft', color: 'success', to: '/rent-car/reservations' }]"
       />
     </div>
     <div v-else>

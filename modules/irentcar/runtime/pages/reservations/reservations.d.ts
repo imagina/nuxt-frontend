@@ -1,7 +1,6 @@
 import type {Reservation} from "#irentcar/types/reservation";
 
-export interface ItemsCollapsible {
+export interface ItemCollapsible {
   label: string;
-  icon: string;
   reservation: Reservation;
 }

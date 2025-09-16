@@ -41,7 +41,6 @@ export const useIcontactStore = defineStore(
         const {data} = await icontactItemsRepository.index({
           include: 'translations',
         });
-        console.log(data)
         this.items = data;
         this.loaded = true;
       },

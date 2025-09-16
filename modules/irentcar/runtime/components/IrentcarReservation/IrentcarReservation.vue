@@ -6,13 +6,19 @@ import {useIPriceConversion} from "#imports";
 import type {ReservationData, StepKey} from "#irentcar/pages/stepper/stepperPage";
 
 const props = defineProps<{ reservation: Reservation | ReservationData | null, canEdit?: boolean }>()
-const {formatCurrency} = useNumberFormat()
+const {formatDate, formatCurrency} = useHelpers()
 const {getAsLabel} = useIPriceConversion()
 const emit = defineEmits<{ (e: 'edit', val: StepKey): void }>()
 
 const reservation = computed<Reservation>(() => props.reservation as Reservation)
 const selectedGamma = computed<Gamma | null>(() => reservation.value.gamma)
 const selectedExtras = computed<GammaOfficeExtra[]>(() => reservation.value.extrasData)
+const details = computed(() =>([
+  {label: 'Oficina de Recogida', value: reservation.value.pickupOffice.title},
+  {label: 'Fecha de recogida', value: formatDate(reservation.value.pickupDate)},
+  {label: 'Oficina de Devolución', value: reservation.value.dropoffOffice.title},
+  {label: 'Fecha de Devolución', value: formatDate(reservation.value.dropoffDate)},
+]))
 const prices = computed(() =>
 {
   const gammaConversions = Object.fromEntries(Object.entries(reservation.value.gammaOfficePriceConversions ?? {})
@@ -56,21 +62,9 @@ const prices = computed(() =>
     <div class="side-reservation relative stepper_list_item">
       <h3 class="stepper-title mb-3 pr-12">Detalles del viaje</h3>
       <div class="space-y-3 text-sm">
-        <div>
-          <div class="stepper-subtitle">Oficina de Recogida</div>
-          <div class="text-gray-600">{{ reservation.pickupOffice?.title }}</div>
-        </div>
-        <div>
-          <div class="stepper-subtitle">Fecha Recogida</div>
-          <div class="text-gray-600">{{ reservation.pickupDate }}</div>
-        </div>
-        <div>
-          <div class="stepper-subtitle">Oficina de Devolución</div>
-          <div class="text-gray-600">{{ reservation.dropoffOffice?.title }}</div>
-        </div>
-        <div>
-          <div class="stepper-subtitle">Fecha Recogida</div>
-          <div class="text-gray-600">{{ reservation.dropoffDate }}</div>
+        <div v-for="detail in details" :key="detail.label">
+          <div class="stepper-subtitle">{{ detail.label}}</div>
+          <div class="text-gray-600">{{ detail.value }}</div>
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@
   const rent = inject<RentCtx>(RENT_CTX)
   if (!rent) throw new Error('RENT_CTX no disponible')
 
-  const {formatCurrency} = useNumberFormat()
+  const {formatCurrency} = useHelpers()
   const {getAsLabel} = useIPriceConversion()
   const availableGammas = computed(() => rent.gammaOffices.value ?? [])
 

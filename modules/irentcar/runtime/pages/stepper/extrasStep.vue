@@ -10,7 +10,7 @@
   const rent = inject<RentCtx>(RENT_CTX)
   if (!rent) throw new Error('RENT_CTX no disponible')
 
-  const {formatCurrency} = useNumberFormat()
+  const {formatCurrency} = useHelpers()
   const loading = ref<boolean>(false)
   const gammaOffice = computed<GammaOffice | null>(() => rent.reservationPreview.value?.gammaOffice)
   const gammaOfficeExtras = ref<GammaOfficeExtra[]>([])
