@@ -1,11 +1,14 @@
 <script setup lang="ts">
+import IContactWhatsapp from "#icontact/components/IcontactWhatsapp/IContactWhatsapp.vue";
+import type {DropdownMenuItem} from "#ui/components/DropdownMenu.vue";
+
 const settingStore = useIsettingStore()
 const logo = settingStore.get('isite::logo1')
 const siteName = settingStore.get('isite::siteName')
 const whatsapp = [ { callingCode: '+57', number: '3118060834', message: ''} ]
 const authUser  = computed(() => useIuserAuthStore().user)
 const isLoggedIn = computed(() => !!authUser.value?.id)
-const items = computed<DropdownItem[]>(() =>
+const items = computed<DropdownMenuItem[]>(() =>
   isLoggedIn.value
     ? [
         { label: 'Mis Reservas', icon: 'i-lucide:calendar-check', to: '/rent-car/reservations' },
@@ -62,9 +65,7 @@ const items = computed<DropdownItem[]>(() =>
   color: var(--color-primary);
   text-transform: uppercase;
   font-weight: 600;
-  font-style: SemiBold;
   font-size: 14px;
-  letter-spacing: .2;
 }
 .menu > :deep(nav) a:hover {
   color: var(--color-secondary);

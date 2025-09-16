@@ -1,7 +1,6 @@
 <script setup>
 
 const props = defineProps({
-  whatsapp: { type: Array, required: true },
   showPhone: { type: Boolean, default: true },
   phoneWithIcon: { type: Boolean, default: true },
   showIcons: { type: Boolean, default: true },
@@ -12,20 +11,22 @@ const props = defineProps({
   classComponent: { type: String, default: '' },
   withHyphenPhone: { type: Boolean, default: true },
 })
+const icontactStore = useIcontactStore()
+const items = computed(() => icontactStore.getItems('WHATSAPP'))
 </script>
 
 <template>
   <!-- Whatsapp -->
-  <div v-if="showPhone && whatsapp" class="component-whatsapp">
+  <div v-if="items.length" class="component-whatsapp">
     <div class="flex">
       <div class="icon-whatsapp">
         <Icon v-if="showIcons" :name="phoneIcon" :class="classIcons" />
       </div>
       <div class="content-whatsapp">
-        <template v-for="(phone, index) in whatsapp" :key="index">
+        <template v-for="(item, index) in items" :key="index">
           <span v-if="withHyphenPhone && index>0">&nbsp;-&nbsp;</span>
-          <a aria-label="whatsapp" :href="`https://wa.me/${phone.callingCode}${phone.number}?text=${phone.message}`" target="_blank" :class="classLinkPhone">
-            <span>{{ phone.callingCode }}</span> {{phone.number }}
+          <a aria-label="whatsapp" :href="`https://wa.me/+${item.countryCode}${item.value}?text=${item.message}`" target="_blank" :class="classLinkPhone">
+            <span>+{{ item.countryCode }}</span> {{ item.value }}
           </a>
         </template>
       </div>

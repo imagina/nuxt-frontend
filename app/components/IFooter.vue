@@ -1,12 +1,12 @@
 <script setup lang="ts">
+import IContactEmail from "#icontact/components/IcontactEmail/IContactEmail.vue";
+import IContactWhatsapp from "#icontact/components/IcontactWhatsapp/IContactWhatsapp.vue";
+
 const settingStore = useIsettingStore()
 // const
 const logoFooter =  settingStore.get('isite::logo2')
 const address = [{title: 'Oficina Principal:', value:'Calle 74 bis 83-45'}]
 const address_extra = [{title: '', value:'Aeropuerto El Dorado de Bogotá · servicio Meet & Greet'}]
-const email = [{title: '', value:'reservas@readyrentacars.com'}]
-const email_extra = [{title: 'PQRS:', value:'servicioalcliente@readyrentacars.com'}]
-const whatsapp = [ { callingCode: '+57', number: '3118060834', message: ''} ]
 
 const desktopNavProps = {
   orientation: 'vertical',
@@ -19,7 +19,7 @@ const desktopNavProps = {
 }
 </script>
 <template>
-  <IcontactFloatWhatsapp />
+  <IcontactWhatsappFixed />
   <footer class="bg-dark-1 text-white">
     <div class="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 py-12 px-4 sm:px-6 lg:px-10">
       <div class="flex justify-center md:justify-start self-center mx-auto lg:mx-0">
@@ -38,9 +38,8 @@ const desktopNavProps = {
       <div class="flex flex-col border-footer relative">
         <h3 class="text-lg font-semibold mb-4">Info de Contacto</h3>
           <div class="space-y-1">
-            <IContactWhatsapp :whatsapp="whatsapp"/>
-            <IContactEmail :email="email" />
-            <IContactEmail :email="email_extra" />
+            <IContactWhatsapp />
+            <IContactEmail />
             <IContactAddress :address="address" />
             <IContactAddress :address="address_extra" />
           </div>
