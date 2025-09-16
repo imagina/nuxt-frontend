@@ -89,6 +89,7 @@
 
 <template>
   <section id="irentStepperPage" class="container mx-auto py-10 px-4 sm:px-6 lg:px-10">
+
     <div v-if="completed" class="flex flex-col items-center justify-center h-screen">
       <UAlert
         title="Reserva Creada"
@@ -100,6 +101,12 @@
     <div v-else>
       <!-- Form -->
       <irent-car-form class="mb-10" @submit="getGammaOffices"/>
+
+      <div class="text-center mb-6 text-gray-700">
+        En esta seccion podras realizar la reserva de tu vehiculo de manera facil y rapida.
+        Escoge en este momento la oficina de recogida y devolucion, las fechas y horas, y el vehiculo que mas se adapte a tus necesidades. <br>
+        Te guiaremos paso a paso para completar tu reserva.
+      </div>
       <!-- Stepper -->
       <div v-if="!gammaOffices.length" class="text-md text-center font-semibold text-gray-700 mb-2">
         Aquí verás los vehículos disponibles según tu búsqueda
