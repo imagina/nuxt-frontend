@@ -23,7 +23,7 @@ const props = defineProps({
             <template v-for="(email, index) in email" :key="index">
             <span v-if="withHyphenEmail && index>0">&nbsp;-&nbsp;</span>
             <a :href="`mailto:${email}`" target="_blank" class="wrap-anywhere" :class="classLinkEmail">
-                {{ email }}
+                <span :class="classTitle">{{email.title}}</span> {{ email.value }}
             </a>
             </template>
         </div>
