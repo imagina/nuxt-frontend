@@ -2,10 +2,11 @@
 const settingStore = useIsettingStore()
 // const
 const logoFooter =  settingStore.get('isite::logo2')
-const phone = ['+57 311 8060834','+57 311 8060834']
-const address = ['Calle 74 bis 83-45 · Aeropuerto El Dorado de Bogotá · servicio Meet & Greet']
-const email = ['serviciocliente@readyrentacars.com']
-
+const address = [{title: 'Oficina Principal:', value:'Calle 74 bis 83-45'}]
+const address_extra = [{title: '', value:'Aeropuerto El Dorado de Bogotá · servicio Meet & Greet'}]
+const email = [{title: '', value:'reservas@readyrentacars.com'}]
+const email_extra = [{title: 'PQRS:', value:'servicioalcliente@readyrentacars.com'}]
+const whatsapp = [ { callingCode: '+57', number: '3118060834', message: ''} ]
 
 const desktopNavProps = {
   orientation: 'vertical',
@@ -16,36 +17,33 @@ const desktopNavProps = {
     link: 'text-sm lg:text-base text-white font-normal hover:text-white hover:underline'
   }
 }
-
-
 </script>
-
-<style scoped>
-</style>
 <template>
   <IContactWhatsappFixed />
   <footer class="bg-dark-1 text-white">
     <div class="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 py-12 px-4 sm:px-6 lg:px-10">
-      <div class="flex justify-center md:justify-start self-center">
+      <div class="flex justify-center md:justify-start self-center mx-auto lg:mx-0">
         <NuxtLink to="/">
           <IMediaRender
               :media="logoFooter" alt="Logo"
               aspect-ratio="auto"
               :ui="{
-                wrapper: 'h-[50px] w-[181px]',
+                wrapper: 'h-[50px] w-full md:w-[181px]',
                 container: '',
                 media: 'object-contain' }"
               />
         </NuxtLink>
       </div>
 
-      <div class="flex flex-col space-y-4">
-        <h3 class="text-lg font-semibold">Info de Contacto</h3>
-
-         <IContactPhone :phone="phone"/>
-         <IContactEmail :email="email" />
-         <IContactAddress :address="address" />
-
+      <div class="flex flex-col border-footer relative">
+        <h3 class="text-lg font-semibold mb-4">Info de Contacto</h3>
+          <div class="space-y-1">
+            <IContactWhatsapp :whatsapp="whatsapp"/>
+            <IContactEmail :email="email" />
+            <IContactEmail :email="email_extra" />
+            <IContactAddress :address="address" />
+            <IContactAddress :address="address_extra" />
+          </div>
       </div>
 
       <div class="flex flex-col space-y-4">
@@ -67,3 +65,17 @@ const desktopNavProps = {
 </div>
   </footer>
 </template>
+<style scoped>
+.border-footer::before {
+  content: '';
+  background: #FFFFFF66;
+  width: 1px;
+  height:calc(100% - 6px);
+  position: absolute;
+  left: -100px;
+  top: 6px;
+}
+@media (max-width: 1199.98px) {
+  .border-footer::before { content: none; }
+}
+</style>

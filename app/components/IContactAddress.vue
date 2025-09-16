@@ -23,7 +23,7 @@ const props = defineProps({
         <template v-for="(address, index) in address" :key="index">
           <span v-if="withHyphenAddress && index>0">&nbsp;-&nbsp;</span>
           <a :href="`https://google.com.co/maps/search/${address}`" target="_blank" :class="classLinkAddress">
-            {{ address }}
+            <span :class="classTitle">{{address.title}}</span> {{ address.value }}
           </a>
         </template>
       </div>

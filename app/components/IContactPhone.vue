@@ -2,6 +2,7 @@
 
 const props = defineProps({
   phone: { type: Array, required: true },
+
   showPhone: { type: Boolean, default: true },
   phoneWithIcon: { type: Boolean, default: true },
   showIcons: { type: Boolean, default: true },
@@ -20,10 +21,11 @@ const props = defineProps({
     <div class="flex">
       <i v-if="showIcons"  :class="[phoneIcon,classIcons]" />
       <div class="content-phone">
+        <span></span>
         <template v-for="(phone, index) in phone" :key="index">
           <span v-if="withHyphenPhone && index>0">&nbsp;-&nbsp;</span>
           <a :href="`tel:${phone}`" target="_blank" :class="classLinkPhone">
-            {{ phone }}
+            <span :class="classTitle">{{phone.title}}</span> {{ phone.value }}
           </a>
         </template>
       </div>
