@@ -10,7 +10,7 @@ export async function usePageLoader (slug: string)
   const {data, error} = await useAsyncData(`page-${slug}`, () =>
     ipagePagesRepository.show(slug, {
         filter: { field: 'slug' },
-        include: 'translations'
+        include: 'translations,files'
       })
   )
 
