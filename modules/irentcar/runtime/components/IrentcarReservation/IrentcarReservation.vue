@@ -112,7 +112,7 @@ const prices = computed(() =>
     <!-- Extras -->
     <div v-if="selectedExtras.length" class="side-resume stepper_list_item">
       <div class="flex justify-between items-center">
-        <h3 class="stepper-title">Elementos opcionales</h3>
+        <h3 class="stepper-title font-bold text-[20px] text-primary mb-3">Elementos opcionales</h3>
         <UButton
           v-if="canEdit"
           size="xs"
@@ -125,7 +125,7 @@ const prices = computed(() =>
       <template v-for="item in selectedExtras" :key="item.id">
         <div class="item">
           <div class="flex justify-between mt-3">
-            <div class="font-semibold text-gray-800">{{ item.extra.title }}</div>
+            <div class=" text-gray-800">{{ item.extra.title }}</div>
             <div class="font-semibold text-gray-800">{{ formatCurrency(item.price) }}</div>
           </div>
           <div class="flex justify-end stepper-description">
