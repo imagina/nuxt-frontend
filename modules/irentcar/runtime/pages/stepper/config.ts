@@ -1,9 +1,5 @@
 import type {StepperItem} from "@nuxt/ui";
 import type {ReservationData} from "#irentcar/pages/stepper/stepperPage";
-import type {Office} from "#irentcar/types/office";
-import type {GammaOffice} from "#irentcar/types/gammaOffice";
-import type {Gamma} from "#irentcar/types/gamma";
-import type {GammaOfficeExtra} from "#irentcar/types/extra";
 
 export const RENT_CTX = Symbol('RENT_CTX')
 export const STEPS_POSITIONS = {gamma: 0, extras: 1, contract: 2, review: 3}
@@ -29,10 +25,15 @@ export const INITIAL_RESERVATION_DATA: ReservationData = {
   options: {flyNumber: ''},
 
   gammaOfficePrice: 0,
-  gammaOfficeTax: 0,
-  gammaOfficeTaxAmount: 0,
-  totalPrice: 0,
+  gammaOfficePriceConversions: null,
+
   gammaOfficeExtraTotalPrice: 0,
-  rentalDays: 0,
-  totalPriceUsd: 0
+  gammaOfficeExtraTotalPriceConversions: null,
+
+  totalPrice: 0,
+  totalPriceConversions: null,
+
+
+  gammaOfficeTax: 0,
+  rentalDays: 0
 }

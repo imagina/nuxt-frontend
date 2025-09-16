@@ -27,13 +27,14 @@
     loading.value = true
     irentcarReservationRepository.preview(requestReservationData.value).then(res =>
     {
-      rent.reservationPreview.value.gammaOfficePrice = res.data.gammaOfficePrice
       rent.reservationPreview.value.gammaOfficeTax = res.data.gammaOfficeTax
-      rent.reservationPreview.value.gammaOfficeTaxAmount = res.data.gammaOfficeTaxAmount
-      rent.reservationPreview.value.totalPrice = res.data.totalPrice
-      rent.reservationPreview.value.totalPriceUsd = res.data.totalPriceUsd
-      rent.reservationPreview.value.gammaOfficeExtraTotalPrice = res.data.gammaOfficeExtraTotalPrice
       rent.reservationPreview.value.rentalDays = res.data.rentalDays
+      rent.reservationPreview.value.gammaOfficePrice = res.data.gammaOfficePrice
+      rent.reservationPreview.value.gammaOfficePriceConversions = res.data.gammaOfficePriceConversions
+      rent.reservationPreview.value.gammaOfficeExtraTotalPrice = res.data.gammaOfficeExtraTotalPrice
+      rent.reservationPreview.value.gammaOfficeExtraTotalPriceConversions = res.data.gammaOfficeExtraTotalPriceConversions
+      rent.reservationPreview.value.totalPrice = res.data.totalPrice
+      rent.reservationPreview.value.totalPriceConversions = res.data.totalPriceConversions
 
     }).catch(err =>
     {
