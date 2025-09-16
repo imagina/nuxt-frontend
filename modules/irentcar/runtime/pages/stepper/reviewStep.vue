@@ -19,6 +19,7 @@
     dropoff_date: reservation.value.dropoffDate as string,
     gamma_office_id: reservation.value.gammaOffice?.id ?? 0,
     gamma_office_extra_ids: reservation.value.extrasData.map(i => i.id),
+    options: {flyNumber: reservation.value.options.flyNumber}
   }))
 
   async function previewReservation ()
