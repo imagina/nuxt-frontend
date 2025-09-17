@@ -129,11 +129,11 @@ provide(RENT_CTX, ctx)
           class="w-full"/>
 
         <!-- Content -->
-        <div v-if="stepComponent" class="grid gap-10 grid-cols-1 lg:grid-cols-3 mt-6">
-          <div class="col-span-12 lg:col-span-2 main-stepper stepper_list_container">
+        <div v-if="stepComponent" class="mt-6 flex flex-col lg:flex-row lg:flex-wrap gap-10">
+          <div class="w-full lg:flex-[0_0_calc(66.666%-1.25rem)] main-stepper stepper_list_container">
             <component :is="stepComponent"/>
           </div>
-          <div class="col-span-12 lg:col-span-1 side-stepper">
+          <div class="w-full lg:flex-[0_0_calc(33.333%-1.25rem)] side-stepper">
             <div v-if="step === 3" class="sticky top-4">
               <div class="side-resumen">
                 <div class="stepper-description" v-html="infoExtra"></div>
@@ -254,6 +254,9 @@ provide(RENT_CTX, ctx)
   .border-hr {
     border-color: #62748E4D;
     margin: 1rem 0;
+  }
+  .max-w-stepper {
+    max-width: 150px;
   }
 }
 </style>
