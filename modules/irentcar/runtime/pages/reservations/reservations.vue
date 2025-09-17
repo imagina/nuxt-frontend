@@ -94,9 +94,9 @@ async function cancelReservation (reservationId: number)
                     <div class="p-4">
                       ¿Seguro que quieres cancelar esta reserva?
                       <div class="mt-4 flex justify-end gap-2">
-                        <UButton label="Cancelar" color="neutral" size="sm"
+                        <UButton label="No" color="neutral" size="sm"
                                  @click="openConfirmationDelete = false"/>
-                        <UButton label="Cancelar" color="error" size="sm"
+                        <UButton label="Si" color="error" size="sm"
                                  @click="cancelReservation(item.reservation.id)"/>
                       </div>
                     </div>
