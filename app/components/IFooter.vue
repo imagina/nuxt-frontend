@@ -38,8 +38,8 @@ const desktopNavProps = {
         <h3 class="text-lg font-semibold mb-4">Info de Contacto</h3>
           <div class="space-y-1">
             <IContactWhatsapp />
-            <IContactEmail />
-            <IlocationLocatable />
+            <IContactEmail :withHyphen="false" />
+            <IlocationLocatable :withHyphen="false" />
           </div>
       </div>
 

@@ -9,7 +9,7 @@ const props = defineProps({
   classIcons: { type: String, default: 'self-center mr-2 text-white' },
   classTitle: { type: String, default: 'font-bold' },
   classLinkAddress: { type: String, default: 'inline-block' },
-  withHyphenAddress: { type: Boolean, default: true },
+  withHyphen: { type: Boolean, default: true },
 })
 
 const ilocationStore = useIlocationStore()
@@ -23,7 +23,7 @@ const locatables = ilocationStore.getLocatables()
       <i v-if="showIcons"  :class="[addressIcon,classIcons]" />
       <div class="content-address">
         <template v-for="(locatable, index) in locatables" :key="index">
-          <span v-if="withHyphenAddress && index>0">&nbsp;-&nbsp;</span>
+          <span v-if="withHyphen && index>0">&nbsp;-&nbsp;</span>
           <a :href="`https://google.com.co/maps/search/${locatable.address}`" target="_blank" :class="classLinkAddress">
             <span :class="classTitle">{{locatable.title}}</span> {{ locatable.address }}
           </a>
