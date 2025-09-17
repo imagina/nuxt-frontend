@@ -1,7 +1,6 @@
 <script setup>
 
 const props = defineProps({
-  address: { type: Array, required: true },
   showAddress: { type: Boolean, default: true },
   showIcons: { type: Boolean, default: true },
   addressWithIcon: { type: Boolean, default: true },
@@ -12,18 +11,21 @@ const props = defineProps({
   classLinkAddress: { type: String, default: 'inline-block' },
   withHyphenAddress: { type: Boolean, default: true },
 })
+
+const ilocationStore = useIlocationStore()
+const locatables = ilocationStore.getLocatables()
 </script>
 
 <template>
   <!-- Dirección  -->
-  <div v-if="showAddress && address" class="component-address">
+  <div v-if="locatables.length" class="component-address">
     <div class="flex">
       <i v-if="showIcons"  :class="[addressIcon,classIcons]" />
       <div class="content-address">
-        <template v-for="(address, index) in address" :key="index">
+        <template v-for="(locatable, index) in locatables" :key="index">
           <span v-if="withHyphenAddress && index>0">&nbsp;-&nbsp;</span>
-          <a :href="`https://google.com.co/maps/search/${address}`" target="_blank" :class="classLinkAddress">
-            <span :class="classTitle">{{address.title}}</span> {{ address.value }}
+          <a :href="`https://google.com.co/maps/search/${locatable.address}`" target="_blank" :class="classLinkAddress">
+            <span :class="classTitle">{{locatable.title}}</span> {{ locatable.address }}
           </a>
         </template>
       </div>

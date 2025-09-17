@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import IContactEmail from "#icontact/components/IcontactEmail/IContactEmail.vue";
 import IContactWhatsapp from "#icontact/components/IcontactWhatsapp/IContactWhatsapp.vue";
+import IlocationLocatable from "#ilocation/components/IlocationLocatable/IlocationLocatable.vue";
 
 const settingStore = useIsettingStore()
 // const
 const logoFooter =  settingStore.get('isite::logo2')
-const address = [{title: 'Oficina Principal:', value:'Calle 74 bis 83-45'}]
-const address_extra = [{title: '', value:'Aeropuerto El Dorado de Bogotá · servicio Meet & Greet'}]
 
 const desktopNavProps = {
   orientation: 'vertical',
@@ -40,8 +39,7 @@ const desktopNavProps = {
           <div class="space-y-1">
             <IContactWhatsapp />
             <IContactEmail />
-            <IContactAddress :address="address" />
-            <IContactAddress :address="address_extra" />
+            <IlocationLocatable />
           </div>
       </div>
 
