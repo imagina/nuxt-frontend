@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { toRefs } from "vue";
+import {toRefs} from "vue";
 
-const open = defineModel<boolean>("open", { default: false });
+const icontactStore = useIcontactStore();
+const items = computed(() => icontactStore.getItems('WHATSAPP'))
+const open = defineModel<boolean>("open", {default: false});
 
 const props = withDefaults(
   defineProps<{
@@ -13,38 +15,21 @@ const props = withDefaults(
     title: "WhatsApp",
   }
 );
-const { side, title } = toRefs(props);
+const {side, title} = toRefs(props);
 
 const cardUI = {
   header: "bg-primary text-white",
   root: "rounded-none md:rounded-xl shadow-none md:shadow-xl",
   body: "p-0 sm:p-0 ",
 };
-
-const items = [
-  {
-    label: "Atención 24/7",
-    callingCode: "+58",
-    number: "4121234567",
-    message: "Hola, necesito ayuda",
-    icon: "fa fa-headset",
-  },
-  {
-    label: "Ventas",
-    callingCode: "+34",
-    number: "600112233",
-    message: "Quiero info de precios",
-  },
-
-]
 </script>
 <template>
   <div>
     <div class="pre-window" :class="side">
-      <div @click="open = true" class="icon" >
+      <div @click="open = true" class="icon">
         <i class="fa fa-whatsapp"></i>
       </div>
-      <div class="text">¿Hablamos?</div>
+      <div class="text hidden lg:inline-flex">¿Hablamos?</div>
     </div>
 
     <Transition
@@ -79,12 +64,13 @@ const items = [
           </template>
 
           <div class="content h-auto md:h-[268px] bg-[#f6f6f6] p-0 overflow-y-auto">
-            <div class="scroll overflow-auto h-full mr-[3px] [scrollbar-width:thin] [scrollbar-color:rgba(0,0,0,0.5)_rgba(0,0,0,0)]">
+            <div
+              class="scroll overflow-auto h-full mr-[3px] [scrollbar-width:thin] [scrollbar-color:rgba(0,0,0,0.5)_rgba(0,0,0,0)]">
               <a
                 class="border-b border-1 border-zinc-200 flex items-center gap-4 px-3 py-4"
                 v-for="(it, i) in items"
                 :key="i"
-                :href="`https://wa.me/${it.callingCode}${it.number}?text=${it.message}`"
+                :href="`https://wa.me/+${it.countryCode}${it.value}?text=${it.message}`"
                 target="_blank"
                 rel="noopener"
               >
@@ -99,9 +85,9 @@ const items = [
                   </div>
                 </div>
                 <div class="list-info">
-                  <div class="title font-semibold">{{ it.label }}</div>
+                  <div class="title font-semibold">{{ it.title }}</div>
                   <p class="subtitle text-sm">
-                    ({{ it.callingCode }}) {{ it.number }}
+                    (+{{ it.countryCode }}) {{ it.value }}
                   </p>
                 </div>
               </a>
@@ -123,6 +109,7 @@ const items = [
   right: unset;
   position: fixed;
 }
+
 .pre-window .icon {
   width: 54px;
   height: 54px;
@@ -135,6 +122,7 @@ const items = [
   font-size: 33px;
   cursor: pointer;
 }
+
 .pre-window .text {
   background-color: #f6f6f6;
   padding: 8px 20px;
@@ -142,10 +130,10 @@ const items = [
   border-radius: 10px;
   color: var(--color-primary);
   font-weight: 600;
-  display: inline-flex;
   border: 2px solid #e9e9e9;
   position: relative;
 }
+
 .pre-window .text:before {
   position: absolute;
   content: "";
@@ -156,6 +144,7 @@ const items = [
   border-bottom: 8px solid transparent;
   border-right: 16px solid #e9e9e9;
 }
+
 .pre-window .text:after {
   position: absolute;
   content: "";
@@ -166,31 +155,37 @@ const items = [
   border-bottom: 8px solid transparent;
   border-right: 14px solid #f6f6f6;
 }
+
 .pre-window.right {
   bottom: 40px;
   left: unset;
   right: 40px;
 }
+
 .pre-window.right .icon {
-    order: 1;
+  order: 1;
 }
+
 .pre-window.right .text {
-    margin-right: 25px;
+  margin-right: 25px;
 }
+
 .pre-window.no-text .text {
-    display: none;
+  display: none;
 }
+
 .pre-window.right .text:before {
-    left: unset;
-    right: -16px;
-    border-left: 16px solid #E9E9E9;
-    border-right: 0;
+  left: unset;
+  right: -16px;
+  border-left: 16px solid #E9E9E9;
+  border-right: 0;
 }
+
 .pre-window.right .text:after {
-    left: unset;
-    right: -11px;
-    border-left: 14px solid #f6f6f6;
-    border-right: 0;
+  left: unset;
+  right: -11px;
+  border-left: 14px solid #f6f6f6;
+  border-right: 0;
 }
 
 /*
@@ -202,5 +197,3 @@ const items = [
   margin-right: 3px;
 }*/
 </style>
-
-

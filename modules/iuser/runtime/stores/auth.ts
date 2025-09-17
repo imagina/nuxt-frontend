@@ -67,14 +67,22 @@ export const useIuserAuthStore = defineStore(
 
       if (!token.value || !token.value?.refreshToken || !token.value.expiresAt) return
       if (token.value.expiresAt - now > buffer) return // still valid
-      if (refreshingPromise.value) return refreshingPromise.value // If refresh already in progress, await it
+      if (refreshingPromise.value) return refreshingPromise.value // If there is a refresh already in progress, await it
 
-      // Start new refresh
+      // Start the new refresh
       refreshingPromise.value = iuserAuthRepository.refreshToken(token.value.refreshToken);
-      const response = await refreshingPromise.value
-      setToken(response.data)
-      refreshingPromise.value = null
-      return response
+
+      try{
+        const response = await refreshingPromise.value
+        setToken(response.data)
+        return response
+      }catch {
+        clearAuth()
+        return
+      }finally
+      {
+        refreshingPromise.value = null
+      }
     }
 
     return {

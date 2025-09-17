@@ -4,7 +4,7 @@ const pages = [
   {
     name: 'irentcar.page.stepper',
     path: '/rent-car/stepper',
-    page: 'runtime/pages/stepper',
+    page: 'runtime/pages/stepper/stepperPage',
     meta: {layout},
   },
   {
@@ -28,7 +28,7 @@ const pages = [
   {
     name: 'irentcar.page.reservations',
     path: '/rent-car/reservations',
-    page: 'runtime/pages/reservations.vue',
+    page: 'runtime/pages/reservations/reservations.vue',
     meta: {layout, auth: true},
   }
 ]

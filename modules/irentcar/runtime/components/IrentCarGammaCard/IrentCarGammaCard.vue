@@ -1,42 +1,42 @@
 <script setup lang="ts">
-import {DialogTitle, DialogDescription} from 'reka-ui'
-import type {IrentCarGammaCardProps} from "#irentcar/components/IrentCarGammaCard/IrentCarGammaCard";
+  import {DialogTitle, DialogDescription} from 'reka-ui'
+  import type {IrentCarGammaCardProps} from "#irentcar/components/IrentCarGammaCard/IrentCarGammaCard";
 
-const {goTo} = useInavigation()
-const router = useRouter()
-const props = withDefaults(defineProps<IrentCarGammaCardProps>(), {
-  orientation: 'vertical'
-})
-const open = defineModel<boolean>("open", {default: false});
-const goToStepper = computed(() =>
-{
-  const stepperRouteName = 'irentcar.page.stepper'
-  const currentRouteName = router.currentRoute.value.name as string
-  if (currentRouteName.includes(stepperRouteName)) return null
-  return () => goTo({name: stepperRouteName})
-})
-const gridOrientationUi = computed(() =>
-{
-  const ui = {
-    'horizontal': {
-      container: 'flex flex-col gap-4 md:flex-row md:items-center',
-      image: 'order-1 md:order-2 md:flex-3',
-      content: 'order-2 md:order-1 md:flex-9',
-      ctaWrap: 'mt-3',
-      text: 'text-center md:text-left',
-      items: 'flex justify-center md:justify-start'
-    },
-    'vertical': {
-      container: 'grid grid-cols-1 gap-4',
-      image: '',
-      content: '',
-      ctaWrap: 'mt-3',
-      text: 'text-center',
-      items: 'flex justify-center'
-    },
-  }
-  return ui[props.orientation]
-})
+  const {goTo} = useInavigation()
+  const router = useRouter()
+  const props = withDefaults(defineProps<IrentCarGammaCardProps>(), {
+    orientation: 'vertical'
+  })
+  const open = defineModel<boolean>("open", {default: false});
+  const goToStepper = computed(() =>
+  {
+    const stepperRouteName = 'irentcar.page.stepper'
+    const currentRouteName = router.currentRoute.value.name as string
+    if (currentRouteName.includes(stepperRouteName)) return null
+    return () => goTo({name: stepperRouteName})
+  })
+  const gridOrientationUi = computed(() =>
+  {
+    const ui = {
+      'horizontal': {
+        container: 'flex flex-col gap-4 md:flex-row md:items-center',
+        image: 'order-1 md:order-2 md:flex-3',
+        content: 'order-2 md:order-1 md:flex-9',
+        ctaWrap: 'mt-3',
+        text: 'text-center md:text-left',
+        items: 'flex justify-center md:justify-start'
+      },
+      'vertical': {
+        container: 'grid grid-cols-1 gap-4',
+        image: '',
+        content: '',
+        ctaWrap: 'mt-3',
+        text: 'text-center',
+        items: 'flex justify-center'
+      },
+    }
+    return ui[props.orientation]
+  })
 </script>
 
 <template>
@@ -49,7 +49,7 @@ const gridOrientationUi = computed(() =>
           aspect-ratio="aspect-square"
           :ui="{
             wrapper: '',
-            container: 'rounded-xl px-1 bg-quaternary border-1 border-gray-300',
+            container: 'max-w-stepper rounded-xl px-1 bg-quaternary border-1 border-gray-300',
             media: 'w-full object-contain rounded-xl'}"/>
       </div>
       <!-- Content -->
@@ -78,14 +78,17 @@ const gridOrientationUi = computed(() =>
           </div>
         </div>
         <div :class="gridOrientationUi.items">
-          <UButton @click="open = true" size="xs" color="info" class="px-3" label="Ver Detalle" variant="link"/>
+          <UButton size="xs" color="info" class="px-3" label="Ver Detalle" variant="link" @click="open = true"/>
         </div>
       </div>
     </div>
   </div>
 
-  <UModal class="car-modal" v-model:open="open"
-          :ui="{ header: 'hidden', overlay: 'overlay-slide', body: 'p-0 sm:p-0',  content: 'w-fit max-w-[calc(100vw-2rem)]' }">
+  <UModal
+    v-model:open="open"
+    class="car-modal"
+    :ui="{ header: 'hidden', overlay: 'overlay-slide', body: 'p-0 sm:p-0',  content: 'w-fit max-w-[calc(100vw-2rem)]' }"
+  >
     <template #header>
       <div class="flex justify-between">
         <div>
@@ -97,8 +100,14 @@ const gridOrientationUi = computed(() =>
     <template #body>
       <div class="card-modal">
         <div class="relative">
-          <UButton @click="open = false" class="btn-close absolute" icon="i-fa6-solid-xmark" size="sm" variant="ghost"
-                   aria-label="Cerrar"/>
+          <UButton
+            class="btn-close absolute"
+            icon="i-fa6-solid-xmark"
+            size="sm"
+            variant="ghost"
+            aria-label="Cerrar"
+            @click="open = false"
+          />
           <IMediaRender
             :media="props.item.files.mainimage" :alt="props.item.title"
             aspect-ratio="aspect-[4/3]"
@@ -132,20 +141,28 @@ const gridOrientationUi = computed(() =>
             </div>
           </div>
           <div class="text-primary text-sm mb-3 gamma-description" v-html="props.item.description"/>
-          <UButton v-if="goToStepper" size="md" color="secondary" class="px-3 cursor-pointer" loading-auto
-                   label="Realizar reservación" variant="outline" @click="goToStepper()"/>
+          <UButton
+            v-if="goToStepper"
+            size="md"
+            color="secondary"
+            class="px-3 cursor-pointer"
+            loading-auto
+            label="Realizar reservación"
+            variant="outline"
+            @click="goToStepper()"
+          />
         </div>
       </div>
     </template>
   </UModal>
 </template>
 <style>
-.car-modal .card-modal {
-  max-width: 350px;
-  width: 100%;
+  .car-modal .card-modal {
+    max-width: 350px;
+    width: 100%;
 
-  & .btn-close {
-    right: 2px;
+    & .btn-close {
+      right: 2px;
+    }
   }
-}
 </style>

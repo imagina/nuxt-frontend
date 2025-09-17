@@ -1,6 +1,8 @@
 import type {Gamma} from "#irentcar/types/gamma";
 import type {Extra} from "#irentcar/types/gammaOffice";
 import type {Office} from "#irentcar/types/office";
+import type {PriceConversion} from "#irentcar/types/priceConversion";
+import type {GammaOfficeExtra} from "#irentcar/types/extra";
 
 export interface Slot
 {
@@ -38,7 +40,7 @@ export interface CreateReservationData
   dropoff_office_id: number;
   dropoff_date: string;
   gamma_office_id: number;
-  gamma_office_extra_ids: string;
+  gamma_office_extra_ids: number[];
 }
 
 export interface Reservation {
@@ -53,12 +55,8 @@ export interface Reservation {
   pickupDate: string
   dropoffDate: string
   statusId: number
-  gammaOfficePrice: number
   gammaOfficeTax: number
-  gammaOfficeTaxAmount: number
   gammaOfficeExtraIds: string
-  gammaOfficeExtraTotalPrice: number
-  totalPrice: number
   totalPriceUsd: number
   options: Record<string, unknown>
   createdAt: string
@@ -66,9 +64,15 @@ export interface Reservation {
   status: Status
   gammaData: Gamma
   gamma: Gamma
-  extrasData: {
-    extra: Extra,
-    price: number
-  }[]
-  rentalDays: number
+  extrasData: GammaOfficeExtra[] | []
+  rentalDays: number,
+
+  gammaOfficePrice: number | null
+  gammaOfficePriceConversions: PriceConversion | null
+
+  gammaOfficeExtraTotalPrice: number | null
+  gammaOfficeExtraTotalPriceConversions: PriceConversion | null
+
+  totalPrice: number | null
+  totalPriceConversions: PriceConversion | null
 }

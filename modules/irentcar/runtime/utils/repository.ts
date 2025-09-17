@@ -3,6 +3,7 @@ import type {Office} from "#irentcar/types/office";
 import type {GammaOffice} from "#irentcar/types/gammaOffice";
 import type {Type} from "#irentcar/types/static";
 import type {Gamma} from "#irentcar/types/gamma";
+import type {GammaOfficeExtra} from "#irentcar/types/extra";
 
 const baseUrl = '/irentcar/v1'
 
@@ -50,8 +51,8 @@ export const irentcarReservationRepository = {
   async update (criteria: number, body: Record<string, unknown>, params: Record<string, unknown> = {}): Promise<void>
   {
     const {$authApiFetch} = useNuxtApp()
-    return $authApiFetch<void>(`${baseUrl}/reservations/${criteria}`, {
-      method: 'PUT', body, params
+    return $authApiFetch(`${baseUrl}/reservations/${criteria}`, {
+      method: 'PUT', body: {attributes: body}, params
     })
   }
 }
@@ -99,6 +100,17 @@ export const irentcarStaticRepository = {
   {
     const {$apiFetch} = useNuxtApp()
     return $apiFetch<{ data: Type[] }>(`${baseUrl}/fuel-types`, {
+      method: 'GET',
+      params
+    })
+  }
+}
+
+export const irentcarGammaOfficeExtraRepository = {
+  async index (params: Record<string, unknown> = {}): Promise<{ data: GammaOfficeExtra[] }>
+  {
+    const {$apiFetch} = useNuxtApp()
+    return $apiFetch<{ data: GammaOfficeExtra[] }>(`${baseUrl}/gamma-office-extra`, {
       method: 'GET',
       params
     })

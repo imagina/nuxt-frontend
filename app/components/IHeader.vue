@@ -1,15 +1,32 @@
 <script setup lang="ts">
+import IContactWhatsapp from "#icontact/components/IcontactWhatsapp/IContactWhatsapp.vue";
+import type {DropdownMenuItem} from "#ui/components/DropdownMenu.vue";
+
 const settingStore = useIsettingStore()
 const logo = settingStore.get('isite::logo1')
 const siteName = settingStore.get('isite::siteName')
 const whatsapp = [ { callingCode: '+57', number: '3118060834', message: ''} ]
+const authUser  = computed(() => useIuserAuthStore().user)
+const isLoggedIn = computed(() => !!authUser.value?.id)
+const items = computed<DropdownMenuItem[]>(() =>
+  isLoggedIn.value
+    ? [
+        { label: 'Mis Reservas', icon: 'i-lucide:calendar-check', to: '/rent-car/reservations' },
+        { label: 'Cerrar sesión', icon: 'i-lucide:log-out', to: '/auth/logout' }
+      ]
+    : [
+        { label: 'Ingresar',    icon: 'i-lucide:log-in', to: '/auth/login'},
+      ]
+)
+
 </script>
 <template>
   <header class="bg-white shadow-md">
     <UContainer>
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center gap-4">
-          <div class="logo ">
+          <div class="logo">
+            <NuxtLink to="/">
             <IMediaRender
               @click="$router.push('/')"
               :media="logo" alt="Logo"
@@ -19,6 +36,7 @@ const whatsapp = [ { callingCode: '+57', number: '3118060834', message: ''} ]
                 container: 'h-[34px] w-[144px]',
                 media: 'object-contain' }"
               />
+            </NuxtLink>
           </div>
           <div class="pl-4 border-l border-gray-300 hidden sm:block">
             <IContactWhatsapp :whatsapp="whatsapp"
@@ -26,8 +44,15 @@ const whatsapp = [ { callingCode: '+57', number: '3118060834', message: ''} ]
                               classLinkPhone="inline-block text-[18px] text-w"/>
           </div>
         </div>
-        <div class="menu">
-          <imenu-menu system-name="main-menu" :title="siteName"/>
+        <div class="menus">
+          <div class="flex items-center">
+            <div class="menu">
+              <imenu-menu system-name="main-menu" :title="siteName"/>
+            </div>
+            <UDropdownMenu :items="items" :popper="{ placement: 'bottom-start', strategy: 'fixed' }">
+              <UButton icon="i-material-symbols:person"  color="neutral" variant="ghost" />
+            </UDropdownMenu>
+          </div>
         </div>
       </div>
     </UContainer>
@@ -40,9 +65,7 @@ const whatsapp = [ { callingCode: '+57', number: '3118060834', message: ''} ]
   color: var(--color-primary);
   text-transform: uppercase;
   font-weight: 600;
-  font-style: SemiBold;
   font-size: 14px;
-  letter-spacing: .2;
 }
 .menu > :deep(nav) a:hover {
   color: var(--color-secondary);
