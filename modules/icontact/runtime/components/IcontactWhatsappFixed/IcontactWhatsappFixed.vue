@@ -16,12 +16,6 @@ const props = withDefaults(
   }
 );
 const {side, title} = toRefs(props);
-
-const cardUI = {
-  header: "bg-primary text-white",
-  root: "rounded-none md:rounded-xl shadow-none md:shadow-xl",
-  body: "p-0 sm:p-0 ",
-};
 </script>
 <template>
   <div>
@@ -29,45 +23,39 @@ const cardUI = {
       <div @click="open = true" class="icon">
         <i class="fa fa-whatsapp"></i>
       </div>
-      <div class="text hidden lg:inline-flex">¿Hablamos?</div>
+      <div class="text">¿Hablamos?</div>
     </div>
 
     <Transition
-      enter-active-class="transition ease-out duration-200"
-      enter-from-class="opacity-0 translate-y-6"
-      enter-to-class="opacity-100 translate-y-0"
-      leave-active-class="transition ease-in duration-150"
-      leave-from-class="opacity-100 translate-y-0"
-      leave-to-class="opacity-0 translate-y-6"
+      enter-active-class="transition-enter-active"
+      enter-from-class="transition-enter-form"
+      enter-to-class="transition-enter-to"
+      leave-active-class="transition-leave-active"
+      leave-from-class="transition-leave-form"
+      leave-to-class="transition-leave-to"
     >
       <section
         v-if="open"
         role="dialog"
         aria-modal="false"
-        class="fixed bottom-0 md:bottom-4 z-[1500] h-full md:h-auto  w-screen md:w-[350px] bg-[#f6f6f6] rounded-none md:rounded-xl"
-        :class="side === 'right' ? 'right-0 md:right-4' : 'left-0 md:left-4'"
+        class="window"
+        :class="side"
       >
-        <UCard :ui="cardUI">
-          <template #header>
-            <div
-              @click="open = false"
-              class="header-close rounded px-3 py-1 md:p-1 float-right cursor-pointer"
-            >
+      <div class="card-root-ui">
+          <div class="card-header-ui">
+            <div @click="open = false" class="header-close">
               <i class="fa fa-close"></i>
             </div>
-            <div class="header-title text-lg">
+            <div class="header-title">
               <i class="fa fa-whatsapp"></i> WhatsApp
             </div>
-            <div class="header-text text-sm">
-              Hola, ¿En que podemos ayudarte?
-            </div>
-          </template>
+            <div class="header-text"> Hola, ¿En que podemos ayudarte? </div>
+          </div>
 
-          <div class="content h-auto md:h-[268px] bg-[#f6f6f6] p-0 overflow-y-auto">
-            <div
-              class="scroll overflow-auto h-full mr-[3px] [scrollbar-width:thin] [scrollbar-color:rgba(0,0,0,0.5)_rgba(0,0,0,0)]">
+          <div class="content">
+            <div class="scroll">
               <a
-                class="border-b border-1 border-zinc-200 flex items-center gap-4 px-3 py-4"
+                class="item-scroll"
                 v-for="(it, i) in items"
                 :key="i"
                 :href="`https://wa.me/+${it.countryCode}${it.value}?text=${it.message}`"
@@ -75,125 +63,134 @@ const cardUI = {
                 rel="noopener"
               >
                 <div class="list-image">
-                  <div
-                    class="icon h-[55px] w-[55px] bg-primary rounded-full text-white flex justify-center items-center"
-                  >
-                    <i
-                      class="text-[30px]"
-                      :class="it.icon ?? 'fa fa-whatsapp'"
-                    ></i>
+                  <div class="icon"> <i :class="it.icon || 'fa fa-whatsapp'"></i>
                   </div>
                 </div>
                 <div class="list-info">
-                  <div class="title font-semibold">{{ it.title }}</div>
-                  <p class="subtitle text-sm">
+                  <div class="title">{{ it.title }}</div>
+                  <p class="subtitle">
                     (+{{ it.countryCode }}) {{ it.value }}
                   </p>
                 </div>
               </a>
             </div>
           </div>
-        </UCard>
+        </div>
       </section>
     </Transition>
   </div>
 </template>
 
 <style scoped>
+@reference "~/assets/css/main.css";
+
 .pre-window {
-  display: flex;
-  align-items: center;
-  z-index: 1000;
-  bottom: 40px;
-  left: 40px;
-  right: unset;
-  position: fixed;
+  @apply fixed bottom-10 left-10 right-auto z-[1000] flex items-center;
 }
-
 .pre-window .icon {
-  width: 54px;
-  height: 54px;
-  background-color: #22ce5a;
-  color: #ffffff;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 33px;
-  cursor: pointer;
+  @apply inline-flex h-[54px] w-[54px] items-center justify-center rounded-full
+         bg-[#22ce5a] text-white text-[33px] cursor-pointer;
 }
-
 .pre-window .text {
-  background-color: #f6f6f6;
-  padding: 8px 20px;
-  margin-left: 25px;
-  border-radius: 10px;
-  color: var(--color-primary);
-  font-weight: 600;
-  border: 2px solid #e9e9e9;
-  position: relative;
+  @apply hidden lg:inline-flex relative ml-[25px] rounded-[10px] border-2 border-[#e9e9e9]
+         bg-[#f6f6f6] px-5 py-2 font-semibold text-[var(--color-primary)];
 }
-
-.pre-window .text:before {
-  position: absolute;
-  content: "";
-  left: -16px;
-  top: 50%;
-  transform: translateY(-50%);
-  border-top: 8px solid transparent;
-  border-bottom: 8px solid transparent;
-  border-right: 16px solid #e9e9e9;
+/* Triángulo del bocadillo (borde exterior gris) */
+.pre-window .text::before {
+  @apply absolute content-[''] left-[-16px] top-1/2 -translate-y-1/2 transform
+         border-y-[8px] border-y-transparent
+         border-r-[16px] border-r-[#e9e9e9];
 }
-
-.pre-window .text:after {
-  position: absolute;
-  content: "";
-  left: -11px;
-  top: 50%;
-  transform: translateY(-50%);
-  border-top: 8px solid transparent;
-  border-bottom: 8px solid transparent;
-  border-right: 14px solid #f6f6f6;
+/* Triángulo interior (relleno del fondo) */
+.pre-window .text::after {
+  @apply absolute content-[''] left-[-11px] top-1/2 -translate-y-1/2 transform
+         border-y-[8px] border-y-transparent
+         border-r-[14px] border-r-[#f6f6f6];
 }
-
+/* Variante a la derecha */
 .pre-window.right {
-  bottom: 40px;
-  left: unset;
-  right: 40px;
+  @apply bottom-10 left-auto right-10;
 }
-
 .pre-window.right .icon {
-  order: 1;
+  @apply order-1;
 }
-
 .pre-window.right .text {
-  margin-right: 25px;
+  @apply mr-[25px];
+}
+/* Triángulos volteados para el lado derecho */
+.pre-window.right .text::before {
+  @apply right-[-16px] left-auto border-r-0 border-l-[16px] border-l-[#e9e9e9];
+}
+.pre-window.right .text::after {
+  @apply right-[-11px] left-auto border-r-0 border-l-[14px] border-l-[#f6f6f6];
+}
+/* Ventana de items */
+.window {
+  @apply fixed bottom-0 md:bottom-4 z-[1500] h-full md:h-auto  w-screen md:w-[350px] bg-[#f6f6f6] rounded-none md:rounded-xl;
+}
+.window.right {
+ @apply  right-0 md:right-4;
+}
+.window.left {
+ @apply  left-0 md:left-4 ;
+}
+.window .content {
+  @apply h-auto md:h-[268px] bg-[#f6f6f6] p-0 overflow-y-auto rounded-none md:rounded-xl;
+}
+.window .scroll {
+  @apply overflow-auto h-full mr-[3px] [scrollbar-width:thin] [scrollbar-color:rgba(0,0,0,0.5)_rgba(0,0,0,0)];
+}
+.window .header-close {
+  @apply rounded px-3 py-1 md:p-1 float-right cursor-pointer;
+}
+.window .item-scroll {
+  @apply border-b border-1 border-zinc-200 flex items-center gap-4 px-3 py-4;
+}
+.window .item-scroll .icon {
+  @apply h-[55px] w-[55px] bg-primary rounded-full text-white flex justify-center items-center;
+}
+.window .item-scroll .icon i {
+  @apply text-[30px];
+}
+.window .item-scroll .title {
+  @apply text-base font-semibold overflow-hidden text-ellipsis;
+}
+.window .item-scroll .subtitle {
+  @apply text-sm;
 }
 
-.pre-window.no-text .text {
-  display: none;
+.window .card-header-ui {
+  @apply bg-primary text-white p-5 rounded-none md:rounded-t-xl;
 }
-
-.pre-window.right .text:before {
-  left: unset;
-  right: -16px;
-  border-left: 16px solid #E9E9E9;
-  border-right: 0;
+.window .card-header-ui .header-title {
+  @apply text-xl;
 }
-
-.pre-window.right .text:after {
-  left: unset;
-  right: -11px;
-  border-left: 14px solid #f6f6f6;
-  border-right: 0;
+.window .card-header-ui .header-text {
+  @apply text-base;
 }
-
-/*
-.scroll {
-  overflow: auto;
-  height: 100%;
-  scrollbar-color: rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0);
-  scrollbar-width: thin;
-  margin-right: 3px;
-}*/
+.window .card-root-ui {
+  @apply rounded-none md:rounded-xl shadow-none md:shadow-xl;
+}
+.window .card-body-ui {
+  @apply p-0 sm:p-0 rounded-none md:rounded-b-xl;
+}
+/* Animaciones de ventana */
+.transition-enter-active {
+  @apply transition ease-out duration-200
+}
+.transition-enter-from {
+  @apply opacity-0 translate-y-6
+}
+.transition-enter-to {
+  @apply opacity-100 translate-y-0;
+}
+.transition-leave-active {
+  @apply transition ease-in duration-150;
+}
+.transition-leave-from {
+  @apply opacity-100 translate-y-0;
+}
+.transition-leave-to {
+  @apply opacity-0 translate-y-6;
+}
 </style>
