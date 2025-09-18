@@ -22,7 +22,7 @@ const items = computed(() => [
   <!-- Social -->
   <div v-if="items.length" class="component-social" :class="classSocial">
     <template v-for="(item, index) in items" :key="index">
-      <a
+      <a v-if="item.isEnable==1"
         :href="item.value"
         :title="item.title"
         target="_blank"
