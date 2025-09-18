@@ -31,13 +31,13 @@ const prices = computed(() =>
   return [
     {
       label: 'Tarifa básica',
-      subLabel: `${reservation.value.rentalDays ?? 1} Dias X ${formatCurrency(reservation.value.gammaOfficePrice ?? 0)}`,
+      subLabel: `${reservation.value.rentalDays ?? 1} día x ${formatCurrency(reservation.value.gammaOfficePrice ?? 0)} / día`,
       value: formatCurrency((reservation.value.gammaOfficePrice ?? 0) * (reservation.value.rentalDays ?? 1)),
       subValue: getAsLabel(gammaConversions),
     },
     {
       label: 'Elementos Extra',
-      subLabel: `${reservation.value.rentalDays ?? 1} Dias X ${formatCurrency(reservation.value.gammaOfficeExtraTotalPrice ?? 0)}`,
+      subLabel: `${reservation.value.rentalDays ?? 1} día x ${formatCurrency(reservation.value.gammaOfficeExtraTotalPrice ?? 0)} / día`,
       value: formatCurrency((reservation.value.gammaOfficeExtraTotalPrice ?? 0) * (reservation.value.rentalDays ?? 1)),
       subValue: getAsLabel(extrasConversions),
     },

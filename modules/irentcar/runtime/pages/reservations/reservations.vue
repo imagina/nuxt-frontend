@@ -4,6 +4,14 @@ import Resumen from '#irentcar/components/IrentcarReservation/IrentcarReservatio
 import type {ItemCollapsible} from './reservations'
 import type {Reservation} from "#irentcar/types/reservation";
 
+const settingStore = useIsettingStore()
+useSeoMeta({
+  title: () => `Mis Reservaciones | ${settingStore.get('isite::siteName')}`,
+  ogTitle: () => `Mis Reservaciones | ${settingStore.get('isite::siteName')}`,
+  description: () => `Mis Reservaciones | ${settingStore.get('isite::siteName')}`,
+  ogDescription: () => `Mis Reservaciones | ${settingStore.get('isite::siteName')}`,
+})
+
 const {formatDate} = useHelpers()
 const openConfirmationDelete = ref(false)
 
@@ -74,7 +82,8 @@ async function cancelReservation (reservationId: number)
                 </div>
                 <div>
                   <div class="text-primary font-semibold text-lg flex items-center ">
-                    <span class="mr-2">{{ item.reservation.gamma.summary }}</span>
+                    <span class="text-dark">#{{ item.reservation.id }}</span>
+                    <span class="px-2">{{ item.reservation.gamma.summary }}</span>
                     <UBadge size="sm" color="success">
                       {{ item.reservation.status.title }}
                     </UBadge>
