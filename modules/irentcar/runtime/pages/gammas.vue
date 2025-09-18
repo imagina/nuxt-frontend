@@ -65,7 +65,7 @@ const filterFields = computed<IFormFieldConfig[]>(() => ([
     type: 'select',
     default: null,
     formFieldProps: {
-      label: 'combustible'
+      label: 'Combustible'
     },
     fieldProps: {
       items: [
