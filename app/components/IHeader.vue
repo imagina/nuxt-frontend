@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import IContactWhatsapp from "#icontact/components/IcontactWhatsapp/IContactWhatsapp.vue";
+import IContactSocial from "#icontact/components/IcontactSocial/IContactSocial.vue";
 import type {DropdownMenuItem} from "#ui/components/DropdownMenu.vue";
 
 const settingStore = useIsettingStore()
 const logo = settingStore.get('isite::logo1')
 const siteName = settingStore.get('isite::siteName')
-const whatsapp = [ { callingCode: '+57', number: '3118060834', message: ''} ]
 const authUser  = computed(() => useIuserAuthStore().user)
 const isLoggedIn = computed(() => !!authUser.value?.id)
 const items = computed<DropdownMenuItem[]>(() =>
@@ -39,9 +39,10 @@ const items = computed<DropdownMenuItem[]>(() =>
             </NuxtLink>
           </div>
           <div class="pl-4 border-l border-gray-300 hidden sm:block">
-            <IContactWhatsapp :whatsapp="whatsapp"
-                              classIcons="flex items-center justify-center text-white"
-                              classLinkPhone="inline-block text-[18px] text-w"/>
+            <IContactSocial class-social="fixed right-0 top-[30%] z-[1000]"
+                            class-link-social="transition hover:text-[26px] hidden sm:flex shadow-lg bg-white h-[30px] w-[35px] text-[20px]  lg:h-[45px] lg:w-[50px] lg:text-[25px] rounded-l-lg my-1 items-center justify-center"/>
+            <IContactWhatsapp class-icons="flex items-center justify-center text-white"
+                              class-link-phone="inline-block text-[18px] text-w"/>
           </div>
         </div>
         <div class="menus">

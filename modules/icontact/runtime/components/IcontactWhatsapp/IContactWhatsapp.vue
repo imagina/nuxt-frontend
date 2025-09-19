@@ -9,7 +9,7 @@ const props = defineProps({
   classTitle: { type: String, default: 'font-bold' },
   classLinkPhone: { type: String, default: 'inline-block' },
   classComponent: { type: String, default: '' },
-  withHyphenPhone: { type: Boolean, default: true },
+  withHyphen: { type: Boolean, default: true },
 })
 const icontactStore = useIcontactStore()
 const items = computed(() => icontactStore.getItems('WHATSAPP'))
@@ -24,7 +24,7 @@ const items = computed(() => icontactStore.getItems('WHATSAPP'))
       </div>
       <div class="content-whatsapp">
         <template v-for="(item, index) in items" :key="index">
-          <span v-if="withHyphenPhone && index>0">&nbsp;-&nbsp;</span>
+          <span v-if="withHyphen && index>0">&nbsp;-&nbsp;</span>
           <a aria-label="whatsapp" :href="`https://wa.me/+${item.countryCode}${item.value}?text=${item.message}`" target="_blank" :class="classLinkPhone">
             <span>+{{ item.countryCode }}</span> {{ item.value }}
           </a>

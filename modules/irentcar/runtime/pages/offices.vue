@@ -16,7 +16,7 @@ const items = computed<AccordionItem[]>(() =>
   officesData.map(o => ({
     label: o.title,
     summary: o.locatable?.address,
-    iframe: armIframeSrc(o.locatable?.lat,o.locatable?.lng),
+    iframe: armIframeSrc(o.locatable?.latitude,o.locatable?.longitude),
     ...o,
   }))
 )
