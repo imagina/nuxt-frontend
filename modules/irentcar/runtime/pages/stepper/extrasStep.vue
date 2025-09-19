@@ -75,9 +75,8 @@
       <IrentCarGammaCard :item="gammaOffice.gamma" orientation="horizontal"/>
     </div>
     <div class="col-span-12 md:col-span-3">
-      <div class="font-semibold text-gray-800 text-center md:text-right">{{
-          formatCurrency(gammaOffice.price)
-        }}
+      <div class="font-semibold text-gray-800 text-center md:text-right">
+        {{ formatCurrency(gammaOffice.price) }} / día
       </div>
       <div class="flex justify-center md:justify-end">
         <UButton
@@ -104,7 +103,7 @@
       <template #label="{item}">
         <div class="flex items-center justify-between">
           <div class="font-semibold text-gray-800">{{ item.label }}</div>
-          <div class="stepper-description pl-3 pb-3">{{ formatCurrency(item.price) }}</div>
+          <div class="stepper-description pl-3 pb-3">{{ formatCurrency(item.price) }} / día</div>
         </div>
       </template>
       <template #description="{item}">

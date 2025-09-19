@@ -27,7 +27,7 @@
       </div>
       <div class="col-span-12 md:col-span-3">
         <div class="font-semibold text-gray-800 text-center md:text-right">
-          {{ formatCurrency(gammaOffice.price) }}
+          {{ formatCurrency(gammaOffice.price) }} / día
         </div>
         <div class="stepper-description text-center md:text-right">
           {{ getAsLabel(gammaOffice.priceConversions ?? null)}}
