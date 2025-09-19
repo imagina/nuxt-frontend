@@ -41,6 +41,15 @@ watch(
   {immediate: false}
 )
 
+watch(
+  () => form.value.pickupTime,
+  (newPickupTime) =>
+  {
+    if (!newPickupTime) return
+    if (!form.value.dropTime) form.value.dropTime = newPickupTime
+  }
+)
+
 const {data: offices} = await useAsyncData(`irentCar:offices`, () =>
   irentcarOfficeRepository.index({include: 'locatable'})
 )
