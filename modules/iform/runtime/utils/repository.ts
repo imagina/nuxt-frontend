@@ -6,8 +6,7 @@ const baseUrl = '/iform/v1'
 export const iformFormsRepository = {
   async show (id: string | number, params: Record<string, unknown> = {}): Promise<{ data: Form }>
   {
-    const {$apiFetch} = useNuxtApp()
-    return $apiFetch<{ data: Form }>(`${baseUrl}/forms/${id}`, {
+    return $fetch<{ data: Form }>(`/api/proxy${baseUrl}/forms/${id}`, {
       method: 'GET',
       params: params
     })

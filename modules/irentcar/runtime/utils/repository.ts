@@ -10,24 +10,21 @@ const baseUrl = '/irentcar/v1'
 export const irentcarReservationRepository = {
   async dateValidation (params: Record<string, unknown>): Promise<{ data: DateValidation }>
   {
-    const {$apiFetch} = useNuxtApp()
-    return $apiFetch<{ data: DateValidation }>(`${baseUrl}/reservations/validation/date`, {
+    return await $fetch(`/api/proxy${baseUrl}/reservations/validation/date`, {
       method: 'GET',
-      params
+      query: params
     })
   },
   async availableGammas (params: Record<string, unknown>): Promise<{ data: GammaOffice[] }>
   {
-    const {$apiFetch} = useNuxtApp()
-    return $apiFetch<{ data: GammaOffice[] }>(`${baseUrl}/reservations/available/gammas`, {
+    return await $fetch(`/api/proxy${baseUrl}/reservations/available/gammas`, {
       method: 'GET',
-      params
+      query: params
     })
   },
   async preview (body: CreateReservationData): Promise<{ data: Reservation }>
   {
-    const {$authApiFetch} = useNuxtApp()
-    return $authApiFetch<{ data: Reservation }>(`${baseUrl}/reservations/preview`, {
+    return await $fetch(`/api/proxy${baseUrl}/reservations/preview`, {
       method: 'POST',
       body: {attributes: body}
     })
@@ -42,10 +39,9 @@ export const irentcarReservationRepository = {
   },
   async index (params: Record<string, unknown> = {}): Promise<{ data: Reservation[] }>
   {
-    const {$authApiFetch} = useNuxtApp()
-    return $authApiFetch<{ data: Reservation[] }>(`${baseUrl}/reservations`, {
+    return await $fetch(`/api/proxy${baseUrl}/reservations`, {
       method: 'GET',
-      params
+      query: params
     })
   },
   async update (criteria: number, body: Record<string, unknown>, params: Record<string, unknown> = {}): Promise<void>
@@ -60,10 +56,9 @@ export const irentcarReservationRepository = {
 export const irentcarOfficeRepository = {
   async index (params: Record<string, unknown> = {}): Promise<{ data: Office[] }>
   {
-    const {$apiFetch} = useNuxtApp()
-    return $apiFetch<{ data: Office[] }>(`${baseUrl}/offices`, {
+    return await $fetch(`/api/proxy${baseUrl}/offices`, {
       method: 'GET',
-      params
+      query: params
     })
   }
 }
@@ -71,10 +66,9 @@ export const irentcarOfficeRepository = {
 export const irentcarGammaRepository = {
   async index (params: Record<string, unknown> = {}): Promise<{ data: Gamma[] }>
   {
-    const {$apiFetch} = useNuxtApp()
-    return $apiFetch<{ data: Gamma[] }>(`${baseUrl}/gammas`, {
+    return await $fetch(`/api/proxy${baseUrl}/gammas`, {
       method: 'GET',
-      params
+      query: params
     })
   }
 }
@@ -82,26 +76,23 @@ export const irentcarGammaRepository = {
 export const irentcarStaticRepository = {
   async indexVehiculeType (params: Record<string, unknown> = {}): Promise<{ data: Type[] }>
   {
-    const {$apiFetch} = useNuxtApp()
-    return $apiFetch<{ data: Type[] }>(`${baseUrl}/vehicle-types`, {
+    return await $fetch(`/api/proxy${baseUrl}/vehicle-types`, {
       method: 'GET',
-      params
+      query: params
     })
   },
   async indexTransmissionType (params: Record<string, unknown> = {}): Promise<{ data: Type[] }>
   {
-    const {$apiFetch} = useNuxtApp()
-    return $apiFetch<{ data: Type[] }>(`${baseUrl}/transmission-types`, {
+    return await $fetch(`/api/proxy${baseUrl}/transmission-types`, {
       method: 'GET',
-      params
+      query: params
     })
   },
   async indexFuelType (params: Record<string, unknown> = {}): Promise<{ data: Type[] }>
   {
-    const {$apiFetch} = useNuxtApp()
-    return $apiFetch<{ data: Type[] }>(`${baseUrl}/fuel-types`, {
+    return await $fetch(`/api/proxy${baseUrl}/fuel-types`, {
       method: 'GET',
-      params
+      query: params
     })
   }
 }
@@ -109,10 +100,9 @@ export const irentcarStaticRepository = {
 export const irentcarGammaOfficeExtraRepository = {
   async index (params: Record<string, unknown> = {}): Promise<{ data: GammaOfficeExtra[] }>
   {
-    const {$apiFetch} = useNuxtApp()
-    return $apiFetch<{ data: GammaOfficeExtra[] }>(`${baseUrl}/gamma-office-extra`, {
+    return await $fetch(`/api/proxy${baseUrl}/gamma-office-extra`, {
       method: 'GET',
-      params
+      query: params
     })
   }
 }

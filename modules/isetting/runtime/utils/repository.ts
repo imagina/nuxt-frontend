@@ -5,8 +5,7 @@ const baseUrl = '/isetting/v1'
 export const isettingSettingsRepository = {
   async index (params = {}): Promise<{ data: Setting[] }>
   {
-    const {$apiFetch} = useNuxtApp()
-    return $apiFetch<{ data: Setting[] }>(
-      `${baseUrl}/settings/get/all`, {method: 'GET', params})
+    return $fetch<{ data: Setting[] }>(
+      `/api/proxy${baseUrl}/settings/get/all`, {method: 'GET', params})
   },
 }

@@ -48,8 +48,7 @@ export const iuserUserRepository = {
 export const iuserRoleRepository = {
   async show (criteria: unknown, params: Record<string, unknown>): Promise<{ data: Role }>
   {
-    const {$apiFetch} = useNuxtApp()
-    return $apiFetch<{ data: Role }>(`${baseUrl}/roles/${criteria}`, {
+    return $fetch<{ data: Role }>(`/api/proxy${baseUrl}/roles/${criteria}`, {
       method: 'GET',
       params
     })

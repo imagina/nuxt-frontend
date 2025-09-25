@@ -13,13 +13,15 @@
 
 import type { PageData } from "#ipage/types/pages";
 
+const baseUrl = "/ipage/v1";
+
 export const ipagePagesRepository = {
   async show(slug: string, params = {}): Promise<{ data: PageData }> {
-     //const {$apiFetch} = useNuxtApp()
+    //const {$apiFetch} = useNuxtApp()
 
-    return await $fetch(`/api/proxy/ipage/v1/pages/${slug}`, {
+    return await $fetch(`/api/proxy${baseUrl}/pages/${slug}`, {
       method: "GET",
-      query: {...params },
+      query: { ...params },
     });
   },
 };
