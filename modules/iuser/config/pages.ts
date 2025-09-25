@@ -17,7 +17,20 @@ const pages = [
     path: '/auth/no-access',
     page: 'runtime/pages/auth/no-access.vue',
     meta: {layout},
+  },
+  {
+    name: 'iuser.request-token',
+    path: '/auth/request-token',
+    page: 'runtime/pages/auth/request-token.vue',
+    meta: {layout},
+  },
+  {
+    name: 'iuser.reset-password',
+    path: '/auth/reset-password',
+    page: 'runtime/pages/auth/reset-password.vue',
+    meta: {layout},
   }
+
 ]
 
 export default pages

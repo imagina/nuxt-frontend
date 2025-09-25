@@ -78,9 +78,14 @@ const getGammaOffices = async (filter: RentAvailability) =>
 const next = () => stepperRef.value?.next()
 const prev = () => stepperRef.value?.prev()
 const completeReservation = () => completed.value = true
-const editStep = (stepName: StepKey) => {
+const editStep = async (stepName: StepKey) => {
   reservationPreview.value.totalPrice = null
   step.value = STEPS_POSITIONS[stepName]
+  await nextTick() // asegura DOM listo
+  if (process.client) {
+    const el = document.getElementById('stepperMain')
+    el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 }
 
 const ctx: RentCtx = {
@@ -119,7 +124,7 @@ provide(RENT_CTX, ctx)
           Aquí verás los vehículos disponibles según tu búsqueda
         </div>
       </div>
-      <div v-else>
+      <div v-else id="stepperMain">
         <UStepper
           ref="stepperRef"
           v-model="step"
