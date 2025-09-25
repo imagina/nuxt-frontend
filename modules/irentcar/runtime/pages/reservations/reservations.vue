@@ -77,18 +77,22 @@ async function cancelReservation (reservationId: number)
                     aspect-ratio="aspect-[1/1]"
                     :ui="{
                       wrapper: '',
-                      container: 'w-[70px] h-[70px] bg-quaternary rounded-sm px-1',
+                      container: 'w-[76px] h-[76px] bg-quaternary rounded-sm px-1',
                       media: ' object-contain rounded-sm' }"/>
                 </div>
                 <div>
-                  <div class="text-primary font-semibold text-lg flex items-center ">
-                    <span class="text-dark">#{{ item.reservation.withPrefix }}{{ item.reservation.id }}</span>
-                    <span class="px-2">{{ item.reservation.gamma.summary }}</span>
+                  <div class="text-dark font-semibold text-lg flex items-center ">
+                    <span class="mr-2">Nº Confirmación: {{ item.reservation.withPrefix }}{{ item.reservation.id }}</span>
                     <UBadge size="sm" color="success">
                       {{ item.reservation.status.title }}
                     </UBadge>
                   </div>
-                  <div class="text-secondary uppercase font-bold">{{ item.reservation?.gamma.title }}</div>
+                  <div class="text-primary font-semibold text-lg flex items-center ">
+                  <span class="text-secondary uppercase font-bold">{{ item.reservation?.gamma.title }}</span>
+                    <span class="px-2">{{ item.reservation.gamma.summary }}</span>
+
+                  </div>
+
                   <i class="fa-regular fa-calendar-range"></i> {{ item.label }}
                 </div>
               </div>
