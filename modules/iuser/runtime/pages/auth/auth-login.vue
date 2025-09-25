@@ -25,6 +25,12 @@ function onLogin ()
                 media: 'object-contain' }"
         />
         <IuserAuth @logged="onLogin"/>
+
+        <div class="text-center mt-6">
+          <UButton icon="i-lucide:key-round" to="/auth/request-token" variant="ghost" size="sm">
+            ¿Olvidaste tu contraseña?
+          </UButton>
+        </div>
       </div>
     </div>
   </ClientOnly>
