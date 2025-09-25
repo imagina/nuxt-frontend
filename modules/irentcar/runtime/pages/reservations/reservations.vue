@@ -82,7 +82,7 @@ async function cancelReservation (reservationId: number)
                 </div>
                 <div>
                   <div class="text-primary font-semibold text-lg flex items-center ">
-                    <span class="text-dark">#{{ item.reservation.id }}</span>
+                    <span class="text-dark">#{{ item.reservation.withPrefix }}{{ item.reservation.id }}</span>
                     <span class="px-2">{{ item.reservation.gamma.summary }}</span>
                     <UBadge size="sm" color="success">
                       {{ item.reservation.status.title }}

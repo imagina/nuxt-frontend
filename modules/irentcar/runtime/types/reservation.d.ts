@@ -75,4 +75,6 @@ export interface Reservation {
 
   totalPrice: number | null
   totalPriceConversions: PriceConversion | null
+
+  withPrefix: string
 }
