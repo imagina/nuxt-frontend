@@ -65,8 +65,8 @@ const proxyHandler = defineEventHandler(async (event) => {
 
 // Export with cache (GET only)
 export default cachedEventHandler(proxyHandler, {
-  maxAge: 5, // Cache TTL in seconds
-  staleMaxAge: 10, // Stale while revalidate time
+  maxAge: 900, // Cache TTL in seconds
+  staleMaxAge: 900, // Stale while revalidate time
   // Generate cache key from path and query
   getKey: (event) => {
     const path = getRouterParam(event, 'path') || ''
