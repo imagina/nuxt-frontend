@@ -4,6 +4,7 @@ import type {RentAvailability, IrentCarFormProps, OfficeOption, IrentCarFormEmit
 import type {IFormFieldConfig} from "~/components/IForm/IForm";
 import type {DateValidation} from "#irentcar/types/reservation";
 import {useInavigation} from "#icore/composables/useInavigation";
+import {generateTimeSlots} from './config'
 import {defu} from "defu";
 
 const {goTo} = useInavigation()
@@ -13,6 +14,18 @@ const emit = defineEmits<IrentCarFormEmits>()
 const router = useRouter()
 const urlFilters = router.currentRoute.value.query.rentAvailability ?? '{}'
 const preFilters = JSON.parse(urlFilters as string)
+
+const storeSettings = useIsettingStore()
+// Instance the time slots
+const slotsIntervalMinutes = storeSettings.get('irentcar::slotsInvervalMinutes')
+const slotStart = storeSettings.get('irentcar::slotRangeStart')
+const slotEnd = storeSettings.get('irentcar::slotRangeEnd')
+const slots = generateTimeSlots(slotStart, slotEnd, slotsIntervalMinutes)
+// Get the settings for date validation
+const minDropOffDays = storeSettings.get('irentcar::minDropoffDays')
+const maxDropOffDays = storeSettings.get('irentcar::maxDropoffDays')
+const minAdvanceMinutes = storeSettings.get('irentcar::minAdvanceMinutes')
+console.log(minDropOffDays, maxDropOffDays, minAdvanceMinutes)
 
 const form = ref<RentAvailability>({
   pickupOfficeId: null,
