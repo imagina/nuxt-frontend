@@ -1,8 +1,19 @@
+import type {Slot} from "#irentcar/types/reservation";
+
+export const defaultFormValues = {
+  pickupOfficeId: null,
+  pickupDate: null,
+  pickupTime: null,
+  dropOfficeId: null,
+  dropDate: null,
+  dropTime: null,
+}
+
 export function generateTimeSlots (
   start: string,
   end: string,
   intervalMinutes: number
-): string[]
+): Slot[]
 {
   const [startHourStr, startMinuteStr] = start.split(':')
   const [endHourStr, endMinuteStr] = end.split(':')
@@ -23,25 +34,16 @@ export function generateTimeSlots (
   const endDate = new Date()
   endDate.setHours(endHour, endMinute, 0, 0)
 
-  const slots: string[] = []
+  const slots: Slot[] = []
 
   const current = new Date(startDate)
   while (current <= endDate)
   {
     const hours = current.getHours().toString().padStart(2, '0')
     const minutes = current.getMinutes().toString().padStart(2, '0')
-    slots.push(`${hours}:${minutes}`)
+    slots.push({hour: `${hours}:${minutes}`, available: true})
     current.setMinutes(current.getMinutes() + intervalMinutes)
   }
 
   return slots
-}
-
-const defaultFormValues = {
-  pickupOfficeId: null,
-  pickupDate: null,
-  pickupTime: null,
-  dropOfficeId: null,
-  dropDate: null,
-  dropTime: null,
 }

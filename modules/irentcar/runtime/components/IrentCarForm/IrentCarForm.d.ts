@@ -29,3 +29,10 @@ export interface IrentCarFormProps extends Pick<IFormProps, 'ui'>
 {
   id?: string
 }
+
+export interface dropLimitCalendarType {
+  min : string,
+  max : string,
+}
+
+export type ResettableKeys = 'pickupTime' | 'dropOfficeId' | 'dropDate' | 'dropTime'

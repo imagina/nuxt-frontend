@@ -1,5 +1,4 @@
 import type {Gamma} from "#irentcar/types/gamma";
-import type {Extra} from "#irentcar/types/gammaOffice";
 import type {Office} from "#irentcar/types/office";
 import type {PriceConversion} from "#irentcar/types/priceConversion";
 import type {GammaOfficeExtra} from "#irentcar/types/extra";
