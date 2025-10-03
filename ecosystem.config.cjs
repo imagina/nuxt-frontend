@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'DevRentCar',
+      name: 'ProdRentCar',
       port: '3000',
       exec_mode: 'cluster',
       instances: 'max',
