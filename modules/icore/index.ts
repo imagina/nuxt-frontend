@@ -18,9 +18,13 @@ export default defineNuxtModule({
       src: resolve(runtimeDir, 'plugins/recaptcha.client'),
       mode: 'client',
     })
+    addPlugin({
+      src: resolve(runtimeDir, 'plugins/router-loading.client'),
+      mode: 'client',
+    })
     // Auto-imports
     addImportsDir(resolve(runtimeDir, 'composables'))
-    //addImportsDir(resolve(runtimeDir, 'stores'))
+    addImportsDir(resolve(runtimeDir, 'stores'))
     //addImportsDir(resolve(runtimeDir, 'utils'))
     // Components (optional)
     // addComponentsDir({path: resolve(runtimeDir, 'components') prefix:'icore', pathPrefix: false})
