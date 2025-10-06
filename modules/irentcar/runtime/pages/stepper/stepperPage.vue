@@ -12,12 +12,14 @@ import ReviewStep from './reviewStep.vue'
 import Resume from '#irentcar/components/IrentcarReservation/IrentcarReservation.vue'
 
 const settingStore = useIsettingStore()
+const routerLoading = useIcoreRouterLoading()
 useSeoMeta({
   title: () => `Reservación | ${settingStore.get('isite::siteName')}`,
   ogTitle: () => `Reservación | ${settingStore.get('isite::siteName')}`,
   description: () => `Reservación | ${settingStore.get('isite::siteName')}`,
   ogDescription: () => `Reservación | ${settingStore.get('isite::siteName')}`,
 })
+onMounted(() => routerLoading.stop())
 
 const step = ref(0)
 const completed = ref(false)

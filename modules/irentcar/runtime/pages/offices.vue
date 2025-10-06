@@ -2,6 +2,8 @@
 import {irentcarOfficeRepository} from '#irentcar/utils/repository'
 import type {AccordionItem} from "@nuxt/ui";
 const settingStore = useIsettingStore()
+const routerLoading = useIcoreRouterLoading()
+onMounted(() => routerLoading.stop())
 
 const {data: officesResponse} = await useAsyncData(`irentCar:offices`, () =>
   irentcarOfficeRepository.index({include: 'locatable'})

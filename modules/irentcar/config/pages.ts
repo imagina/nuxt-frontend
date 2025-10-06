@@ -8,12 +8,6 @@ const pages = [
     meta: {layout},
   },
   {
-    name: 'irentcar.page.stepper-details',
-    path: '/rent-car/stepper-details',
-    page: 'runtime/pages/stepper-details.vue',
-    meta: {layout},
-  },
-  {
     name: 'irentcar.page.offices',
     path: '/rent-car/offices',
     page: 'runtime/pages/offices.vue',

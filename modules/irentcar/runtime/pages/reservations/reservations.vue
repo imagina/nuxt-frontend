@@ -5,12 +5,15 @@ import type {ItemCollapsible} from './reservations'
 import type {Reservation} from "#irentcar/types/reservation";
 
 const settingStore = useIsettingStore()
+const routerLoading = useIcoreRouterLoading()
+
 useSeoMeta({
   title: () => `Mis Reservaciones | ${settingStore.get('isite::siteName')}`,
   ogTitle: () => `Mis Reservaciones | ${settingStore.get('isite::siteName')}`,
   description: () => `Mis Reservaciones | ${settingStore.get('isite::siteName')}`,
   ogDescription: () => `Mis Reservaciones | ${settingStore.get('isite::siteName')}`,
 })
+onMounted(() => routerLoading.stop())
 
 const {formatDate} = useHelpers()
 const openConfirmationDelete = ref(false)

@@ -6,6 +6,8 @@ import type {Type} from "#irentcar/types/static";
 const settingStore = useIsettingStore()
 
 const router = useRouter()
+const routerLoading = useIcoreRouterLoading()
+onMounted(() => routerLoading.stop())
 const urlFilters = router.currentRoute.value.query.filters ?? '{}'
 const filters = ref(JSON.parse(urlFilters as string))
 
