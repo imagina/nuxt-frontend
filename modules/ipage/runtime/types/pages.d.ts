@@ -1,4 +1,26 @@
-export interface PageData {
+import type {Thumbnails} from "#islider/types/slider";
+
+interface PageFile
+{
+  disk: string | null;
+  extension: string | null;
+  filename: string | null;
+  filesize: number | null;
+  folderId: number | null;
+  hasThumbnails: boolean | null;
+  hasWatermark: boolean | null;
+  isFolder: number; // 0 = false, 1 = true
+  isImage: boolean;
+  isVideo: boolean;
+  mimetype: string | null;
+  path: string;
+  thumbnails: Thumbnails;
+  url: string;
+  visibility: string | null;
+}
+
+export interface PageData
+{
   id: number
   title: string | null
   slug: string | null
@@ -21,13 +43,15 @@ export interface PageData {
   type: string
   status: boolean | null
   recordType: string
-
+  files: { mainimage: PageFile }
   // localized content
   es?: PageLocale
+
   [locale: string]: PageLocale | unknown
 }
 
-export interface PageLocale {
+export interface PageLocale
+{
   title: string
   slug: string
   status: boolean

@@ -33,7 +33,7 @@ const registerFormFields = computed(() =>
 
 const formActions = computed<ButtonProps[]>(() => ([
   {
-    label: authType.value === 'login' ? 'Register' : 'Login',
+    label: authType.value === 'login' ? 'Registrarme' : 'Iniciar Sesión',
     color: 'neutral',
     onClick: () =>
     {
@@ -41,7 +41,7 @@ const formActions = computed<ButtonProps[]>(() => ([
     }
   },
   {
-    label: authType.value === 'login' ? 'Login' : 'Register',
+    label: authType.value === 'login' ? 'Iniciar Sesión' : 'Registrarme',
     type: 'submit',
     color: 'primary',
     loading: loading.value

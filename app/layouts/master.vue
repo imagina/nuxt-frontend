@@ -1,4 +1,6 @@
 <script setup lang="ts">
+  import IcoreRouterLoader from "#icore/components/IcoreRouterLoader.vue";
+
   const settingStore = useIsettingStore()
   //Always use light for layout master
   const colorMode = useColorMode()
@@ -22,6 +24,7 @@
     data-vaul-drawer-wrapper>
     <IHeader/>
     <main class="flex-1">
+      <IcoreRouterLoader />
       <slot/>
     </main>
     <IFooter/>
