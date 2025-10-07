@@ -1,1 +1,1 @@
-# TODOs for Ipage Module
+# TODOs for iblog Module

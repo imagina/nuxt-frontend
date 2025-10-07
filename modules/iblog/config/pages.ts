@@ -2,15 +2,15 @@ const layout = 'master'
 const pages = [
   {
     name: 'blog.category',
-    path: '/iblog/:category',
-    page: 'index',
-    meta: { layout },
+    path: '/iblog/:slugCategory',
+    page: 'runtime/pages/category',
+    meta: {layout},
   },
   {
     name: 'blog.post',
-    path: '/iblog/:category/:post',
-    page: 'show',
-    meta: { layout },
+    path: '/iblog/:slugCategory/:slugPost',
+    page: 'runtime/pages/post',
+    meta: {layout},
   },
 ]
 

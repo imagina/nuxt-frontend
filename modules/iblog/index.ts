@@ -3,7 +3,7 @@ import pagesConfig from './config/pages'
 
 export default defineNuxtModule({
   meta: {
-    name: 'ipage'
+    name: 'iblog'
   },
   async setup (_, nuxt)
   {
@@ -13,7 +13,7 @@ export default defineNuxtModule({
     // Alias for the module
     nuxt.options.alias['#iblog'] = runtimeDir
     // Auto-imports
-    addImportsDir(resolve(runtimeDir, 'composables'))
+    //addImportsDir(resolve(runtimeDir, 'composables'))
     //addImportsDir(resolve(runtimeDir, 'stores'))
     //addImportsDir(resolve(runtimeDir, 'utils'))
     // Plugins
@@ -24,15 +24,6 @@ export default defineNuxtModule({
     extendPages((pages) => pagesConfig.forEach(
       page => pages.push({...page, file: resolve(page.page)})
     ))
-    // Add middleware
-    nuxt.hook('app:resolve', (app) =>
-    {
-      app.middleware.unshift({
-        name: 'ipage-redirect-home',
-        path: resolve(runtimeDir, 'middleware/redirect-home.global'),
-        global: true
-      })
-    })
     //Extend i18n
     nuxt.hook('i18n:registerModule', register => register({
       langDir: resolve('./i18n'),
