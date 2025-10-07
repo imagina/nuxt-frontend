@@ -5,6 +5,20 @@ defineProps<{ page: PageData }>()
 </script>
 <template>
   <div>
+    <!-- Home Colbitumen -->
+        <IsliderCarousel
+      system-name="slider_home"
+      dots-position="inside-left-middle"
+      :carousel-props="{
+      dots: true,
+      autoplay: true,
+      loop: true,
+      ui: {
+        item: 'h-[260px] sm:h-[360px] md:h-[400px]',
+        dot: 'w-[16px] h-[16px] rounded-full bg-[#FFFFFF80] data-[state=active]:bg-secondary'
+      }
+    }"
+    />
     <!-- Nosotros -->
     <IBreadcrumb
       :title="page.title ?? '...'"

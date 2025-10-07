@@ -5,7 +5,7 @@ defineProps<{ page: PageData }>()
 
 const buttonProps = {
   size: 'xl',
-  class: 'justify-center bg-secondary  text-white hover:bg-primary hover:text-white transition'
+  class: 'px-5 py-3 bg-tertiary rounded-full text-[18px] leading-[18px] transition'
 }
 const ui = {
   root: '',
@@ -37,29 +37,28 @@ const ui = {
         />
       </template>
     </IBreadcrumb>
-    <div class="bg-gray-2">
-      <UContainer class="py-10 px-4 sm:px-6 lg:px-10 contacto">
-        <h1 class="page-title hidden">{{ page.title }}</h1>
-        <div class="page-body mb-9" v-html="page.body"></div>
-        <div class="flex flex-col gap-10 lg:flex-row">
-          <div class="min-w-0 lg:basis-1/2">
-            <IformForm
-              :button-props="buttonProps"
-              :ui="ui" system-name="contact_form" />
-          </div>
-          <div class="min-w-0 lg:basis-1/2">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63623.92796860637!2d-74.13125156112116!3d4.683603391468811!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9aeed5ded35d%3A0xf23844a180342b9c!2sAlquiler%20de%20Carros%20Bogot%C3%A1%20-%20ABC%20RENT%20A%20CAR!5e0!3m2!1ses!2sve!4v1755888820280!5m2!1ses!2sve"
-              class=" h-[550px] w-full rounded-lg"
-              style="border:0;"
-              allowfullscreen
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-          </div>
+    <UContainer class="py-10  contacto">
+      <h1 class="page-title hidden">{{ page.title }}</h1>
+      <div class="page-body mb-10" v-html="page.body"></div>
+      <div class="flex flex-col gap-10 lg:flex-row">
+        <div class="min-w-0 lg:basis-1/2">
+          <IformForm
+            :button-props="buttonProps"
+            :ui="ui" system-name="formulario-pqrsf" />
         </div>
-      </UContainer>
-    </div>
+        <div class="min-w-0 lg:basis-1/2">
+          <IMediaRender
+            :media="page.files.mainimage"
+            :alt="page.title"
+            aspect-ratio="aspect-1/1"
+            :ui="{
+              wrapper: '',
+              media: 'w-full h-full object-cover rounded-2xl',
+            }"
+          />
+        </div>
+      </div>
+    </UContainer>
   </div>
 </template>
 <style scoped>
