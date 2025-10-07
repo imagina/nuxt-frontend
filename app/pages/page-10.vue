@@ -12,7 +12,7 @@ defineProps<{ page: PageData }>()
       :title="page.title ?? '...'"
       :ui="{ link: 'font-bold text-gray-3' }">
   </IBreadcrumb>
-  <UContainer class="py-10 nosotros ">
+  <UContainer :class="`page-${page?.id}`" class="py-10 nosotros">
     <h1 class="page-title hidden">{{ page.title }}</h1>
     <div class="page-body-img">
       <!-- Imagen primero -->
@@ -34,7 +34,27 @@ defineProps<{ page: PageData }>()
   <!-- Slider con video us -->
   <ISliderVideoUs name="asfalcargo_nosotros_video"></ISliderVideoUs>
 
-  <!-- Carousel Clientes -->
+  <!-- Historia -->
+  <ITimelineHistory
+    name="asfalcargo_historia"
+    title="Nuestra Historia"
+    subtitle="¡Entérate como ha sido nuestra evolución a través del tiempo!"
+  />
+
+  <!-- Slider Rutas -->
+  <ISliderColumnTwo
+    name="asfalcargo_rutas"
+    title="NUESTRAS"
+    subtitle="Rutas"
+  />
+
+  <!-- Slider certificaciones-->
+  <ISliderColumnOne
+    name="asfalcargo_certificaciones"
+    title="Nuestras Certificaciones"
+  />
+
+  <!-- Slider Clientes -->
   <ISliderClients name="colbitumen_clientes"></ISliderClients>
 
 </template>

@@ -64,7 +64,7 @@ const soluciones = [
 </script>
 
 <template>
-  <div>
+  <div :class="`page-${page?.id}`">
     <!-- Inicio comercializadora -->
     <ISliderMain name="principal_comercializadora"></ISliderMain>
 

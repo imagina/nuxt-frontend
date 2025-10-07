@@ -67,7 +67,7 @@ const posts = [{},{},{},{}]
 </script>
 
 <template>
-  <div>
+  <div :class="`page-${page?.id}`">
     <!-- Inicio Asfalcargo -->
     <ISliderMain name="principal-asfalcargo">
       <template #curve>

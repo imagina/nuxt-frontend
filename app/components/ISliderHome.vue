@@ -9,6 +9,7 @@ const props = defineProps({
 <template>
   <IsliderCarousel :system-name="name" dots-position="inside-left-middle"
   :carousel-props="{
+    fade: true,
     dots: false,
     autoplay: true,
     loop: false,

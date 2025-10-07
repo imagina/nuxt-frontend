@@ -2,8 +2,6 @@
 import type { PageData } from '#ipage/types/pages'
 defineProps<{ page: PageData }>()
 
-
-
 </script>
 
 <template>
@@ -12,7 +10,7 @@ defineProps<{ page: PageData }>()
       :title="page.title ?? '...'"
       :ui="{ link: 'font-bold text-gray-3' }">
   </IBreadcrumb>
-  <UContainer class="py-10 nosotros ">
+  <UContainer :class="`page-${page?.id}`" class="py-10 nosotros">
     <h1 class="page-title hidden">{{ page.title }}</h1>
     <div class="page-body-img">
       <!-- Imagen primero -->
@@ -34,7 +32,27 @@ defineProps<{ page: PageData }>()
   <!-- Slider con video us -->
   <ISliderVideoUs name="colbitumen_nosotros_video"></ISliderVideoUs>
 
-  <!-- Carousel Clientes -->
+  <!-- Historia -->
+  <ITimelineHistory
+    name="colbitumen_historia"
+    title="Nuestra Historia"
+    subtitle="¡Entérate cómo ha sido nuestra evolución a través del tiempo!"
+  />
+
+  <!-- Slider Compromiso de excelencia -->
+  <ISliderColumnTwo
+    name="colbitumen_excelencia"
+    title="CONOCE NUESTRO COMPROMISO"
+    subtitle="Compromiso con la Excelencia"
+  />
+
+  <!-- Slider certificaciones-->
+  <ISliderColumnOne
+    name="colbitumen_certificaciones"
+    title="Nuestras Certificaciones"
+  />
+
+  <!-- Slider Clientes -->
   <ISliderClients name="colbitumen_clientes"></ISliderClients>
 
 </template>

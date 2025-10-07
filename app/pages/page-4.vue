@@ -36,7 +36,7 @@ const ui = {
         />
       </template>
     </IBreadcrumb>
-    <UContainer class="py-10 trabaja">
+    <UContainer :class="`page-${page?.id}`" class="py-10 trabaja">
       <h1 class="page-title hidden">{{ page.title }}</h1>
       <div class="page-body mb-10" v-html="page.body"></div>
       <div class="flex flex-col gap-10 lg:flex-row">
