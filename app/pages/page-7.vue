@@ -145,6 +145,7 @@ const posts = [{},{},{},{}]
           :carousel-props="{
             dots: true,
             loop: true,
+            align: 'start',
             autoplay: true,
             ui: {
               item: 'snap-start grow-0 shrink-0 basis-full lg:basis-1/2',

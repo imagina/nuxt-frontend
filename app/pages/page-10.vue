@@ -7,7 +7,7 @@ defineProps<{ page: PageData }>()
 </script>
 
 <template>
-  <!-- Nosotros Laboratorio -->
+  <!-- Nosotros Asfalcargo -->
   <IBreadcrumb
       :title="page.title ?? '...'"
       :ui="{ link: 'font-bold text-gray-3' }">
@@ -32,7 +32,7 @@ defineProps<{ page: PageData }>()
   <div class="w-full h-2"></div>
 
   <!-- Slider con video us -->
-  <ISliderVideoUs name="laboratorio_nosotros_video"></ISliderVideoUs>
+  <ISliderVideoUs name="asfalcargo_nosotros_video"></ISliderVideoUs>
 
   <!-- Carousel Clientes -->
   <ISliderClients name="colbitumen_clientes"></ISliderClients>

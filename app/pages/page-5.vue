@@ -162,10 +162,11 @@ const soluciones = [
           dots-position="outside-bottom-middle"
           :carousel-props="{
             dots: true,
+            align: 'start',
             autoplay: true,
             loop: true,
             ui: {
-                item: 'basis-1/2 md:basis-1/3',
+                item: 'basis-1/2 md:basis-1/3 lg:basis-1/4',
                 dot: 'w-[13px] h-[13px] rounded-full data-[state=active]:bg-tertiary',
               },
           }">

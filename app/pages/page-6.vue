@@ -151,6 +151,7 @@ const posts = [{},{},{},{}]
         :carousel-props="{
           dots: false,
           loop: true,
+          align: 'start',
           autoplay: true,
           ui: {
             item: 'basis-1/2 md:basis-1/3 lg:basis-1/4 shrink-0 p-0',

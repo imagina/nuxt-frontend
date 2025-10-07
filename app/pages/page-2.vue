@@ -2,70 +2,53 @@
 import type { PageData } from '#ipage/types/pages'
 defineProps<{ page: PageData }>()
 
+
+
 </script>
+
 <template>
-  <div>
-    <!-- Home Colbitumen -->
-        <IsliderCarousel
-      system-name="slider_home"
-      dots-position="inside-left-middle"
-      :carousel-props="{
-      dots: true,
-      autoplay: true,
-      loop: true,
-      ui: {
-        item: 'h-[260px] sm:h-[360px] md:h-[400px]',
-        dot: 'w-[16px] h-[16px] rounded-full bg-[#FFFFFF80] data-[state=active]:bg-secondary'
-      }
-    }"
-    />
-    <!-- Nosotros -->
-    <IBreadcrumb
+  <!-- Nosotros Colbitumen -->
+  <IBreadcrumb
       :title="page.title ?? '...'"
       :ui="{ link: 'font-bold text-gray-3' }">
-      <template #extraUp>
-        <IsliderCarousel
-          system-name="publi_nosotros"
-          item-theme="ItemTheme2"
-          dots-position="inside-left-middle"
-          :carousel-props="{
-          dots: true,
-          autoplay: true,
-          loop: true,
-          ui: {
-            item: 'h-[260px] sm:h-[360px] md:h-[400px]',
-            dot: 'w-[16px] h-[16px] rounded-full bg-[#FFFFFF80] data-[state=active]:bg-secondary'
-          }
-        }"/>
-      </template>
-    </IBreadcrumb>
-    <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-10 nosotros">
-      <h1 class="page-title hidden">{{ page.title }}</h1>
-      <div class="page-body" v-html="page.body"></div>
-    </section>
-    <!-- Form Contacto -->
-    <FormContact />
-  </div>
+  </IBreadcrumb>
+  <UContainer class="py-10 nosotros ">
+    <h1 class="page-title hidden">{{ page.title }}</h1>
+    <div class="page-body-img">
+      <!-- Imagen primero -->
+      <IMediaRender
+        :media="page.files.mainimage"
+        :alt="page.title"
+        aspect-ratio="auto"
+        :ui="{
+          wrapper: 'float-right w-full lg:w-1/2 h-[450px] ml-10 mb-10',
+          media: 'w-full h-full object-cover rounded-2xl',
+        }"
+      />
+      <div class="page-body text-justify" v-html="page.body"></div>
+    </div>
+  </UContainer>
+
+  <div class="w-full h-2"></div>
+
+  <!-- Slider con video us -->
+  <ISliderVideoUs name="colbitumen_nosotros_video"></ISliderVideoUs>
+
+  <!-- Carousel Clientes -->
+  <ISliderClients name="colbitumen_clientes"></ISliderClients>
+
 </template>
-
 <style scoped>
-@reference "~/assets/css/main.css";
-
-.nosotros .page-body {
-
-
-  & :deep(img) { object-fit: cover; border-radius: 30px; }
-
-  /* grid dentro del HTML inyectado */
-  & :deep(:is(.grid)) { @apply gap-10; }
-
-  /* Énfasis y enlaces */
-  & :deep(:is(strong,a)) { @apply text-primary; }
-
-  /* Separador */
-  & :deep(:is(hr)) {
-    @apply border-t;
-    border-color: #00000026;
+:deep(.page-body) {
+  & h2 { position: relative; }
+  & h2:before {
+    content: "";
+    display: block;
+    background-color: var(--color-tertiary);
+    width: 96px;
+    height: 4px;
+    position: absolute;
+    bottom: -18px;
   }
 }
 </style>

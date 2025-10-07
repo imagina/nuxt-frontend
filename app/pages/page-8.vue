@@ -107,7 +107,7 @@ const soluciones = [
                 <IMediaRender
                   :media="item.image"
                   :alt="item.title"
-                  aspect-ratio="aspect-4/3"
+                  aspect-ratio="aspect-16/9"
                   :ui="{
                     wrapper: '',
                     container: 'rounded-2xl ',
@@ -206,9 +206,10 @@ const soluciones = [
           :carousel-props="{
             dots: true,
             loop: true,
+            align: 'start',
             autoplay: true,
             ui: {
-              item: 'basis-1/2 md:basis-1/3',
+              item: 'basis-1/2 md:basis-1/3 lg:basis-1/4',
               dot: 'w-[13px] h-[13px] rounded-full data-[state=active]:bg-tertiary',
             },
           }"
@@ -217,7 +218,7 @@ const soluciones = [
         >
           <template #item="{ item, index }">
             <div class="mb-8">
-              <div class="m-4 rounded-2xl bg-white transition p-3 hover:-translate-y-0.5 ">
+              <div class=" bg-white transition hover:-translate-y-0.5 ">
                 <NuxtLink :to="item.href">
                   <IMediaRender
                     :media="item.image"
