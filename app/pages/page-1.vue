@@ -1,9 +1,16 @@
 <script lang="ts">
-export const pageMeta = { layout: 'blank'}
+export const pageMeta = {layout: 'blank'}
 </script>
 
 <script setup lang="ts">
 import type {PageData} from "#ipage/types/pages";
+import {ipagePagesRepository} from '#ipage/utils/repository'
+
+const {data} = await useAsyncData('switch-home-pages', () =>
+  ipagePagesRepository.index({
+    filter: {slug: {operator: 'like', value: '%inicio-%'}},
+    include: 'translations,files'
+  }))
 
 defineProps<{ page: PageData }>()
 const settingStore = useIsettingStore()
