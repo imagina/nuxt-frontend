@@ -8,7 +8,7 @@ const props = defineProps({
 <template>
   <UContainer class="py-10">
       <div class="text-center">
-        <div v-if="title" class=" text-tertiary tracking-[.25em] text-[16px] leading-[16px] lg:text-[18px] lg:leading-[18px] font-bold uppercase mb-2" >
+        <div v-if="title" class="text-tertiary tracking-[.25em] text-[16px] leading-[16px] lg:text-[18px] lg:leading-[18px] font-bold uppercase mb-2" >
           {{ title }}
         </div>
         <div v-if="subtitle" class="text-primary text-[25px] leading-[25px] lg:text-[35px] lg:leading-[35px] font-bold mb-10" >
