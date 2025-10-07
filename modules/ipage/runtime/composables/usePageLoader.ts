@@ -6,12 +6,13 @@ export async function usePageLoader (slug: string)
 {
   const page = ref<PageData>()
   const PageComponent = shallowRef()
+  let pageMeta: Record<string, any> | undefined
 
   const {data, error} = await useAsyncData(`page-${slug}`, () =>
     ipagePagesRepository.show(slug, {
-        filter: { field: 'slug' },
-        include: 'translations,files'
-      })
+      filter: {field: 'slug'},
+      include: 'translations,files'
+    })
   )
 
   if (error.value)
@@ -30,13 +31,13 @@ export async function usePageLoader (slug: string)
 
   if (components[componentPath])
   {
-    PageComponent.value = defineAsyncComponent(
-      components[componentPath] as unknown as () => Promise<Component>
-    )
+    const mod = await (components[componentPath] as () => Promise<any>)()
+    pageMeta = mod.pageMeta
+    PageComponent.value = defineAsyncComponent(() => Promise.resolve(mod.default))
   } else
   {
     PageComponent.value = defineAsyncComponent(() => import('#ipage/pages/default-page.vue'))
   }
 
-  return {page, PageComponent}
+  return {page, PageComponent, pageMeta}
 }
