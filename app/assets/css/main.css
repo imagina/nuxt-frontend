@@ -38,7 +38,7 @@
 }
 
 .page-body {
-  @apply font-normal text-[18px] leading-[20px] md:text-[20px] md:leading-[30px];
+  @apply font-normal text-justify text-[16px] leading-[20px] md:text-[18px] md:leading-[25px];
 
   & :is(.grid) { @apply gap-10; }
 

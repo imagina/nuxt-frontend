@@ -38,21 +38,12 @@ const items = computed<DropdownMenuItem[]>(() =>
               />
             </NuxtLink>
           </div>
-          <div class="pl-4 border-l border-gray-300 hidden sm:block">
-            <IContactSocial class-social="fixed right-0 top-[30%] z-[1000]"
-                            class-link-social="transition hover:text-[26px] hidden sm:flex shadow-lg bg-white h-[30px] w-[35px] text-[20px]  lg:h-[45px] lg:w-[50px] lg:text-[25px] rounded-l-lg my-1 items-center justify-center"/>
-            <IContactWhatsapp class-icons="flex items-center justify-center text-white"
-                              class-link-phone="inline-block text-[18px] text-w"/>
-          </div>
         </div>
         <div class="menus">
           <div class="flex items-center">
             <div class="menu">
               <imenu-menu system-name="main-menu" :title="siteName"/>
             </div>
-            <UDropdownMenu :items="items" :popper="{ placement: 'bottom-start', strategy: 'fixed' }">
-              <UButton icon="i-material-symbols:person"  color="neutral" variant="ghost" />
-            </UDropdownMenu>
           </div>
         </div>
       </div>
@@ -70,14 +61,5 @@ const items = computed<DropdownMenuItem[]>(() =>
 }
 .menu > :deep(nav) a:hover {
   color: var(--color-secondary);
-}
-:deep(.component-whatsapp .flex) {
-  @apply items-center justify-center gap-2;
-}
-:deep(.component-whatsapp .text-w span) {
-  @apply font-bold;
-}
-:deep(.component-whatsapp .icon-whatsapp) {
-  @apply h-[32px] w-[32px] rounded-full bg-whatsapp flex items-center justify-center;
 }
 </style>
