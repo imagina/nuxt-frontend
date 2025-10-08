@@ -17,15 +17,25 @@ const items = computed(() => icontactStore.getItems('WHATSAPP'))
 
 <template>
   <!-- Whatsapp -->
-  <div v-if="items.length" class="component-whatsapp">
-    <div class="flex">
+  <div v-if="items.length" class="component-whatsapp" :class="classComponent">
+    <template v-if="layoutInline">
+      <div v-for="(item, index) in items" :key="index" class="flex">
+        <div class="icon-whatsapp">
+          <Icon v-if="showIcons" :name="phoneIcon" :class="classIcons" />
+        </div>
+        <a aria-label="whatsapp" rel="noopener" :href="`https://wa.me/+${item.countryCode}${item.value}?text=${item.message}`" target="_blank" :class="classLinkPhone">
+          <span>+{{ item.countryCode }}</span> {{ item.value }}
+        </a>
+      </div>
+    </template>
+    <div v-else class="flex">
       <div class="icon-whatsapp">
         <Icon v-if="showIcons" :name="phoneIcon" :class="classIcons" />
       </div>
       <div class="content-whatsapp">
         <template v-for="(item, index) in items" :key="index">
           <span v-if="withHyphen && index>0">&nbsp;-&nbsp;</span>
-          <a aria-label="whatsapp" :href="`https://wa.me/+${item.countryCode}${item.value}?text=${item.message}`" target="_blank" :class="classLinkPhone">
+          <a aria-label="whatsapp" rel="noopener" :href="`https://wa.me/+${item.countryCode}${item.value}?text=${item.message}`" target="_blank" :class="classLinkPhone">
             <span>+{{ item.countryCode }}</span> {{ item.value }}
           </a>
         </template>

@@ -10,6 +10,7 @@ const props = defineProps({
   classTitle: {type: String, default: 'font-bold'},
   classLinkEmail: {type: String, default: 'inline-block'},
   withHyphen: {type: Boolean, default: true},
+  layoutInline: { type: Boolean, default: false },
 })
 const icontactStore = useIcontactStore()
 const items = computed(() => icontactStore.getItems('EMAIL'))
@@ -18,13 +19,21 @@ const items = computed(() => icontactStore.getItems('EMAIL'))
 
 <template>
   <!-- Email -->
-  <div v-if="items.length" class="component-email">
-    <div class="flex">
+  <div v-if="items.length" class="component-email" :class="classComponent">
+    <template v-if="layoutInline">
+      <div v-for="(item, index) in items" :key="index.id" class="flex">
+        <i v-if="showIcons" :class="[emailIcon,classIcons]"/>
+        <a aria-label="email" :href="`mailto:${item.value}`" target="_blank" class="wrap-anywhere" :class="classLinkEmail"  rel="noopener">
+          <span :class="classTitle">{{ item.title }}</span> {{ item.value }}
+        </a>
+      </div>
+    </template>
+    <div v-else class="flex">
       <i v-if="showIcons" :class="[emailIcon,classIcons]"/>
       <div class="content-email">
         <template v-for="(item, index) in items" :key="index">
           <span v-if="withHyphen && index>0">&nbsp;-&nbsp;</span>
-          <a :href="`mailto:${item.value}`" target="_blank" class="wrap-anywhere" :class="classLinkEmail">
+          <a aria-label="email" :href="`mailto:${item.value}`" target="_blank" class="wrap-anywhere" :class="classLinkEmail"  rel="noopener">
             <span :class="classTitle">{{ item.title }}</span> {{ item.value }}
           </a>
         </template>

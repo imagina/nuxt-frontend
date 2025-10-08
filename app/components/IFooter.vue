@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import IContactSocial from "#icontact/components/IcontactSocial/IContactSocial.vue";
 import IContactEmail from "#icontact/components/IcontactEmail/IContactEmail.vue";
-import IContactWhatsapp from "#icontact/components/IcontactWhatsapp/IContactWhatsapp.vue";
+import IContactPhone from "#icontact/components/IcontactPhone/IContactPhone.vue";
 import IlocationLocatable from "#ilocation/components/IlocationLocatable/IlocationLocatable.vue";
+
 
 const settingStore = useIsettingStore()
 // const
-const logoFooter =  settingStore.get('isite::logo2')
+const logoFooter =  settingStore.get('isite::logoIadmin')
 
 const desktopNavProps = {
   orientation: 'vertical',
@@ -18,61 +20,55 @@ const desktopNavProps = {
 }
 </script>
 <template>
-  <IcontactWhatsappFixed />
+  <!-- <IcontactWhatsappFixed /> -->
   <footer class="bg-dark-1 text-white">
-    <div class="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 py-12 px-4 sm:px-6 lg:px-10">
-      <div class="flex justify-center md:justify-start self-center mx-auto lg:mx-0">
-        <NuxtLink to="/">
-          <IMediaRender
-              :media="logoFooter" alt="Logo"
-              aspect-ratio="auto"
-              :ui="{
-                wrapper: 'h-[50px] w-full md:w-[181px]',
-                container: '',
-                media: 'object-contain' }"
-              />
-        </NuxtLink>
+    <UContainer class="py-10 text-center">
+      <NuxtLink to="/">
+        <IMediaRender
+            :media="logoFooter" alt="Logo"
+            aspect-ratio="auto"
+            :ui="{
+              wrapper: 'h-[50px] w-auto',
+              container: '',
+              media: 'object-contain' }"
+            />
+      </NuxtLink>
+    </UContainer>
+    <UContainer class="grid gap-10 lg:grid-cols-12">
+      <div class="lg:col-span-4 mb-10">
+        <h3 class="text-lg font-bold mb-4 uppercase">Hablemos</h3>
+        <IContactPhone class-title="hidden" :withHyphen="false" />
+        <IContactEmail class-title="hidden" :withHyphen="false" />
       </div>
+      <div class="lg:col-span-4 mb-10">
+        <h3 class="text-lg font-bold mb-4 uppercase">UBÍCANOS</h3>
+        <div class="space-y-1">
+          <IlocationLocatable class-component="space-y-2" :layout-inline="true" :withHyphen="false" class-icons="mt-1 mr-2 text-white"/>
 
-      <div class="flex flex-col border-footer relative">
-        <h3 class="text-lg font-semibold mb-4">Info de Contacto</h3>
-          <div class="space-y-1">
-            <IContactWhatsapp />
-            <IContactEmail :withHyphen="false" />
-            <IlocationLocatable :withHyphen="false" />
-          </div>
+        </div>
       </div>
-
-      <div class="flex flex-col space-y-4">
-        <h3 class="text-lg font-semibold">Apoyo al Cliente</h3>
-
-        <imenu-menu :with-drawer="false" system-name="inferior-menu" :desktop-nav-props="desktopNavProps" />
+      <div class="lg:col-span-4 mb-10">
+        <h3 class="text-lg font-bold mb-4 uppercase">Redes sociales</h3>
+          <IContactSocial
+            class-social="flex flex-wrap gap-3"
+            class-link-social="inline-flex h-10 w-10 items-center justify-center
+                              rounded-full border border-white
+                              hover:border-secondary transition"
+            class-icons="!text-white  text-[16px] leading-none"
+          />
       </div>
-
+    </UContainer>
+    <div class="border-t border-neutral-800">
+      <UContainer class="flex flex-col items-center md:flex-row md:justify-between md:items-center">
+        <div class="w-full md:w-auto py-4 text-center md:text-left">
+            <ILogoImagina />
+        </div>
+        <p class="w-full md:w-auto py-4 text-[16px] font-normal text-center md:text-left">
+            <ICopyright :with-title-copyright="false" :with-year="false" />
+        </p>
+      </UContainer>
     </div>
-    <div class="bg-dark-2 border-t border-neutral-800">
-  <div class="container mx-auto flex flex-col items-center md:flex-row md:justify-between md:items-center px-4 sm:px-6 lg:px-10">
-    <div class="w-full md:w-auto py-4 text-center md:text-left">
-        <ILogoImagina />
-    </div>
-    <p class="w-full md:w-auto py-4 text-[16px] font-normal text-center md:text-left">
-        <ICopyright :with-title-copyright="false" :with-year="false" />
-    </p>
-  </div>
-</div>
   </footer>
 </template>
 <style scoped>
-.border-footer::before {
-  content: '';
-  background: #FFFFFF66;
-  width: 1px;
-  height:calc(100% - 6px);
-  position: absolute;
-  left: -100px;
-  top: 6px;
-}
-@media (max-width: 1199.98px) {
-  .border-footer::before { content: none; }
-}
 </style>

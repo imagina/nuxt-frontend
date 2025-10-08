@@ -2,7 +2,7 @@
 const route = useRoute()
 const pageSlug = route.params.slug?.toString() || 'inicio'
 const {page, PageComponent, pageMeta} = await usePageLoader(pageSlug)
-const layout = pageMeta?.layout || route.meta.layout || 'default'
+const layout = pageMeta?.layout || route.meta.layout || 'master'
 const settingStore = useIsettingStore()
 
 setPageLayout(layout)
