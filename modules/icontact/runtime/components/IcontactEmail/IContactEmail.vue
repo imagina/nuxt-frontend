@@ -9,6 +9,7 @@ const props = defineProps({
   classIcons: {type: String, default: 'self-center mr-2 text-white'},
   classTitle: {type: String, default: 'font-bold'},
   classLinkEmail: {type: String, default: 'inline-block'},
+  classComponent: { type: String, default: '' },
   withHyphen: {type: Boolean, default: true},
   layoutInline: { type: Boolean, default: false },
 })

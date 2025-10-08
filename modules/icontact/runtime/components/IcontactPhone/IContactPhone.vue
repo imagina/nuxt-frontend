@@ -11,7 +11,6 @@ const props = defineProps({
   classComponent: { type: String, default: '' },
   withHyphen: { type: Boolean, default: true },
   layoutInline: { type: Boolean, default: false },
-  layoutInline: { type: Boolean, default: false },
 })
 const icontactStore = useIcontactStore()
 const items = computed(() => icontactStore.getItems('PHONE'))
