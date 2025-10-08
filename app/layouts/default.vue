@@ -1,0 +1,32 @@
+<script setup lang="ts">
+  import IcoreRouterLoader from "#icore/components/IcoreRouterLoader.vue";
+
+  const settingStore = useIsettingStore()
+  //Always use light for layout master
+  const colorMode = useColorMode()
+  colorMode.value = 'light'
+
+  // Favicon
+  useHead({
+    link: [
+      {
+        rel: 'icon',
+        type: 'image/png',
+        href: settingStore.get('isite::favicon').url
+      }
+    ]
+  })
+</script>
+
+<template>
+  <div
+    class="min-h-screen flex flex-col"
+    data-vaul-drawer-wrapper>
+    <IHeader/>
+    <main class="flex-1">
+      <IcoreRouterLoader />
+      <slot/>
+    </main>
+    <IFooter/>
+  </div>
+</template>

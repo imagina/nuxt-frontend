@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { PageData } from '#ipage/types/pages'
-defineProps<{ page: PageData }>()
+const {page} = await usePageLoader()
 
 
 const buttonProps = {
@@ -18,7 +17,7 @@ const ui = {
 <template>
   <div>
     <!-- Contacto -->
-     <IBreadcrumb
+    <IBreadcrumb
       :title="page.title ?? '...'"
       :ui="{ link: 'font-bold text-gray-3' }">
       <template #extraUp>
@@ -45,7 +44,7 @@ const ui = {
           <div class="min-w-0 lg:basis-1/2">
             <IformForm
               :button-props="buttonProps"
-              :ui="ui" system-name="contact_form" />
+              :ui="ui" system-name="contact_form"/>
           </div>
           <div class="min-w-0 lg:basis-1/2">
             <iframe
@@ -67,7 +66,10 @@ const ui = {
 
 .contacto .page-body {
   /* Énfasis y enlaces */
-  & :deep(:is(strong,a)) { @apply text-primary; }
+
+  & :deep(:is(strong,a)) {
+    @apply text-primary;
+  }
 }
 
 :deep(input), :deep(textarea) {

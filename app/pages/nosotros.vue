@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import type { PageData } from '#ipage/types/pages'
-defineProps<{ page: PageData }>()
-
+const {page} = await usePageLoader()
 </script>
 <template>
   <div>
@@ -26,11 +24,11 @@ defineProps<{ page: PageData }>()
       </template>
     </IBreadcrumb>
     <section class="container mx-auto py-10 px-4 sm:px-6 lg:px-10 nosotros">
-      <h1 class="page-title hidden">{{ page.title }}</h1>
-      <div class="page-body" v-html="page.body"></div>
+      <h1 class="page-title hidden">{{ page?.title }}</h1>
+      <div class="page-body" v-html="page?.body"></div>
     </section>
     <!-- Form Contacto -->
-    <FormContact />
+    <FormContact/>
   </div>
 </template>
 
@@ -40,15 +38,25 @@ defineProps<{ page: PageData }>()
 .nosotros .page-body {
 
 
-  & :deep(img) { object-fit: cover; border-radius: 30px; }
+  & :deep(img) {
+    object-fit: cover;
+    border-radius: 30px;
+  }
 
   /* grid dentro del HTML inyectado */
-  & :deep(:is(.grid)) { @apply gap-10; }
+
+  & :deep(:is(.grid)) {
+    @apply gap-10;
+  }
 
   /* Énfasis y enlaces */
-  & :deep(:is(strong,a)) { @apply text-primary; }
+
+  & :deep(:is(strong,a)) {
+    @apply text-primary;
+  }
 
   /* Separador */
+
   & :deep(:is(hr)) {
     @apply border-t;
     border-color: #00000026;

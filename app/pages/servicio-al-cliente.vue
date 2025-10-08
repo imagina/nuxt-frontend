@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import type { PageData } from '#ipage/types/pages'
-defineProps<{ page: PageData }>()
-
+const {page} = await usePageLoader()
+definePageMeta({layout: 'blank'})
 </script>
 
 <template>
