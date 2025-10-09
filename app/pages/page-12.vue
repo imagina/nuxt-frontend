@@ -1,3 +1,6 @@
+<script lang="ts">
+export const pageMeta = {layout: 'master-comercializadora'}
+</script>
 
 <script setup lang="ts">
 import type { PageData } from '#ipage/types/pages'
@@ -5,10 +8,11 @@ defineProps<{ page: PageData }>()
 </script>
 
 <template>
-  <!-- Nosotros Colbitumen -->
+  <!-- Conocenos Comercializadora -->
   <IBreadcrumb
     variant="hero"
-    :title="page.title"
+    homeLink="/inicio-comercializadora"
+    :title="page?.title ?? '...'"
     height="h-[320px]"
     overlay="bg-black/50"
     align="center"
@@ -23,8 +27,8 @@ defineProps<{ page: PageData }>()
     </template>
   </IBreadcrumb>
   <UContainer :class="`page-${page?.id}`" class="py-10 nosotros">
-    <h1 class="page-title hidden">{{ page.title }}</h1>
-    <div class="page-body text-justify" v-html="page.body"></div>
+    <h1 class="page-title hidden ">{{ page.title }}</h1>
+    <div class="page-body mt-10 text-justify" v-html="page.body"></div>
   </UContainer>
 </template>
 <style scoped>

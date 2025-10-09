@@ -12,6 +12,7 @@ interface Props {
   title?: string
   crumbs?: BreadcrumbItem[]
   homeLabel?: string
+  homeLink?: string
 
   /* Apariencia (bar) */
   background?: string
@@ -33,6 +34,7 @@ const props = withDefaults(defineProps<Props>(), {
   showTrail: true,
   title: 'Página',
   homeLabel: 'Inicio',
+  homeLink: '/',
 
   background: 'bg-gray-100 py-5',
   ui: () => ({}),
@@ -46,7 +48,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const items = computed<BreadcrumbItem[]>(() => {
   if (props.crumbs?.length) return props.crumbs
-  return [{ label: props.homeLabel, to: '/' }, { label: props.title }]
+  return [{ label: props.homeLabel, to: props.homeLink }, { label: props.title }]
 })
 
 const alignClasses = computed(() =>

@@ -13,6 +13,7 @@ defineProps<{ page: PageData }>()
 <template>
   <!-- Nosotros Laboratorio -->
   <IBreadcrumb
+      homeLink="/inicio-laboratorio"
       :title="page.title ?? '...'"
       :ui="{ link: 'font-bold text-gray-3' }">
   </IBreadcrumb>

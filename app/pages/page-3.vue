@@ -19,6 +19,7 @@ const ui = {
   <div>
     <!-- Contacto -->
      <IBreadcrumb
+      homeLink="/inicio-colbitumen"
       :title="page.title ?? '...'"
       :ui="{ link: 'font-bold text-gray-3' }">
     </IBreadcrumb>
