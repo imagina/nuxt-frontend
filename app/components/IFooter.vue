@@ -7,7 +7,7 @@ import IlocationLocatable from "#ilocation/components/IlocationLocatable/Ilocati
 
 const settingStore = useIsettingStore()
 // const
-const logoFooter =  settingStore.get('isite::logoIadmin')
+const logoFooter =  settingStore.get('isite::logoIadminSM')
 
 const desktopNavProps = {
   orientation: 'vertical',

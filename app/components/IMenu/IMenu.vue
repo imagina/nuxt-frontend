@@ -5,7 +5,7 @@ import type {NavigationMenuItem} from "@nuxt/ui";
 
 const props = withDefaults(defineProps<IMenuProps>(), {
   drawerDirection: 'right',
-  desktopNavProps: () => ({class: 'hidden lg:flex'}),
+  desktopNavProps: () => ({class: 'hidden xl:flex'}),
   withDrawer: true,
   title: '',
   description: 'Menu',
@@ -33,9 +33,9 @@ const mappedItems = computed<NavigationMenuItem[]>(() => props.items.map((item) 
   <UDrawer
     v-model:open="dOpen"
     v-if="props.withDrawer"
-    class="lg:hidden" :direction="drawerDirection"
+    class="xl:hidden" :direction="drawerDirection"
     should-scale-background :set-background-color-on-scale="false"
-    :ui="{ content: 'w-full', handle: 'bg-gray-400!' }">
+    :ui="{ content: 'w-full lg:w-80', handle: 'bg-gray-400!' }">
 
     <!-- Action Buton -->
     <UButton color="neutral" variant="ghost" trailing-icon="i-lucide-menu"/>
@@ -43,7 +43,7 @@ const mappedItems = computed<NavigationMenuItem[]>(() => props.items.map((item) 
     <template #header>
       <div class="flex justify-between">
         <div>
-          <DialogTitle>{{ title }}</DialogTitle>
+          <DialogTitle class="capitalize mb-4">{{ title }}</DialogTitle>
           <DialogDescription>{{ description}}</DialogDescription>
         </div>
         <UButton color="neutral" variant="ghost" icon="i-lucide-x" @click="dOpen = false"/>

@@ -10,7 +10,7 @@ interface ImenuMenuProps extends Omit<IMenuProps, 'items'>
 }
 
 const props = withDefaults(defineProps<ImenuMenuProps>(), {
-  desktopNavProps: () => ({class: 'hidden lg:flex'}),
+  desktopNavProps: () => ({class: 'hidden xl:flex'}),
   withDrawer: true
 })
 

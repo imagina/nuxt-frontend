@@ -20,21 +20,6 @@ const ui = {
     <IBreadcrumb
       :title="page.title ?? '...'"
       :ui="{ link: 'font-bold text-gray-3' }">
-      <template #extraUp>
-        <IsliderCarousel
-          system-name="publi_contacto"
-          dots-position="inside-left-middle"
-          item-theme="ItemTheme2"
-          :carousel-props="{
-          dots: true,
-          autoplay: true,
-          loop: true,
-          ui: {
-            item: 'h-[260px] sm:h-[360px] md:h-[400px]',
-            dot: 'w-[16px] h-[16px] rounded-full bg-[#FFFFFF80] data-[state=active]:bg-secondary'
-          } }"
-        />
-      </template>
     </IBreadcrumb>
     <UContainer :class="`page-${page?.id}`" class="py-10 trabaja">
       <h1 class="page-title hidden">{{ page.title }}</h1>

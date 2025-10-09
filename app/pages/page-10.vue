@@ -1,8 +1,10 @@
+<script lang="ts">
+export const pageMeta = {layout: 'master-asfalcargo'}
+</script>
+
 <script setup lang="ts">
 import type { PageData } from '#ipage/types/pages'
 defineProps<{ page: PageData }>()
-
-
 
 </script>
 

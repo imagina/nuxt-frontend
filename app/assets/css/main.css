@@ -41,6 +41,7 @@
   @apply font-normal text-justify text-[16px] leading-[20px] md:text-[18px] md:leading-[25px];
 
   & :is(.grid) { @apply gap-10; }
+  & .btgrid { margin-bottom: 20px;}
 
   /* Títulos */
   & :is(h1,h2,h3,h4) { @apply font-semibold mb-[15px]; }

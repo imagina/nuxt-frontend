@@ -3,22 +3,12 @@ export const pageMeta = {layout: 'blank'}
 </script>
 
 <script setup lang="ts">
-import type {PageData} from "#ipage/types/pages";
-import {ipagePagesRepository} from '#ipage/utils/repository'
-
-const {data} = await useAsyncData('switch-home-pages', () =>
-  ipagePagesRepository.index({
-    filter: {slug: {operator: 'like', value: '%inicio-%'}},
-    include: 'translations,files'
-  }))
-
+import type { PageData } from '#ipage/types/pages'
 defineProps<{ page: PageData }>()
 
-const items = computed(() => data.value?.data ?? [])
-
+const { homes } = useHomePages()
 const settingStore = useIsettingStore()
 const logoColbitumen = settingStore.get('isite::logo1')
-
 
 const desktopNavProps = {
   orientation: 'vertical',
@@ -36,8 +26,8 @@ const desktopNavProps = {
 <template>
 
   <div class="relative w-full py-20">
-    <IMediaRender :media="page.files.mainimage"
-                  :alt="page.title" aspect-ratio="auto"
+    <IMediaRender :media="page?.files?.mainimage"
+                  :alt="page?.title" aspect-ratio="auto"
                   :ui="{  media: 'absolute inset-0 w-full h-full object-cover' }"/>
     <div class="absolute inset-0 bg-black/50"></div>
     <!-- Contenido -->
@@ -59,19 +49,19 @@ const desktopNavProps = {
           </div>
           <!-- Botones con logos -->
           <nav class="w-full space-y-5 max-w-[300px] mx-auto">
-            <template v-for="(item, i) in items" :key="i">
+            <template v-for="(item, i) in homes" :key="i">
               <NuxtLink
-                :to="item.slug"
-                class="group flex items-center justify-center rounded-full bg-white/95 shadow-xl ring-1 ring-black/10 backdrop-blur transition hover:translate-y-[-1px] hover:shadow-2xl"
+                :to="item?.slug"
+                class="group flex items-center justify-center rounded-full bg-white shadow-xl ring-1 ring-black/10 backdrop-blur transition hover:translate-y-[-1px] hover:shadow-2xl"
               >
                 <IMediaRender
-                  :media="item.files.mainimage"
-                  :alt="item.title"
-                  aspect-ratio="aspect-16/9"
+                  :media="item?.files?.mainimage"
+                  :alt="item?.metaTitle"
+                  aspect-ratio="auto"
                   :ui="{
                   wrapper: '  ',
                   container: ' h-[79px]',
-                  media: ' object-contain',
+                  media: ' object-contain p-2',
                 }"
                 />
               </NuxtLink>

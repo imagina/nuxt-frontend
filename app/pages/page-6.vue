@@ -1,3 +1,7 @@
+<script lang="ts">
+export const pageMeta = {layout: 'master-laboratorio'}
+</script>
+
 <script setup lang="ts">
 import type { PageData } from '#ipage/types/pages'
 import IPostList from '../components/IPostList.vue';
