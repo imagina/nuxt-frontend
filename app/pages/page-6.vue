@@ -123,7 +123,7 @@ const posts = [{},{},{},{}]
                     :ui="{
                       wrapper: '',
                       container: 'rounded-2xl ',
-                      media: 'object-cover rounded-2xl',
+                      media: 'object-contain rounded-2xl',
                     }"
                   />
                 </div>
@@ -134,7 +134,7 @@ const posts = [{},{},{},{}]
     </section>
 
     <!-- H1 -->
-    <section class="bg-[#F3F3F3] home py-5">
+    <section class="bg-[#F3F3F3] home pb-10">
       <UContainer>
         <div class="page-body-h1" v-html="page?.body"></div>
       </UContainer>

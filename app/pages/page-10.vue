@@ -15,7 +15,7 @@ defineProps<{ page: PageData }>()
       :title="page.title ?? '...'"
       :ui="{ link: 'font-bold text-gray-3' }">
   </IBreadcrumb>
-  <UContainer :class="`page-${page?.id}`" class="py-10 nosotros">
+  <UContainer :class="`page-${page?.id}`" class="pt-20 nosotros">
     <h1 class="page-title hidden">{{ page.title }}</h1>
     <div class="page-body-img">
       <!-- Imagen primero -->

@@ -26,7 +26,7 @@ defineProps<{ page: PageData }>()
       />
     </template>
   </IBreadcrumb>
-  <UContainer :class="`page-${page?.id}`" class="py-10 nosotros">
+  <UContainer :class="`page-${page?.id}`" class="py-20 conocenos">
     <h1 class="page-title hidden ">{{ page.title }}</h1>
     <div class="page-body mt-10 text-justify" v-html="page.body"></div>
   </UContainer>
@@ -43,7 +43,6 @@ defineProps<{ page: PageData }>()
     position: absolute;
     bottom: -18px;
   }
-  & img { object-fit: cover; border-radius: 30px; }
   & .btn {
     background: var(--color-tertiary);
     border-radius: 50rem;

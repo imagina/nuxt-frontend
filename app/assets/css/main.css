@@ -43,6 +43,8 @@
   & :is(.grid) { @apply gap-10; }
   & .btgrid { margin-bottom: 20px;}
 
+  & img { object-fit: cover; border-radius: 30px; }
+
   /* Títulos */
   & :is(h1,h2,h3,h4) { @apply font-semibold mb-[15px]; }
   & :is(h1,h2) { @apply text-[30px] leading-[40px] md:text-[40px] md:leading-[50px]; }

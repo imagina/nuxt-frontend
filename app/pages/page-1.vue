@@ -28,8 +28,8 @@ const desktopNavProps = {
   <div class="relative w-full py-20">
     <IMediaRender :media="page?.files?.mainimage"
                   :alt="page?.title" aspect-ratio="auto"
-                  :ui="{  media: 'absolute inset-0 w-full h-full object-cover' }"/>
-    <div class="absolute inset-0 bg-black/50"></div>
+                  :ui="{  wrapper: '', container:'', media: 'absolute inset-0  object-cover' }"/>
+    <div class="absolute inset-0 h-full bg-black/50"></div>
     <!-- Contenido -->
     <div class="relative mx-auto max-w-7xl px-6 lg:px-12 h-full">
       <div class="h-full flex items-center justify-center">

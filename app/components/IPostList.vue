@@ -9,9 +9,18 @@ const props = defineProps({
 <template>
   <article class="rounded-2xl">
     <div class="flex gap-4">
-      <figure class="shrink-0 w-40 sm:w-48 rounded-xl overflow-hidden">
-        <img src="/images/requisitos.jpg" alt="Miniatura" class="h-full w-full object-cover">
-      </figure>
+      <NuxtLink to="#">
+        <IMediaRender
+          :media="post.files?.mainimage ?? { url: '/images/default.jpg'}"
+          :alt="post?.title ?? 'Image'"
+          aspect-ratio="aspect-16/9"
+          :ui="{
+            wrapper: '',
+            container: 'rounded-2xl w-40 lg:w-64',
+            media: 'object-cover rounded-2xl ',
+          }"
+        />
+      </NuxtLink>
 
       <div class="min-w-0">
         <p class="text-[12px] text-gray-500">Noviembre 24, 2030</p>

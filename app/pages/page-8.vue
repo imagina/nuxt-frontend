@@ -80,13 +80,13 @@ const soluciones = [
     </section>
 
     <!-- Carousel Soluciones Integrales -->
-    <UContainer class="py-10">
+    <UContainer class="py-20">
       <div class="text-center">
         <div class="text-primary text-[30px] leading-[30px] lg:text-[40px] lg:leading-[40px] font-bold mb-5">
           Nuestras Soluciones Integrales
           <span class="mt-3 block h-1 w-24 mx-auto rounded bg-tertiary"></span>
         </div>
-        <div class="text-secondary text-[16px] leading-[18px] lg:text-[20px] lg:leading-[22px] font-bold mb-10" >
+        <div class="text-secondary text-[16px] leading-[18px] lg:text-[20px] lg:leading-[22px]  mb-10" >
           Duis sit amet lectus quis quam accumsan hendrerit. Aenean ultricies dignissim tellus elementum condimentum. Mauris convallis quis mi eu pulvinar.
         </div>
       </div>
@@ -198,9 +198,9 @@ const soluciones = [
 
     <!-- Carousel Esto te puede interesar -->
     <section class="bg-[#F4F8F8]">
-      <UContainer class="py-10">
+      <UContainer class="pt-20 pb-10">
         <div class="text-center">
-          <div class="text-primary text-[30px] leading-[30px] lg:text-[40px] lg:leading-[40px] font-bold mb-5">
+          <div class="text-primary text-[30px] leading-[30px] lg:text-[40px] lg:leading-[40px] font-bold mb-10">
             Esto te puede Interesar
             <span class="mt-3 block h-1 w-24 mx-auto rounded bg-tertiary"></span>
           </div>

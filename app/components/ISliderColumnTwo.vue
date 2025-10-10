@@ -6,7 +6,7 @@ const props = defineProps({
 });
 </script>
 <template>
-  <UContainer class="py-10">
+  <UContainer class="py-12">
       <div class="text-center">
         <div v-if="title" class="text-tertiary tracking-[.25em] text-[16px] leading-[16px] lg:text-[18px] lg:leading-[18px] font-bold uppercase mb-2" >
           {{ title }}
@@ -53,5 +53,14 @@ const props = defineProps({
         </IsliderCarousel>
   </UContainer>
 </template>
-<style>
+<style scoped>
+@reference "~/assets/css/main.css";
+:deep(.custom-html) {
+  /* Listas */
+  & :is(ul) { @apply list-disc pl-5 mt-[15px]; }
+  & :is(ul li) { @apply list-item mb-2; }
+  & :is(ol) { @apply list-decimal pl-5 mt-[15px]; }
+  & :is(ol li) { @apply list-item mb-2; }
+}
 </style>
+

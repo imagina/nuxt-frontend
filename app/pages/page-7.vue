@@ -139,7 +139,7 @@ const posts = [{},{},{},{}]
     </section>
 
     <!-- Slider reseñas -->
-    <section class="bg-resenias pt-20 pb-10">
+    <section class="bg-resenias pt-20 pb-10 lg:px-20">
       <UContainer>
         <h2 class=" text-primary mb-10 text-center text-[20px] leading-[20px] lg:text-[38px] lg:leading-[38px] font-extrabold" >
           Reseñas de Nuestros Clientes
@@ -152,19 +152,20 @@ const posts = [{},{},{},{}]
             align: 'start',
             autoplay: true,
             ui: {
+              container: 'gap-10',
               item: 'snap-start grow-0 shrink-0 basis-full lg:basis-1/2',
               dot: 'w-[13px] h-[13px] rounded-full data-[state=active]:bg-tertiary',
             },
           }">
           <template #item="{ item, index }">
             <div class="h-10"></div>
-            <article class="relative rounded-2xl bg-white shadow-md ring-1 ring-gray-100 p-10 sm:p-8">
+            <article class="relative rounded-2xl bg-white shadow-md ring-1 ring-gray-100 md:p-15 p-8 mb-10">
               <!-- círculo comillas -->
               <div class="absolute -top-6 left-1/2 -translate-x-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-red-500 shadow-md">
                 <span class="text-white text-xl leading-none"><i class="fa-solid fa-quote-left"></i></span>
               </div>
 
-              <div class="space-y-4 text-[15px] leading-relaxed text-gray-700" v-html="item.customHtml"></div>
+              <div class="space-y-4 text-[15px] leading-relaxed text-gray-700 italic text-justify" v-html="item.customHtml"></div>
 
               <div class="mt-6 text-center">
                 <span class="mx-auto mb-2 block h-1 w-6 rounded bg-red-500"></span>

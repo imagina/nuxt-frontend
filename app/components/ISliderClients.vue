@@ -8,7 +8,7 @@ const props = defineProps({
 </script>
 <template>
   <section class="bg-clients">
-    <UContainer class="py-10">
+    <UContainer class="py-12">
       <div class="text-center">
         <div class="text-tertiary tracking-[.25em] text-[16px] leading-[16px] lg:text-[18px] lg:leading-[18px] font-bold uppercase mb-2" >
           Lazos estrechados
@@ -25,6 +25,7 @@ const props = defineProps({
           arrows: true,
           loop: true,
           autoplay: true,
+          align: 'start',
           ui: {
             item: 'basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-[20%] xl:basis-1/6',
           },
@@ -32,17 +33,17 @@ const props = defineProps({
         <template #item="{ item }">
           <div class="mb-8">
           <NuxtLink :to="item.uri ?? item.url">
-                <IMediaRender
-                  :media="item.files.slideimage"
-                  :alt="item.title"
-                  aspect-ratio="aspect-4/3"
-                  :ui="{
-                    wrapper: '',
-                    container: 'rounded-2xl ',
-                    media: 'object-cover rounded-2xl',
-                  }"
-                />
-              </NuxtLink>
+            <IMediaRender
+              :media="item.files.slideimage"
+              :alt="item.title"
+              aspect-ratio="aspect-4/3"
+              :ui="{
+                wrapper: 'bg-white p-3 rounded-2xl',
+                container: 'rounded-2xl ',
+                media: 'object-contain ',
+              }"
+            />
+          </NuxtLink>
           </div>
         </template>
       </IsliderCarousel>
@@ -53,6 +54,5 @@ const props = defineProps({
 .bg-clients {
   border-top: 1px solid #0000001F;
   background: #F2F2F2;
-
 }
 </style>

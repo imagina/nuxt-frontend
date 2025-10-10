@@ -106,6 +106,10 @@ const alignClasses = computed(() =>
         </div>
       </UContainer>
     </div>
+
+    <div v-if="$slots.extraDown">
+      <slot name="extraDown" />
+    </div>
   </div>
 </template>
 
