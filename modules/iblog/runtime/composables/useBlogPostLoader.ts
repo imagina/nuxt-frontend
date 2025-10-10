@@ -15,7 +15,7 @@ export function useBlogPostLoader (slugPost: string, slugCategory?: string) {
     try {
       const res = await iblogPostsRepository.show(slugPost, {
         filter: { field: 'slug' },
-        include: 'translations,files',
+        include: 'translations,files,category,category.translations',
         categorySlug: slugCategory,
         category_slug: slugCategory
       })

@@ -3,29 +3,28 @@ import { computed } from 'vue'
 import type { BreadcrumbItem } from '@nuxt/ui'
 
 interface Props {
-  /* Layout */
   variant?: 'bar' | 'hero'
   align?: 'left' | 'center'
   showTrail?: boolean
 
-  /* Contenido */
   title?: string
   crumbs?: BreadcrumbItem[]
   homeLabel?: string
   homeLink?: string
 
-  /* Apariencia (bar) */
   background?: string
   ui?: Record<string, any>
 
-  /* Apariencia (hero) */
   height?: string
   overlay?: string
   containerClass?: string
 
-  /* (opcional) si prefieres no usar slot y pasar el media directo */
   media?: any
   mediaUi?: Record<string, any>
+
+  extraBefore?: BreadcrumbItem[]
+  extraAfter?: BreadcrumbItem[]
+  includeTitle?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -43,12 +42,20 @@ const props = withDefaults(defineProps<Props>(), {
   overlay: 'bg-black/50',
   containerClass: '',
   media: null,
-  mediaUi: () => ({ media: 'absolute inset-0 w-full h-full object-cover' })
+  mediaUi: () => ({ media: 'absolute inset-0 w-full h-full object-cover' }),
+
+  extraBefore: () => [],
+  extraAfter: () => [],
+  includeTitle: true
 })
 
 const items = computed<BreadcrumbItem[]>(() => {
   if (props.crumbs?.length) return props.crumbs
-  return [{ label: props.homeLabel, to: props.homeLink }, { label: props.title }]
+  const base: BreadcrumbItem[] = [{ label: props.homeLabel, to: props.homeLink }]
+  if (props.extraBefore?.length) base.push(...props.extraBefore)
+  if (props.includeTitle !== false) base.push({ label: props.title })
+  if (props.extraAfter?.length) base.push(...props.extraAfter)
+  return base
 })
 
 const alignClasses = computed(() =>
@@ -62,9 +69,8 @@ const alignClasses = computed(() =>
       <slot name="extraUp" />
     </div>
 
-    <!-- HERO con fondo (por slot o media) -->
+    <!-- HERO -->
     <section v-if="variant === 'hero'" class="relative isolate overflow-hidden" :class="height">
-      <!-- Fondo: 1) slot `background`  2) `media` (IMediaRender interno) -->
       <div class="absolute inset-0 -z-10">
         <slot name="background" />
         <IMediaRender
@@ -75,34 +81,51 @@ const alignClasses = computed(() =>
         />
       </div>
 
-      <!-- Overlay -->
       <div class="absolute inset-0 -z-10" :class="overlay"></div>
 
-      <!-- Contenido -->
       <UContainer :class="['h-full flex', containerClass]">
         <div class="m-auto flex w-full max-w-4xl flex-col gap-3 text-white" :class="alignClasses">
           <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
             {{ title }}
           </h1>
+
+          <!-- UI3: usa keys separatorIcon / link -->
           <UBreadcrumb
             v-if="showTrail"
             :items="items"
             :ui="{
-              ol: align === 'center' ? 'justify-center' : '',
-              link: 'text-white/90 hover:text-white',
-              divider: 'text-white/70',
+              list: align === 'center' ? 'justify-center' : 'justify-start',
+              link: 'text-white/90 hover:text-white',          // enlaces blancos
+              separatorIcon: 'text-white',                     // chevron blanco
               ...ui
             }"
-          />
+          >
+            <!-- Deja pasar un separador custom si el consumidor lo define -->
+            <template #separator>
+              <slot name="separator" />
+            </template>
+          </UBreadcrumb>
         </div>
       </UContainer>
     </section>
 
-    <!-- BARRA simple -->
+    <!-- BARRA -->
     <div v-else :class="background">
       <UContainer>
         <div class="flex flex-col gap-2">
-          <UBreadcrumb v-if="showTrail" :items="items" :ui="ui" />
+          <UBreadcrumb
+            v-if="showTrail"
+            :items="items"
+            :ui="{
+              link: 'text-gray-700 hover:text-gray-900',
+              separatorIcon: 'text-gray-400',
+              ...ui
+            }"
+          >
+            <template #separator>
+              <slot name="separator" />
+            </template>
+          </UBreadcrumb>
         </div>
       </UContainer>
     </div>
@@ -112,4 +135,3 @@ const alignClasses = computed(() =>
     </div>
   </div>
 </template>
-

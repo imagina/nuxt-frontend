@@ -18,6 +18,15 @@ const mainImageUrl = computed(() => post.files?.mainimage?.url || null)
 
 const dump = (v: any) => { try { return JSON.stringify(v, null, 2) } catch { return String(v) } }
 
+// texto de la categoría (puedes usar el que ya tengas cargado)
+const categoryLabel = computed(() =>  post.category?.title || post.category?.es?.title)
+
+const categoryCrumb = computed<BreadcrumbItem>(() => ({
+  label: categoryLabel.value,
+  to: `/iblog/${slugCategory}`
+}))
+
+
 type GalImg = { src: string; alt?: string }
 
 const images: GalImg[] = [
@@ -58,10 +67,10 @@ const images: GalImg[] = [
   <article v-else :class="`iblog post post-${post.id} category-${slugCategory}`">
     <IBreadcrumb
       :title="title"
+      :extra-before="[categoryCrumb]"
       :ui="{ link: 'font-bold text-gray-3' }">
     </IBreadcrumb>
     <UContainer class="pt-20">
-
       <h1 class="page-title hidden"> {{ title }} </h1>
       <div class="page-body text-justify mb-20" v-html="htmlContent"></div>
 

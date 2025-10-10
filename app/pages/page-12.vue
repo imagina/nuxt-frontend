@@ -11,13 +11,10 @@ defineProps<{ page: PageData }>()
   <!-- Conocenos Comercializadora -->
   <IBreadcrumb
     variant="hero"
-    homeLink="/inicio-comercializadora"
     :title="page?.title ?? '...'"
-    height="h-[320px]"
-    overlay="bg-black/50"
-    align="center"
-    :ui="{ link: 'text-white/90', divider: 'text-white/70' }"
-  >
+    :ui="{
+      link: 'text-white hover:text-white/80',
+      separatorIcon: 'text-white'   }">
     <template #background>
       <IMediaRender
         :media="page.files?.mainimage"
