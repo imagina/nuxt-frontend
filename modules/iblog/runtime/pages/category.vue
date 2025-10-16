@@ -22,7 +22,9 @@ const description = computed(() => category.value?.description || category.value
 
 <template>
   <!-- SKELETON LINDO MIENTRAS CARGA -->
-  <div v-if="pending" class="space-y-8 mb-20">
+  <div v-if="pending">
+    <div class="mx-auto h-15 w-full bg-gray-200 animate-pulse"></div>
+    <UContainer class="mt-20 space-y-8 mb-20">
     <!-- Header -->
     <div class="text-center space-y-3">
       <div class="mx-auto h-3 w-64 rounded-full bg-gray-200 animate-pulse"></div>
@@ -43,6 +45,7 @@ const description = computed(() => category.value?.description || category.value
         </div>
       </div>
     </div>
+    </UContainer>
   </div>
   <!-- CONTENIDO  -->
   <section v-else :class="`iblog category category-${slugCategory}`">
@@ -51,7 +54,6 @@ const description = computed(() => category.value?.description || category.value
       :ui="{ link: 'font-bold text-gray-3' }">
     </IBreadcrumb>
     <UContainer class="pt-20">
-
       <div>
         <h1 class="page-title text-center"> {{ title }} </h1>
         <div class="page-body text-justify mb-10" v-html="description"></div>

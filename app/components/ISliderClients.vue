@@ -19,7 +19,19 @@ const props = defineProps({
       </div>
       <IsliderCarousel
         :system-name="name"
-         arrows-position="outside-between-middle"
+        arrows-position="outside-between-middle"
+        prev-icon="material-symbols-light:chevron-left"
+        next-icon="material-symbols-light:chevron-right"
+        :prev="{
+          size: 'auto',
+          class: 'rounded-none border-0 ring-0 shadow-none !bg-transparent hover:bg-transparent focus:outline-none focus:ring-0',
+          ui: { leadingIcon: 'h-15 w-10 text-[#A1ACBD]' }
+        }"
+        :next="{
+          size: 'auto',
+          class: 'rounded-none border-0 ring-0 shadow-none !bg-transparent hover:bg-transparent focus:outline-none focus:ring-0',
+          ui: { leadingIcon: 'h-15 w-10 text-[#A1ACBD]' }
+        }"
         :carousel-props="{
           dots: false,
           arrows: true,

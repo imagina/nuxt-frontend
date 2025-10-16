@@ -1,8 +1,12 @@
+<script lang="ts">
+export const pageMeta = {layout: 'master-laboratorio'}
+</script>
+
 <script setup lang="ts">
 import type { PageData } from '#ipage/types/pages'
 import IPageContact from '~/components/IPageContact.vue';
 defineProps<{ page: PageData }>()
 </script>
 <template>
-  <IPageContact :page="page" link="/inicio-colbitumen" />
+  <IPageContact :page="page" link="/inicio-laboratorio" />
 </template>

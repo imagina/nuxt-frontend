@@ -11,6 +11,7 @@ defineProps<{ page: PageData }>()
   <!-- Conocenos Comercializadora -->
   <IBreadcrumb
     variant="hero"
+    homeLink="/inicio-comercializadora"
     :title="page?.title ?? '...'"
     :ui="{
       link: 'text-white hover:text-white/80',

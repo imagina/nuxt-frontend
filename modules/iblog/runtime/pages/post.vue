@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import PostCarousel from '#iblog/components/PostCarousel.vue'
 import { useBlogPostLoader } from '#iblog/composables/useBlogPostLoader'
 
 const route = useRoute()
@@ -41,13 +42,63 @@ const images: GalImg[] = [
   { src: '/images/requisitos.jpg',  alt: 'Camión 4' },
   { src: '/images/photo.jpg', alt: 'Operario' },
 ]
+const soluciones = [
+  {
+    id: 1,
+    title: "Normalizados",
+    slug: "normalizados",
+    summary: "Asfaltos de alta calidad, fabricados bajo normas técnicas nacionales e internacionales. Brindan estabilidad y desempeño confiable en proyectos viales urbanos y carreteras de alto tránsito.",
+    files: { mainimage: { url: "/images/default.jpg",}},
+    category: { slug: 'soluciones-integrales-colbitumen'}
+  },
+  {
+    id: 2,
+    title: "Asfalto Modificado con Polímeros",
+    slug: "asfalto-modificado-con-polimeros",
+    summary: "Asfaltos de alta calidad, fabricados bajo normas técnicas nacionales e internacionales. Brindan estabilidad y desempeño confiable en proyectos viales urbanos y carreteras de alto tránsito.",
+    files: { mainimage: { url: "/images/default.jpg",}},
+    category: { slug: 'soluciones-integrales-colbitumen'}
+  },
+  {
+    id: 3,
+    title: "Asfaltos Modificados con GCR y Plásticos Posconsumo",
+    slug: "asfalto-modificado-con-polimeros",
+    summary: "Asfaltos de alta calidad, fabricados bajo normas técnicas nacionales e internacionales. Brindan estabilidad y desempeño confiable en proyectos viales urbanos y carreteras de alto tránsito.",
+    files: { mainimage: { url: "/images/default.jpg",}},
+    category: { slug: 'soluciones-integrales-colbitumen'}
+  },
+  {
+    id: 4,
+    title: "Asfaltos Modificados con GCR y Plásticos Posconsumo",
+    slug: "asfalto-modificado-con-polimeros",
+    summary: "Asfaltos de alta calidad, fabricados bajo normas técnicas nacionales e internacionales. Brindan estabilidad y desempeño confiable en proyectos viales urbanos y carreteras de alto tránsito.",
+    files: { mainimage: { url: "/images/default.jpg",}},
+    category: { slug: 'soluciones-integrales-colbitumen'}
+  },
+    {
+    id: 5,
+    title: "Normalizados",
+    slug: "normalizados",
+    summary: "Asfaltos de alta calidad, fabricados bajo normas técnicas nacionales e internacionales. Brindan estabilidad y desempeño confiable en proyectos viales urbanos y carreteras de alto tránsito.",
+    files: { mainimage: { url: "/images/default.jpg",}},
+    category: { slug: 'soluciones-integrales-colbitumen'}
+  },
+    {
+    id: 6,
+    title: "Normalizados",
+    slug: "normalizados",
+    summary: "Asfaltos de alta calidad, fabricados bajo normas técnicas nacionales e internacionales. Brindan estabilidad y desempeño confiable en proyectos viales urbanos y carreteras de alto tránsito.",
+    files: { mainimage: { url: "/images/default.jpg",}},
+    category: { slug: 'soluciones-integrales-colbitumen'}
+  }
+];
 </script>
 
 <template>
   <!-- SKELETON LINDO MIENTRAS CARGA -->
   <div v-if="pending">
     <div class="mx-auto h-15 w-full bg-gray-200 animate-pulse"></div>
-    <UContainer class="pt-20">
+    <UContainer class="mt-20 space-y-8 mb-20">
       <div class="text-center space-y-3 mb-10">
         <div class="mx-auto h-3 w-64 rounded-full bg-gray-200 animate-pulse"></div>
         <div class="mx-auto h-3 w-96 rounded-full bg-gray-200 animate-pulse"></div>
@@ -80,7 +131,7 @@ const images: GalImg[] = [
           <figure
             v-for="(img, i) in images"
             :key="img.src + i"
-            class="mb-4 break-inside-avoid rounded-xl overflow-hidden"
+            class="mb-4 break-inside-avoid overflow-hidden"
           >
             <img
               :src="img.src"
@@ -95,4 +146,7 @@ const images: GalImg[] = [
       </div>
     </UContainer>
   </article>
+  <PostCarousel :posts="soluciones"
+                title="Conoce más Servicios"
+                background="bg-[#F3F3F3]" />
 </template>

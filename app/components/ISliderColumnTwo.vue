@@ -31,7 +31,7 @@ const props = defineProps({
               <div class="lg:col-span-6">
                 <IMediaRender
                   :media="item.files.slideimage" :alt="item.title"
-                  aspect-ratio="aspect-4/3"
+                  aspect-ratio="aspect-16/9"
                   :ui="{
                     wrapper: '',
                     container: 'rounded-2xl ',

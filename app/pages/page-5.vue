@@ -177,7 +177,7 @@ const soluciones = [
                 aspect-ratio="aspect-4/3"
                 :ui="{
                   wrapper: '',
-                  container: 'h-[65px] w-[65px] rounded-full',
+                  container: 'h-[110px] w-[110px] rounded-full',
                   media: 'object-cover rounded-full',
                 }"
               />

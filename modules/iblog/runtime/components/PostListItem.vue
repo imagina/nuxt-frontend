@@ -23,17 +23,13 @@ const slugCategory = computed(() => route.params.slugCategory as string)
     </NuxtLink>
     <!-- Contenido -->
     <div class="content-post mt-6">
-
-       <NuxtLink
-        :to="`/iblog/${slugCategory}/${item.slug}`"
-      >
+       <NuxtLink :to="`/iblog/${slugCategory}/${item.slug}`" >
         <h3 class="line-clamp-2 lg:min-h-[44px] text-primary font-bold text-[16px] leading-[16px] sm:text-[18px] sm:leading-[18px] lg:text-[22px] lg:leading-[22px]">
-          {{ item.title || item.es?.title }}
+          {{ item.title }}
         </h3>
       </NuxtLink>
-
       <p class="line-clamp-4 mt-2 lg:mt-3 mb-5 lg:mb-8 text-[14px] leading-[16px] lg:text-[17px] lg:leading-[19px]">
-      {{ item.summary || item.es?.summary }}
+        {{ item.summary }}
       </p>
 
       <UButton

@@ -1,8 +1,5 @@
-<script lang="ts">
-export const pageMeta = {layout: 'master-comercializadora'}
-</script>
-
 <script setup lang="ts">
+definePageMeta({ layout: 'master-comercializadora' })
 import type { PageData } from '#ipage/types/pages'
 defineProps<{ page: PageData }>()
 
