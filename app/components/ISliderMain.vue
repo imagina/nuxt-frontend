@@ -11,7 +11,6 @@ const props = defineProps({
     dots-position="inside-left-middle"
     :carousel-props="{
       dots: true,
-      fade: true,
       autoplay: true,
       loop: true,
       ui: {

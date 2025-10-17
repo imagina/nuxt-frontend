@@ -112,6 +112,7 @@ const soluciones = [
                   :media="item.image"
                   :alt="item.title"
                   aspect-ratio="aspect-16/9"
+                  effect="zoom"
                   :ui="{
                     wrapper: '',
                     container: 'rounded-2xl ',
@@ -166,10 +167,11 @@ const soluciones = [
               <IMediaRender
                 :media="item.files.slideimage"
                 :alt="item.title"
+                effect="zoom"
                 aspect-ratio="auto"
                 :ui="{
                   wrapper: '',
-                  container: '',
+                  container: 'rounded-2xl',
                   media: 'rounded-2xl lg:aspect-4/5 aspect-16/9 shadow-lg object-cover',
                 }"
                  />
@@ -205,6 +207,13 @@ const soluciones = [
             <span class="mt-3 block h-1 w-24 mx-auto rounded bg-tertiary"></span>
           </div>
         </div>
+
+        <ICarouselEffect
+  :items="soluciones"
+  effect="autoplay"
+  :effectOptions="{ delay: 3500, stopOnInteraction: true }"
+/>
+hola
         <ICarousel
           :items="soluciones"
           :carousel-props="{
@@ -227,6 +236,7 @@ const soluciones = [
                   <IMediaRender
                     :media="item.image"
                     :alt="item.title"
+                    effect="zoom"
                     aspect-ratio="aspect-16/9"
                     :ui="{
                       wrapper: '',

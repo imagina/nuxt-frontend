@@ -48,6 +48,7 @@ const props = defineProps({
             <IMediaRender
               :media="item.files.slideimage"
               :alt="item.title"
+              effect="tilt"
               aspect-ratio="aspect-4/3"
               :ui="{
                 wrapper: 'bg-white p-3 rounded-2xl',

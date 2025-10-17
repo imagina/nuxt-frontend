@@ -25,7 +25,7 @@ const desktopNavProps = {
 
 <template>
 
-  <div class="relative w-full py-20">
+  <div class="relative w-full h-screen py-20">
     <IMediaRender :media="page?.files?.mainimage"
                   :alt="page?.title" aspect-ratio="auto"
                   :ui="{  wrapper: '', container:'', media: 'absolute inset-0  object-cover' }"/>
@@ -60,7 +60,7 @@ const desktopNavProps = {
                   aspect-ratio="auto"
                   :ui="{
                   wrapper: '  ',
-                  container: ' h-[79px]',
+                  container: ' h-[79px] rounded-full',
                   media: ' object-contain p-2',
                 }"
                 />
