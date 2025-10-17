@@ -37,8 +37,10 @@ const desktopNavProps = {
     <UContainer class="grid gap-10 lg:grid-cols-12">
       <div class="lg:col-span-4 mb-10">
         <h3 class="text-lg font-bold mb-4 uppercase">Hablemos</h3>
-        <IContactPhone class-title="hidden" :withHyphen="false" />
-        <IContactEmail class-title="hidden" :withHyphen="false" />
+        <ClientOnly>
+          <IContactPhone class-title="hidden" :withHyphen="false" />
+          <IContactEmail class-title="hidden" :withHyphen="false" />
+        </ClientOnly>
       </div>
       <div class="lg:col-span-4 mb-10">
         <h3 class="text-lg font-bold mb-4 uppercase">UBÍCANOS</h3>
@@ -49,13 +51,14 @@ const desktopNavProps = {
       </div>
       <div class="lg:col-span-4 mb-10">
         <h3 class="text-lg font-bold mb-4 uppercase">Redes sociales</h3>
-          <IContactSocial
+        <ClientOnly>
+          <IContactSocial filter-text="colbitumen"
             class-social="flex flex-wrap gap-3"
             class-link-social="inline-flex h-10 w-10 items-center justify-center
                               rounded-full border border-white
                               hover:border-secondary transition"
-            class-icons="!text-white  text-[16px] leading-none"
-          />
+            class-icons="!text-white text-[16px] leading-none" />
+        </ClientOnly>
       </div>
     </UContainer>
     <div class="border-t border-neutral-800">

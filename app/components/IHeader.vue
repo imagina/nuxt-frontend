@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import IMenuMenu from "#imenu/components/ImenuMenu.vue";
+import IContactSocial from "#icontact/components/IcontactSocial/IContactSocial.vue";
 
 const props = defineProps<{ siteName?: string }>()
 const siteName = computed(() => props.siteName ?? 'colbitumen')
@@ -21,27 +23,35 @@ const pageMatch = computed(() => {
 </script>
 
 <template>
-  <ClientOnly>
   <header class="bg-white py-3">
+    <ClientOnly>
+      <IContactSocial :filter-text="siteName"
+                      class-social="fixed right-0 top-[30%] z-[1000]"
+                      class-link-social="transition hover:text-[26px] hidden sm:flex shadow-lg bg-white h-[30px] w-[35px] text-[20px]  lg:h-[45px] lg:w-[50px] lg:text-[25px] rounded-l-lg my-1 items-center justify-center"/>
+    </ClientOnly>
     <UContainer>
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center gap-4">
           <div class="logo">
+            <ClientOnly>
              <IMediaRender
-              @click="$router.push(`/${pageMatch.slug}`)"
-              :media="pageMatch.files?.mainimage" :alt="pageMatch.metaTitle"
+              @click="$router.push(`/${pageMatch?.slug}`)"
+              :media="pageMatch?.files?.mainimage" :alt="pageMatch?.metaTitle"
               aspect-ratio="auto"
               :ui="{
                 wrapper: 'cursor-pointer',
                 container: 'h-[86px] ',
                 media: 'object-contain h-[86px] py-2' }"
               />
+            </ClientOnly>
           </div>
         </div>
         <div class="menus">
           <div class="flex items-center">
             <div class="menu">
-              <imenu-menu :system-name="siteName" :title="pageMatch.metaTitle"/>
+              <ClientOnly>
+                <IMenuMenu :system-name="siteName" :title="pageMatch?.metaTitle"/>
+              </ClientOnly>
             </div>
             <div class="search pl-3 pr-4 border-r border-[#D9D9D9]">
               <UButton
@@ -55,7 +65,6 @@ const pageMatch = computed(() => {
       </div>
     </UContainer>
   </header>
-  </ClientOnly>
 </template>
 <style scoped>
 .menu > :deep(nav) a, .menu > :deep(nav) .iconify  {

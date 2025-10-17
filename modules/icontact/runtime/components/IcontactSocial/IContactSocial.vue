@@ -3,9 +3,10 @@ const props = defineProps({
   classIcons: { type: String, default: "" },
   classSocial: { type: String, default: "" },
   classLinkSocial: { type: String, default: "inline-block" },
+  filterText: { type: String, default: '' },
 });
 const icontactStore = useIcontactStore();
-const items = computed(() => [
+const allItems = computed(() => [
   ...(icontactStore.getItems("FACEBOOK") ?? []),
   ...(icontactStore.getItems("TWITTER") ?? []),
   ...(icontactStore.getItems("INSTAGRAM") ?? []),
@@ -16,6 +17,22 @@ const items = computed(() => [
   ...(icontactStore.getItems("PINTEREST") ?? []),
   ...(icontactStore.getItems("FLICKR") ?? []),
 ]);
+
+// normaliza para comparar sin acentos ni mayúsculas
+const normalize = (s) =>
+  (s ?? "")
+    .toString()
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .toLowerCase()
+
+// Items filtrados por systemName (substring match)
+const items = computed(() => {
+  const list = (allItems.value || []).filter((it) => it?.isEnable == 1)
+  const q = normalize(props.filterText?.trim())
+  if (!q) return list
+  return list.filter((it) => normalize(it?.systemName).includes(q))
+})
 </script>
 
 <template>

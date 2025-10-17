@@ -10,9 +10,27 @@ const props = defineProps({
   classLinkPhone: { type: String, default: 'inline-block' },
   classComponent: { type: String, default: '' },
   withHyphen: { type: Boolean, default: true },
+  filterText: { type: String, default: '' },
 })
+
 const icontactStore = useIcontactStore()
-const items = computed(() => icontactStore.getItems('WHATSAPP'))
+const allItems = computed(() => icontactStore.getItems('WHATSAPP') ?? []);
+
+// normaliza para comparar sin acentos ni mayúsculas
+const normalize = (s) =>
+  (s ?? '')
+    .toString()
+    .normalize('NFD')
+    .replace(/\p{Diacritic}/gu, '')
+    .toLowerCase()
+
+// items filtrados por systemName (substring match)
+const items = computed(() => {
+  const list = (allItems.value || []).filter((it) => it?.isEnable == 1)
+  const q = normalize(props.filterText?.trim())
+  if (!q) return list
+  return list.filter((it) => normalize(it?.systemName).includes(q))
+})
 </script>
 
 <template>

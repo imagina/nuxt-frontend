@@ -11,9 +11,27 @@ const props = defineProps({
   classComponent: { type: String, default: '' },
   withHyphen: { type: Boolean, default: true },
   layoutInline: { type: Boolean, default: false },
+  filterText: { type: String, default: '' },
 })
+
 const icontactStore = useIcontactStore()
-const items = computed(() => icontactStore.getItems('PHONE'))
+const allItems = computed(() => icontactStore.getItems('PHONE') ?? []);
+
+// normaliza para comparar sin acentos ni mayúsculas
+const normalize = (s) =>
+  (s ?? '')
+    .toString()
+    .normalize('NFD')
+    .replace(/\p{Diacritic}/gu, '')
+    .toLowerCase()
+
+// items filtrados por systemName (substring match)
+const items = computed(() => {
+  const list = (allItems.value || []).filter((it) => it?.isEnable == 1)
+  const q = normalize(props.filterText?.trim())
+  if (!q) return list
+  return list.filter((it) => normalize(it?.systemName).includes(q))
+})
 </script>
 
 <template>

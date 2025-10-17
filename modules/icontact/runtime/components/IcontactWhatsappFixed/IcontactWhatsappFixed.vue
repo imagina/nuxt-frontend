@@ -2,20 +2,41 @@
 import {toRefs} from "vue";
 
 const icontactStore = useIcontactStore();
-const items = computed(() => icontactStore.getItems('WHATSAPP'))
 const open = defineModel<boolean>("open", {default: false});
 
 const props = withDefaults(
   defineProps<{
     side?: "left" | "right";
     title?: string;
+    filterText?: string;
   }>(),
   {
     side: "left",
     title: "WhatsApp",
+    filterText: "",
   }
 );
 const {side, title} = toRefs(props);
+
+// lista base desde el store
+const allItems = computed(() => icontactStore.getItems("WHATSAPP") ?? []);
+
+// normaliza para comparar sin acentos ni mayúsculas
+const normalize = (s: unknown): string =>
+  (s ?? "")
+    .toString()
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .toLowerCase();
+
+// items filtrados por systemName (substring match)
+const items = computed(() => {
+  const list = (allItems.value || []).filter((it) => it?.isEnable == 1)
+  const q = normalize(props.filterText?.trim())
+  if (!q) return list
+  return list.filter((it) => normalize(it?.systemName).includes(q))
+})
+
 </script>
 <template>
   <div>
