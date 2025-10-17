@@ -1,12 +1,62 @@
 <script setup lang="ts">
-  import type {IMediaRenderProps} from './IMediaRender'
+import type {IMediaRenderProps} from './IMediaRender'
 
-  const props = defineProps<IMediaRenderProps>()
+type Effect =
+  | 'none'
+  | 'zoom'
+  | 'grayscale'
+  | 'tilt'
+  | 'pan'
+
+const props = defineProps<IMediaRenderProps & {
+  effect?: Effect
+}>()
+
+const effect = computed<Effect>(() => props.effect ?? 'none')
+
+/**
+ * Clases para el contenedor (iframe/video)
+ * y para la imagen (img) — separadas por si quieres matizar
+ */
+const mediaEffectWrapperClass = computed(() => {
+  switch (effect.value) {
+    case 'zoom':
+      return 'transition-transform duration-500 ease-out will-change-transform group-hover:scale-[1.03]'
+    case 'tilt':
+      return 'transition-transform duration-500 ease-out will-change-transform group-hover:scale-[1.03] group-hover:-rotate-1'
+    case 'pan':
+      return 'transition-transform duration-700 ease-out will-change-transform group-hover:translate-x-1.5'
+    case 'grayscale':
+      return ''
+    default:
+      return ''
+  }
+})
+
+const mediaEffectImgClass = computed(() => {
+  switch (effect.value) {
+    case 'zoom':
+      return 'transition-transform duration-500 ease-out will-change-transform group-hover:scale-105'
+    case 'tilt':
+      return 'transition-transform duration-500 ease-out will-change-transform group-hover:scale-105 group-hover:-rotate-1'
+    case 'pan':
+      return 'transition-transform duration-700 ease-out will-change-transform group-hover:translate-x-2'
+    case 'grayscale':
+      return 'transition duration-500 ease-out will-change-filter filter grayscale group-hover:grayscale-0'
+    default:
+      return ''
+  }
+})
 </script>
 
 <template>
   <div :class="['w-full flex justify-center', ui?.wrapper]">
-    <div :class="[ aspectRatio || 'aspect-video', ui?.container]">
+    <div :class="[
+        aspectRatio || 'aspect-video',
+        'group overflow-hidden',
+        ui?.container,
+        mediaEffectWrapperClass
+      ]">
       <!-- YOUTUBE -->
       <iframe
         v-if="media?.youtubeId"
@@ -36,7 +86,7 @@
       </video>
 
       <!-- IMAGEN -->
-      <picture v-else class="w-full h-full">
+      <picture v-else class="w-full h-full block">
         <source
           v-if="media?.thumbnails?.extraLargeThumb"
           :srcset="media.thumbnails.extraLargeThumb"
@@ -63,7 +113,7 @@
           :alt="alt"
           :title="title"
           class="w-full h-full"
-          :class="ui?.media"
+          :class="[ui?.media, mediaEffectImgClass]"
           loading="lazy"
           decoding="async"
           :fetchpriority="fetchPriority"
